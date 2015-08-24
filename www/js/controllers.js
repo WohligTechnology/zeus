@@ -44,85 +44,149 @@ angular.module('starter.controllers', [])
 .controller('AccessCtrl', function($scope) {
 
 })
-.controller('LoginCtrl', function($scope) {
-          //        ***** tabchange ****
+  .controller('LoginCtrl', function($scope) {
+    //        ***** tabchange ****
 
-        $scope.tab = 'signin';
-        $scope.classa = 'active';
+    $scope.tab = 'signin';
+    $scope.classa = 'active';
+    $scope.classb = '';
+
+    $scope.tabchange = function(tab, a) {
+
+      $scope.tab = tab;
+      if (a == 1) {
+        $scope.classa = "active";
         $scope.classb = '';
 
-        $scope.tabchange = function(tab, a) {
+      } else {
+        $scope.classa = '';
+        $scope.classb = "active";
 
-            $scope.tab = tab;
-            if (a == 1) {
-                $scope.classa = "active";
-                $scope.classb = '';
+      }
+    };
 
-            } else {
-                $scope.classa = '';
-                $scope.classb = "active";
+    //    ****** End ******
 
-            }
-        };
+  })
+  .controller('ResetPasswordCtrl', function($scope) {
 
-        //    ****** End ******
-           
-})
-.controller('ResetPasswordCtrl', function($scope) {
+  })
+  .controller('ForgotPasswordCtrl', function($scope) {
 
-})
-.controller('ForgotPasswordCtrl', function($scope) {
+  })
+  .controller('SignupCtrl', function($scope) {
 
-})
-.controller('SignupCtrl', function($scope) {
+  })
+  .controller('HomeCtrl', function($scope) {
+    $scope.slides=["http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png","http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png","http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png"];
+    
+  })
+  .controller('ContentPageCtrl', function($scope) {
 
-})
-.controller('HomeCtrl', function($scope) {
+  })
+  .controller('EventsCtrl', function($scope) {
 
-})
-.controller('ContentPageCtrl', function($scope) {
+    $scope.events = [{
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
+  })
+  .controller('EventDetailCtrl', function($scope) {
 
-})
-.controller('EventsCtrl', function($scope) {
+  })
+  .controller('BlogsCtrl', function($scope) {
 
-})
-.controller('EventDetailCtrl', function($scope) {
+  })
+  .controller('BlogDetailCtrl', function($scope) {
 
-})
-    .controller('BlogsCtrl', function($scope) {
+  })
+  .controller('PhotoGalleryCategoryCtrl', function($scope) {
 
-})
-    .controller('BlogDetailCtrl', function($scope) {
+  })
+  .controller('PhotoGalleryCtrl', function($scope) {
 
-})
-    .controller('PhotoGalleryCategoryCtrl', function($scope) {
+  })
+  .controller('VideoGalleryCategoryCtrl', function($scope) {
 
-})
-    .controller('PhotoGalleryCtrl', function($scope) {
+    $scope.videos = [{
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
+    
+    
+  })
+  .controller('VideoGalleryCtrl', function($scope) {
 
-})
-    .controller('VideoGalleryCategoryCtrl', function($scope) {
+  })
+  .controller('AccountCtrl', function($scope) {
 
-})
-    .controller('VideoGalleryCtrl', function($scope) {
+  })
+  .controller('SettingCtrl', function($scope) {
 
-})
-.controller('AccountCtrl', function($scope) {
+  })
+  .controller('NotificationCtrl', function($scope) {
 
-})
-.controller('SettingCtrl', function($scope) {
+  })
+  .controller('ContactCtrl', function($scope) {
 
-})
-.controller('NotificationCtrl', function($scope) {
+  })
+  .controller('SearchCtrl', function($scope) {
 
-})
-.controller('ContactCtrl', function($scope) {
-
-})
-.controller('SearchCtrl', function($scope) {
-
-})
+  })
 
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
-});
+.controller('PlaylistCtrl', function($scope, $stateParams) {});
