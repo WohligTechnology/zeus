@@ -45,7 +45,28 @@ angular.module('starter.controllers', [])
 
 })
 .controller('LoginCtrl', function($scope) {
+          //        ***** tabchange ****
 
+        $scope.tab = 'signin';
+        $scope.classa = 'active';
+        $scope.classb = '';
+
+        $scope.tabchange = function(tab, a) {
+
+            $scope.tab = tab;
+            if (a == 1) {
+                $scope.classa = "active";
+                $scope.classb = '';
+
+            } else {
+                $scope.classa = '';
+                $scope.classb = "active";
+
+            }
+        };
+
+        //    ****** End ******
+           
 })
 .controller('ResetPasswordCtrl', function($scope) {
 
