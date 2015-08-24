@@ -13,7 +13,7 @@ angular.module('starter.controllers', [])
   $scope.loginData = {};
 
   // Create the login modal that we will use later
-  $ionicModal.fromTemplateUrl('templates/login.html', {
+  $ionicModal.fromTemplateUrl('templates/accessView/login.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
@@ -351,5 +351,32 @@ angular.module('starter.controllers', [])
 
   })
   .controller('SearchCtrl', function($scope) {
-
+    $scope.searches = [{
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
   });

@@ -25,7 +25,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
@@ -33,11 +33,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('access', {
-      url: '/access',
-      abstract: true,
-      templateUrl: 'templates/access.html',
-      controller: 'AccessCtrl'
-    })
+    url: '/access',
+    abstract: true,
+    templateUrl: 'templates/access.html',
+    controller: 'AccessCtrl'
+  })
     .state('access.login', {
       url: '/login',
       views: {
@@ -49,14 +49,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
   .state('access.signup', {
-      url: '/signup',
-      views: {
-        'content': {
-          templateUrl: 'templates/accessView/signup.html',
-          controller: "SignupCtrl"
-        }
+    url: '/signup',
+    views: {
+      'content': {
+        templateUrl: 'templates/accessView/signup.html',
+        controller: "SignupCtrl"
       }
-    })
+    }
+  })
     .state('access.resetpassword', {
       url: '/resetpassword',
       views: {
@@ -77,14 +77,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
   .state('app.home', {
-      url: '/home',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/appView/home.html',
-          controller: "HomeCtrl"
-        }
+    url: '/home',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/appView/home.html',
+        controller: "HomeCtrl"
       }
-    })
+    }
+  })
     .state('app.contentpage', {
       url: '/about',
       views: {
