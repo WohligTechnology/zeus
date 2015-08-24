@@ -2,42 +2,43 @@
   <ion-content>
     <div class="contact">
       <div class="tab">
-        <ul>
-          <li class="{{classa}}" ng-click="tabchange('contactus',1)">Contact us</li>
-          <li class="{{classb}}" ng-click="tabchange('contactform',2)">Contact form</li>
-        </ul>
+        <div class="button-bar">
+          <a class="button" ng-click="tabchange('contactus',1)">Contact us</a>
+          <a class="button" ng-click="tabchange('contactform',2)">Contact form</a>
+        </div>
+
 
       </div>
     </div>
     <div class="contactus" ng-show="tab=='contactus'">
-    <div class="address">
-          <div class="card">
-  <div class="item item-text-wrap">
-      <a href="#" class="item item-icon-left">
-    <i class="icon ion-home"></i>
-   Plot no. 3, Flat no. A/30 Laxmi Nivas , 3rd Floor , Near Sadhana School , Sion (W) , Mumbai 400022.
-  </a>
+      <div class="address">
+        <div class="card">
+          <div class="item item-text-wrap">
+            <a href="#" class="item item-icon-left">
+              <i class="icon ion-home"></i>
+              Plot no. 3, Flat no. A/30 Laxmi Nivas , 3rd Floor , Near Sadhana School , Sion (W) , Mumbai 400022.
+            </a>
 
-  <a href="#" class="item item-icon-left">
-    <i class="icon ion-ios-telephone"></i>
-   +91 98200 45678 / +91 9819222221
-  </a>
+            <a href="#" class="item item-icon-left">
+              <i class="icon ion-ios-telephone"></i>
+              +91 98200 45678 / +91 9819222221
+            </a>
 
-  <a href="#" class="item item-icon-left">
-    <i class="icon ion-wifi"></i>
-    info@wohlig.com
-  </a>
+            <a href="#" class="item item-icon-left">
+              <i class="icon ion-wifi"></i>
+              info@wohlig.com
+            </a>
 
-  </div>
-</div>
-     
-             </div>
-<div class="map">
-     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.2736359736555!2d72.87047899999999!3d19.051703000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8c6425d4cf9%3A0x310d2671e74a4ba8!2sWohlig!5e0!3m2!1sen!2sin!4v1434175166694" width="100%" height="250" frameborder="0" style="border:0"></iframe>
-</div>
- </div>
- <div class="contactform" ng-show="tab=='contactform'">
-           <div class="list">
+          </div>
+        </div>
+
+      </div>
+      <div class="map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3771.2736359736555!2d72.87047899999999!3d19.051703000000003!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c8c6425d4cf9%3A0x310d2671e74a4ba8!2sWohlig!5e0!3m2!1sen!2sin!4v1434175166694" width="100%" height="250" frameborder="0" style="border:0"></iframe>
+      </div>
+    </div>
+    <div class="contactform" ng-show="tab=='contactform'">
+      <div class="list">
         <label class="item item-input item-floating-label">
           <span class="input-label">Full name</span>
           <i class="icon ln-user"><input type="text" placeholder="Full name"></i>
@@ -46,20 +47,21 @@
           <span class="input-label">Email</span>
           <i class="icon ln-envelope"><input type="email" placeholder="Email"></i>
         </label>
-         <label class="item item-input item-floating-label">
+        <label class="item item-input item-floating-label">
           <span class="input-label">Subject</span>
           <i class="icon ln-envelope"><input type="email" placeholder="Subject"></i>
         </label>
-          <label class="item item-input item-floating-label">
+        <label class="item item-input item-floating-label">
           <span class="input-label">Comments</span>
           <i class="icon ln-envelope">  <textarea placeholder="Comments"></textarea></i>
         </label>
-        
-      
+
+
       </div>
-        <button class="button button-block button-positive">
+      <button class="button button-block button-positive">
         Submit
       </button>
- </div>
+    </div>
   </ion-content>
 </ion-view>
+
