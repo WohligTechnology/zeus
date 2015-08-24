@@ -25,49 +25,209 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider
 
-    .state('app', {
+  .state('app', {
     url: '/app',
     abstract: true,
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
 
-  .state('app.search', {
-    url: '/search',
+  .state('app.home', {
+    url: '/home',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html'
+        templateUrl: 'templates/home.html',
+        controller: "HomeCtrl"
+      }
+    }
+  })
+    .state('access', {
+      url: '/access',
+      abstract: true,
+      templateUrl: 'templates/access.html',
+      controller: 'AccessCtrl'
+    })
+    .state('access.login', {
+      url: '/login',
+      views: {
+        'content': {
+          templateUrl: 'templates/login.html',
+          controller: "LoginCtrl"
+        }
+      }
+    })
+
+  .state('access.signup', {
+    url: '/signup',
+    views: {
+      'content': {
+        templateUrl: 'templates/signup.html',
+        controller: "SignupCtrl"
+      }
+    }
+  })
+    .state('access.resetpassword', {
+      url: '/resetpassword',
+      views: {
+        'content': {
+          templateUrl: 'templates/resetpassword.html',
+          controller: "ResetPasswordCtrl"
+        }
+      }
+    })
+
+  .state('access.forgotpassword', {
+    url: '/forgotpassword/',
+    views: {
+      'content': {
+        templateUrl: 'templates/forgotpassword.html',
+        controller: 'ForgotPasswordCtrl'
+      }
+    }
+  })
+    .state('app.contentpage', {
+      url: '/about',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/contentpage.html',
+          controller: "ContentPageCtrl"
+        }
+      }
+    })
+
+  .state('app.events', {
+    url: '/events',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/events.html',
+        controller: "EventsCtrl"
       }
     }
   })
 
-  .state('app.browse', {
-      url: '/browse',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/browse.html'
-        }
-      }
-    })
-    .state('app.playlists', {
-      url: '/playlists',
-      views: {
-        'menuContent': {
-          templateUrl: 'templates/playlists.html',
-          controller: 'PlaylistsCtrl'
-        }
-      }
-    })
-
-  .state('app.single', {
-    url: '/playlists/:playlistId',
+  .state('app.eventdetail', {
+    url: '/eventdetail',
     views: {
       'menuContent': {
-        templateUrl: 'templates/playlist.html',
-        controller: 'PlaylistCtrl'
+        templateUrl: 'templates/eventdetail.html',
+        controller: "EventDetailCtrl"
       }
     }
-  });
+  })
+
+  .state('app.blogs', {
+    url: '/blogs',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/blogs.html',
+        controller: "BlogsCtrl"
+      }
+    }
+  })
+
+  .state('app.blogdetail', {
+    url: '/blogdetail',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/blogdetail.html',
+        controller: "BlogDetailCtrl"
+      }
+    }
+  })
+
+  .state('app.photogallerycategory', {
+    url: '/photogallerycategory',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/photogallerycategory.html',
+        controller: "PhotoGalleryCategoryCtrl"
+      }
+    }
+  })
+
+  .state('app.photogallery', {
+    url: '/photogallery',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/photogallery.html',
+        controller: "PhotoGalleryCtrl"
+      }
+    }
+  })
+
+  .state('app.videogallerycategory', {
+    url: '/videogallerycategory',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/videogallerycategory.html',
+        controller: "VideoGalleryCategoryCtrl"
+      }
+    }
+  })
+
+  .state('app.videogallery', {
+    url: '/videogallery',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/videogallery.html',
+        controller: "VideoGalleryCtrl"
+      }
+    }
+  })
+
+  .state('app.account', {
+    url: '/account',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/account.html',
+        controller: "AccountCtrl"
+      }
+    }
+  })
+
+  .state('app.setting', {
+    url: '/setting',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/setting.html',
+        controller: "SettingCtrl"
+      }
+    }
+  })
+
+  .state('app.notification', {
+    url: '/notification',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/notification.html',
+        controller: "NotificationCtrl"
+      }
+    }
+  })
+
+  .state('app.contact', {
+    url: '/contact',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/contact.html',
+        controller: "ContactCtrl"
+      }
+    }
+  })
+
+  .state('app.search', {
+    url: '/search',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/search.html',
+        controller: "SearchCtrl"
+      }
+    }
+  })
+
+
+
+  ;
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/home');
 });
