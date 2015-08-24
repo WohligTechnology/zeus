@@ -86,7 +86,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
     .state('app.contentpage', {
-      url: '/about',
+      url: '/contentpage',
       views: {
         'menuContent': {
           templateUrl: 'templates/appView/contentpage.html',
