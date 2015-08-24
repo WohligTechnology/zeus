@@ -32,26 +32,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'AppCtrl'
   })
 
-  .state('app.home', {
-    url: '/home',
-    views: {
-      'menuContent': {
-        templateUrl: 'templates/home.html',
-        controller: "HomeCtrl"
-      }
-    }
+
+  .state('access', {
+    url: '/access',
+    abstract: true,
+    templateUrl: 'templates/access.html',
+    controller: 'AccessCtrl'
   })
-    .state('access', {
-      url: '/access',
-      abstract: true,
-      templateUrl: 'templates/access.html',
-      controller: 'AccessCtrl'
-    })
     .state('access.login', {
       url: '/login',
       views: {
         'content': {
-          templateUrl: 'templates/login.html',
+          templateUrl: 'templates/accessView/login.html',
           controller: "LoginCtrl"
         }
       }
@@ -61,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/signup',
     views: {
       'content': {
-        templateUrl: 'templates/signup.html',
+        templateUrl: 'templates/accessView/signup.html',
         controller: "SignupCtrl"
       }
     }
@@ -70,7 +62,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       url: '/resetpassword',
       views: {
         'content': {
-          templateUrl: 'templates/resetpassword.html',
+          templateUrl: 'templates/accessView/resetpassword.html',
           controller: "ResetPasswordCtrl"
         }
       }
@@ -80,16 +72,25 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/forgotpassword/',
     views: {
       'content': {
-        templateUrl: 'templates/forgotpassword.html',
+        templateUrl: 'templates/accessView/forgotpassword.html',
         controller: 'ForgotPasswordCtrl'
       }
     }
   })
+    .state('app.home', {
+      url: '/home',
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/appView/home.html',
+          controller: "HomeCtrl"
+        }
+      }
+    })
     .state('app.contentpage', {
       url: '/about',
       views: {
         'menuContent': {
-          templateUrl: 'templates/contentpage.html',
+          templateUrl: 'templates/appView/contentpage.html',
           controller: "ContentPageCtrl"
         }
       }
@@ -99,7 +100,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/events',
     views: {
       'menuContent': {
-        templateUrl: 'templates/events.html',
+        templateUrl: 'templates/appView/events.html',
         controller: "EventsCtrl"
       }
     }
@@ -109,7 +110,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/eventdetail',
     views: {
       'menuContent': {
-        templateUrl: 'templates/eventdetail.html',
+        templateUrl: 'templates/appView/eventdetail.html',
         controller: "EventDetailCtrl"
       }
     }
@@ -119,7 +120,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/blogs',
     views: {
       'menuContent': {
-        templateUrl: 'templates/blogs.html',
+        templateUrl: 'templates/appView/blogs.html',
         controller: "BlogsCtrl"
       }
     }
@@ -129,7 +130,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/blogdetail',
     views: {
       'menuContent': {
-        templateUrl: 'templates/blogdetail.html',
+        templateUrl: 'templates/appView/blogdetail.html',
         controller: "BlogDetailCtrl"
       }
     }
@@ -139,7 +140,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/photogallerycategory',
     views: {
       'menuContent': {
-        templateUrl: 'templates/photogallerycategory.html',
+        templateUrl: 'templates/appView/photogallerycategory.html',
         controller: "PhotoGalleryCategoryCtrl"
       }
     }
@@ -149,7 +150,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/photogallery',
     views: {
       'menuContent': {
-        templateUrl: 'templates/photogallery.html',
+        templateUrl: 'templates/appView/photogallery.html',
         controller: "PhotoGalleryCtrl"
       }
     }
@@ -159,7 +160,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/videogallerycategory',
     views: {
       'menuContent': {
-        templateUrl: 'templates/videogallerycategory.html',
+        templateUrl: 'templates/appView/videogallerycategory.html',
         controller: "VideoGalleryCategoryCtrl"
       }
     }
@@ -169,7 +170,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/videogallery',
     views: {
       'menuContent': {
-        templateUrl: 'templates/videogallery.html',
+        templateUrl: 'templates/appView/videogallery.html',
         controller: "VideoGalleryCtrl"
       }
     }
@@ -179,7 +180,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/account',
     views: {
       'menuContent': {
-        templateUrl: 'templates/account.html',
+        templateUrl: 'templates/appView/account.html',
         controller: "AccountCtrl"
       }
     }
@@ -189,7 +190,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/setting',
     views: {
       'menuContent': {
-        templateUrl: 'templates/setting.html',
+        templateUrl: 'templates/appView/setting.html',
         controller: "SettingCtrl"
       }
     }
@@ -199,7 +200,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/notification',
     views: {
       'menuContent': {
-        templateUrl: 'templates/notification.html',
+        templateUrl: 'templates/appView/notification.html',
         controller: "NotificationCtrl"
       }
     }
@@ -209,7 +210,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/contact',
     views: {
       'menuContent': {
-        templateUrl: 'templates/contact.html',
+        templateUrl: 'templates/appView/contact.html',
         controller: "ContactCtrl"
       }
     }
@@ -219,7 +220,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     url: '/search',
     views: {
       'menuContent': {
-        templateUrl: 'templates/search.html',
+        templateUrl: 'templates/appView/search.html',
         controller: "SearchCtrl"
       }
     }
