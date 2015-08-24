@@ -31,14 +31,12 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
-
-
-  .state('access', {
-    url: '/access',
-    abstract: true,
-    templateUrl: 'templates/access.html',
-    controller: 'AccessCtrl'
-  })
+    .state('access', {
+      url: '/access',
+      abstract: true,
+      templateUrl: 'templates/access.html',
+      controller: 'AccessCtrl'
+    })
     .state('access.login', {
       url: '/login',
       views: {
@@ -48,16 +46,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-
-  .state('access.signup', {
-    url: '/signup',
-    views: {
-      'content': {
-        templateUrl: 'templates/accessView/signup.html',
-        controller: "SignupCtrl"
+    .state('access.signup', {
+      url: '/signup',
+      views: {
+        'content': {
+          templateUrl: 'templates/accessView/signup.html',
+          controller: "SignupCtrl"
+        }
       }
-    }
-  })
+    })
     .state('access.resetpassword', {
       url: '/resetpassword',
       views: {
@@ -67,16 +64,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-
-  .state('access.forgotpassword', {
-    url: '/forgotpassword/',
-    views: {
-      'content': {
-        templateUrl: 'templates/accessView/forgotpassword.html',
-        controller: 'ForgotPasswordCtrl'
+    .state('access.forgotpassword', {
+      url: '/forgotpassword',
+      views: {
+        'content': {
+          templateUrl: 'templates/accessView/forgotpassword.html',
+          controller: 'ForgotPasswordCtrl'
+        }
       }
-    }
-  })
+    })
     .state('app.home', {
       url: '/home',
       views: {
