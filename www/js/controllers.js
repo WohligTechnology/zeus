@@ -128,7 +128,6 @@ angular.module('starter.controllers', [])
       date: "7 Jan, 2016",
       subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
       title: "Music Concert",
       date: "7 Jan, 2016",
       subtitle: "Film, Media & Entertainment by paragyte technologies"
@@ -138,7 +137,6 @@ angular.module('starter.controllers', [])
       date: "7 Jan, 2016",
       subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
       title: "Music Concert",
       date: "7 Jan, 2016",
       subtitle: "Film, Media & Entertainment by paragyte technologies"
@@ -299,7 +297,34 @@ angular.module('starter.controllers', [])
 
   })
   .controller('NotificationCtrl', function($scope) {
-
+    $scope.notifications = [{
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
   })
   .controller('ContactCtrl', function($scope) {
     //        ***** tabchange ****
@@ -327,7 +352,4 @@ angular.module('starter.controllers', [])
   })
   .controller('SearchCtrl', function($scope) {
 
-  })
-
-
-.controller('PlaylistCtrl', function($scope, $stateParams) {});
+  });
