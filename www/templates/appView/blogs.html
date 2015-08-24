@@ -1,0 +1,15 @@
+<ion-view view-title="Blog">
+  <ion-content>
+    <ion-list class="full-width">
+      <ion-item ng-repeat="item in blogs">
+        <img ng-src="{{item.image}}" class="full-image">
+        <h2>{{item.title}}</h2>
+        <p>{{item.subtitle}}</p>
+        <ion-option-button class="button-positive" ng-click="share(item)">
+          Share
+        </ion-option-button>
+      </ion-item>
+    </ion-list>
+  </ion-content>
+</ion-view>
+

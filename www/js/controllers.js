@@ -78,8 +78,8 @@ angular.module('starter.controllers', [])
 
   })
   .controller('HomeCtrl', function($scope) {
-    $scope.slides=["http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png","http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png","http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png"];
-    
+    $scope.slides = ["http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png"];
+
   })
   .controller('ContentPageCtrl', function($scope) {
 
@@ -122,16 +122,106 @@ angular.module('starter.controllers', [])
 
   })
   .controller('BlogsCtrl', function($scope) {
-
+    $scope.blogs = [{
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
   })
   .controller('BlogDetailCtrl', function($scope) {
 
   })
   .controller('PhotoGalleryCategoryCtrl', function($scope) {
-
+    $scope.photos = [{
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
   })
   .controller('PhotoGalleryCtrl', function($scope) {
-
+    $scope.photos = [{
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
   })
   .controller('VideoGalleryCategoryCtrl', function($scope) {
 
@@ -166,11 +256,41 @@ angular.module('starter.controllers', [])
       date: "7 Jan, 2016",
       subtitle: "Film, Media & Entertainment by paragyte technologies"
     }];
-    
-    
+
+
   })
   .controller('VideoGalleryCtrl', function($scope) {
-
+    $scope.videos = [{
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      title: "Music Concert",
+      date: "7 Jan, 2016",
+      subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
   })
   .controller('AccountCtrl', function($scope) {
 
