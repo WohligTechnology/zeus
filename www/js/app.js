@@ -31,13 +31,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     templateUrl: 'templates/menu.html',
     controller: 'AppCtrl'
   })
-<<<<<<< Updated upstream
-    .state('access', {
-=======
-
 
   .state('access', {
->>>>>>> Stashed changes
       url: '/access',
       abstract: true,
       templateUrl: 'templates/access.html',
@@ -52,12 +47,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-<<<<<<< Updated upstream
-    .state('access.signup', {
-=======
 
   .state('access.signup', {
->>>>>>> Stashed changes
       url: '/signup',
       views: {
         'content': {
@@ -83,15 +74,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
           controller: 'ForgotPasswordCtrl'
         }
       }
-<<<<<<< Updated upstream
     })
-    .state('app.home', {
-=======
-    }
-  })
 
   .state('app.home', {
->>>>>>> Stashed changes
       url: '/home',
       views: {
         'menuContent': {
