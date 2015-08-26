@@ -77,14 +77,11 @@ a, a:hover {
 
 .login-tab {
   margin-top: 45px; }
-  .login-tab .tab ul {
-    list-style: none;
-    display: block;
+  .login-tab .tab .row {
     text-align: center;
     text-transform: uppercase; }
-    .login-tab .tab ul li {
-      display: inline-block;
-      padding: 10px 60px;
+    .login-tab .tab .row .col {
+      padding: 10px 0px;
       font-size: 15px;
       color: #fff; }
   .login-tab .tab .active {
