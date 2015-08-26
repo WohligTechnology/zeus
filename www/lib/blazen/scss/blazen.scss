@@ -1,0 +1,185 @@
+//sass variable
+$positive:#50d2c2 !default;
+$stable: yellow !default;
+$white: #fff !default;
+$base-color: #212121 !default;
+$icon-color:#7a7a7a !default;
+$lato-font-weight:300 !default;
+$button-stable-text:#fff !default;
+$border-color:#ddd;
+$color1:#2d4486;
+$color2:#45b0e3;
+$color3:#33477E;
+$color4:#7EBCDA;
+$headings-font-weight:500 !default;
+$texts-font-size:14px !default;
+$font-family-sans-serif:"Lato",
+"Helvetica Neue",
+"Roboto",
+"Segoe UI",
+sans-serif !default;
+$font-family-light-sans-serif:"Lato",
+"HelveticaNeue-Light",
+"Roboto-Light",
+"Segoe UI-Light",
+sans-serif-light !default;
+$login-bg-image:url('../img/background/login_background.jpg') no-repeat center center;
+// sass mixing
+@mixin transition($transition-property,
+$transition-time) {
+  -webkit-transition: $transition-property $transition-time;
+  -moz-transition: $transition-property $transition-time;
+  -ms-transition: $transition-property $transition-time;
+  -o-transition: $transition-property $transition-time;
+  transition: $transition-property $transition-time;
+}
+
+@mixin clip-path($clip) {
+  -webkit-clip-path: $clip;
+  -moz-clip-path: $clip;
+  -ms-clip-path: $clip;
+  clip-path: $clip;
+}
+
+//custom class
+input::-webkit-input-placeholder {
+  color: $base-color;
+}
+
+.button {
+  font-weight: $lato-font-weight;
+  min-height: 52px !important;
+  text-transform: capitalize;
+  font-size: 16px !important;
+  border-radius: 0px !important;
+}
+
+.input-tag {
+  color: $base-color !important;
+  font-weight: $lato-font-weight;
+  font-size: $texts-font-size;
+}
+
+// facebook or twitter button
+.button.button-positive-facebook {
+  border-color: $color1;
+  background-color: $color1;
+  color: $white;
+}
+
+.button.button-positive-twitter {
+  border-color: $color2;
+  background-color: $color2;
+  color: $white;
+}
+
+.button-positive-facebook.button.activated {
+  border-color: $color3 !important;
+  background-color: $color3!important;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+.button-positive-twitter.button.activated {
+  border-color: $color4;
+  background-color: $color4;
+  box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.1) !important;
+}
+
+// end
+//sass start
+@font-face {
+  font-family: 'Lato';
+  src: url("../fonts/Lato-Bold.ttf");
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url(../fonts/Lato-Light.ttf);
+  font-weight: 300;
+}
+
+@font-face {
+  font-family: 'Lato';
+  src: url(../fonts/Lato-Regular.ttf);
+}
+
+a,
+a:hover {
+  text-decoration: none
+}
+
+.login-logo {
+  margin-top: 10%;
+  text-align: center;
+}
+
+.login_back {
+  //    background: $login-bg-image;
+  background-size: 100% 100%;
+}
+
+.login-tab {
+  margin-top: 45px;
+  .tab {
+    ul {
+      list-style: none;
+      display: block;
+      text-align: center;
+      text-transform: uppercase;
+      li {
+        display: inline-block;
+        padding: 10px 60px;
+        font-size: 15px;
+      }
+    }
+    .active {
+      border-bottom: 2px solid $positive;
+    }
+  }
+  .login {
+    margin-top: 20px;
+    .list {
+      .item {
+        border-bottom: 1px solid $border-color;
+        border-top: 0px;
+        i {
+          display: inline-block;
+          font-size: 22px;
+          color: $icon-color;
+        }
+        input {
+          display: inline-block;
+          padding-left: 15px;
+          @extend .input-tag;
+        }
+        input::-webkit-input-placeholder {
+          color: $base-color;
+        }
+        span {
+          padding-left: 37px;
+          font-weight: $lato-font-weight;
+          padding-bottom: 7px;
+        }
+        input[type="text"] {
+          @extend .input-tag;
+        }
+      }
+    }
+    .login-btn {
+      margin: 0px 20px;
+      padding-top: 45px;
+      .sign {
+        span {
+          color: #909090;
+          font-weight: 300;
+          font-size: 14px;
+          a {
+            color: #000;
+            margin: 10px;
+          }
+        }
+      }
+    }
+  }
+}

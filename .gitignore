@@ -11,3 +11,9 @@ wp-content/cache/
 wp-content/upgrade/
 wp-content/uploads/
 wp-content/wp-cache-config.php
+# Specifies intentionally untracked files to ignore when using Git
+# http://git-scm.com/docs/gitignore
+
+node_modules/
+platforms/
+plugins/
