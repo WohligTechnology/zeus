@@ -1,6 +1,6 @@
 //sass variable
 $positive:#50d2c2 !default;
-$stable: yellow !default;
+$stable: transparent !default;
 $white: #fff !default;
 $base-color: #212121 !default;
 $icon-color:#7a7a7a !default;
@@ -115,7 +115,7 @@ a:hover {
 }
 
 .login_back {
-  //    background: $login-bg-image;
+      background: $login-bg-image;
   background-size: 100% 100%;
 }
 
