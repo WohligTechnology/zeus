@@ -1,3 +1,31 @@
+<<<<<<< HEAD
+//sass variable
+$light:                           #fff !default;
+$stable:                          #f8f8f8 !default;
+$positive:                        #50d2c2 !default;
+$calm:                            #11c1f3 !default;
+$balanced:                        #33cd5f !default;
+$energized:                       #ffc900 !default;
+$assertive:                       #ef473a !default;
+$royal:                           #886aea !default;
+$dark:                            #444 !default;
+ $white:#fff !default;
+ $base-color:#212121 !default;
+ $icon-color:#9e9ea3 !default;
+ $lato-font-weight:300 !default;
+ $button-stable-text:#fff !default;
+ $border-color:#ddd;
+ $color1:#2d4486;
+ $color2:#45b0e3;
+ $color3:#33477E;
+ $color4:#7EBCDA;
+ $headings-font-weight:500 !default;
+ $texts-font-size:14px !default;
+ $font-family-sans-serif:"Lato","Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
+ $font-family-light-sans-serif:"Lato", "HelveticaNeue-Light", "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
+ $login-bg-image:url('../img/background/login_background.jpg') no-repeat center center;
+
+=======
     //sass variable
 $positive:#50d2c2 !default;
 $stable:transparent !default;
@@ -24,6 +52,7 @@ $font-family-light-sans-serif:"Lato",
 "Segoe UI-Light",
 sans-serif-light !default;
 $login-bg-image:url('../img/background/login_background.jpg') no-repeat center center;
+>>>>>>> button done
 // sass mixing
 @mixin transition($transition-property,
 $transition-time) {
@@ -46,6 +75,15 @@ input::-webkit-input-placeholder {
     color: $base-color;
 }
 
+/*.button {
+  font-weight: $lato-font-weight;
+  min-height: 52px !important;
+  text-transform: capitalize;
+  font-size: 16px !important;
+  border-radius: 0px !important;
+}*/
+
+
 .button {
     font-weight: $lato-font-weight;
     min-height: 52px !important;
@@ -53,6 +91,7 @@ input::-webkit-input-placeholder {
     font-size: 16px !important;
     border-radius: 0px !important;
 }
+
 
 .input-tag {
     color: $icon-color !important;
@@ -194,6 +233,45 @@ a:hover {
     margin-top: 15px !important;
 }
 
+<<<<<<< HEAD
+ion-side-menu {
+    .item {
+        
+.icon.positive-bg-before:before {
+  background-color: $positive;
+}
+.icon.calm-bg-before:before {
+  background-color: $calm;
+}
+.icon.assertive-bg-before:before {
+  background-color: $assertive;
+}
+.icon.balanced-bg-before:before {
+  background-color: $balanced;
+}
+.icon.energized-bg-before:before {
+  background-color: $energized;
+}
+.icon.royal-bg-before:before {
+  background-color: $royal;
+}
+.icon.stable-bg-before:before {
+  background-color: $stable;
+}
+.icon.dark-bg-before:before {
+  background-color: $dark;
+}
+        .icon:before {
+    color: #FFFFFF;
+    border-radius: 50%;
+    font-size: 14px;
+    width: 32px;
+    height: 32px;
+    line-height: 32px;
+}
+}
+}
+
 .list.list-wave {
     .item p {
         white-space: normal;
@@ -210,3 +288,4 @@ a:hover {
         }
     }
 }
+
