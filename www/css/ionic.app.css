@@ -25,6 +25,13 @@ input::-webkit-input-placeholder {
   font-size: 16px !important;
   border-radius: 0px !important;
 }*/
+.button {
+  font-weight: 300;
+  min-height: 52px !important;
+  text-transform: capitalize;
+  font-size: 16px !important;
+  border-radius: 0px !important; }
+
 .input-tag, .login-tab .login .list .item input, .login-tab .login .list .item input[type="text"] {
   color: #9e9ea3 !important;
   font-weight: 300;
@@ -125,30 +132,6 @@ a, a:hover {
 
 .margtp {
   margin-top: 15px !important; }
-
-ion-side-menu .item .icon.positive-bg-before:before {
-  background-color: #50d2c2; }
-ion-side-menu .item .icon.calm-bg-before:before {
-  background-color: #11c1f3; }
-ion-side-menu .item .icon.assertive-bg-before:before {
-  background-color: #ef473a; }
-ion-side-menu .item .icon.balanced-bg-before:before {
-  background-color: #33cd5f; }
-ion-side-menu .item .icon.energized-bg-before:before {
-  background-color: #ffc900; }
-ion-side-menu .item .icon.royal-bg-before:before {
-  background-color: #886aea; }
-ion-side-menu .item .icon.stable-bg-before:before {
-  background-color: #f8f8f8; }
-ion-side-menu .item .icon.dark-bg-before:before {
-  background-color: #444; }
-ion-side-menu .item .icon:before {
-  color: #FFFFFF;
-  border-radius: 50%;
-  font-size: 14px;
-  width: 32px;
-  height: 32px;
-  line-height: 32px; }
 
 /*!
   Ionicons, v2.0.1
