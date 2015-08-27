@@ -126,6 +126,10 @@ a, a:hover {
 .margtp {
   margin-top: 15px !important; }
 
+.list.list-wave .item p {
+  white-space: normal;
+  text-align: justify; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
