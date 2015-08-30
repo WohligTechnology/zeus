@@ -87,35 +87,41 @@ angular.module('starter.controllers', [])
   .controller('EventsCtrl', function($scope) {
 
     $scope.events = [{
-      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-      title: "Music Concert",
+      image: "img/event/1.jpg",
+      title: "Sona Mohaptra",
       date: "7 Jan, 2016",
-      subtitle: "Film, Media & Entertainment by paragyte technologies"
+      subtitle: "Live at Tiwnhoase cafe",
+      time: "8 PM , Onwards"
     }, {
-      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-      title: "Music Concert",
-      date: "7 Jan, 2016",
-      subtitle: "Film, Media & Entertainment by paragyte technologies"
+      image: "img/event/2.jpg",
+      title: "Sonu nigam",
+      date: "8 Jan, 2016",
+      subtitle: "Live at Townhouse cafe",
+      time: "9 PM , Onwards"
     }, {
-      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+      image: "img/event/3.jpg",
       title: "Music Concert",
-      date: "7 Jan, 2016",
-      subtitle: "Film, Media & Entertainment by paragyte technologies"
+      date: "9 Jan, 2016",
+        subtitle: "Live at Fort cafe",
+      time: "9 PM , Onwards"
     }, {
-      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-      title: "Music Concert",
-      date: "7 Jan, 2016",
-      subtitle: "Film, Media & Entertainment by paragyte technologies"
+      image: "img/event/4.jpg",
+      title: "Arjit singh",
+      date: "10 Jan, 2016",
+        subtitle: "Live at Macdee cafe",
+      time: "12 PM , Onwards"
     }, {
-      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-      title: "Music Concert",
-      date: "7 Jan, 2016",
-      subtitle: "Film, Media & Entertainment by paragyte technologies"
+      image: "img/event/5.jpg",
+      title: "sohan honakeri",
+      date: "11 Jan, 2016",
+        subtitle: "Live at Townhall cafe",
+      time: "10 PM , Onwards"
     }, {
-      image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-      title: "Music Concert",
-      date: "7 Jan, 2016",
-      subtitle: "Film, Media & Entertainment by paragyte technologies"
+      image: "img/event/6.jpg",
+      title: "chintan shah",
+      date: "12 Jan, 2016",
+        subtitle: "Live at Town cafe",
+      time: "11 PM , Onwards"
     }];
   })
   .controller('EventDetailCtrl', function($scope) {
