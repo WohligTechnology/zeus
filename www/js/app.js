@@ -114,6 +114,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
       }
     }
   })
+  .state('app.service', {
+    url: '/service',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/appView/service.html',
+        controller: "ServiceCtrl"
+      }
+    }
+  })
 
   .state('app.blogs', {
     url: '/blogs',

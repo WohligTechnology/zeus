@@ -105,7 +105,7 @@ a, a:hover {
         border-top: 0px;
         border-right: 0;
         border-left: 0; }
-        .login-tab .login .list .item i {
+        .login-tab .login .list .item i, .login-tab .login .list .item .service-set .service1, .service-set .login-tab .login .list .item .service1, .login-tab .login .list .item .service-set .service2, .service-set .login-tab .login .list .item .service2, .login-tab .login .list .item .service-set .service3, .service-set .login-tab .login .list .item .service3, .login-tab .login .list .item .service-set .service4, .service-set .login-tab .login .list .item .service4, .login-tab .login .list .item .service-set .service5, .service-set .login-tab .login .list .item .service5 {
           display: inline-block;
           font-size: 22px;
           color: #9e9ea3; }
@@ -161,7 +161,7 @@ a, a:hover {
   margin: 0px 20px 0px 20px;
   border-bottom: 0;
   text-transform: capitalize; }
-.menu-set i {
+.menu-set i, .menu-set .service-set .service1, .service-set .menu-set .service1, .menu-set .service-set .service2, .service-set .menu-set .service2, .menu-set .service-set .service3, .service-set .menu-set .service3, .menu-set .service-set .service4, .service-set .menu-set .service4, .menu-set .service-set .service5, .service-set .menu-set .service5 {
   font-size: 22px !important;
   color: #bbbbbd; }
 
@@ -280,6 +280,29 @@ a, a:hover {
       .popular-set .layer .tabs .icon:before {
         font-size: 20px !important;
         line-height: 52px !important; }
+
+.service-set {
+  text-align: center; }
+  .service-set .services, .service-set .service1, .service-set .service2, .service-set .service3, .service-set .service4, .service-set .service5 {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 15px !important;
+    font-weight: 300 !important;
+    padding: 20px 0px 20px 0px !important; }
+    .service-set .services i, .service-set .service1 i, .service-set .service2 i, .service-set .service3 i, .service-set .service4 i, .service-set .service5 i, .service-set .services .service1, .service-set .service1 .service1, .service-set .service2 .service1, .service-set .service3 .service1, .service-set .service4 .service1, .service-set .service5 .service1, .service-set .services .service2, .service-set .service1 .service2, .service-set .service2 .service2, .service-set .service3 .service2, .service-set .service4 .service2, .service-set .service5 .service2, .service-set .services .service3, .service-set .service1 .service3, .service-set .service2 .service3, .service-set .service3 .service3, .service-set .service4 .service3, .service-set .service5 .service3, .service-set .services .service4, .service-set .service1 .service4, .service-set .service2 .service4, .service-set .service3 .service4, .service-set .service4 .service4, .service-set .service5 .service4, .service-set .services .service5, .service-set .service1 .service5, .service-set .service2 .service5, .service-set .service3 .service5, .service-set .service4 .service5, .service-set .service5 .service5 {
+      display: block;
+      font-size: 40px;
+      padding-bottom: 10px; }
+  .service-set .service1 {
+    background-color: #76dab2; }
+  .service-set .service2 {
+    background-color: #7c56e4; }
+  .service-set .service3 {
+    background-color: #f3458d; }
+  .service-set .service4 {
+    background-color: #00c0e4; }
+  .service-set .service5 {
+    background-color: #7658f8; }
 
 /*!
   Ionicons, v2.0.1
@@ -2524,7 +2547,7 @@ a, a:hover {
  * Eric Meyer's Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)
  * http://cssreset.com
  */
-html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, i, u, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, fieldset, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, i, .service-set .service1, .service-set .service2, .service-set .service3, .service-set .service4, .service-set .service5, u, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, fieldset, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
   margin: 0;
   padding: 0;
   border: 0;
@@ -4365,7 +4388,7 @@ ion-tabs.tabs-color-active-dark .tab-item {
       margin-top: 1px;
       border-width: 0px 0px 2px 0px !important;
       border-style: solid; }
-      .tabs-top.tabs-striped .tab-item.tab-item-active > .badge, .tabs-top.tabs-striped .tab-item.tab-item-active > i, .tabs-top.tabs-striped .tab-item.active > .badge, .tabs-top.tabs-striped .tab-item.active > i, .tabs-top.tabs-striped .tab-item.activated > .badge, .tabs-top.tabs-striped .tab-item.activated > i {
+      .tabs-top.tabs-striped .tab-item.tab-item-active > .badge, .tabs-top.tabs-striped .tab-item.tab-item-active > i, .tabs-top.tabs-striped .service-set .tab-item.tab-item-active > .service1, .service-set .tabs-top.tabs-striped .tab-item.tab-item-active > .service1, .tabs-top.tabs-striped .service-set .tab-item.tab-item-active > .service2, .service-set .tabs-top.tabs-striped .tab-item.tab-item-active > .service2, .tabs-top.tabs-striped .service-set .tab-item.tab-item-active > .service3, .service-set .tabs-top.tabs-striped .tab-item.tab-item-active > .service3, .tabs-top.tabs-striped .service-set .tab-item.tab-item-active > .service4, .service-set .tabs-top.tabs-striped .tab-item.tab-item-active > .service4, .tabs-top.tabs-striped .service-set .tab-item.tab-item-active > .service5, .service-set .tabs-top.tabs-striped .tab-item.tab-item-active > .service5, .tabs-top.tabs-striped .tab-item.active > .badge, .tabs-top.tabs-striped .tab-item.active > i, .tabs-top.tabs-striped .service-set .tab-item.active > .service1, .service-set .tabs-top.tabs-striped .tab-item.active > .service1, .tabs-top.tabs-striped .service-set .tab-item.active > .service2, .service-set .tabs-top.tabs-striped .tab-item.active > .service2, .tabs-top.tabs-striped .service-set .tab-item.active > .service3, .service-set .tabs-top.tabs-striped .tab-item.active > .service3, .tabs-top.tabs-striped .service-set .tab-item.active > .service4, .service-set .tabs-top.tabs-striped .tab-item.active > .service4, .tabs-top.tabs-striped .service-set .tab-item.active > .service5, .service-set .tabs-top.tabs-striped .tab-item.active > .service5, .tabs-top.tabs-striped .tab-item.activated > .badge, .tabs-top.tabs-striped .tab-item.activated > i, .tabs-top.tabs-striped .service-set .tab-item.activated > .service1, .service-set .tabs-top.tabs-striped .tab-item.activated > .service1, .tabs-top.tabs-striped .service-set .tab-item.activated > .service2, .service-set .tabs-top.tabs-striped .tab-item.activated > .service2, .tabs-top.tabs-striped .service-set .tab-item.activated > .service3, .service-set .tabs-top.tabs-striped .tab-item.activated > .service3, .tabs-top.tabs-striped .service-set .tab-item.activated > .service4, .service-set .tabs-top.tabs-striped .tab-item.activated > .service4, .tabs-top.tabs-striped .service-set .tab-item.activated > .service5, .service-set .tabs-top.tabs-striped .tab-item.activated > .service5 {
         margin-top: -1px; }
     .tabs-top.tabs-striped .tab-item .badge {
       -webkit-transition: color .2s ease;
@@ -4373,12 +4396,12 @@ ion-tabs.tabs-color-active-dark .tab-item {
       -ms-transition: color .2s ease;
       -o-transition: color .2s ease;
       transition: color .2s ease; }
-  .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active i, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active i, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated i {
+  .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active i, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service-set .service1, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service1, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service-set .service2, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service2, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service-set .service3, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service3, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service-set .service4, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service4, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service-set .service5, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .service5, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active i, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service-set .service1, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service1, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service-set .service2, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service2, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service-set .service3, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service3, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service-set .service4, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service4, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service-set .service5, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .service5, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated i, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service-set .service1, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service1, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service-set .service2, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service2, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service-set .service3, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service3, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service-set .service4, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service4, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service-set .service5, .service-set .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .service5 {
     display: block;
     margin-top: -1px; }
   .tabs-top.tabs-striped.tabs-icon-left .tab-item {
     margin-top: 1px; }
-    .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active i, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active i, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated i {
+    .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active i, .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service-set .service1, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service1, .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service-set .service2, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service2, .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service-set .service3, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service3, .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service-set .service4, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service4, .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service-set .service5, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .service5, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active i, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service-set .service1, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service1, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service-set .service2, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service2, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service-set .service3, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service3, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service-set .service4, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service4, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service-set .service5, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .service5, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated i, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service-set .service1, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service1, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service-set .service2, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service2, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service-set .service3, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service3, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service-set .service4, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service4, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service-set .service5, .service-set .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .service5 {
       margin-top: -0.1em; }
 
 /* Allow parent element to have tabs-top */

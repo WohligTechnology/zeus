@@ -54,11 +54,13 @@
       input::-webkit-input-placeholder {
         color: $base-color;
       }
-.bar.bar-positive .title {
-    color: $white;
-    font-family: $font-family-sans-serif;
-    font-weight: $lato-font-weight;
-}
+
+      .bar.bar-positive .title {
+        color: $white;
+        font-family: $font-family-sans-serif;
+        font-weight: $lato-font-weight;
+      }
+
       .bar .button.button-icon .icon:before,
       .bar .button.button-icon:before,
       .bar .button.button-icon.icon-left:before,
@@ -317,80 +319,119 @@
         }
       }
 
-.popular-set {
-    height: 100%;
-    width: 100%;
-    background-position: center center;
-    background-size: cover;
-    position: relative;
-    display: block;
-    overflow: hidden;
-    figcaption.blog-name {
-    position: absolute;
-    color: $light;
-    font-weight: $lato-font-weight;
-    margin: 0px 0px 0px 14px;
-    bottom: 65px;
-    font-size: 22px;
-    text-transform: capitalize;
-    border-bottom: 2px solid $positive;
-    padding-bottom: 3px;
-}
-    .pop-img {
-    position: absolute;
-    top: 50%;
-    min-height: 100%;
-    display: block;
-    left: 50%;
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
-    -o-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    min-width: 100%;
-}
-    figure {
-    height: 180px;
-}
-    .layer {
-    height: 180px;
-    background: -webkit-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
-    background: -moz-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
-    background: -ms-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
-    background: -o-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
-    position: relative;
-    @include transition(all, 0.5s);
-    position: absolute;
-    top: 0;
-    width: 100%;
-        p{
-                        
-    margin: 0;
-    color: #fff;
-    font-size: 12px;
-    padding: 10px 0px 0px 15px;
-    position: absolute;
-    bottom: 45px;
-            text-transform: capitalize;
+      .popular-set {
+        height: 100%;
+        width: 100%;
+        background-position: center center;
+        background-size: cover;
+        position: relative;
+        display: block;
+        overflow: hidden;
+        figcaption.blog-name {
+          position: absolute;
+          color: $light;
+          font-weight: $lato-font-weight;
+          margin: 0px 0px 0px 14px;
+          bottom: 65px;
+          font-size: 22px;
+          text-transform: capitalize;
+          border-bottom: 2px solid $positive;
+          padding-bottom: 3px;
         }
-        .tabs{
-                        
-    background-color: transparent;
-    color: #fff;
-    position: absolute;
+        .pop-img {
+          position: absolute;
+          top: 50%;
+          min-height: 100%;
+          display: block;
+          left: 50%;
+          -webkit-transform: translate(-50%, -50%);
+          -moz-transform: translate(-50%, -50%);
+          -ms-transform: translate(-50%, -50%);
+          -o-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+          min-width: 100%;
+        }
+        figure {
+          height: 180px;
+        }
+        .layer {
+          height: 180px;
+          background: -webkit-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
+          background: -moz-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
+          background: -ms-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
+          background: -o-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
+          position: relative;
+          @include transition(all, 0.5s);
+          position: absolute;
+          top: 0;
+          width: 100%;
+          p {
+            margin: 0;
+            color: #fff;
+            font-size: 12px;
+            padding: 10px 0px 0px 15px;
+            position: absolute;
+            bottom: 45px;
+            text-transform: capitalize;
+          }
+          .tabs {
+            background-color: transparent;
+            color: #fff;
+            position: absolute;
             border: 0px;
             text-transform: capitalize;
-            .icon{
-                text-transform: capitalize;
+            .icon {
+              text-transform: capitalize;
             }
-              .icon:before {
-            font-size: 20px !important;
-                  line-height: 52px !important;
-                  
-          
+            .icon:before {
+              font-size: 20px !important;
+              line-height: 52px !important;
+            }
           }
         }
-}
-    
-}
+      }
 
+      .service-set {
+        text-align: center;
+        .services {
+          color: #fff;
+          text-transform: uppercase;
+          font-size: 15px !important;
+          font-weight: 300 !important;
+          padding: 20px 0px 20px 0px !important;
+              i {
+            display: block;
+            font-size: 40px;
+            padding-bottom: 10px;
+          }
+        }
+        .service1 {
+         @extend .services ;
+            background-color: #76dab2;
+           @extend i ;
+        
+        }
+           .service2 {
+         @extend .services ;
+            background-color: #7c56e4;
+           @extend i ;
+        
+        }   
+          .service3 {
+         @extend .services ;
+            background-color: #f3458d;
+           @extend i ;
+        
+        }   
+          .service4 {
+         @extend .services ;
+            background-color: #00c0e4;
+           @extend i ;
+        
+        }   .service5 {
+         @extend .services ;
+            background-color: #7658f8;
+           @extend i ;
+        
+        }
+      }

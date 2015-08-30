@@ -126,13 +126,17 @@ angular.module('starter.controllers', [])
   })
   .controller('EventDetailCtrl', function($scope) {
 
+  }) 
+    .controller('ServiceCtrl', function($scope) {
+
   })
   .controller('BlogsCtrl', function($scope) {
     $scope.blogs = [{
       image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-      title: "Music Concert",
-      date: "7 Jan, 2016",
-      subtitle: "Film, Media & Entertainment by paragyte technologies"
+      name: "Music Concert",
+      email: "Music Concert",
+      content: "7 Jan, 2016"
+    
     }, {
       title: "Music Concert",
       date: "7 Jan, 2016",
