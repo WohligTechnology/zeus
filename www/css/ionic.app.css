@@ -131,6 +131,35 @@ a, a:hover {
 .margtp {
   margin-top: 15px !important; }
 
+.side-image {
+  padding-top: 4px !important;
+  width: 100%; }
+  .side-image h3 {
+    text-transform: capitalize !important;
+    margin: 0 !important;
+    font-family: "Lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !important;
+    font-size: 17px !important; }
+  .side-image p {
+    margin: 0;
+    color: #9e9ea3 !important;
+    font-family: "Lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !important;
+    font-size: 13px !important; }
+  .side-image .item {
+    border: none; }
+
+.menu-set .item {
+  border-color: #eee;
+  font-size: 12px !important;
+  border-right: 0;
+  border-left: 0;
+  padding: 13px 0px 13px 50px;
+  margin: 0px 20px 0px 20px;
+  border-bottom: 0;
+  text-transform: capitalize; }
+.menu-set i {
+  font-size: 22px !important;
+  color: #bbbbbd; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
