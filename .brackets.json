@@ -1,5 +1,6 @@
 {
     "jscodehints.detectedExclusions": [
-        "/Applications/XAMPP/xamppfiles/htdocs/zeus/www/js/app.js"
+        "/Applications/XAMPP/xamppfiles/htdocs/zeus/www/js/app.js",
+        "C:/xampp/htdocs/zeus/gulpfile.js"
     ]
 }

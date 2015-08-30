@@ -196,7 +196,8 @@ a, a:hover {
       left: inherit; }
   .blog-set .item-body {
     padding: 0px 16px 16px 16px !important;
-    border-top: 0 !important; }
+    border-top: 0 !important;
+    border-bottom: 0; }
     .blog-set .item-body p {
       font-size: 12px; }
   .blog-set .tabs {
