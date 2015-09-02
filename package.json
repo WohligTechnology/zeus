@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "bower": "^1.3.3",
+    "grunt": "^0.4.5",
     "gulp-util": "^2.2.14",
     "shelljs": "^0.3.0"
   },
@@ -23,5 +24,19 @@
   ],
   "cordovaPlatforms": [
     "ios"
-  ]
+  ],
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WohligTechnology/zeus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WohligTechnology/zeus/issues"
+  },
+  "homepage": "https://github.com/WohligTechnology/zeus#readme"
 }

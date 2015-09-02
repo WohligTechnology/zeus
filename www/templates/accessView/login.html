@@ -17,12 +17,12 @@
                 <div class="list">
                     <label class="item item-input item-floating-label">
                         <span class="input-label"> Username</span>
-                        <i class="icon ln-user"><input type="text" placeholder="Username"></i>
+                        <i class="icon ln-user"><input type="text" placeholder="Username" ng-model="signin.username"></i>
                     </label>
 
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Password</span>
-                        <i class="icon ln-lock"><input type="password" placeholder="Password"></i>
+                        <i class="icon ln-lock"><input type="password" placeholder="Password" ng-model="signin.password"></i>
                     </label>
                 </div>
                 
@@ -30,7 +30,7 @@
                 
                 <div class="login-btn footer">
                     <a href="#">
-                        <button class="button button-block button-positive">
+                        <button class="button button-block button-positive" ng-click="signinsubmit(signin);">
                             Sign in
                         </button>
                     </a>
@@ -39,15 +39,29 @@
                     </div>
                     <div class=" btn-set">
 
+                        <button ng-click="googlelogin()" class="button button-full button-positive-facebook button-block">
+                            Login With Google
+                        </button>
+
+                    </div> 
+                    <div class=" btn-set">
+
                         <button ng-click="facebooklogin()" class="button button-full button-positive-facebook button-block">
-                            Sign in With Facebook
+                            Login With Facebook
                         </button>
 
                     </div>
                     <div class=" btn-set">
 
                         <button ng-click="twitterlogin()" class="button button-full button-positive-twitter button-block">
-                            Sign in With Twitter
+                            Login With Twitter
+                        </button>
+
+                    </div> 
+                    <div class=" btn-set">
+
+                        <button ng-click="instagramlogin()" class="button button-full button-positive-twitter button-block">
+                            Login With Instagram
                         </button>
 
                     </div>
@@ -63,24 +77,24 @@
                 <div class="list">
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Username</span>
-                        <i class="icon ln-user"><input type="text" placeholder="Username"></i>
+                        <i class="icon ln-user"><input type="text" placeholder="Username" ng-model="signup.username"></i>
                     </label>
 
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Email</span>
-                        <i class="icon ln-envelope"><input type="email" placeholder="Email"></i>
+                        <i class="icon ln-envelope"><input type="email" placeholder="Email" ng-model="signup.email"></i>
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Date of birth</span>
-                        <i class="icon ln-gift"><input type="text" onfocus="(this.type='date')" placeholder="Birth Date"></i>
+                        <i class="icon ln-gift"><input type="text" onfocus="(this.type='date')" placeholder="Birth Date" ng-model="signup.dob"></i>
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Password</span>
-                        <i class="icon ln-lock"><input type="password" placeholder="Password"></i>
+                        <i class="icon ln-lock"><input type="password" placeholder="Password" ng-model="signup.password"></i>
                     </label>
                 </div>
                 <div class="login-btn footer">
-                    <button class="button button-block button-positive">
+                    <button class="button button-block button-positive" ng-click="signupsubmit(signup);">
                         Sign up
                     </button>
                 </div>

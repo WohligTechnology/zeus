@@ -1,6 +1,6 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['starter.services'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout,$location,MyServices ) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -10,7 +10,17 @@ angular.module('starter.controllers', [])
   //});
 
   // Form data for the login modal
+    var logoutsuccess=function(data,success){
+    console.log(data);
+        if(data=='true'){
+         $location.url("/access/login");
+        }
+    }
+    $scope.logout=function(){
+      MyServices.logout().success(logoutsuccess);
+    }
   $scope.loginData = {};
+  
 
   // Create the login modal that we will use later
   $ionicModal.fromTemplateUrl('templates/accessView/login.html', {
@@ -44,7 +54,107 @@ angular.module('starter.controllers', [])
 .controller('AccessCtrl', function($scope) {
 
 })
-  .controller('LoginCtrl', function($scope) {
+  .controller('LoginCtrl', function($scope,$location,$interval,MyServices,$ionicPopup) {
+      $scope.loginfail = function() {
+   var alertPopup = $ionicPopup.alert({
+     title: 'Login Failed!',
+     template: 'Wrong username or password!!'
+   });
+ };
+    
+    
+    //logins
+     var checktwitter = function (data, status) {
+        if (data != "false") {
+            $interval.cancel(stopinterval);
+            ref.close();
+            MyServices.authenticate().success(authenticatesuccess);
+        } else {
+           $scope.loginfail();
+        }
+    };
+
+    var callAtIntervaltwitter = function () {
+        MyServices.authenticate().success(checktwitter);
+    };
+      var authenticatesuccess = function (data, status) {
+        console.log(data);
+        if (data != "false") {
+//            $.jStorage.set("user", data);
+            user = data;
+            $location.url("/home");
+        } else {
+           $scope.loginfail();
+        };
+    };
+    $scope.facebooklogin=function(){
+     ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+    $scope.twitterlogin=function(){
+     console.log("in twitter");
+
+        ref = window.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+    
+      $scope.instagramlogin = function () {
+
+        ref = window.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+        //        $location.url("/tab/dash");
+    }
+      
+        $scope.googlelogin = function () {
+
+        ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+    
+        //SIGN UP FORMn
+        $scope.signup={};
+        var signupsuccess=function(data,status){
+        console.log(data);
+             $scope.signup={};
+        }
+        $scope.signupsubmit=function(signup){
+            $scope.signup=signup;
+          MyServices.signup($scope.signup,signupsuccess);
+        }
+        
+        // SIGN IN 
+         $scope.signin={};
+        var signinsuccess=function(data,status){
+        console.log(data);
+            if(data!='false'){
+             MyServices.authenticate().success(authenticatesuccess);
+                 $scope.signin={};
+            }
+            
+            else{
+              $scope.loginfail();
+            }
+        }
+        $scope.signinsubmit=function(signin){
+            $scope.signin=signin;
+          MyServices.signin($scope.signin,signinsuccess);
+        }
     //        ***** tabchange ****
 
     $scope.tab = 'signin';

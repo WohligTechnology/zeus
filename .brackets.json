@@ -1,5 +1,11 @@
 {
     "jscodehints.detectedExclusions": [
-        "/Applications/XAMPP/xamppfiles/htdocs/zeus/www/js/app.js"
+        "/Applications/XAMPP/xamppfiles/htdocs/zeus/www/js/app.js",
+        "C:/xampp/htdocs/zeus/gulpfile.js",
+        "C:/xampp/htdocs/zeus/www/lib/ionic/js/ionic.min.js",
+        "C:/xampp/htdocs/zeus/www/lib/ionic/js/ionic.js",
+        "C:/xampp/htdocs/zeus/www/js/controllers.js",
+        "C:/xampp/htdocs/zeus/www/lib/ionic/js/ionic.bundle.min.js",
+        "C:/xampp/htdocs/zeus/www/lib/ionic/js/ionic.bundle.js"
     ]
 }
