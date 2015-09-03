@@ -1,3 +1,4 @@
+var reloadpage = false;
 angular.module('starter.controllers', ['starter.services'])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $location) {
@@ -14,7 +15,8 @@ angular.module('starter.controllers', ['starter.services'])
         console.log(data);
         if (data == 'true') {
             $.jStorage.flush();
-            $location.url("/access/login");
+            reloadpage = true;
+            $location.path("/access/login");
         }
     }
     $scope.logout = function () {
@@ -51,28 +53,30 @@ angular.module('starter.controllers', ['starter.services'])
             $scope.closeLogin();
         }, 1000);
     };
-                        
 
-//    $scope.user = {};
-        $scope.username = $.jStorage.get("user").username;
-        if ($scope.username == "") {
-            $scope.username = $.jStorage.get("user").name;
-        }
-        $scope.userimage = $.jStorage.get("user").image;
-        $scope.useremail = $.jStorage.get("user").email;
+
+    //    $scope.user = {};
+
+    $scope.username = $.jStorage.get("user").username;
+    if ($scope.username == "") {
+        $scope.username = $.jStorage.get("user").name;
+    }
+    $scope.userimage = $.jStorage.get("user").image;
+    $scope.useremail = $.jStorage.get("user").email;
 })
 
 .controller('AccessCtrl', function ($scope) {
 
 })
 
-.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location) {
+.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window) {
         //        $scope.loginfail = function() {
         //   var alertPopup = $ionicPopup.alert({
         //     title: 'Login Failed!',
         //     template: 'Wrong username or password!!'
         //   });
         // };
+
         $.jStorage.flush();
         //logins
         var checktwitter = function (data, status) {
