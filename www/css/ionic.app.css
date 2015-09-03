@@ -325,6 +325,11 @@ a {
   top: -15px;
   z-index: 99; }
 
+.wordpress-content p, .wordpress-content h1, .wordpress-content h2, .wordpress-content h3, .wordpress-content h4, .wordpress-content h5, .wordpress-content h6 {
+  margin: 0 0 10px; }
+.wordpress-content img {
+  width: 100%; }
+
 /*!
   Ionicons, v2.0.1
   Created by Ben Sperry for the Ionic Framework, http://ionicons.com/
