@@ -4,21 +4,21 @@
             <div class="row ">
                 <div class="col col-67">
                     <div class="bl-name">
-                        <p>{{blog.name}}</p>
-                        <span>{{blog.email}}</span>
+                        <p>{{blog.author.first_name}} {{blog.author.last_name}}</p>
+                        <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>
                     </div>
                 </div>
                 <div class="col col-33 bl-img">
                     <div class=" item-avatar">
-                        <img ng-src="{{blog.image}}">
+                        <img ng-src="{{blog.author.avatar_URL}}">
                     </div>
 
                 </div>
             </div>
             <div class="item item-body">
                 <img src="img/background/divider.png" class="full-image">
-                <p>
-                    "{{blog.content}}"
+                <p ng-bind-html="blog.content">
+
                 </p>
             </div>
             <div class="item tabs tabs-secondary tabs-icon-left">

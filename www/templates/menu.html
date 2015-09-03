@@ -18,10 +18,9 @@
             <div class="list side-image">
 
                 <a class="item item-avatar" href="#">
-                    <img src="img/profile.png">
-                    {{userdetails}}
-                    <h3>{{username}}</h3>
-                    <p>{{useremail}}</p>
+                    <img ng-src="{{userdetails.userimage}}">
+                    <h3>{{userdetails.username}}</h3>
+                    <p>{{userdetails.useremail}}</p>
                 </a>
 
 
@@ -36,23 +35,23 @@
 
             <div class="list menu-set" style="top:30px">
                 <img src="img/background/divider.png" class="full-image">
-                <a class="item item-icon-left" href="#" style="border:0px;">
+                <a class="item item-icon-left" href="#/app/home" style="border:0px;">
                     <i class="icon ln-home3 assertive-bg-before"></i> Home
                 </a>
 
-                <a class="item item-icon-left" href="#">
+                <a class="item item-icon-left" href="#/app/events" ng-show="menudata.events">
                     <i class="icon ln-calendar2 balanced-bg-before"></i> Events
                 </a>
 
-                <a class="item item-icon-left" href="#">
+                <a class="item item-icon-left" href="#" ng-show="menudata.blogs">
                     <i class="icon ln-papers royal-bg-before"></i> Blog
                 </a>
 
-                <a class="item item-icon-left" href="#">
+                <a class="item item-icon-left" href="#" ng-show="menudata.gallery">
                     <i class="icon ln-picture stable-bg-before"></i> Photos
                 </a>
 
-                <a class="item item-icon-left" href="#">
+                <a class="item item-icon-left" href="#" ng-show="menudata.videogallery">
                     <i class="icon ln-film-play dark-bg-before"></i> Videos
                 </a>
 
@@ -61,7 +60,7 @@
                     <i class="icon ln-circle-exclamation energized-bg-before"></i> about
                 </a>
                 <a class="item item-icon-left" href="#">
-                    <i class="icon ln-briefcase energized-bg-before"></i> career
+                    <i class="icon ln-briefcase energized-bg-before"></i> Career
                 </a>
                 <a class="item item-icon-left" href="#">
                     <i class="icon ln-phone2 energized-bg-before"></i> Contact

@@ -3,14 +3,58 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $location) {
 
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
-    console.log("app ctrl");
-    // Form data for the login modal
+    $scope.menudata = {};
+    MyServices.getappconfig(function (data, status) {
+        //        console.log(data);
+        //for blogs
+        var blogdata = JSON.parse(data[1].text);
+        for (var i = 0; i < blogdata.length; i++) {
+            console.log(blogdata[i]);
+            if (blogdata[i].value == true) {
+                $scope.menudata.blogs = true;
+                $.jStorage.set("blogType", blogdata[i].name);
+                break;
+            } else {
+                $scope.menudata.blogs = false;
+            }
+        }
+
+        //        _.each(JSON.parse(data[1].text), function (n) {
+        //            console.log(n);
+        //            if (n.value == true) {
+        //                $scope.menudata.blogs = true;
+        //                $.jStorage.set("blogType", n.name);
+        //            } else {
+        //                $scope.menudata.blogs = false;
+        //            }
+        //        })
+
+        //for gallery
+        if (data[2].text == "Drop down yes") {
+            $scope.menudata.gallery = true;
+        } else {
+            $scope.menudata.gallery = false;
+        }
+        //for video gallery
+        if (data[3].text == "Drop down yes") {
+            $scope.menudata.videogallery = true;
+        } else {
+            $scope.menudata.videogallery = false;
+        }
+        //for events
+        if (data[4].text == "Drop down yes") {
+            $scope.menudata.events = true;
+        } else {
+            $scope.menudata.events = false;
+        }
+        //for banner
+        if (data[5].text == "Drop down yes") {
+            $scope.menudata.banner = true;
+        } else {
+            $scope.menudata.banner = false;
+        }
+    })
+
     var logoutsuccess = function (data, success) {
         console.log(data);
         if (data == 'true') {
@@ -54,15 +98,15 @@ angular.module('starter.controllers', ['starter.services'])
         }, 1000);
     };
 
-
-    //    $scope.user = {};
-
-    $scope.username = $.jStorage.get("user").username;
-    if ($scope.username == "") {
-        $scope.username = $.jStorage.get("user").name;
+    if ($.jStorage.get("user")) {
+        $scope.userdetails = {};
+        $scope.userdetails.username = $.jStorage.get("user").username;
+        if ($scope.userdetails.username == "") {
+            $scope.userdetails.username = $.jStorage.get("user").name;
+        }
+        $scope.userdetails.userimage = $.jStorage.get("user").image;
+        $scope.userdetails.useremail = $.jStorage.get("user").email;
     }
-    $scope.userimage = $.jStorage.get("user").image;
-    $scope.useremail = $.jStorage.get("user").email;
 })
 
 .controller('AccessCtrl', function ($scope) {
@@ -70,188 +114,214 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window) {
-        //        $scope.loginfail = function() {
-        //   var alertPopup = $ionicPopup.alert({
-        //     title: 'Login Failed!',
-        //     template: 'Wrong username or password!!'
-        //   });
-        // };
 
-        $.jStorage.flush();
-        //logins
-        var checktwitter = function (data, status) {
-            if (data != "false") {
-                $interval.cancel(stopinterval);
-                ref.close();
-                MyServices.authenticate().success(authenticatesuccess);
-            } else {
 
+
+    $.jStorage.flush();
+
+    $scope.logindata = {};
+
+    MyServices.getappconfig(function (data, status) {
+        console.log(data);
+        _.each(JSON.parse(data[0].text), function (n) {
+            console.log(n);
+            if (n.name.toLowerCase() == "email") {
+                $scope.logindata.email = true;
+            } else if (n.name.toLowerCase() == "google") {
+                $scope.logindata.google = true;
+            } else if (n.name.toLowerCase() == "twitter") {
+                $scope.logindata.twitter = true;
+            } else if (n.name.toLowerCase() == "instagram") {
+                $scope.logindata.instagram = true;
+            } else if (n.name.toLowerCase() == "facebook") {
+                $scope.logindata.facebook = true;
             }
-        };
+        })
+    })
 
-        var callAtIntervaltwitter = function () {
-            MyServices.authenticate().success(checktwitter);
-        };
-        var authenticatesuccess = function (data, status) {
-            console.log(data);
-            userdetails = data;
+    //logins
+    var checktwitter = function (data, status) {
+        if (data != "false") {
+            $interval.cancel(stopinterval);
+            ref.close();
+            MyServices.authenticate().success(authenticatesuccess);
+        } else {
+
+        }
+    };
+
+    var callAtIntervaltwitter = function () {
+        MyServices.authenticate().success(checktwitter);
+    };
+    var authenticatesuccess = function (data, status) {
+        console.log(data);
+        if (data != "false") {
             $.jStorage.set("user", data);
-            if (data != "false") {
-                //            $.jStorage.set("user", data);
-                user = data;
-                $location.url("/app/home");
-            } else {
-
-            };
-        };
-        $scope.facebooklogin = function () {
-            ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
-            stopinterval = $interval(callAtIntervaltwitter, 2000);
-            ref.addEventListener('exit', function (event) {
-                MyServices.authenticate().success(authenticatesuccess);
-                $interval.cancel(stopinterval);
-            });
+            user = data;
+            $location.url("/app/home");
         }
-        $scope.twitterlogin = function () {
-            console.log("in twitter");
+    };
+    $scope.facebooklogin = function () {
+        ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+    $scope.twitterlogin = function () {
+        console.log("in twitter");
 
-            ref = window.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
-            stopinterval = $interval(callAtIntervaltwitter, 2000);
-            ref.addEventListener('exit', function (event) {
-                MyServices.authenticate().success(authenticatesuccess);
-                $interval.cancel(stopinterval);
-            });
-        }
+        ref = window.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
 
-        $scope.instagramlogin = function () {
+    $scope.instagramlogin = function () {
+        ref = window.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+        //        $location.url("/tab/dash");
+    }
 
-            ref = window.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
-            stopinterval = $interval(callAtIntervaltwitter, 2000);
-            ref.addEventListener('exit', function (event) {
-                MyServices.authenticate().success(authenticatesuccess);
-                $interval.cancel(stopinterval);
-            });
-            //        $location.url("/tab/dash");
-        }
+    $scope.googlelogin = function () {
 
-        $scope.googlelogin = function () {
+        ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
 
-            ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
-            stopinterval = $interval(callAtIntervaltwitter, 2000);
-            ref.addEventListener('exit', function (event) {
-                MyServices.authenticate().success(authenticatesuccess);
-                $interval.cancel(stopinterval);
-            });
-        }
-
-        //SIGN UP FORMn
+    //SIGN UP FORMn
+    $scope.signup = {};
+    var signupsuccess = function (data, status) {
+        console.log(data);
         $scope.signup = {};
-        var signupsuccess = function (data, status) {
-            console.log(data);
-            $scope.signup = {};
+    }
+    $scope.signupsubmit = function (signup) {
+        $scope.signup = signup;
+        MyServices.signup($scope.signup, signupsuccess);
+    }
+
+    // SIGN IN 
+    $scope.signin = {};
+    var signinsuccess = function (data, status) {
+        console.log(data);
+        if (data != 'false') {
+            MyServices.authenticate().success(authenticatesuccess);
+            $scope.signin = {};
+        } else {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Login Failed!',
+                template: 'Wrong username or password!!'
+            });
         }
-        $scope.signupsubmit = function (signup) {
-            $scope.signup = signup;
-            MyServices.signup($scope.signup, signupsuccess);
+    }
+    $scope.signinsubmit = function (signin) {
+        MyServices.signin(signin, signinsuccess);
+    }
+
+    //        ***** tabchange ****
+
+    $scope.tab = 'signin';
+    $scope.classa = 'active';
+    $scope.classb = '';
+
+    $scope.tabchange = function (tab, a) {
+
+        $scope.tab = tab;
+        if (a == 1) {
+            $scope.classa = "active";
+            $scope.classb = '';
+
+        } else {
+            $scope.classa = '';
+            $scope.classb = "active";
+
         }
+    };
 
-        // SIGN IN 
-        $scope.signin = {};
-        var signinsuccess = function (data, status) {
-            console.log(data);
-            if (data != 'false') {
-                MyServices.authenticate().success(authenticatesuccess);
-                $scope.signin = {};
-            } else {
-                //              $scope.loginfail();
-            }
-        }
-        $scope.signinsubmit = function (signin) {
-            $scope.signin = signin;
-            MyServices.signin($scope.signin, signinsuccess);
-        }
+    //    ****** End ******
 
-        //        ***** tabchange ****
+})
 
-        $scope.tab = 'signin';
-        $scope.classa = 'active';
-        $scope.classb = '';
+.controller('ResetPasswordCtrl', function ($scope) {
 
-        $scope.tabchange = function (tab, a) {
+})
 
-            $scope.tab = tab;
-            if (a == 1) {
-                $scope.classa = "active";
-                $scope.classb = '';
+.controller('ForgotPasswordCtrl', function ($scope) {
 
-            } else {
-                $scope.classa = '';
-                $scope.classb = "active";
+})
 
-            }
-        };
+.controller('SignupCtrl', function ($scope) {})
 
-        //    ****** End ******
+.controller('HomeCtrl', function ($scope, MyServices, $ionicSlideBoxDelegate) {
 
+    //        $scope.slides = ["http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png"];
+
+    MyServices.getallsliders(function (data, status) {
+        $scope.slides = data.queryresult;
+        $ionicSlideBoxDelegate.update();
     })
-    .controller('ResetPasswordCtrl', function ($scope) {
 
+})
+
+.controller('ContentPageCtrl', function ($scope) {
+
+})
+
+.controller('EventsCtrl', function ($scope, MyServices) {
+
+    //    $scope.events = [{
+    //        image: "img/event/1.jpg",
+    //        title: "Sona Mohaptra",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Live at Tiwnhoase cafe",
+    //        time: "8 PM , Onwards"
+    //    }, {
+    //        image: "img/event/2.jpg",
+    //        title: "Sonu nigam",
+    //        date: "8 Jan, 2016",
+    //        subtitle: "Live at Townhouse cafe",
+    //        time: "9 PM , Onwards"
+    //    }, {
+    //        image: "img/event/3.jpg",
+    //        title: "Music Concert",
+    //        date: "9 Jan, 2016",
+    //        subtitle: "Live at Fort cafe",
+    //        time: "9 PM , Onwards"
+    //    }, {
+    //        image: "img/event/4.jpg",
+    //        title: "Arjit singh",
+    //        date: "10 Jan, 2016",
+    //        subtitle: "Live at Macdee cafe",
+    //        time: "12 PM , Onwards"
+    //    }, {
+    //        image: "img/event/5.jpg",
+    //        title: "sohan honakeri",
+    //        date: "11 Jan, 2016",
+    //        subtitle: "Live at Townhall cafe",
+    //        time: "10 PM , Onwards"
+    //    }, {
+    //        image: "img/event/6.jpg",
+    //        title: "chintan shah",
+    //        date: "12 Jan, 2016",
+    //        subtitle: "Live at Town cafe",
+    //        time: "11 PM , Onwards"
+    //    }];
+
+    MyServices.getallevents(function (data, status) {
+        $scope.events = data.queryresult;
     })
-    .controller('ForgotPasswordCtrl', function ($scope) {
-
-    })
-    .controller('SignupCtrl', function ($scope) {
-
-    })
-    .controller('HomeCtrl', function ($scope) {
-
-        console.log("home ctrl");
-        $scope.slides = ["http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png"];
-
-    })
-    .controller('ContentPageCtrl', function ($scope) {
-
-    })
-    .controller('EventsCtrl', function ($scope) {
-
-        $scope.events = [{
-            image: "img/event/1.jpg",
-            title: "Sona Mohaptra",
-            date: "7 Jan, 2016",
-            subtitle: "Live at Tiwnhoase cafe",
-            time: "8 PM , Onwards"
-    }, {
-            image: "img/event/2.jpg",
-            title: "Sonu nigam",
-            date: "8 Jan, 2016",
-            subtitle: "Live at Townhouse cafe",
-            time: "9 PM , Onwards"
-    }, {
-            image: "img/event/3.jpg",
-            title: "Music Concert",
-            date: "9 Jan, 2016",
-            subtitle: "Live at Fort cafe",
-            time: "9 PM , Onwards"
-    }, {
-            image: "img/event/4.jpg",
-            title: "Arjit singh",
-            date: "10 Jan, 2016",
-            subtitle: "Live at Macdee cafe",
-            time: "12 PM , Onwards"
-    }, {
-            image: "img/event/5.jpg",
-            title: "sohan honakeri",
-            date: "11 Jan, 2016",
-            subtitle: "Live at Townhall cafe",
-            time: "10 PM , Onwards"
-    }, {
-            image: "img/event/6.jpg",
-            title: "chintan shah",
-            date: "12 Jan, 2016",
-            subtitle: "Live at Town cafe",
-            time: "11 PM , Onwards"
-    }];
-    })
+})
 
 .controller('EventDetailCtrl', function ($scope) {
 
@@ -261,105 +331,124 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('BlogsCtrl', function ($scope) {
-        $scope.blogs = [{
-            image: "img/profile/1.jpg",
-            name: "Marty McFly",
-            email: "@Marty_coop",
-            content: "This is a 'Facebook' styled Card. The header is created from a Thumbnail List item, the content is from a card-body consisting of an image and paragraph text."
+.controller('BlogsCtrl', function ($scope, MyServices) {
+    //    $scope.blogs = [{
+    //        image: "img/profile/1.jpg",
+    //        name: "Marty McFly",
+    //        email: "@Marty_coop",
+    //        content: "This is a 'Facebook' styled Card. The header is created from a Thumbnail List item, the content is from a card-body consisting of an image and paragraph text."
+    //
+    //    }, {
+    //        image: "img/profile/2.jpg",
+    //        name: "Liesa Bell",
+    //        email: "@LiesaHot",
+    //        content: "Keira Christina Knightley was born in the South West Greater London suburb of Richmond on March 26th 1985. "
+    //    }, {
+    //        image: "img/profile/3.jpg",
+    //        name: "Keira Knightley",
+    //        email: "@Keira_baby",
+    //        content: " Eva Gaëlle Green was born on July 5, 1980, in Paris, France. She has a sororal twin sister. "
+    //    }, {
+    //        image: "img/profile/4.jpg",
+    //        name: "Eva Green",
+    //        email: "@Eva-sexy",
+    //        content: " styled Card. The header is created from a Thumbnail List item, the content is from a card-body consisting of an image and paragraph text."
+    //    }, {
+    //        image: "img/profile/5.jpg",
+    //        name: "Natalie Portman",
+    //        email: "@Natalie_Portman",
+    //        content: "Natalie Portman was born Natalie Hershlag on June 9, 1981, in Jerusalem, Israel, to a Jewish family."
+    //    }];
 
-    }, {
-            image: "img/profile/2.jpg",
-            name: "Liesa Bell",
-            email: "@LiesaHot",
-            content: "Keira Christina Knightley was born in the South West Greater London suburb of Richmond on March 26th 1985. "
-    }, {
-            image: "img/profile/3.jpg",
-            name: "Keira Knightley",
-            email: "@Keira_baby",
-            content: " Eva Gaëlle Green was born on July 5, 1980, in Paris, France. She has a sororal twin sister. "
-    }, {
-            image: "img/profile/4.jpg",
-            name: "Eva Green",
-            email: "@Eva-sexy",
-            content: " styled Card. The header is created from a Thumbnail List item, the content is from a card-body consisting of an image and paragraph text."
-    }, {
-            image: "img/profile/5.jpg",
-            name: "Natalie Portman",
-            email: "@Natalie_Portman",
-            content: "Natalie Portman was born Natalie Hershlag on June 9, 1981, in Jerusalem, Israel, to a Jewish family."
-    }];
-    })
-    .controller('BlogDetailCtrl', function ($scope) {
+    if ($.jStorage.get("blogType") && $.jStorage.get("blogType").toLowerCase() == "wordpress") {
+        MyServices.getWordpressPosts(function (data, status) {
+            console.log("my post");
+            console.log(data);
+            $scope.blogs = data.posts;
+        });
+    }
+})
 
-    })
-    .controller('PhotoGalleryCategoryCtrl', function ($scope) {
-        $scope.photos = [{
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+.controller('BlogDetailCtrl', function ($scope) {
+
+})
+
+.controller('PhotoGalleryCategoryCtrl', function ($scope) {
+    $scope.photos = [{
+        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }];
+
+})
+
+.controller('PhotoGalleryCtrl', function ($scope, MyServices) {
+    //    $scope.photos = [{
+    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }];
+
+    MyServices.getallgallery(function (data, status) {
+        $scope.photos = data.queryresult;
+        $scope.photos = _.chunk($scope.photos, 2);
+        console.log($scope.photos);
     })
-    .controller('PhotoGalleryCtrl', function ($scope) {
-        $scope.photos = [{
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }];
-    })
-    .controller('VideoGalleryCategoryCtrl', function ($scope) {
+})
+
+.controller('VideoGalleryCategoryCtrl', function ($scope) {
 
         $scope.videos = [{
             image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",

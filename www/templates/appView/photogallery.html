@@ -1,46 +1,13 @@
 <ion-view view-title="Gallery">
-  <ion-content>
-    <div class="row">
-      <div class="col col-50">
-       <figure>
-        <img src="https://farm8.staticflickr.com/7083/7266966750_bb475d1910_q.jpg" class="full-image" src="https://farm8.staticflickr.com/7083/7266966750_bb475d1910_q.jpg">
-        <figcaption>Demo Image name</figcaption>
-        </figure>
+    <ion-content>
+        <div class="row" ng-repeat="photo in photos">
+            <div class="col col-50" ng-repeat="img in photo">
+                <figure>
+                    <img ng-src="{{img.image|serverimage}}" class="full-image">
+                    <figcaption>{{img.name}}</figcaption>
+                </figure>
+            </div>
+
         </div>
-      <div class="col col-50">
-             <figure>
-      <img src="https://farm8.staticflickr.com/7157/6464932095_93bfb6b28f_q.jpg" class="full-image" src="https://farm8.staticflickr.com/7157/6464932095_93bfb6b28f_q.jpg">
-       <figcaption>Demo Image name</figcaption>
-          </figure>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col col-50">
-       <figure>
-        <img src="https://farm8.staticflickr.com/7083/7266966750_bb475d1910_q.jpg" class="full-image" src="https://farm8.staticflickr.com/7083/7266966750_bb475d1910_q.jpg">
-        <figcaption>Demo Image name</figcaption>
-        </figure>
-        </div>
-      <div class="col col-50">
-             <figure>
-      <img src="https://farm8.staticflickr.com/7157/6464932095_93bfb6b28f_q.jpg" class="full-image" src="https://farm8.staticflickr.com/7157/6464932095_93bfb6b28f_q.jpg">
-       <figcaption>Demo Image name</figcaption>
-          </figure>
-      </div>
-    </div>
-        <div class="row">
-      <div class="col col-50">
-       <figure>
-        <img src="https://farm8.staticflickr.com/7083/7266966750_bb475d1910_q.jpg" class="full-image" src="https://farm8.staticflickr.com/7083/7266966750_bb475d1910_q.jpg">
-        <figcaption>Demo Image name</figcaption>
-        </figure>
-        </div>
-      <div class="col col-50">
-             <figure>
-      <img src="https://farm8.staticflickr.com/7157/6464932095_93bfb6b28f_q.jpg" class="full-image" src="https://farm8.staticflickr.com/7157/6464932095_93bfb6b28f_q.jpg">
-       <figcaption>Demo Image name</figcaption>
-          </figure>
-      </div>
-    </div>
-  </ion-content>
+    </ion-content>
 </ion-view>

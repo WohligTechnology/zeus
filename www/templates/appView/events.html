@@ -1,35 +1,26 @@
 <ion-view view-title="Events">
-
-  <ion-content>
-    <ion-lis style="padding-top:0px">
-  <a>
+    <ion-content>
+        <ion-lis style="padding-top:0px">
+            <a>
                 <div class="popular-set" ng-repeat="event in events">
-                    <figure >
-                        <img class="pop-img" ng-src="{{event.image}}" alt="Demo" class="full-image">
+                    <figure>
+                        <img class="pop-img" ng-src="{{event.image|serverimage}}" alt="Demo" class="full-image">
                         <div class="layer">
                             <figcaption class="blog-name">{{event.title}}</figcaption>
-                            <p>{{event.subtitle}}</p>
-                           
+                            <p>{{event.content}}</p>
+
                             <div class="item tabs tabs-secondary tabs-icon-left">
-                                
-                                
-    <a class="tab-item borderright" href="#">
-      <i class="icon ln-calendar3 "></i>
-      {{event.date}}
-    </a>
-   
-    <a class="tab-item" href="#">
-      <i class="icon ln-timer"></i>
-     {{event.time}}
-    </a>
-  </div>
+                                <a class="tab-item borderright" href="#">
+                                    <i class="icon ln-calendar3 "></i> {{event.startdate|date : 'dd MMM, yyyy'}}
+                                </a>
+                                <a class="tab-item" href="#">
+                                    <i class="icon ln-timer"></i> {{event.starttime|convertto12}}
+                                </a>
+                            </div>
                         </div>
-
                     </figure>
-
                 </div>
             </a>
-    </ion-list>
-  </ion-content>
+            </ion-list>
+    </ion-content>
 </ion-view>
-

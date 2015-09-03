@@ -244,13 +244,25 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     $urlRouterProvider.otherwise('/app/home');
 
 
+})
+
+
+
+.filter('serverimage', function () {
+    return function (image) {
+        return adminimage + image;
+    };
+})
+
+.filter('convertto12', function () {
+    return function (date) {
+        var newtime = "";
+        var split = date.split(":");
+        if (parseInt(split[0]) >= 12) {
+            newtime = (parseInt(split[0]) - 12) + ":" + split[1] + " PM Onwards";
+        } else {
+            newtime = split[0] + ":" + split[1] + " AM Onwards";
+        }
+        return newtime;
+    };
 });
-
-
-
-//.filter('serverimage', function () {
-//    return function (image) {
-//            return imgpath + image;
-//        
-//    };
-//})
