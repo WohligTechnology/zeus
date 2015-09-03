@@ -32,12 +32,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     controller: 'AppCtrl'
   })
 
+  
   .state('access', {
     url: '/access',
     abstract: true,
     templateUrl: 'templates/access.html',
     controller: 'AccessCtrl'
   })
+  
     .state('access.login', {
       url: '/login',
       views: {
@@ -239,4 +241,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
+    
+    
 });
+
+
+
+//.filter('serverimage', function () {
+//    return function (image) {
+//            return imgpath + image;
+//        
+//    };
+//})

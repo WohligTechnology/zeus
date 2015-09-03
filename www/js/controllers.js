@@ -1,6 +1,6 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['starter.services'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $location) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -8,6 +8,18 @@ angular.module('starter.controllers', [])
     // listen for the $ionicView.enter event:
     //$scope.$on('$ionicView.enter', function(e) {
     //});
+    console.log("app ctrl");
+    // Form data for the login modal
+    var logoutsuccess = function (data, success) {
+        console.log(data);
+        if (data == 'true') {
+            $.jStorage.flush();
+            $location.url("/access/login");
+        }
+    }
+    $scope.logout = function () {
+        MyServices.logout().success(logoutsuccess);
+    }
 
     // Form data for the login modal
     $scope.loginData = {};
@@ -39,12 +51,122 @@ angular.module('starter.controllers', [])
             $scope.closeLogin();
         }, 1000);
     };
+                        
+
+//    $scope.user = {};
+        $scope.username = $.jStorage.get("user").username;
+        if ($scope.username == "") {
+            $scope.username = $.jStorage.get("user").name;
+        }
+        $scope.userimage = $.jStorage.get("user").image;
+        $scope.useremail = $.jStorage.get("user").email;
 })
 
 .controller('AccessCtrl', function ($scope) {
 
-    })
-    .controller('LoginCtrl', function ($scope) {
+})
+
+.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location) {
+        //        $scope.loginfail = function() {
+        //   var alertPopup = $ionicPopup.alert({
+        //     title: 'Login Failed!',
+        //     template: 'Wrong username or password!!'
+        //   });
+        // };
+        $.jStorage.flush();
+        //logins
+        var checktwitter = function (data, status) {
+            if (data != "false") {
+                $interval.cancel(stopinterval);
+                ref.close();
+                MyServices.authenticate().success(authenticatesuccess);
+            } else {
+
+            }
+        };
+
+        var callAtIntervaltwitter = function () {
+            MyServices.authenticate().success(checktwitter);
+        };
+        var authenticatesuccess = function (data, status) {
+            console.log(data);
+            userdetails = data;
+            $.jStorage.set("user", data);
+            if (data != "false") {
+                //            $.jStorage.set("user", data);
+                user = data;
+                $location.url("/app/home");
+            } else {
+
+            };
+        };
+        $scope.facebooklogin = function () {
+            ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function (event) {
+                MyServices.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
+        }
+        $scope.twitterlogin = function () {
+            console.log("in twitter");
+
+            ref = window.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function (event) {
+                MyServices.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
+        }
+
+        $scope.instagramlogin = function () {
+
+            ref = window.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function (event) {
+                MyServices.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
+            //        $location.url("/tab/dash");
+        }
+
+        $scope.googlelogin = function () {
+
+            ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function (event) {
+                MyServices.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
+        }
+
+        //SIGN UP FORMn
+        $scope.signup = {};
+        var signupsuccess = function (data, status) {
+            console.log(data);
+            $scope.signup = {};
+        }
+        $scope.signupsubmit = function (signup) {
+            $scope.signup = signup;
+            MyServices.signup($scope.signup, signupsuccess);
+        }
+
+        // SIGN IN 
+        $scope.signin = {};
+        var signinsuccess = function (data, status) {
+            console.log(data);
+            if (data != 'false') {
+                MyServices.authenticate().success(authenticatesuccess);
+                $scope.signin = {};
+            } else {
+                //              $scope.loginfail();
+            }
+        }
+        $scope.signinsubmit = function (signin) {
+            $scope.signin = signin;
+            MyServices.signin($scope.signin, signinsuccess);
+        }
+
         //        ***** tabchange ****
 
         $scope.tab = 'signin';
@@ -78,6 +200,8 @@ angular.module('starter.controllers', [])
 
     })
     .controller('HomeCtrl', function ($scope) {
+
+        console.log("home ctrl");
         $scope.slides = ["http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png"];
 
     })
@@ -124,13 +248,16 @@ angular.module('starter.controllers', [])
             time: "11 PM , Onwards"
     }];
     })
-    .controller('EventDetailCtrl', function ($scope) {
 
-    })
-    .controller('ServiceCtrl', function ($scope) {
+.controller('EventDetailCtrl', function ($scope) {
 
-    })
-    .controller('BlogsCtrl', function ($scope) {
+})
+
+.controller('ServiceCtrl', function ($scope) {
+
+})
+
+.controller('BlogsCtrl', function ($scope) {
         $scope.blogs = [{
             image: "img/profile/1.jpg",
             name: "Marty McFly",
