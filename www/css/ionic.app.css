@@ -166,10 +166,11 @@ a, a:hover {
   color: #bbbbbd; }
 
 .blog-set {
-  margin: 40px 20px 0px 20px !important;
+  margin: 40px 20px 0px !important;
   position: inherit !important; }
   .blog-set .bl-name {
-    padding: 0px 0px 0px 8px; }
+    padding: 10px 0px 0px 15px;
+    position: relative; }
     .blog-set .bl-name p {
       font-size: 16px;
       font-family: "Lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !important;
@@ -305,6 +306,24 @@ a, a:hover {
 .item.item-body {
   overflow: hidden;
   height: 200px; }
+
+a {
+  color: inherit; }
+
+.relative {
+  position: relative; }
+
+.card-img {
+  height: 45px;
+  width: 45px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-radius: 50%;
+  background-color: #ccc;
+  position: absolute;
+  right: 10px;
+  top: -15px;
+  z-index: 99; }
 
 /*!
   Ionicons, v2.0.1

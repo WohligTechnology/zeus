@@ -1,35 +1,28 @@
 <ion-view view-title="Blog">
-    <ion-content>
-        <div class="list card blog-set" ng-repeat="blog in blogs">
-            <div class="row ">
-                <div class="col col-67">
-                    <div class="bl-name">
-                        <p>{{blog.author.first_name}} {{blog.author.last_name}}</p>
-                        <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>
-                    </div>
-                </div>
-                <div class="col col-33 bl-img">
-                    <div class=" item-avatar">
-                        <img ng-src="{{blog.author.avatar_URL}}">
-                    </div>
+  <ion-content>
 
-                </div>
-            </div>
-            <div class="item item-body">
-                <img src="img/background/divider.png" class="full-image">
-                <p ng-bind-html="blog.content">
-
-                </p>
-            </div>
-            <div class="item tabs tabs-secondary tabs-icon-left">
-                <a class="tab-item borderright" href="#">
-                    <i class="icon ln-thumbs-up2"></i>
-                </a>
-                <a class="tab-item" href="#">
-                    <i class="icon ln-share"></i>
-
-                </a>
-            </div>
+    <div class="relative" ng-repeat="blog in blogs">
+      <div class="card-img" style="background-image:url('{{blog.author.avatar_URL}}');"></div>
+      <div class="card blog-set">
+        <div class="bl-name">
+          <p>{{blog.author.first_name}} {{blog.author.last_name}}</p>
+          <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>
         </div>
-    </ion-content>
+        <div class="item item-body">
+          <img src="img/background/divider.png" class="full-image">
+          <div class="wordpress-content" ng-bind-html="blog.content"></div>
+        </div>
+        <div class="item tabs tabs-secondary tabs-icon-left">
+          <a class="tab-item borderright" href="#">
+            <i class="icon ln-thumbs-up2"></i>
+          </a>
+          <a class="tab-item" href="#">
+            <i class="icon ln-share"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </ion-content>
 </ion-view>
+
