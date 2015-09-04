@@ -3,7 +3,7 @@
 
     <div class="relative" ng-repeat="blog in blogs">
       <div class="card-img" style="background-image:url('{{blog.author.avatar_URL}}');"></div>
-      <div class="card blog-set">
+      <div class="card blog-set" ng-click="blogDetail();">
         <div class="bl-name">
           <p>{{blog.author.first_name}} {{blog.author.last_name}}</p>
           <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>

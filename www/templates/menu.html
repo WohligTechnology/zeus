@@ -1,81 +1,83 @@
-<ion-side-menus enable-menu-with-back-views="true" ng-controller="AppCtrl">
-    <ion-side-menu-content>
-        <ion-nav-bar class="bar-positive">
-            <ion-nav-back-button>
-            </ion-nav-back-button>
+<ion-side-menus enable-menu-with-back-views="false" ng-controller="AppCtrl">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
 
-            <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-                </button>
-            </ion-nav-buttons>
-        </ion-nav-bar>
-        <ion-nav-view name="menuContent"></ion-nav-view>
-    </ion-side-menu-content>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
 
-    <ion-side-menu side="left">
-        <ion-header-bar class="bar-side">
+  <ion-side-menu side="left">
+    <ion-header-bar class="bar-side">
 
-            <div class="list side-image">
-                <a class="item item-avatar" href="#">
-                    <img ng-src="{{userdetails.userimage}}">
-                    <h3>{{userdetails.username}}</h3>
-                    <p>{{userdetails.useremail}}</p>
-                </a>
-            </div>
+      <div class="list side-image">
+        <a class="item item-avatar" href="#">
+          <img ng-src="{{userdetails.userimage}}">
+          <h3>{{userdetails.username}}</h3>
+          <p>{{userdetails.useremail}}</p>
+        </a>
+      </div>
 
-        </ion-header-bar>
+    </ion-header-bar>
 
-        <ion-content>
-
-
-            <div class="list menu-set" style="top:30px">
-                <img src="img/background/divider.png" class="full-image">
-                <a class="item item-icon-left" href="#/app/home" style="border:0px;">
-                    <i class="icon ln-home3 assertive-bg-before"></i> Home
-                </a>
-
-                <a class="item item-icon-left" href="#/app/events" ng-show="menudata.events">
-                    <i class="icon ln-calendar2 balanced-bg-before"></i> Events
-                </a>
-
-                <a class="item item-icon-left" href="#" ng-show="menudata.blogs">
-                    <i class="icon ln-papers royal-bg-before"></i> Blog
-                </a>
-
-                <a class="item item-icon-left" href="#" ng-show="menudata.gallery">
-                    <i class="icon ln-picture stable-bg-before"></i> Photos
-                </a>
-
-                <a class="item item-icon-left" href="#" ng-show="menudata.videogallery">
-                    <i class="icon ln-film-play dark-bg-before"></i> Videos
-                </a>
+    <ion-content>
 
 
-                <a class="item item-icon-left" href="#">
-                    <i class="icon ln-circle-exclamation energized-bg-before"></i> about
-                </a>
-                <a class="item item-icon-left" href="#">
-                    <i class="icon ln-briefcase energized-bg-before"></i> Career
-                </a>
-                <a class="item item-icon-left" href="#">
-                    <i class="icon ln-phone2 energized-bg-before"></i> Contact
-                </a>
+      <div class="list menu-set" style="top:30px">
+        <img src="img/background/divider.png" class="full-image">
+
+        <a class="item item-icon-left" href="#/app/home" style="border:0px;">
+          <i class="icon ln-home3 assertive-bg-before"></i> Home
+        </a>
+
+        <a class="item item-icon-left" href="#/app/events" menu-close ng-show="menudata.events">
+            <i class="icon ln-calendar2 balanced-bg-before"></i> Events
+        </a>
+
+        <a class="item item-icon-left" href="#/app/blogs" menu-close ng-show="menudata.blogs">
+          <i class="icon ln-papers royal-bg-before"></i> Blog
+        </a>
+
+        <a class="item item-icon-left" href="#" ng-show="menudata.gallery">
+          <i class="icon ln-picture stable-bg-before"></i> Photos
+        </a>
+
+        <a class="item item-icon-left" href="#" ng-show="menudata.videogallery">
+          <i class="icon ln-film-play dark-bg-before"></i> Videos
+        </a>
 
 
-            </div>
-            <div class="list menu-set" style="top:15px">
-                <img src="img/background/divider.png" class="full-image">
-                <a class="item item-icon-left" href="#" style="border:0px;">
-                    <i class="icon ln-user energized-bg-before"></i> profile
-                </a>
-                <a class="item item-icon-left" href="#">
-                    <i class="icon ln-gear2 assertive-bg-before"></i> Setting
-                </a>
+        <a class="item item-icon-left" href="#">
+          <i class="icon ln-circle-exclamation energized-bg-before"></i> about
+        </a>
+        <a class="item item-icon-left" href="#">
+          <i class="icon ln-briefcase energized-bg-before"></i> Career
+        </a>
+        <a class="item item-icon-left" href="#">
+          <i class="icon ln-phone2 energized-bg-before"></i> Contact
+        </a>
 
-                <a class="item item-icon-left" ng-click="logout();">
-                    <i class="icon ln-arrow-right2 balanced-bg-before"></i> Logout
-                </a>
-            </div>
-        </ion-content>
-    </ion-side-menu>
+
+      </div>
+      <div class="list menu-set" style="top:15px">
+        <img src="img/background/divider.png" class="full-image">
+        <a class="item item-icon-left" href="#" style="border:0px;">
+          <i class="icon ln-user energized-bg-before"></i> profile
+        </a>
+        <a class="item item-icon-left" href="#">
+          <i class="icon ln-gear2 assertive-bg-before"></i> Setting
+        </a>
+
+        <a class="item item-icon-left" ng-click="logout();">
+          <i class="icon ln-arrow-right2 balanced-bg-before"></i> Logout
+        </a>
+      </div>
+    </ion-content>
+  </ion-side-menu>
 </ion-side-menus>
+
