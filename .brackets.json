@@ -1,6 +1,14 @@
 {
     "jscodehints.detectedExclusions": [
         "/Applications/XAMPP/xamppfiles/htdocs/zeus/www/js/app.js",
-        "C:/xampp/htdocs/zeus/gulpfile.js"
+        "C:/xampp/htdocs/zeus/gulpfile.js",
+        "C:/xampp/htdocs/zeus/platforms/ios/www/plugins/cordova-plugin-splashscreen/www/splashscreen.js",
+        "C:/xampp/htdocs/zeus/www/lib/js/moment.js",
+        "C:/xampp/htdocs/zeus/www/lib/js/lodash.min.js",
+        "C:/xampp/htdocs/zeus/www/lib/js/jstorage.js",
+        "C:/xampp/htdocs/zeus/www/lib/ionic/js/ionic.min.js",
+        "C:/xampp/htdocs/zeus/www/lib/ionic/js/ionic.js",
+        "C:/xampp/htdocs/zeus/www/js/controllers.js",
+        "C:/xampp/htdocs/zeus/www/lib/ionic/js/ionic.bundle.min.js"
     ]
 }

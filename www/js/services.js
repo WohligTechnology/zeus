@@ -55,6 +55,41 @@ angular.module('starter.services', [])
                         'password': signin.password
                     }
                 }).success(callback);
+            }, 
+            changepassword: function (password, callback) {
+                return $http({
+                    url: adminurl + 'changepassword',
+                    method: "POST",
+                    data: {
+                        'id':$.jStorage.get("user").id,
+                        'oldpassword': password.oldpassword,
+                        'newpassword': password.newpassword,
+                        'confirmpassword': password.confirmpassword
+                    }
+                }).success(callback);
+            },  
+            profilesubmit: function (profile, callback) {
+                return $http({
+                    url: adminurl + 'profilesubmit',
+                    method: "POST",
+                    data: {
+                        'id':$.jStorage.get("user").id,
+                        'name': profile.name,
+                        'email': profile.email,
+                        'password': profile.password,
+                        'dob': profile.dob,
+                        'contact': profile.contact,
+                    }
+                }).success(callback);
+            },   
+            forgotpassword: function (email, callback) {
+                return $http({
+                    url: adminurl + 'forgotpassword',
+                    method: "POST",
+                    data: {
+                        'email': email
+                    }
+                }).success(callback);
             },
             authenticate: function () {
                 return $http({

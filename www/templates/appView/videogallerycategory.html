@@ -4,6 +4,7 @@
     <ion-list>
       <ion-item collection-repeat="item in videos" class="item-thumbnail-left">
         <img ng-src="{{item.image}}">
+<!--          <iframe width="80" height="80" src="https://www.youtube.com/embed/n175tQZ10OY" frameborder="0" allowfullscreen></iframe>-->
         <h2>{{item.title}}</h2>
         <p>{{item.subtitle}}</p>
         <ion-option-button class="button-positive" ng-click="share(item)">

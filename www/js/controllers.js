@@ -250,16 +250,74 @@ angular.module('starter.controllers', ['starter.services'])
     }
   };
 
-  //    ****** End ******
+  //    ***** End ******
 
 })
 
-.controller('ResetPasswordCtrl', function($scope) {
+.controller('ResetPasswordCtrl', function($scope,MyServices,$ionicPopup,$timeout) {
+      $scope.showPopup2 = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Your Password is Changed!!</p>',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    }; 
+    $scope.showPopup3 = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Your New Password and Confirm Password do not Match!!</p>',
+            title: 'Sorry!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    $scope.showPopup4 = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Something went wrong!!</p>',
+            title: 'Oops Try Again!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    $scope.password={};
+     var changepasswordcallback=function(data,status){
+    console.log(data);
+         if(data==1){
+         $scope.showPopup2();
+         $scope.password={};
+         }
+         else if(data==0){
+         $scope.showPopup4();
+         }
+         else if(data==-1){
+         $scope.showPopup3();
+         }
+    }
+    $scope.changepassword=function(password){
+     MyServices.changepassword(password,changepasswordcallback)
+    }
 
 })
 
-.controller('ForgotPasswordCtrl', function($scope) {
+.controller('ForgotPasswordCtrl', function($scope,MyServices) {
+    var forgotpasswordcallback=function(data,status){
+    console.log(data);
+    }
+$scope.forgotpassword=function(email){
+    MyServices.forgotpassword(email,forgotpasswordcallback)
 
+}
 })
 
 .controller('SignupCtrl', function($scope) {})
@@ -495,7 +553,30 @@ angular.module('starter.controllers', ['starter.services'])
       subtitle: "Film, Media & Entertainment by paragyte technologies"
     }];
   })
-  .controller('AccountCtrl', function($scope) {
+  .controller('AccountCtrl', function($scope,MyServices,$ionicPopup,$timeout) {
+    $scope.profile={};
+     $scope.showPopup1 = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Your Profile is Created!!</p>',
+            title: 'Thankyou!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    var profilesubmitcallback=function(data,status){
+    console.log(data);
+        if(data==1){
+        $scope.showPopup1();
+                $scope.profile={};
+        }
+    }
+    $scope.profilesubmit=function(profile){
+    MyServices.profilesubmit(profile,profilesubmitcallback)
+    }
 
   })
   .controller('SettingCtrl', function($scope) {
