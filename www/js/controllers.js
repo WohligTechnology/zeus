@@ -114,12 +114,9 @@ angular.module('starter.controllers', ['starter.services'])
 
 .controller('LoginCtrl', function($scope, MyServices, $ionicPopup, $interval, $location, $window) {
 
-
-
   $.jStorage.flush();
 
   $scope.logindata = {};
-
 
   MyServices.getappconfig(function(data, status) {
     console.log(data);
@@ -138,7 +135,6 @@ angular.module('starter.controllers', ['starter.services'])
       }
     })
   })
-
 
   //logins
   var checktwitter = function(data, status) {
