@@ -17,6 +17,10 @@ var Api_Key = "3e67f6179c11014cc027c6a944d7d9fb";
 var User_Key = "132717193@N04";
 var WORDPRESS_API_URL = 'https://public-api.wordpress.com/rest/v1.1/';
 
+//for tumblr
+var Tumblr_UserName = "taylorswift.tumblr.com";
+var TUBMLR_API_URL = 'http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + Tumblr_UserName + '/posts';
+
 angular.module('starter.services', [])
     .factory('MyServices', function ($http) {
         return {
@@ -55,25 +59,25 @@ angular.module('starter.services', [])
                         'password': signin.password
                     }
                 }).success(callback);
-            }, 
+            },
             changepassword: function (password, callback) {
                 return $http({
                     url: adminurl + 'changepassword',
                     method: "POST",
                     data: {
-                        'id':$.jStorage.get("user").id,
+                        'id': $.jStorage.get("user").id,
                         'oldpassword': password.oldpassword,
                         'newpassword': password.newpassword,
                         'confirmpassword': password.confirmpassword
                     }
                 }).success(callback);
-            },  
+            },
             profilesubmit: function (profile, callback) {
                 return $http({
                     url: adminurl + 'profilesubmit',
                     method: "POST",
                     data: {
-                        'id':$.jStorage.get("user").id,
+                        'id': $.jStorage.get("user").id,
                         'name': profile.name,
                         'email': profile.email,
                         'password': profile.password,
@@ -81,7 +85,7 @@ angular.module('starter.services', [])
                         'contact': profile.contact,
                     }
                 }).success(callback);
-            },   
+            },
             forgotpassword: function (email, callback) {
                 return $http({
                     url: adminurl + 'forgotpassword',
@@ -135,6 +139,9 @@ angular.module('starter.services', [])
                     return $http.get(data.meta.links.posts).success(callback);
                 }
                 $http.get(WORDPRESS_API_URL + "sites/" + Wordpress_UserName).success(getdata);
+            },
+            getTumblrPosts: function (callback) {
+                $http.get(TUBMLR_API_URL).success(callback);
             },
         };
     });

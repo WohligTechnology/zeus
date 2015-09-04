@@ -1,28 +1,49 @@
 <ion-view view-title="Blog">
-  <ion-content>
+    <ion-content>
+        <div class="relative" ng-repeat="blog in blogs" ng-show="showWordpress">
+            <div class="card-img" style="background-image:url('{{blog.author.avatar_URL}}');"></div>
+            <div class="card blog-set" ng-click="blogDetail();">
+                <div class="bl-name">
+                    <p>{{blog.author.first_name}} {{blog.author.last_name}}</p>
+                    <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>
+                </div>
+                <div class="item item-body">
+                    <img src="img/background/divider.png" class="full-image">
+                    <div class="wordpress-content" ng-bind-html="blog.content"></div>
+                </div>
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <a class="tab-item borderright" href="#">
+                        <i class="icon ln-thumbs-up2"></i>
+                    </a>
+                    <a class="tab-item" href="#">
+                        <i class="icon ln-share"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
 
-    <div class="relative" ng-repeat="blog in blogs">
-      <div class="card-img" style="background-image:url('{{blog.author.avatar_URL}}');"></div>
-      <div class="card blog-set" ng-click="blogDetail();">
-        <div class="bl-name">
-          <p>{{blog.author.first_name}} {{blog.author.last_name}}</p>
-          <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>
+        <div class="relative" ng-repeat="blog in blogs" ng-hide="showWordpress" ng-if="blog.type=='photo'">
+            <div class="card-img" style="background-image:url('{{blog.thumbnail_url}}');"></div>
+            <div class="card blog-set" ng-click="blogDetail();">
+                <div class="bl-name">
+                    <p>{{blog.blog_name}}</p>
+                    <!--                    <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>-->
+                </div>
+                <div class="item item-body">
+                    <img src="img/background/divider.png" class="full-image">
+                    <div class="wordpress-content" ng-bind-html="blog.caption">
+                    </div>
+                    <img ng-src="{{blog.photos[0].original_size.url}}" class="full-image">
+                </div>
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <a class="tab-item borderright" href="#">
+                        <i class="icon ln-thumbs-up2"></i>
+                    </a>
+                    <a class="tab-item" href="#">
+                        <i class="icon ln-share"></i>
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="item item-body">
-          <img src="img/background/divider.png" class="full-image">
-          <div class="wordpress-content" ng-bind-html="blog.content"></div>
-        </div>
-        <div class="item tabs tabs-secondary tabs-icon-left">
-          <a class="tab-item borderright" href="#">
-            <i class="icon ln-thumbs-up2"></i>
-          </a>
-          <a class="tab-item" href="#">
-            <i class="icon ln-share"></i>
-          </a>
-        </div>
-      </div>
-    </div>
-
-  </ion-content>
+    </ion-content>
 </ion-view>
-
