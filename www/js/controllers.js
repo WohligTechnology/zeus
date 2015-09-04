@@ -6,10 +6,9 @@ angular.module('starter.controllers', ['starter.services'])
   $scope.menudata = {};
   MyServices.getappconfig(function(data, status) {
     //        console.log(data);
-    //for blogs
+    //for blog s
     var blogdata = JSON.parse(data[1].text);
     for (var i = 0; i < blogdata.length; i++) {
-      console.log(blogdata[i]);
       if (blogdata[i].value == true) {
         $scope.menudata.blogs = true;
         $.jStorage.set("blogType", blogdata[i].name);
@@ -121,23 +120,25 @@ angular.module('starter.controllers', ['starter.services'])
 
   $scope.logindata = {};
 
+
   MyServices.getappconfig(function(data, status) {
     console.log(data);
     _.each(JSON.parse(data[0].text), function(n) {
       console.log(n);
-      if (n.name.toLowerCase() == "email") {
+      if (n.name.toLowerCase() == "email" && n.value == true) {
         $scope.logindata.email = true;
-      } else if (n.name.toLowerCase() == "google") {
+      } else if (n.name.toLowerCase() == "google" && n.value == true) {
         $scope.logindata.google = true;
-      } else if (n.name.toLowerCase() == "twitter") {
+      } else if (n.name.toLowerCase() == "twitter" && n.value == true) {
         $scope.logindata.twitter = true;
-      } else if (n.name.toLowerCase() == "instagram") {
+      } else if (n.name.toLowerCase() == "instagram" && n.value == true) {
         $scope.logindata.instagram = true;
-      } else if (n.name.toLowerCase() == "facebook") {
+      } else if (n.name.toLowerCase() == "facebook" && n.value == true) {
         $scope.logindata.facebook = true;
       }
     })
   })
+
 
   //logins
   var checktwitter = function(data, status) {
@@ -331,7 +332,7 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('BlogsCtrl', function($scope, MyServices,$location) {
+.controller('BlogsCtrl', function($scope, MyServices, $location) {
 
   $scope.blogDetail = function() {
     $location.path('/app/blogdetail');
