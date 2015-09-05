@@ -1,56 +1,15 @@
 <ion-view view-title="Photo Category">
 
-  <ion-content>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="http://tutupash.com/site/assets/nin_logo.jpeg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
+  <ion-content >
+    <div class="list card" ng-repeat="photos in photos" ng-click="sendphotoid(photos.id);"> 
+      <div>
+        <h2>{{photos.name}}</h2>
       </div>
       <div class="item item-image">
-        <img src="http://ecx.images-amazon.com/images/I/41D5vU4I1NL.jpg">
+        <img ng-src="{{photos.image | serverimage}}">
       </div>
     </div>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="http://tutupash.com/site/assets/nin_logo.jpeg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image">
-        <img src="http://ecx.images-amazon.com/images/I/41D5vU4I1NL.jpg">
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="http://tutupash.com/site/assets/nin_logo.jpeg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image">
-        <img src="http://ecx.images-amazon.com/images/I/41D5vU4I1NL.jpg">
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="http://tutupash.com/site/assets/nin_logo.jpeg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image">
-        <img src="http://ecx.images-amazon.com/images/I/41D5vU4I1NL.jpg">
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="http://tutupash.com/site/assets/nin_logo.jpeg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image">
-        <img src="http://ecx.images-amazon.com/images/I/41D5vU4I1NL.jpg">
-      </div>
-    </div>
+  
       
   </ion-content>
 </ion-view>

@@ -95,6 +95,24 @@ angular.module('starter.services', [])
                     }
                 }).success(callback);
             },
+            getallvideogalleryvideo: function (id, callback) {
+                return $http({
+                    url: adminurl + 'getallvideogalleryvideo',
+                    method: "POST",
+                    data: {
+                        'id': id
+                    }
+                }).success(callback);
+            },  
+            getallgalleryimage: function (id, callback) {
+                return $http({
+                    url: adminurl + 'getallgalleryimage',
+                    method: "POST",
+                    data: {
+                        'id': id
+                    }
+                }).success(callback);
+            },
             authenticate: function () {
                 return $http({
                     url: adminurl + 'authenticate',
@@ -131,6 +149,12 @@ angular.module('starter.services', [])
             getallgallery: function (callback) {
                 return $http({
                     url: adminurl + 'getallgallery',
+                    method: "POST"
+                }).success(callback);
+            }, 
+            getallvideogallery: function (callback) {
+                return $http({
+                    url: adminurl + 'getallvideogallery',
                     method: "POST"
                 }).success(callback);
             },

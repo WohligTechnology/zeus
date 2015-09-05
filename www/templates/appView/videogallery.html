@@ -1,11 +1,35 @@
 <ion-view view-title="Videos">
 
+    <ion-content>
+        <ion-list class="full-width">
+            <ion-item ng-repeat="item in videos">
+                <!--        <img ng-src="{{item.image}}" class="full-image">-->
+                <div class="img-holder">
+                    	<div youtube code="item.url"></div>
+<!--
+                    <i class="icon ln-circle-play youtube"></i>
+                    <img width="302" height="201" ng-src="http://img.youtube.com/vi/{{item.url}}/0.jpg" alt="" class="img-responsive">
+-->
+                </div>
+                <h2>{{item.name}}</h2>
+                <p>{{item.alt}}</p>
+                <ion-option-button class="button-positive" ng-click="share(item)">
+                    Share
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
+</ion-view>
+<!--
+<ion-view view-title="Videos">
+
   <ion-content>
     <ion-list class="full-width">
       <ion-item ng-repeat="item in videos">
         <img ng-src="{{item.image}}" class="full-image">
-        <h2>{{item.title}}</h2>
-        <p>{{item.subtitle}}</p>
+         							<img width="302" height="201" ng-src="http://img.youtube.com/vi/{{item.url}}/0.jpg" alt="" class="img-responsive"><i class="icon ln-circle-play"></i>
+        <h2>{{item.name}}</h2>
+        <p>{{item.alt}}</p>
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
         </ion-option-button>
@@ -13,4 +37,4 @@
     </ion-list>
   </ion-content>
 </ion-view>
-
+-->
