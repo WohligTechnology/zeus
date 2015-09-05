@@ -103,7 +103,7 @@ angular.module('starter.services', [])
                         'id': id
                     }
                 }).success(callback);
-            },  
+            },
             getallgalleryimage: function (id, callback) {
                 return $http({
                     url: adminurl + 'getallgalleryimage',
@@ -151,7 +151,7 @@ angular.module('starter.services', [])
                     url: adminurl + 'getallgallery',
                     method: "POST"
                 }).success(callback);
-            }, 
+            },
             getallvideogallery: function (callback) {
                 return $http({
                     url: adminurl + 'getallvideogallery',

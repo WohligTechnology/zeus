@@ -1,19 +1,37 @@
 <ion-view view-title="Article">
-  <ion-content>
+    <!--    FOR WORDPRESS-->
+    <ion-content>
+        <div ng-if="details.provider=='wordpress'">
+            <div class="article-banner">
+                <img ng-src="{{details.featured_image}}" class="full-image">
+                <div class="user-info">
+                    <img ng-src="{{details.author.avatar_URL}}">
+                    <h4>{{details.author.first_name}} {{details.author.last_name}}</h4>
+                    <h5>{{details.date|date : 'MMMM dd, yyyy'}}</h5>
+                </div>
+            </div>
 
-    <div class="article-banner">
-      <img src="http://ionicframework.com/img/docs/delorean.jpg">
-      <div class="user-info">
-          <img src="http://ionicframework.com/img/docs/mcfly.jpg">
-          <h4>user name</h4>
-          <h5>January, 15, 2015</h5>
-      </div>
-    </div>
+            <div class="article-data">
+                <h3>{{details.title}}</h3>
+                <p ng-bind-html="details.content"></p>
+            </div>
+        </div>
 
-    <div class="article-data">
-      <h3>"difference-a-header-makes...."</h3>
-      <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>
-    </div>
-  </ion-content>
+        <!--        FOR TUMBLR-->
+        <div ng-if="details.provider=='tumblr'">
+            <div class="article-banner">
+                <img ng-src="{{details.photos[0].original_size.url}}" class="full-image">
+                <div class="user-info">
+                    <img src="http://ionicframework.com/img/docs/mcfly.jpg">
+                    <h4>{{details.blog_name}}</h4>
+                    <h5>{{details.date|date : 'MMMM dd, yyyy'}}</h5>
+                </div>
+            </div>
+
+            <div class="article-data">
+                <h3 ng-bind-html="details.caption"></h3>
+<!--                <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>-->
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
-

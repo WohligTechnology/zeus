@@ -388,7 +388,9 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.showWordpress = true;
 
-    $scope.blogDetail = function () {
+    $scope.blogDetail = function (blog, name) {
+        blog.provider = name;
+        $.jStorage.set('postdetail', blog);
         $location.path('/app/blogdetail');
     }
 
@@ -409,23 +411,28 @@ angular.module('starter.controllers', ['starter.services'])
     }
 })
 
-.controller('BlogDetailCtrl', function ($scope) {
-
+.controller('BlogDetailCtrl', function ($scope, MyServices) {
+    $scope.details = $.jStorage.get('postdetail');
+    if ($scope.details.provider == 'tumblr') {
+        var newdt = $scope.details.date.split('T');
+        $scope.details.date = newdt[0];
+    }
+    console.log($scope.details);
 })
 
-.controller('PhotoGalleryCategoryCtrl', function ($scope,MyServices ,$location ) {
-    $scope.sendphotoid=function(id){
-    $location.url("app/photogallery/"+id);
+.controller('PhotoGalleryCategoryCtrl', function ($scope, MyServices, $location) {
+    $scope.sendphotoid = function (id) {
+        $location.url("app/photogallery/" + id);
     }
-    var getallgallerycallback=function(data,status){
-    console.log(data.queryresult);
-        $scope.photos =data.queryresult;
+    var getallgallerycallback = function (data, status) {
+        console.log(data.queryresult);
+        $scope.photos = data.queryresult;
     }
-     MyServices.getallgallery(getallgallerycallback);
+    MyServices.getallgallery(getallgallerycallback);
 })
 
-.controller('PhotoGalleryCtrl', function ($scope, MyServices,$stateParams) {
-    $scope.photoid=$stateParams.id;
+.controller('PhotoGalleryCtrl', function ($scope, MyServices, $stateParams) {
+    $scope.photoid = $stateParams.id;
     console.log($scope.photoid);
     //    $scope.photos = [{
     //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
@@ -458,56 +465,56 @@ angular.module('starter.controllers', ['starter.services'])
     //        date: "7 Jan, 2016",
     //        subtitle: "Film, Media & Entertainment by paragyte technologies"
     //    }];
-    var getallgalleryimagecallback=function(data,status){
-      $scope.photos = data.queryresult;
-       $scope.photos = _.chunk($scope.photos, 2);
+    var getallgalleryimagecallback = function (data, status) {
+        $scope.photos = data.queryresult;
+        $scope.photos = _.chunk($scope.photos, 2);
         console.log($scope.photos);
     }
-    MyServices.getallgalleryimage($scope.photoid,getallgalleryimagecallback)
+    MyServices.getallgalleryimage($scope.photoid, getallgalleryimagecallback)
 
-//    MyServices.getallgalleryimage(function (data, status) {
-//        $scope.photos = data.queryresult;
-//        $scope.photos = _.chunk($scope.photos, 2);
-//        console.log($scope.photos);
-//    })
+    //    MyServices.getallgalleryimage(function (data, status) {
+    //        $scope.photos = data.queryresult;
+    //        $scope.photos = _.chunk($scope.photos, 2);
+    //        console.log($scope.photos);
+    //    })
 })
 
-.controller('VideoGalleryCategoryCtrl', function ($scope,MyServices) {
-    $scope.videos={};
- var getallvideogallerycallback=function(data,status){
-    console.log(data.queryresult);
-     $scope.videos =data.queryresult;
-    }
-    MyServices.getallvideogallery(getallvideogallerycallback);
-    
-//        $scope.videos = [{
-//            url: "bNSLwCS7vpU",
-//            title: "Music Concert",
-//            date: "7 Jan, 2016",
-//            subtitle: "Film, Media & Entertainment by paragyte technologies"
-//  }];
+.controller('VideoGalleryCategoryCtrl', function ($scope, MyServices) {
+        $scope.videos = {};
+        var getallvideogallerycallback = function (data, status) {
+            console.log(data.queryresult);
+            $scope.videos = data.queryresult;
+        }
+        MyServices.getallvideogallery(getallvideogallerycallback);
+
+        //        $scope.videos = [{
+        //            url: "bNSLwCS7vpU",
+        //            title: "Music Concert",
+        //            date: "7 Jan, 2016",
+        //            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        //  }];
 
 
     })
-    .controller('VideoGalleryCtrl', function ($scope,MyServices,$stateParams) {
-    $scope.videoid=$stateParams.id;
-    console.log($scope.videoid);
-    var getallvideogalleryvideocallback=function(data,status){
-    console.log(data.queryresult);
-    $scope.videos =data.queryresult;
-    }
-    MyServices.getallvideogalleryvideo($scope.videoid,getallvideogalleryvideocallback);
-//        $scope.videos = [{
-//             url: "bNSLwCS7vpU",
-//            title: "Music Concert",
-//            date: "7 Jan, 2016",
-//            subtitle: "Film, Media & Entertainment by paragyte technologies"
-//    }, {
-//            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-//            title: "Music Concert",
-//            date: "7 Jan, 2016",
-//            subtitle: "Film, Media & Entertainment by paragyte technologies"
-//    }];
+    .controller('VideoGalleryCtrl', function ($scope, MyServices, $stateParams) {
+        $scope.videoid = $stateParams.id;
+        console.log($scope.videoid);
+        var getallvideogalleryvideocallback = function (data, status) {
+            console.log(data.queryresult);
+            $scope.videos = data.queryresult;
+        }
+        MyServices.getallvideogalleryvideo($scope.videoid, getallvideogalleryvideocallback);
+        //        $scope.videos = [{
+        //             url: "bNSLwCS7vpU",
+        //            title: "Music Concert",
+        //            date: "7 Jan, 2016",
+        //            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        //    }, {
+        //            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
+        //            title: "Music Concert",
+        //            date: "7 Jan, 2016",
+        //            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        //    }];
     })
     .controller('AccountCtrl', function ($scope, MyServices, $ionicPopup, $timeout) {
         $scope.profile = {};
