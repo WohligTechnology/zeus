@@ -1,9 +1,19 @@
 var reloadpage = false;
 angular.module('starter.controllers', ['starter.services'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $location) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $location,$ionicLoading) {
 
     $scope.menudata = {};
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     MyServices.getappconfig(function (data, status) {
         //        console.log(data);
         //for blog s
@@ -59,10 +69,12 @@ angular.module('starter.controllers', ['starter.services'])
         if (data == 'true') {
             $.jStorage.flush();
             reloadpage = true;
+              $ionicLoading.hide();
             $location.path("/access/login");
         }
     }
     $scope.logout = function () {
+          $ionicLoading.show();
         MyServices.logout().success(logoutsuccess);
     }
 
@@ -108,11 +120,20 @@ angular.module('starter.controllers', ['starter.services'])
     }
 })
 
-.controller('AccessCtrl', function ($scope) {
-
+.controller('AccessCtrl', function ($scope,$ionicLoading) {
+// loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
 })
 
-.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window) {
+.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window,$ionicLoading ) {
 
     $.jStorage.flush();
 
@@ -135,7 +156,16 @@ angular.module('starter.controllers', ['starter.services'])
             }
         })
     })
-
+// loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     //logins
     var checktwitter = function (data, status) {
         if (data != "false") {
@@ -155,6 +185,7 @@ angular.module('starter.controllers', ['starter.services'])
         if (data != "false") {
             $.jStorage.set("user", data);
             user = data;
+            
             $location.url("/app/home");
         }
     };
@@ -201,9 +232,11 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.signup = {};
     var signupsuccess = function (data, status) {
         console.log(data);
+          $ionicLoading.hide();
         $scope.signup = {};
     }
     $scope.signupsubmit = function (signup) {
+          $ionicLoading.show();
         $scope.signup = signup;
         MyServices.signup($scope.signup, signupsuccess);
     }
@@ -213,6 +246,7 @@ angular.module('starter.controllers', ['starter.services'])
     var signinsuccess = function (data, status) {
         console.log(data);
         if (data != 'false') {
+             $ionicLoading.hide();
             MyServices.authenticate().success(authenticatesuccess);
             $scope.signin = {};
         } else {
@@ -223,6 +257,7 @@ angular.module('starter.controllers', ['starter.services'])
         }
     }
     $scope.signinsubmit = function (signin) {
+         $ionicLoading.show();
         MyServices.signin(signin, signinsuccess);
     }
 
@@ -250,7 +285,18 @@ angular.module('starter.controllers', ['starter.services'])
 
 })
 
-.controller('ResetPasswordCtrl', function ($scope, MyServices, $ionicPopup, $timeout) {
+.controller('ResetPasswordCtrl', function ($scope, MyServices, $ionicPopup, $timeout,$ionicLoading) {
+    
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     $scope.showPopup2 = function () {
 
         var myPopup = $ionicPopup.show({
@@ -291,104 +337,154 @@ angular.module('starter.controllers', ['starter.services'])
         console.log(data);
         if (data == 1) {
             $scope.showPopup2();
+              $ionicLoading.hide();
             $scope.password = {};
         } else if (data == 0) {
+              $ionicLoading.hide();
             $scope.showPopup4();
         } else if (data == -1) {
+              $ionicLoading.hide();
             $scope.showPopup3();
         }
     }
     $scope.changepassword = function (password) {
+          $ionicLoading.show();
         MyServices.changepassword(password, changepasswordcallback)
     }
 
 })
 
-.controller('ForgotPasswordCtrl', function ($scope, MyServices) {
+.controller('ForgotPasswordCtrl', function ($scope, MyServices,$ionicLoading) {
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     var forgotpasswordcallback = function (data, status) {
         console.log(data);
+          $ionicLoading.hide();
     }
     $scope.forgotpassword = function (email) {
+          $ionicLoading.show();
         MyServices.forgotpassword(email, forgotpasswordcallback)
 
     }
 })
 
-.controller('SignupCtrl', function ($scope) {})
+.controller('SignupCtrl', function ($scope,$ionicLoading) {})
 
-.controller('HomeCtrl', function ($scope, MyServices, $ionicSlideBoxDelegate) {
+.controller('HomeCtrl', function ($scope, MyServices, $ionicSlideBoxDelegate,$ionicLoading) {
+      $ionicLoading.show();
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
 
     //        $scope.slides = ["http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png", "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png"];
 
     MyServices.getallsliders(function (data, status) {
+          $ionicLoading.hide();
         $scope.slides = data.queryresult;
         $ionicSlideBoxDelegate.update();
     })
 
 })
 
-.controller('ContentPageCtrl', function ($scope) {
-
+.controller('ContentPageCtrl', function ($scope,$ionicLoading) {
+// loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
 })
 
-.controller('EventsCtrl', function ($scope, MyServices) {
-
-    //    $scope.events = [{
-    //        image: "img/event/1.jpg",
-    //        title: "Sona Mohaptra",
-    //        date: "7 Jan, 2016",
-    //        subtitle: "Live at Tiwnhoase cafe",
-    //        time: "8 PM , Onwards"
-    //    }, {
-    //        image: "img/event/2.jpg",
-    //        title: "Sonu nigam",
-    //        date: "8 Jan, 2016",
-    //        subtitle: "Live at Townhouse cafe",
-    //        time: "9 PM , Onwards"
-    //    }, {
-    //        image: "img/event/3.jpg",
-    //        title: "Music Concert",
-    //        date: "9 Jan, 2016",
-    //        subtitle: "Live at Fort cafe",
-    //        time: "9 PM , Onwards"
-    //    }, {
-    //        image: "img/event/4.jpg",
-    //        title: "Arjit singh",
-    //        date: "10 Jan, 2016",
-    //        subtitle: "Live at Macdee cafe",
-    //        time: "12 PM , Onwards"
-    //    }, {
-    //        image: "img/event/5.jpg",
-    //        title: "sohan honakeri",
-    //        date: "11 Jan, 2016",
-    //        subtitle: "Live at Townhall cafe",
-    //        time: "10 PM , Onwards"
-    //    }, {
-    //        image: "img/event/6.jpg",
-    //        title: "chintan shah",
-    //        date: "12 Jan, 2016",
-    //        subtitle: "Live at Town cafe",
-    //        time: "11 PM , Onwards"
-    //    }];
+.controller('EventsCtrl', function ($scope, MyServices, $location,$ionicLoading) {
+      $ionicLoading.show();
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
 
     MyServices.getallevents(function (data, status) {
+          $ionicLoading.hide();
         $scope.events = data.queryresult;
+        console.log($scope.events);
     })
+    $scope.geteventdetails = function (id) {
+        $location.url("app/eventdetail/" + id);
+    }
 })
 
-.controller('EventDetailCtrl', function ($scope) {
-
+.controller('EventDetailCtrl', function ($scope, $stateParams, MyServices,$ionicLoading) {
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.id = $stateParams.id;
+    var getsingleeventscallback = function (data, status) {
+        console.log(data);
+        $scope.eventdetail = data;
+    }
+    MyServices.getsingleevents($scope.id, getsingleeventscallback)
 })
 
-.controller('ServiceCtrl', function ($scope) {
-
+.controller('ServiceCtrl', function ($scope,$ionicLoading) {
+// loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
 })
 
-.controller('BlogsCtrl', function ($scope, MyServices, $location) {
-
+.controller('BlogsCtrl', function ($scope, MyServices, $location,$ionicLoading) {
+      $ionicLoading.show();
+   // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     $scope.showWordpress = true;
 
     $scope.blogDetail = function (blog, name) {
+          $ionicLoading.show();
         blog.provider = name;
         $.jStorage.set('postdetail', blog);
         $location.path('/app/blogdetail');
@@ -397,6 +493,7 @@ angular.module('starter.controllers', ['starter.services'])
     if ($.jStorage.get("blogType") && $.jStorage.get("blogType").toLowerCase() == "wordpress") {
         $scope.showWordpress = true;
         MyServices.getWordpressPosts(function (data, status) {
+              $ionicLoading.hide();
             console.log("WORDPRESS");
             console.log(data);
             $scope.blogs = data.posts;
@@ -404,6 +501,7 @@ angular.module('starter.controllers', ['starter.services'])
     } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").toLowerCase() == "tumblr") {
         $scope.showWordpress = false;
         MyServices.getTumblrPosts(function (data, status) {
+              $ionicLoading.hide();
             console.log("TUMBLR");
             console.log(data);
             $scope.blogs = data.response.posts;
@@ -411,7 +509,18 @@ angular.module('starter.controllers', ['starter.services'])
     }
 })
 
-.controller('BlogDetailCtrl', function ($scope, MyServices) {
+.controller('BlogDetailCtrl', function ($scope, MyServices,$ionicLoading) {
+      $ionicLoading.hide();
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     $scope.details = $.jStorage.get('postdetail');
     if ($scope.details.provider == 'tumblr') {
         var newdt = $scope.details.date.split('T');
@@ -420,52 +529,45 @@ angular.module('starter.controllers', ['starter.services'])
     console.log($scope.details);
 })
 
-.controller('PhotoGalleryCategoryCtrl', function ($scope, MyServices, $location) {
+.controller('PhotoGalleryCategoryCtrl', function ($scope, MyServices, $location,$ionicLoading) {
+      $ionicLoading.show();
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     $scope.sendphotoid = function (id) {
         $location.url("app/photogallery/" + id);
     }
     var getallgallerycallback = function (data, status) {
+          $ionicLoading.hide();
         console.log(data.queryresult);
         $scope.photos = data.queryresult;
     }
     MyServices.getallgallery(getallgallerycallback);
 })
 
-.controller('PhotoGalleryCtrl', function ($scope, MyServices, $stateParams) {
+.controller('PhotoGalleryCtrl', function ($scope, MyServices, $stateParams,$ionicLoading) {
+      $ionicLoading.show();
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     $scope.photoid = $stateParams.id;
     console.log($scope.photoid);
-    //    $scope.photos = [{
-    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-    //        title: "Music Concert",
-    //        date: "7 Jan, 2016",
-    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
-    //    }, {
-    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-    //        title: "Music Concert",
-    //        date: "7 Jan, 2016",
-    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
-    //    }, {
-    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-    //        title: "Music Concert",
-    //        date: "7 Jan, 2016",
-    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
-    //    }, {
-    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-    //        title: "Music Concert",
-    //        date: "7 Jan, 2016",
-    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
-    //    }, {
-    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-    //        title: "Music Concert",
-    //        date: "7 Jan, 2016",
-    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
-    //    }, {
-    //        image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-    //        title: "Music Concert",
-    //        date: "7 Jan, 2016",
-    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
-    //    }];
     var getallgalleryimagecallback = function (data, status) {
+          $ionicLoading.hide();
         $scope.photos = data.queryresult;
         $scope.photos = _.chunk($scope.photos, 2);
         console.log($scope.photos);
@@ -479,9 +581,21 @@ angular.module('starter.controllers', ['starter.services'])
     //    })
 })
 
-.controller('VideoGalleryCategoryCtrl', function ($scope, MyServices) {
+.controller('VideoGalleryCategoryCtrl', function ($scope, MyServices,$ionicLoading) {
+      $ionicLoading.show();
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
         $scope.videos = {};
         var getallvideogallerycallback = function (data, status) {
+              $ionicLoading.hide();
             console.log(data.queryresult);
             $scope.videos = data.queryresult;
         }
@@ -496,27 +610,47 @@ angular.module('starter.controllers', ['starter.services'])
 
 
     })
-    .controller('VideoGalleryCtrl', function ($scope, MyServices, $stateParams) {
+    .controller('VideoGalleryCtrl', function ($scope, MyServices, $stateParams,$ionicLoading) {
+      $ionicLoading.show();
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
         $scope.videoid = $stateParams.id;
         console.log($scope.videoid);
         var getallvideogalleryvideocallback = function (data, status) {
+              $ionicLoading.hide();
             console.log(data.queryresult);
             $scope.videos = data.queryresult;
         }
         MyServices.getallvideogalleryvideo($scope.videoid, getallvideogalleryvideocallback);
-        //        $scope.videos = [{
-        //             url: "bNSLwCS7vpU",
-        //            title: "Music Concert",
-        //            date: "7 Jan, 2016",
-        //            subtitle: "Film, Media & Entertainment by paragyte technologies"
-        //    }, {
-        //            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-        //            title: "Music Concert",
-        //            date: "7 Jan, 2016",
-        //            subtitle: "Film, Media & Entertainment by paragyte technologies"
-        //    }];
     })
-    .controller('AccountCtrl', function ($scope, MyServices, $ionicPopup, $timeout) {
+    .controller('AccountCtrl', function ($scope, MyServices, $ionicPopup, $timeout,$ionicLoading) {
+    if ($.jStorage.get("user")) {
+        $scope.userdetails = {};
+        $scope.userdetails.username = $.jStorage.get("user").username;
+        if ($scope.userdetails.username == "") {
+            $scope.userdetails.username = $.jStorage.get("user").name;
+        }
+        $scope.userdetails.userimage = $.jStorage.get("user").image;
+        $scope.userdetails.useremail = $.jStorage.get("user").email;
+    }
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
         $scope.profile = {};
         $scope.showPopup1 = function () {
 
@@ -531,6 +665,7 @@ angular.module('starter.controllers', ['starter.services'])
             }, 2000);
         };
         var profilesubmitcallback = function (data, status) {
+              $ionicLoading.hide();
             console.log(data);
             if (data == 1) {
                 $scope.showPopup1();
@@ -538,14 +673,34 @@ angular.module('starter.controllers', ['starter.services'])
             }
         }
         $scope.profilesubmit = function (profile) {
+              $ionicLoading.show();
             MyServices.profilesubmit(profile, profilesubmitcallback)
         }
 
     })
-    .controller('SettingCtrl', function ($scope) {
-
+    .controller('SettingCtrl', function ($scope,$ionicLoading) {
+// loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     })
-    .controller('NotificationCtrl', function ($scope) {
+    .controller('NotificationCtrl', function ($scope,$ionicLoading) {
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
         $scope.notifications = [{
             image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
             title: "Music Concert",
@@ -575,8 +730,58 @@ angular.module('starter.controllers', ['starter.services'])
             subtitle: "Film, Media & Entertainment by paragyte technologies"
     }];
     })
-    .controller('ContactCtrl', function ($scope) {
-        //        ***** tabchange ****
+    .controller('ContactCtrl', function ($scope, MyServices, $ionicPopup, $timeout,$ionicLoading) {
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+        $scope.enquiry = {};
+        var createenquirycallback = function (data, status) {
+              $ionicLoading.hide();
+            console.log(data);
+            if (data == 1) {
+                $scope.showPopupcontact();
+                 $scope.enquiry = {};
+            } else {
+                $scope.showPopupcontactfailure();
+            }
+        }
+
+            $scope.showPopupcontact = function () {
+                var myPopup = $ionicPopup.show({
+                    template: '<p class="text-center">Successfully Submitted!!</p>',
+                    title: 'Thank you!',
+                    scope: $scope,
+
+                });
+                $timeout(function () {
+                    myPopup.close(); //close the popup after 3 seconds for some reason
+                }, 2000);
+            };
+            $scope.showPopupcontactfailure = function () {
+
+                var myPopup = $ionicPopup.show({
+                    template: '<p class="text-center">Try Again!!</p>',
+                    title: 'Sorry!',
+                    scope: $scope,
+
+                });
+                $timeout(function () {
+                    myPopup.close(); //close the popup after 3 seconds for some reason
+                }, 2000);
+            };
+        
+        $scope.enquiryform = function (enquiry) {
+                MyServices.createenquiry(enquiry, createenquirycallback)
+                  $ionicLoading.show();
+            }
+            //        ***** tabchange ****
 
         $scope.tab = 'contactus';
         $scope.classa = 'active';
@@ -600,7 +805,17 @@ angular.module('starter.controllers', ['starter.services'])
 
     })
 
-.controller('SearchCtrl', function ($scope, MyServices,$location){
+.controller('SearchCtrl', function ($scope, MyServices, $location,$ionicLoading) {
+    // loader
+    
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
     $scope.searchresults = {};
 
     var searchelementcallback = function (data, status) {
@@ -612,17 +827,17 @@ angular.module('starter.controllers', ['starter.services'])
     $scope.getsearchelement = function (searchelement) {
         MyServices.searchelement(searchelement, searchelementcallback)
     }
-    
+
     // Go to Events page
-    
-    $scope.openevents=function(){
-    $location.url("app/events");
+
+    $scope.openevents = function () {
+        $location.url("app/events");
     }
-    $scope.openvideogallery=function(id){
-    $location.url("app/videogallery/"+ id);
+    $scope.openvideogallery = function (id) {
+        $location.url("app/videogallery/" + id);
     }
-    $scope.opengallery=function(id){
-      $location.url("app/photogallery/" + id);
+    $scope.opengallery = function (id) {
+        $location.url("app/photogallery/" + id);
     }
 
 });

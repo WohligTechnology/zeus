@@ -3,8 +3,8 @@
 
     <div class="side-image">
       <figure>
-        <a href="#/app/profile" menu-close><img src="img/profile.png"></a>
-        <figcaption>Ana Todurie</figcaption>
+        <a href="#/app/profile" menu-close><img ng-src="{{userdetails.userimage | serverimage}}"></a>
+        <figcaption>{{userdetails.username}}</figcaption>
       </figure>
       <div class="profile-set">
         <a href="#/app/setting" menu-close> <i class="icon ln-gear2 "></i>

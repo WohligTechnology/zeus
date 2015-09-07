@@ -101,7 +101,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .state('app.eventdetail', {
-            url: '/eventdetail',
+            url: '/eventdetail/:id',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/appView/eventdetail.html',

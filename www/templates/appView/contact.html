@@ -41,24 +41,24 @@
       <div class="list">
         <label class="item item-input item-floating-label">
           <span class="input-label">Full name</span>
-          <i class="icon ln-user"><input type="text" placeholder="Full name"></i>
+          <i class="icon ln-user"><input type="text" placeholder="Full name" ng-model="enquiry.name"></i>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Email</span>
-          <i class="icon ln-envelope"><input type="email" placeholder="Email"></i>
+          <i class="icon ln-envelope"><input type="email" placeholder="Email" ng-model="enquiry.email"></i>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Subject</span>
-          <i class="icon ln-envelope"><input type="email" placeholder="Subject"></i>
+          <i class="icon ln-envelope"><input type="text" placeholder="Subject" ng-model="enquiry.title"></i>
         </label>
         <label class="item item-input item-floating-label">
           <span class="input-label">Comments</span>
-          <i class="icon ln-envelope">  <textarea placeholder="Comments"></textarea></i>
+          <i class="icon ln-envelope">  <textarea placeholder="Comments" ng-model="enquiry.content"></textarea></i>
         </label>
 
 
       </div>
-      <button class="button button-block button-positive">
+      <button class="button button-block button-positive" ng-click="enquiryform(enquiry);">
         Submit
       </button>
     </div>

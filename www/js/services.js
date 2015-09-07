@@ -86,12 +86,34 @@ angular.module('starter.services', [])
                     }
                 }).success(callback);
             },
+            createenquiry: function (enquiry, callback) {
+                return $http({
+                    url: adminurl + 'createenquiry',
+                    method: "POST",
+                    data: {
+                        'id': $.jStorage.get("user").id,
+                        'name': enquiry.name,
+                        'email': enquiry.email,
+                        'title': enquiry.title,
+                        'content': enquiry.content
+                    }
+                }).success(callback);
+            },
             forgotpassword: function (email, callback) {
                 return $http({
                     url: adminurl + 'forgotpassword',
                     method: "POST",
                     data: {
                         'email': email
+                    }
+                }).success(callback);
+            },
+            getsingleevents: function (id, callback) {
+                return $http({
+                    url: adminurl + 'getsingleevents',
+                    method: "POST",
+                    data: {
+                        'id': id
                     }
                 }).success(callback);
             },  

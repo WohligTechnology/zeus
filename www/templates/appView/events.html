@@ -2,7 +2,7 @@
     <ion-content>
         <ion-lis style="padding-top:0px">
             <a>
-                <div class="popular-set" ng-repeat="event in events">
+                <div class="popular-set" ng-repeat="event in events" ng-click="geteventdetails(event.id);">
                     <figure>
                         <img class="pop-img" ng-src="{{event.image|serverimage}}" alt="Demo" class="full-image">
                         <div class="layer">

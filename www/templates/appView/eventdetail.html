@@ -1,13 +1,29 @@
 <ion-view view-title="Events">
-  <ion-content>
-
-  
-<div class="articalcontain">
-     <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
-    <h3>"difference-a-header-makes...."</h3>
-    <h5>january, 23, 2200</h5>
-    <p>Our websites are our online homes. It makes sense that we want&nbsp;to give them personality and warmth,&nbsp;just like we do with our physical homes.</p>
-  
-</div>
-  </ion-content>
+    <ion-content>
+        <div class="articalcontain">
+            <img class="full-image" ng-src="{{eventdetail.image |serverimage}}">
+            <h3>{{eventdetail.title}}</h3>
+            <h5>{{eventdetail.timestamp|date : 'MMMM, dd yyyy'}}</h5>
+            <p>{{eventdetail.content}}</p>
+            <div ng-repeat="eventimages in eventdetail.eventimages">
+                <img class="full-image" ng-src="{{eventimages.image|serverimage}}">
+            </div>
+            <div ng-repeat="eventvideos in eventdetail.eventvideos">
+                <div youtube code="eventvideos.url"></div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
+<!--
+<div class="articalcontain" ng-repeat="eventdetail in eventdetail">
+     <img class="full-image" ng-src="{{eventdetail.image |serverimage}}">
+    <h3>{{eventdetail.title}}</h3>
+    <h5>{{eventdetail.timestamp}}</h5>
+    <p>{{eventdetail.content}}</p>
+    <div ng-repeat="eventimages in eventdetail.eventimages">
+    <img class="full-image" ng-src="{{eventimages.image}}">
+    </div>
+    <div ng-repeat="eventvideos in eventdetail.eventvideos">
+    <img class="full-image" ng-src="{{eventvideos.image}}">
+    </div>
+</div>-->
