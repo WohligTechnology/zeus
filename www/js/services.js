@@ -94,6 +94,16 @@ angular.module('starter.services', [])
                         'email': email
                     }
                 }).success(callback);
+            },  
+            
+            searchelement: function (searchelement, callback) {
+                return $http({
+                    url: adminurl + 'searchelement',
+                    method: "POST",
+                    data: {
+                        'searchelement': searchelement
+                    }
+                }).success(callback);
             },
             getallvideogalleryvideo: function (id, callback) {
                 return $http({

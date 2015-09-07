@@ -599,33 +599,30 @@ angular.module('starter.controllers', ['starter.services'])
         //    ****** End ******
 
     })
-    .controller('SearchCtrl', function ($scope) {
-        $scope.searches = [{
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "http://www.grey-hare.co.uk/wp-content/uploads/2012/09/Event-management.png",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }];
-    });
+
+.controller('SearchCtrl', function ($scope, MyServices,$location){
+    $scope.searchresults = {};
+
+    var searchelementcallback = function (data, status) {
+        console.log(data);
+        $scope.searchresults.searchevent = data.events;
+        $scope.searchresults.searchgallery = data.gallery;
+        $scope.searchresults.searchvideogallery = data.videogallery;
+    }
+    $scope.getsearchelement = function (searchelement) {
+        MyServices.searchelement(searchelement, searchelementcallback)
+    }
+    
+    // Go to Events page
+    
+    $scope.openevents=function(){
+    $location.url("app/events");
+    }
+    $scope.openvideogallery=function(id){
+    $location.url("app/videogallery/"+ id);
+    }
+    $scope.opengallery=function(id){
+      $location.url("app/photogallery/" + id);
+    }
+
+});
