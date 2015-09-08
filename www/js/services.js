@@ -144,7 +144,7 @@ angular.module('starter.services', [])
                         'id': id
                     }
                 }).success(callback);
-            }, 
+            },
             getsingleblog: function (id, callback) {
                 return $http({
                     url: adminurl + 'getsingleblog',
