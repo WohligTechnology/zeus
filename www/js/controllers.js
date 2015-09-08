@@ -133,7 +133,7 @@ angular.module('starter.controllers', ['starter.services'])
     };
 })
 
-.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading) {
+.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading,$timeout ) {
 
     $.jStorage.flush();
 
@@ -227,11 +227,40 @@ angular.module('starter.controllers', ['starter.services'])
             $interval.cancel(stopinterval);
         });
     }
+    // popup
+     $scope.showPopupsignupsuccess = function () {
 
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Successfully Registered!!</p>',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    $scope.showPopupsignupfailure = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Sorry Try Again!!</p>',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    
     //SIGN UP FORMn
     $scope.signup = {};
     var signupsuccess = function (data, status) {
         console.log(data);
+        if(data=="1"){
+        $scope.showPopupsignupsuccess();
+        }
+        else{
+        $scope.showPopupsignupfailure();
+        }
         $ionicLoading.hide();
         $scope.signup = {};
     }
