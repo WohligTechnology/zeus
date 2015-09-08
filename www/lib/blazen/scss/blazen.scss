@@ -1,6 +1,4 @@
       //sass variable
-
-
       $light: #ffffff !default;
       $stable: #f8f8f8 !default;
       $positive: #50d2c2 !default;
@@ -13,6 +11,7 @@
       $white:#fff !default;
       $base-color:#212121 !default;
       $icon-color:#9e9ea3 !default;
+      $icon:#00FFE0 !default;
       $menu-color:#bbbbbd !default;
       $lato-font-weight:300 !default;
       $button-stable-text:#fff !default;
@@ -34,7 +33,9 @@
       "Roboto-Light",
       "Segoe UI-Light",
       sans-serif-light !default;
-      $login-bg-image:url('../img/background/login_background.jpg') no-repeat center center;
+      $button-border-radius: 0px !default;
+      $button-border-width: 0px !default;
+      $login-bg-image:url('../img/background/1.jpg') no-repeat center center;
       // sass mixing
       @mixin transition($transition-property,
       $transition-time) {
@@ -52,7 +53,25 @@
           clip-path: $clip;
       }
       
-      //custom class
+ 
+      //sass start
+      @font-face {
+          font-family: 'Lato';
+          src: url("../fonts/Lato-Bold.ttf");
+          font-weight: 700;
+      }
+      
+      @font-face {
+          font-family: 'Lato';
+          src: url(../fonts/Lato-Light.ttf);
+          font-weight: 300;
+      }
+      
+      @font-face {
+          font-family: 'Lato';
+          src: url(../fonts/Lato-Regular.ttf);
+      }
+           //custom class
       input::-webkit-input-placeholder {
           color: $base-color;
       }
@@ -69,19 +88,19 @@
       .bar .button.button-icon.icon-right:before {
           vertical-align: top;
           font-size: 32px;
-//          line-height: 16px !important;
+          //          line-height: 16px !important;
       }
       
       // end
       .button {
           font-weight: $lato-font-weight;
           text-transform: capitalize;
-          font-size: 16px !important;
+          font-size: 15px !important;
           border-radius: 0px !important;
       }
       
       .input-tag {
-          color: $icon-color !important;
+          color: $light !important;
           font-weight: $lato-font-weight;
           font-size: $texts-font-size;
       }
@@ -112,24 +131,6 @@
       }
       
       // end
-      //sass start
-      @font-face {
-          font-family: 'Lato';
-          src: url("../fonts/Lato-Bold.ttf");
-          font-weight: 700;
-      }
-      
-      @font-face {
-          font-family: 'Lato';
-          src: url(../fonts/Lato-Light.ttf);
-          font-weight: 300;
-      }
-      
-      @font-face {
-          font-family: 'Lato';
-          src: url(../fonts/Lato-Regular.ttf);
-      }
-      
       a,
       a:hover {
           text-decoration: none
@@ -153,7 +154,7 @@
                   text-transform: uppercase;
                   .col {
                       padding: 10px 0px;
-                      font-size: 15px;
+                      font-size: 13px;
                       color: $white;
                   }
               }
@@ -166,14 +167,14 @@
               .list {
                   margin: 0 15px;
                   .item {
-                      border-bottom: 1px solid $icon-color;
+                      border-bottom: 1px solid $positive;
                       border-top: 0px;
                       border-right: 0;
                       border-left: 0;
                       i {
                           display: inline-block;
                           font-size: 22px;
-                          color: $icon-color;
+                          color: $icon;
                       }
                       input {
                           display: inline-block;
@@ -181,7 +182,7 @@
                           @extend .input-tag;
                       }
                       input::-webkit-input-placeholder {
-                          color: $icon-color;
+                          color: $light;
                       }
                       span {
                           padding-left: 37px;
@@ -199,11 +200,11 @@
                   padding-top: 45px;
                   .sign {
                       span {
-                          color: #909090;
+                          color: $positive;
                           font-weight: 300;
                           font-size: 14px;
                           a {
-                              color: #000;
+                              color: $light;
                               margin: 10px;
                           }
                       }
@@ -260,7 +261,6 @@
       .blog-set {
           margin: 40px 20px 0px !important;
           position: inherit !important;
-          
           .bl-name {
               padding: 10px 0px 0px 15px;
               position: relative;
@@ -438,31 +438,44 @@
           overflow: hidden;
           height: 200px;
       }
-a {
-    color: inherit;
-}
-.relative {position: relative;}
-.card-img {
-    height: 45px;
-    width: 45px;
-    background-repeat: no-repeat;
-    background-size: contain;
-    border-radius: 50%;
-    background-color: #ccc;
-    position: absolute;
-    right: 10px;
-    top: -15px;
-    z-index: 99;
-}
-.wordpress-content {
-    p,h1,h2,h3,h4,h5,h6 {
-    margin: 0 0 10px;
-}
-    img {
-        width: 100%;
-        height: auto;
-    }
-}
-
-a.card {display: block;}
-
+      
+      a {
+          color: inherit;
+      }
+      
+      .relative {
+          position: relative;
+      }
+      
+      .card-img {
+          height: 45px;
+          width: 45px;
+          background-repeat: no-repeat;
+          background-size: contain;
+          border-radius: 50%;
+          background-color: #ccc;
+          position: absolute;
+          right: 10px;
+          top: -15px;
+          z-index: 99;
+      }
+      
+      .wordpress-content {
+          p,
+          h1,
+          h2,
+          h3,
+          h4,
+          h5,
+          h6 {
+              margin: 0 0 10px;
+          }
+          img {
+              width: 100%;
+              height: auto;
+          }
+      }
+      
+      a.card {
+          display: block;
+      }

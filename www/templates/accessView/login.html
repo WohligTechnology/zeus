@@ -21,14 +21,16 @@
                         <input type="text" placeholder="Username" ng-model="signin.username">
                     </label>
 
-                    <label class="item item-input item-floating-label margtp">
-                        <span class="input-label">Password</span>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
                         <i class="icon ln-lock"></i>
                         <input type="password" placeholder="Password" ng-model="signin.password">
                     </label>
+
                 </div>
+
                 <div class="login-btn footer">
-                    <a href="#"ng-show="logindata.email">
+                    <a href="#" ng-show="logindata.email">
                         <button class="button button-block button-positive" ng-click="signinsubmit(signin);">
                             Sign in
                         </button>
@@ -76,27 +78,36 @@
                 <div class="list">
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Username</span>
-                        <i class="icon ln-user"><input type="text" placeholder="Username" ng-model="signup.username"></i>
+                        <i class="icon ln-user"></i>
+                        <input type="text" placeholder="Username" ng-model="signup.username">
                     </label>
 
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Email</span>
-                        <i class="icon ln-envelope"><input type="email" placeholder="Email" ng-model="signup.email"></i>
+                        <i class="icon ln-envelope"></i>
+                        <input type="email" placeholder="Email" ng-model="signup.email">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Date of birth</span>
-                        <i class="icon ln-gift"><input type="text" onfocus="(this.type='date')" placeholder="Birth Date" ng-model="signup.dob"></i>
+                        <i class="icon ln-gift"></i>
+                        <input type="text" onfocus="(this.type='date')" placeholder="Birth Date" ng-model="signup.dob">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Password</span>
-                        <i class="icon ln-lock"><input type="password" placeholder="Password" ng-model="signup.password"></i>
+                        <i class="icon ln-lock"></i>
+                        <input type="password" placeholder="Password" ng-model="signup.password">
                     </label>
                 </div>
+
                 <div class="login-btn footer">
                     <button class="button button-block button-positive" ng-click="signupsubmit(signup);">
                         Sign up
                     </button>
+                    <div class="sign text-center" ng-show="logindata.email">
+                        <span>All Ready have an account?<a href="#/user-signup">Sign In</a></span>
+                    </div>
                 </div>
+                
             </div>
 
         </div>
