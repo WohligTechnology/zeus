@@ -5,7 +5,7 @@
             <div class="card blog-set" ng-click="blogDetail(blog,'wordpress');">
                 <div class="bl-name">
                     <p>{{blog.author.first_name}} {{blog.author.last_name}}</p>
-                    <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>
+                    <span ng-if="blog.date">{{blog.date|date : 'MMMM dd, yyyy'}}</span>
                 </div>
                 <div class="item item-body">
                     <img src="img/background/divider.png" class="full-image">
@@ -23,11 +23,11 @@
         </div>
 
         <div class="relative" ng-repeat="blog in blogs" ng-hide="showWordpress" ng-if="blog.type=='photo'">
-            <div class="card-img" style="background-image:url('{{blog.thumbnail_url}}');"></div>
+            <div class="card-img" style="background-image:url(img/user.png);"></div>
             <div class="card blog-set" ng-click="blogDetail(blog,'tumblr');">
                 <div class="bl-name">
                     <p>{{blog.blog_name}}</p>
-                    <!--                    <span ng-if="blog.author.email!=false">{{blog.author.email}}</span>-->
+                    <span ng-if="blog.date">{{blog.date|formatdate}}</span>
                 </div>
                 <div class="item item-body">
                     <img src="img/background/divider.png" class="full-image">
@@ -44,16 +44,40 @@
                     </a>
                 </div>
             </div>
-        </div>  
-        
+        </div>
+
         <div class="relative" ng-repeat="item in blogs" ng-show="showCustomblog" ng-click="getblogdetailscms(item.id);">
-<!--            <div class="card blog-set" ng-click="blogDetail(blog,'tumblr');">-->
+            <div class="card-img" style="background-image:url(img/user.png);"></div>
+            <div class="card blog-set">
+                <div class="bl-name">
+                    <p>{{item.name}}</p>
+                    <span ng-if="item.timestamp">{{item.timestamp|date : 'MMMM dd, yyyy'}}</span>
+                </div>
+                <div class="item item-body">
+                    <img src="img/background/divider.png" class="full-image">
+                    <div class="wordpress-content" ng-bind-html="item.content| cut:true:175:'...'| rawHtml">
+                    </div>
+                    <img ng-src="{{blog.photos[0].original_size.url}}" class="full-image">
+                </div>
+                <div class="item tabs tabs-secondary tabs-icon-left">
+                    <a class="tab-item borderright" href="#">
+                        <i class="icon ln-thumbs-up2"></i>
+                    </a>
+                    <a class="tab-item" href="#">
+                        <i class="icon ln-share"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!--            <div class="card blog-set" ng-click="blogDetail(blog,'tumblr');">-->
+            <!--
             <div class="card blog-set">
                 <div class="bl-name" style="padding-bottom: 10px;">
                     <p>{{item.name}}</p>
                 </div>
-                  <div class="wordpress-content" style="padding-left: 16px;">{{item.content}}</div>
+                <div class="wordpress-content" style="padding-left: 16px;">{{item.content}}</div>
             </div>
+-->
         </div>
     </ion-content>
 </ion-view>

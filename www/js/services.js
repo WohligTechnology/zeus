@@ -1,5 +1,5 @@
-//var adminbase = "http://wohlig.co.in/webappbackend/";
-var adminbase = "http://localhost/webappbackend/";
+var adminbase = "http://wohlig.co.in/webappbackend/";
+//var adminbase = "http://localhost/webappbackend/";
 //var adminbase = "http://192.168.2.9/webappbackend/";
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";
@@ -207,12 +207,18 @@ angular.module('starter.services', [])
             },
             getWordpressPosts: function (callback) {
                 var getdata = function (data, status) {
-                    return $http.get(data.meta.links.posts).success(callback);
+                    return $http.get(data.meta.links.posts, {
+                        withCredentials: false
+                    }).success(callback);
                 }
-                $http.get(WORDPRESS_API_URL + "sites/" + Wordpress_UserName).success(getdata);
+                $http.get(WORDPRESS_API_URL + "sites/" + Wordpress_UserName, {
+                    withCredentials: false
+                }).success(getdata);
             },
             getTumblrPosts: function (callback) {
-                $http.get(TUBMLR_API_URL).success(callback);
+                $http.get(TUBMLR_API_URL, {
+                    withCredentials: false
+                }).success(callback);
             },
         };
     });

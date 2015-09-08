@@ -24,7 +24,7 @@
                 <div class="user-info">
                     <img src="http://ionicframework.com/img/docs/mcfly.jpg">
                     <h4>{{details.blog_name}}</h4>
-                    <h5>{{details.date|date : 'MMMM dd, yyyy'}}</h5>
+                    <h5>{{details.date|formatdate}}</h5>
                 </div>
             </div>
 
@@ -40,21 +40,21 @@
             <div class="article-banner">
                 <div class="user-info">
                     <h3>{{cmsdetails.name}}</h3>
-                </div> 
+                </div>
                 <div class="user-info">
                     <h4>{{cmsdetails.title}}</h4>
                 </div>
-                   <div class="article-data">
-                <p>{{cmsdetails.content}}</p>
-            </div>
-                  <div ng-repeat="images in cmsdetails.blogimage">
-                <img ng-src="{{images.image | serverimage}}" class="full-image">
-                    </div>
-                
-                  <div ng-repeat="videos in cmsdetails.blogvideo">
-                <div youtube code="videos.video"></div>
-            </div>
-                
+                <div class="article-data">
+                    <p>{{cmsdetails.content}}</p>
+                </div>
+                <div ng-repeat="images in cmsdetails.blogimage">
+                    <img ng-src="{{images.image | serverimage}}" class="full-image">
+                </div>
+
+                <div ng-repeat="videos in cmsdetails.blogvideo">
+                    <div youtube code="videos.video"></div>
+                </div>
+
             </div>
         </div>
     </ion-content>

@@ -306,4 +306,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             return $sce.trustAsHtml(val);
         };
         }
-    ]);
+    ])
+
+.filter('formatdate', function ($filter) {
+    return function (val) {
+        var split = val.split(" ");
+        return $filter('date')(split[0], 'MMMM, dd yyyy')
+    };
+})
