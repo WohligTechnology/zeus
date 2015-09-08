@@ -44,6 +44,16 @@
                     </a>
                 </div>
             </div>
+        </div>  
+        
+        <div class="relative" ng-repeat="item in blogs" ng-show="showCustomblog" ng-click="getblogdetailscms(item.id);">
+<!--            <div class="card blog-set" ng-click="blogDetail(blog,'tumblr');">-->
+            <div class="card blog-set">
+                <div class="bl-name" style="padding-bottom: 10px;">
+                    <p>{{item.name}}</p>
+                </div>
+                  <div class="wordpress-content" style="padding-left: 16px;">{{item.content}}</div>
+            </div>
         </div>
     </ion-content>
 </ion-view>

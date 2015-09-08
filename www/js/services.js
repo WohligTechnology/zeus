@@ -116,8 +116,8 @@ angular.module('starter.services', [])
                         'id': id
                     }
                 }).success(callback);
-            },  
-            
+            },
+
             searchelement: function (searchelement, callback) {
                 return $http({
                     url: adminurl + 'searchelement',
@@ -144,12 +144,27 @@ angular.module('starter.services', [])
                         'id': id
                     }
                 }).success(callback);
+            }, 
+            getsingleblog: function (id, callback) {
+                return $http({
+                    url: adminurl + 'getsingleblog',
+                    method: "POST",
+                    data: {
+                        'id': id
+                    }
+                }).success(callback);
             },
             authenticate: function () {
                 return $http({
                     url: adminurl + 'authenticate',
                     method: "POST"
                 });
+            },
+            getallblog: function (callback) {
+                return $http({
+                    url: adminurl + 'getallblog',
+                    method: "POST"
+                }).success(callback);
             },
             logout: function () {
                 return $http({

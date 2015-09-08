@@ -1,4 +1,4 @@
-<ion-view view-title="Article">
+<ion-view view-title="Blog Details">
     <!--    FOR WORDPRESS-->
     <ion-content>
         <div ng-if="details.provider=='wordpress'">
@@ -31,6 +31,22 @@
             <div class="article-data">
                 <h3 ng-bind-html="details.caption"></h3>
 <!--                <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>-->
+            </div>
+        </div> 
+        
+        
+        <!--        FOR CMS-->
+        <div ng-show="showcmsdetail">
+            <div class="article-banner">
+                <img ng-src="{{cmsdetails.blogimage.image}}" class="full-image">
+                <div class="user-info">
+                    <h4>{{cmsdetails.name}}</h4>
+                </div>
+            </div>
+
+            <div class="article-data">
+<!--                <h3 ng-bind-html="cmsdetails.caption"></h3>-->
+                <p>{{cmsdetails.content}}</p>
             </div>
         </div>
     </ion-content>

@@ -130,7 +130,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     })
 
     .state('app.blogdetail', {
-        url: '/blogdetail',
+        url: '/blogdetail/:id',
         views: {
             'menuContent': {
                 templateUrl: 'templates/appView/blogdetail.html',
