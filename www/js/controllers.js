@@ -133,7 +133,7 @@ angular.module('starter.controllers', ['starter.services'])
     };
 })
 
-.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading,$timeout ) {
+.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
 
     $.jStorage.flush();
 
@@ -220,15 +220,15 @@ angular.module('starter.controllers', ['starter.services'])
 
     $scope.googlelogin = function () {
 
-        ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
-        stopinterval = $interval(callAtIntervaltwitter, 2000);
-        ref.addEventListener('exit', function (event) {
-            MyServices.authenticate().success(authenticatesuccess);
-            $interval.cancel(stopinterval);
-        });
-    }
-    // popup
-     $scope.showPopupsignupsuccess = function () {
+            ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function (event) {
+                MyServices.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
+        }
+        // popup
+    $scope.showPopupsignupsuccess = function () {
 
         var myPopup = $ionicPopup.show({
             template: '<p class="text-center">Successfully Registered!!</p>',
@@ -250,16 +250,15 @@ angular.module('starter.controllers', ['starter.services'])
             myPopup.close(); //close the popup after 3 seconds for some reason
         }, 2000);
     };
-    
+
     //SIGN UP FORMn
     $scope.signup = {};
     var signupsuccess = function (data, status) {
         console.log(data);
-        if(data=="1"){
-        $scope.showPopupsignupsuccess();
-        }
-        else{
-        $scope.showPopupsignupfailure();
+        if (data == "1") {
+            $scope.showPopupsignupsuccess();
+        } else {
+            $scope.showPopupsignupfailure();
         }
         $ionicLoading.hide();
         $scope.signup = {};
@@ -575,12 +574,14 @@ angular.module('starter.controllers', ['starter.services'])
     };
 
     // tumblr and wordpress
-    $scope.details = $.jStorage.get('postdetail');
-    if ($scope.details.provider == 'tumblr') {
-        var newdt = $scope.details.date.split('T');
-        $scope.details.date = newdt[0];
+    if ($stateParams.id == 0) {
+        $scope.details = $.jStorage.get('postdetail');
+        if ($scope.details.provider == 'tumblr') {
+            var newdt = $scope.details.date.split('T');
+            $scope.details.date = newdt[0];
+        }
+        console.log($scope.details);
     }
-    console.log($scope.details);
 })
 
 .controller('PhotoGalleryCategoryCtrl', function ($scope, MyServices, $location, $ionicLoading) {
