@@ -1,7 +1,7 @@
 <ion-view view-title="Blog Details">
     <!--    FOR WORDPRESS-->
     <ion-content>
-        <div ng-if="details.provider=='wordpress'">
+        <div ng-if="details.provider=='wordpress' && id==0">
             <div class="article-banner">
                 <img ng-src="{{details.featured_image}}" class="full-image">
                 <div class="user-info">
@@ -18,7 +18,7 @@
         </div>
 
         <!--        FOR TUMBLR-->
-        <div ng-if="details.provider=='tumblr'">
+        <div ng-if="details.provider=='tumblr' && id==0">
             <div class="article-banner">
                 <img ng-src="{{details.photos[0].original_size.url}}" class="full-image">
                 <div class="user-info">
@@ -30,23 +30,31 @@
 
             <div class="article-data">
                 <h3 ng-bind-html="details.caption"></h3>
-<!--                <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>-->
+                <!--                <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>-->
             </div>
-        </div> 
-        
-        
-        <!--        FOR CMS-->
-        <div ng-show="showcmsdetail">
-            <div class="article-banner">
-                <img ng-src="{{cmsdetails.blogimage.image}}" class="full-image">
-                <div class="user-info">
-                    <h4>{{cmsdetails.name}}</h4>
-                </div>
-            </div>
+        </div>
 
-            <div class="article-data">
-<!--                <h3 ng-bind-html="cmsdetails.caption"></h3>-->
+
+        <!--        FOR CMS-->
+        <div ng-if="id!=0">
+            <div class="article-banner">
+                <div class="user-info">
+                    <h3>{{cmsdetails.name}}</h3>
+                </div> 
+                <div class="user-info">
+                    <h4>{{cmsdetails.title}}</h4>
+                </div>
+                   <div class="article-data">
                 <p>{{cmsdetails.content}}</p>
+            </div>
+                  <div ng-repeat="images in cmsdetails.blogimage">
+                <img ng-src="{{images.image | serverimage}}" class="full-image">
+                    </div>
+                
+                  <div ng-repeat="videos in cmsdetails.blogvideo">
+                <div youtube code="videos.video"></div>
+            </div>
+                
             </div>
         </div>
     </ion-content>

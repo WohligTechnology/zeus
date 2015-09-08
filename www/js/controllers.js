@@ -473,8 +473,9 @@ angular.module('starter.controllers', ['starter.services'])
 .controller('BlogsCtrl', function ($scope, MyServices, $location, $ionicLoading) {
     $ionicLoading.show();
     // loader
-    $scope.getblogdetailscms=function(id){
-     $location.path('/app/blogdetail/'+id);
+
+    $scope.getblogdetailscms = function (id) {
+        $location.path('/app/blogdetail/' + id);
     }
     showloading = function () {
         $ionicLoading.show({
@@ -484,7 +485,7 @@ angular.module('starter.controllers', ['starter.services'])
             $ionicLoading.hide();
         }, 10000);
     };
-//    $scope.showWordpress = true;
+    //    $scope.showWordpress = true;
 
     $scope.blogDetail = function (blog, name) {
         console.log(name)
@@ -522,17 +523,18 @@ angular.module('starter.controllers', ['starter.services'])
     }
 })
 
-.controller('BlogDetailCtrl', function ($scope, MyServices, $ionicLoading,$stateParams) {
+.controller('BlogDetailCtrl', function ($scope, MyServices, $ionicLoading, $stateParams) {
     $ionicLoading.hide();
     // loader
-    var getsingleblogsuccess=function(data,status){
-        $scope.showcmsdetail=true;
-    console.log(data);
-        $scope.cmsdetails=data;
+    var getsingleblogsuccess = function (data, status) {
+        $scope.showcmsdetail = true;
+        console.log(data);
+        $scope.cmsdetails = data;
     }
-    $scope.id=$stateParams.id;
-    MyServices.getsingleblog( $scope.id,getsingleblogsuccess)
-    
+
+    $scope.id = $stateParams.id;
+    MyServices.getsingleblog($scope.id, getsingleblogsuccess)
+
     //loader
     $scope.showloading = function () {
         $ionicLoading.show({
@@ -542,7 +544,7 @@ angular.module('starter.controllers', ['starter.services'])
             $ionicLoading.hide();
         }, 10000);
     };
-    
+
     // tumblr and wordpress
     $scope.details = $.jStorage.get('postdetail');
     if ($scope.details.provider == 'tumblr') {
