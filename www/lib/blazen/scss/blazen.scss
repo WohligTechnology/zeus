@@ -1,7 +1,7 @@
       //sass variable
       $light: #ffffff !default;
       $stable: #f8f8f8 !default;
-      $positive: #50d2c2 !default;
+      $positive: #0ac6c6 !default;
       $calm: #11c1f3 !default;
       $balanced: #33cd5f !default;
       $energized: #ffc900 !default;
@@ -36,6 +36,8 @@
       $button-border-radius: 0px !default;
       $button-border-width: 0px !default;
       $login-bg-image:url('../img/background/1.jpg') no-repeat center center;
+
+
       // sass mixing
       @mixin transition($transition-property,
       $transition-time) {
@@ -52,8 +54,9 @@
           -ms-clip-path: $clip;
           clip-path: $clip;
       }
-      
+      // end
       //sass start
+
       @font-face {
           font-family: 'Lato';
           src: url("../fonts/Lato-Bold.ttf");
@@ -70,7 +73,7 @@
           font-family: 'Lato';
           src: url(../fonts/Lato-Regular.ttf);
       }
-      
+    
       //custom class
       input::-webkit-input-placeholder {
           color: $base-color;
@@ -94,8 +97,31 @@
           font-size: 32px;
           //          line-height: 16px !important;
       }
-      
+      //slider
+
+.slider-slide {
+    position: relative;
+    display: block;
+    float: left;
+    width: 100%;
+    height: 190px !important;
+    vertical-align: top;
+}
       // end
+
+// side bar
+
+.bar-side {
+    background-image: url('../img/background/2.jpg') !important;
+    height: 160px !important;
+    background-size: 100% 100% !important;
+    background-position: center, center;
+    .item{
+        background: transparent;
+    }
+}
+
+// end
       .button {
           font-weight: $lato-font-weight;
           text-transform: capitalize;
@@ -234,24 +260,33 @@
       }
       
       .side-image {
-          padding-top: 4px !important;
+         
           width: 100%;
           h3 {
               text-transform: capitalize !important;
               margin: 0 !important;
               font-family: $font-family-sans-serif !important;
               font-size: 17px !important;
-              font-weight: 300;
+               color: $light;
+    font-weight: 400;
           }
           p {
               margin: 0;
-              color: $icon-color!important;
+              color:#2B5254!important;
               font-family: $font-family-sans-serif !important;
               font-size: 13px !important;
-              font-weight: 300;
+                 
           }
           .item {
               border: none;
+          }
+        
+               img {
+   
+    border-radius: 100%;
+    width: 70px;
+    height: 70px;
+
           }
       }
       
@@ -348,7 +383,7 @@
               font-weight: $lato-font-weight;
               margin: 0px 0px 0px 14px;
               bottom: 65px;
-              font-size: 22px;
+              font-size: 20px;
               text-transform: capitalize;
               border-bottom: 2px solid $positive;
               padding-bottom: 3px;
@@ -365,6 +400,7 @@
               -o-transform: translate(-50%, -50%);
               transform: translate(-50%, -50%);
               min-width: 100%;
+              height: 100%;
           }
           figure {
               height: 180px;
@@ -509,7 +545,7 @@
       .home-content {
           margin-top: -5px;
           .home-feed {
-              background-color: rgba(80, 210, 194, 0.81);
+              background-color: rgba(10, 198, 198, 0.8);
               ;
               color: $light;
               padding: 8px;

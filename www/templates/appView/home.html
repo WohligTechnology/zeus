@@ -2,7 +2,7 @@
     <ion-content>
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="slide in slides track by $index">
-                <img ng-src="{{slide.image|serverimage}}" class="full-image">
+                <img ng-src="{{slide.image|serverimage}}" class="full-image" style="height:100%">
             </ion-slide>
         </ion-slide-box>
 
