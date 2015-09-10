@@ -19,8 +19,12 @@
                 <a class="item item-avatar" href="#">
                     <img ng-src="{{userdetails.userimage}}" ng-if="userdetails.userimage">
                     <img ng-src="img/user.png" ng-if="!userdetails.userimage">
+<!--
                     <h3>{{userdetails.username}}</h3>
                     <p>{{userdetails.useremail}}</p>
+-->
+                     <h3>Adam Dale</h3>
+                    <p>@Adam_dale</p>
                 </a>
             </div>
 
@@ -32,51 +36,51 @@
             <div class="list menu-set" style="top:30px">
                 <img src="img/background/divider.png" class="full-image">
 
-                <a class="item item-icon-left" href="#/app/home" style="border:0px;">
+                <ion-item   nav-clear menu-close  class="item item-icon-left" href="#/app/home" style="border:0px;">
                     <i class="icon ln-home3 assertive-bg-before"></i> Home
-                </a>
+                </ion-item>
 
-                <a class="item item-icon-left" href="#/app/events" menu-close ng-show="menudata.events">
+                <ion-item   nav-clear menu-close class="item item-icon-left" href="#/app/events" menu-close >
                     <i class="icon ln-calendar2 balanced-bg-before"></i> Events
-                </a>
+                </ion-item>
 
-                <a class="item item-icon-left" href="#/app/blogs" menu-close ng-show="menudata.blogs">
+                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/blogs" menu-close >
                     <i class="icon ln-papers royal-bg-before"></i> Blog
-                </a>
+                </ion-item>
 
-                <a class="item item-icon-left" href="#/app/photogallerycategory" ng-show="menudata.gallery">
+                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/photogallerycategory" >
                     <i class="icon ln-picture stable-bg-before"></i> Photos
-                </a>
+                </ion-item>
 
-                <a class="item item-icon-left" href="#/app/videogallerycategory" ng-show="menudata.videogallery">
+                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/videogallerycategory" >
                     <i class="icon ln-film-play dark-bg-before"></i> Videos
-                </a>
+                </ion-item>
 
 
-                <a class="item item-icon-left" href="#">
+                <ion-item  nav-clear menu-close class="item item-icon-left" href="#">
                     <i class="icon ln-circle-exclamation energized-bg-before"></i> about
-                </a>
-                <a class="item item-icon-left" href="#">
+                </ion-item>
+                <ion-item  nav-clear menu-close class="item item-icon-left" href="#">
                     <i class="icon ln-briefcase energized-bg-before"></i> Career
-                </a>
-                <a class="item item-icon-left" href="#/app/contact">
+                </ion-item>
+                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/contact">
                     <i class="icon ln-phone2 energized-bg-before"></i> Contact
-                </a>
+                </ion-item>
 
 
             </div>
             <div class="list menu-set" style="top:15px">
                 <img src="img/background/divider.png" class="full-image">
-                <a class="item item-icon-left" href="#" style="border:0px;">
+                <ion-item  nav-clear menu-close class="item item-icon-left" href="#" style="border:0px;">
                     <i class="icon ln-user energized-bg-before"></i> profile
-                </a>
-                <a class="item item-icon-left" href="#/app/setting">
+                </ion-item>
+                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/setting">
                     <i class="icon ln-gear2 assertive-bg-before"></i> Setting
-                </a>
+                </ion-item>
 
-                <a class="item item-icon-left" ng-click="logout();">
-                    <i class="icon ln-arrow-right2 balanced-bg-before"></i> Logout
-                </a>
+                <ion-item  nav-clear menu-close class="item item-icon-left item-content" href="#/login" ng-click="logout();">
+                    <i class="icon ln-arrow-right2 balanced-bg-before "></i> Logout
+                </ion-item>
             </div>
         </ion-content>
     </ion-side-menu>

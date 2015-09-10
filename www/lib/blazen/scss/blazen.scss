@@ -53,7 +53,6 @@
           clip-path: $clip;
       }
       
- 
       //sass start
       @font-face {
           font-family: 'Lato';
@@ -71,7 +70,8 @@
           font-family: 'Lato';
           src: url(../fonts/Lato-Regular.ttf);
       }
-           //custom class
+      
+      //custom class
       input::-webkit-input-placeholder {
           color: $base-color;
       }
@@ -80,6 +80,10 @@
           color: $white;
           font-family: $font-family-sans-serif;
           font-weight: $lato-font-weight;
+      }
+      
+      .bg-transparent {
+          background: transprent;
       }
       
       .bar .button.button-icon .icon:before,
@@ -103,6 +107,14 @@
           color: $light !important;
           font-weight: $lato-font-weight;
           font-size: $texts-font-size;
+      }
+      
+      .padzero {
+          padding: 0 !important;
+      }
+      
+      .madzero {
+          margin: 0 !important;
       }
       
       // facebook or twitter button
@@ -229,12 +241,14 @@
               margin: 0 !important;
               font-family: $font-family-sans-serif !important;
               font-size: 17px !important;
+              font-weight: 300;
           }
           p {
               margin: 0;
               color: $icon-color!important;
               font-family: $font-family-sans-serif !important;
               font-size: 13px !important;
+              font-weight: 300;
           }
           .item {
               border: none;
@@ -247,7 +261,7 @@
               font-size: 12px !important;
               border-right: 0;
               border-left: 0;
-              padding: 13px 0px 13px 50px;
+              padding: 0px 0px 0px 50px;
               margin: 0px 20px 0px 20px;
               border-bottom: 0;
               text-transform: capitalize;
@@ -436,7 +450,7 @@
       
       .item.item-body {
           overflow: hidden;
-          height: 200px;
+          height: 160px;
       }
       
       a {
@@ -461,6 +475,7 @@
       }
       
       .wordpress-content {
+          font-size: 13px;
           p,
           h1,
           h2,
@@ -478,4 +493,93 @@
       
       a.card {
           display: block;
+      }
+      
+      .image-hloder {
+          height: 180px;
+          overflow: hidden;
+          position: relative;
+          text-align: center;
+          img {
+              width: 100%;
+              height: auto;
+          }
+      }
+      
+      .home-content {
+          margin-top: -5px;
+          .home-feed {
+              background-color: rgba(80, 210, 194, 0.81);
+              ;
+              color: $light;
+              padding: 8px;
+              position: absolute;
+              width: 50%;
+              top: 0;
+              height: 180px;
+              .span {
+                  font-size: 11px;
+                  font-weight: 300;
+              }
+              .small-pic {
+                  border-radius: 100%;
+                  height: 25px;
+                  width: 25px;
+                  vertical-align: middle;
+                  float: right;
+              }
+              p {
+                  font-size: 12px;
+                  margin: 7px 0px 15px 0px;
+                  line-height: 130%;
+                  font-weight: 300;
+              }
+              h4 {
+                  font-size: 15px;
+                  margin: 15px 0px 06px 0px;
+                  color: $light;
+              }
+              a {
+                  border: 1px solid $light;
+                  font-size: 11px;
+                  font-weight: 300;
+                  padding: 5px 7px;
+                  border-radius: 14px;
+              }
+          }
+      }
+      
+      .inside-head {
+          .inside-pic {
+              border-radius: 100%;
+              height: 30px;
+              width: 30px;
+              vertical-align: middle;
+              float: right;
+                  border: 1px solid #fff;
+          }
+          h5 {
+              margin: 0px 0px 5px 0px;
+              color: #fff;
+          }
+          span{
+                  font-size: 11px;
+    color: $light;
+    border-bottom: 2px solid $positive;
+    padding-bottom: 10px;
+          }
+          .inside-play {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              background: $light;
+              border-radius: 100%;
+              height: 50px;
+              width: 50px;
+              transform: translate(-50%, -50%);
+              opacity: 0.6;
+              img {
+                  padding: 16px 17px;
+              }
+          }
       }
