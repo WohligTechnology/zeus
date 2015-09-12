@@ -744,6 +744,18 @@ angular.module('starter.controllers', ['starter.services'])
                 $ionicLoading.hide();
             }, 10000);
         };
+    })   
+    .controller('ProfileCtrl', function ($scope, $ionicLoading) {
+        // loader
+
+//        $scope.showloading = function () {
+//            $ionicLoading.show({
+//                template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+//            });
+//            $timeout(function () {
+//                $ionicLoading.hide();
+//            }, 10000);
+//        };
     })
     .controller('NotificationCtrl', function ($scope, $ionicLoading) {
         // loader

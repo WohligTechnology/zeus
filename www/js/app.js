@@ -89,6 +89,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
                     controller: "ContentPageCtrl"
                 }
             }
+        })  
+        .state('app.profile', {
+            url: '/profile',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/appView/profile.html',
+                    controller: "ProfileCtrl"
+                }
+            }
         })
 
     .state('app.events', {
