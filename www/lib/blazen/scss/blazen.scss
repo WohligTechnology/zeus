@@ -36,8 +36,6 @@
       $button-border-radius: 0px !default;
       $button-border-width: 0px !default;
       $login-bg-image:url('../img/background/1.jpg') no-repeat center center;
-
-
       // sass mixing
       @mixin transition($transition-property,
       $transition-time) {
@@ -54,9 +52,9 @@
           -ms-clip-path: $clip;
           clip-path: $clip;
       }
+      
       // end
       //sass start
-
       @font-face {
           font-family: 'Lato';
           src: url("../fonts/Lato-Bold.ttf");
@@ -73,7 +71,7 @@
           font-family: 'Lato';
           src: url(../fonts/Lato-Regular.ttf);
       }
-    
+      
       //custom class
       input::-webkit-input-placeholder {
           color: $base-color;
@@ -97,31 +95,34 @@
           font-size: 32px;
           //          line-height: 16px !important;
       }
+      
+      .relative {
+          position: relative;
+      }
+      
       //slider
-
-.slider-slide {
-    position: relative;
-    display: block;
-    float: left;
-    width: 100%;
-    height: 190px !important;
-    vertical-align: top;
-}
+      .slider-slide {
+          position: relative;
+          display: block;
+          float: left;
+          width: 100%;
+          height: 190px !important;
+          vertical-align: top;
+      }
+      
       // end
-
-// side bar
-
-.bar-side {
-    background-image: url('../img/background/2.jpg') !important;
-    height: 160px !important;
-    background-size: 100% 100% !important;
-    background-position: center, center;
-    .item{
-        background: transparent;
-    }
-}
-
-// end
+      // side bar
+      .bar-side {
+          background-image: url('../img/background/2.jpg') !important;
+          height: 160px !important;
+          background-size: 100% 100% !important;
+          background-position: center, center;
+          .item {
+              background: transparent;
+          }
+      }
+      
+      // end
       .button {
           font-weight: $lato-font-weight;
           text-transform: capitalize;
@@ -260,33 +261,28 @@
       }
       
       .side-image {
-         
           width: 100%;
           h3 {
               text-transform: capitalize !important;
               margin: 0 !important;
               font-family: $font-family-sans-serif !important;
               font-size: 17px !important;
-               color: $light;
-    font-weight: 400;
+              color: $light;
+              font-weight: 400;
           }
           p {
               margin: 0;
-              color:#2B5254!important;
+              color: #2B5254!important;
               font-family: $font-family-sans-serif !important;
               font-size: 13px !important;
-                 
           }
           .item {
               border: none;
           }
-        
-               img {
-   
-    border-radius: 100%;
-    width: 70px;
-    height: 70px;
-
+          img {
+              border-radius: 100%;
+              width: 70px;
+              height: 70px;
           }
       }
       
@@ -592,17 +588,17 @@
               width: 30px;
               vertical-align: middle;
               float: right;
-                  border: 1px solid #fff;
+              border: 1px solid #fff;
           }
           h5 {
               margin: 0px 0px 5px 0px;
               color: #fff;
           }
-          span{
-                  font-size: 11px;
-    color: $light;
-    border-bottom: 2px solid $positive;
-    padding-bottom: 10px;
+          span {
+              font-size: 11px;
+              color: $light;
+              border-bottom: 2px solid $positive;
+              padding-bottom: 10px;
           }
           .inside-play {
               position: absolute;
@@ -616,6 +612,131 @@
               opacity: 0.6;
               img {
                   padding: 16px 17px;
+              }
+          }
+      }
+      
+      // video page
+      .layers {
+          height: 180px;
+          background: rgba(29, 38, 99, 0.79);
+          ;
+          position: relative;
+          @include transition(all,
+          0.5s);
+          position: absolute;
+          top: 0;
+          width: 100%;
+      }
+      
+      .big-video {
+          color: $light;
+          height: 180px;
+          padding: 8px;
+          background: rgba(41, 49, 68, 0.49);
+          h4 {
+              color: $light;
+              text-transform: uppercase;
+              font-size: 14px;
+              line-height: 130%;
+              margin: 8px 0px 10px 0px;
+          }
+          span {
+              color: #FF0047;
+          }
+          p {
+              text-transform: capitalize;
+              font-size: 10px;
+              line-height: 130%;
+          }
+          .lik-time {
+              padding-top: 10px;
+              font-size: 11px;
+              i {
+                  margin: 10px 5px 0px 0px;
+                  font-size: 15px;
+                  vertical-align: baseline;
+                  color: #FF0047;
+              }
+          }
+          hr {
+              width: 30px;
+              margin: 3px 0px 11px 0px;
+          }
+          .marginl {
+              margin-left: 10px !important;
+          }
+      }
+      
+      .video-play {
+          .in-play {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              background: rgba(255, 0, 71, 0.81);
+              ;
+              border-radius: 100%;
+              height: 55px;
+              width: 55px;
+              img {
+                  padding: 15px 18px;
+              }
+          }
+      }
+      
+      .martop {
+          margin-top: 10px;
+      }
+      
+      .small-video {
+          .sm-video {
+                  border-radius: 4px;
+              figure{
+                  height: 145px !important;
+                      border-radius: 4px;
+              }
+              .layertw {
+                      border-radius: 4px;
+                  @extend .layers;
+                  height: 145px !important;
+                  padding: 5px;
+                  span {
+                      color: #FF0047;
+                  }
+                  h4 {
+                      color: $light;
+                      text-transform: uppercase;
+                      font-size: 12px;
+                      line-height: 130%;
+                          margin: 6px 0px 10px;
+                  }
+                  hr {
+                      width: 50px;
+                     margin: 10px auto;
+                  }
+                  .sm-play {
+                      background: #D50A4E;
+                      width: 40px;
+                      height: 40px;
+                          margin: 4px auto;
+                      border-radius: 100%;
+                      img {
+                          padding: 12px 14px;
+                          
+                      }
+                  }
+                  .time-like{
+                         font-size: 10px;
+    color: $light;
+                      i{
+                          color: #FF0047;
+                          margin: 0px 7px 0px 0px;
+                      }
+                      .margltw{
+                              margin-left: 20px;
+                      }
+                  }
               }
           }
       }
