@@ -138,6 +138,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             }
         }
     })
+    
+    .state('app.about', {
+        url: '/about',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/appView/about.html',
+                controller: "AboutCtrl"
+            }
+        }
+    })
 
     .state('app.blogdetail', {
         url: '/blogdetail/:id',

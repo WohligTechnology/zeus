@@ -406,6 +406,51 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('SignupCtrl', function ($scope, $ionicLoading) {})
+    
+    .controller('AboutCtrl', function ($scope, $ionicLoading , $stateParams, $window, $ionicScrollDelegate) {
+    
+         $scope.abouthead = [{
+            content: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+
+        }];
+        $scope.content = [{
+            detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a massa sit amet justo pretium condimentum. Integer sed lectus sit amet leo dictum ullamcorper nec in tellus. Quisque vitae venenatis eros, vitae venenatis eros. Maecenas nec leo non tortor dignissim fermentum sed aliquet ligula."
+
+        }];
+        $scope.moretext = [{
+            more: "Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nam aliquet ultrices dignissim. Donec pretium et dui ut imperdiet. Aliquam et urna non neque tempor vehicula at quis justo. Ut eleifend odio justo, et finibus mi aliquet vitae. Etiam euismod dapibus arcu nec pellentesque. Suspendisse faucibus velit ornare, tincidunt massa in, ullamcorper lectus. Quisque semper venenatis nulla, at auctor libero pharetra ultrices. Duis ut enim egestas, varius lorem ac, sodales sapien."
+
+        }];
+    
+    
+        //    ****** More Text Json Format data ******
+
+        $scope.showDetails = "dontshow";
+        $scope.moredetails = "Read More";
+        $scope.showmore = function(classname) {
+            var newheight = $(".moretext." + classname).height();
+            console.log(newheight);
+            console.log("show more clicked");
+            if ($scope.showDetails == "showmore") {
+                $scope.showDetails = "dontshow";
+                $(".addanimation").height(0);
+                $scope.moredetails = "Read More";
+                $ionicScrollDelegate.$getByHandle('mainScroll').resize();
+                $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
+            } else {
+                $scope.showDetails = "showmore";
+                $(".addanimation").height(newheight);
+                $scope.moredetails = "Hide";
+                $ionicScrollDelegate.$getByHandle('mainScroll').resize();
+                $ionicScrollDelegate.$getByHandle('mainScroll').scrollBottom();
+            }
+
+        };
+
+        //***** End ******
+    
+    
+})
 
 .controller('HomeCtrl', function ($scope, MyServices, $ionicSlideBoxDelegate, $ionicLoading) {
     $ionicLoading.show();

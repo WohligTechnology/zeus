@@ -1,0 +1,18 @@
+<ion-view view-title="About">
+  <ion-content>
+<div class="about-set">
+    <img src="img/background/3.jpg" class="full-image">
+</div>
+
+      <div class="about-us">
+            <h3 ng-repeat="head in abouthead">"{{head.content}}"</h3>
+            <p ng-repeat="cont in content">{{cont.detail}}</p>
+            <div class="know-content addanimation" ng-class="showDetails">
+                <p ng-repeat="text in moretext" class="moretext moreabout">{{text.more}}</p>
+            </div>
+            <div class="know-more know-btn" ng-click="showmore('moreabout');">
+                {{moredetails}}
+            </div>
+        </div>
+  </ion-content>
+</ion-view>
