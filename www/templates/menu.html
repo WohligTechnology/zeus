@@ -1,86 +1,85 @@
 <ion-side-menus enable-menu-with-back-views="false" ng-controller="AppCtrl">
-    <ion-side-menu-content>
-        <ion-nav-bar class="bar-positive">
-            <ion-nav-back-button>
-            </ion-nav-back-button>
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-positive">
+      <ion-nav-back-button>
+      </ion-nav-back-button>
 
-            <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
-                </button>
-            </ion-nav-buttons>
-        </ion-nav-bar>
-        <ion-nav-view name="menuContent"></ion-nav-view>
-    </ion-side-menu-content>
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>
+      </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
 
-    <ion-side-menu side="left">
-        <ion-header-bar class="bar-side">
+  <ion-side-menu side="left">
 
-            <div class="list side-image">
-                <a class="item " href="#">
-                    <img ng-src="{{userdetails.userimage}}" ng-if="userdetails.userimage">
-                    <img ng-src="img/user.png" ng-if="!userdetails.userimage">
-<!--
+
+
+    <div class="list no-margin">
+
+      <ion-item class="item-avatar">
+        <img ng-src="{{userdetails.userimage}}" ng-if="userdetails.userimage">
+        <img ng-src="img/user.png" ng-if="!userdetails.userimage">
+        <!--
                     <h3>{{userdetails.username}}</h3>
                     <p>{{userdetails.useremail}}</p>
 -->
-                     <h3>Adam Dale</h3>
-                    <p>@Adam_dale</p>
-                </a>
-            </div>
-
-        </ion-header-bar>
-
-        <ion-content>
+        <h3>Adam Dale</h3>
+        <p>@Adam_dale</p>
+      </ion-item>
 
 
-            <div class="list menu-set" style="top:116px">
+    </div>
 
-                <ion-item   nav-clear menu-close  class="item item-icon-left" href="#/app/home" style="border:0px;">
-                    <i class="icon ln-home3 assertive-bg-before"></i> Home
-                </ion-item>
+    <ion-content class="has-menu-photo">
+      <div class="list menu-set">
 
-                <ion-item   nav-clear menu-close class="item item-icon-left" href="#/app/events" menu-close >
-                    <i class="icon ln-calendar2 balanced-bg-before"></i> Events
-                </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/home">
+          <i class="icon ln-home3"></i> Home
+        </ion-item>
 
-                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/blogs" menu-close >
-                    <i class="icon ln-papers royal-bg-before"></i> Blog
-                </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/events">
+          <i class="icon ln-calendar2"></i> Events
+        </ion-item>
 
-                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/photogallerycategory" >
-                    <i class="icon ln-picture stable-bg-before"></i> Photos
-                </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/blogs">
+          <i class="icon ln-papers"></i> Blog
+        </ion-item>
 
-                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/videogallerycategory" >
-                    <i class="icon ln-film-play dark-bg-before"></i> Videos
-                </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/photogallerycategory">
+          <i class="icon ln-picture"></i> Photos
+        </ion-item>
 
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/videogallerycategory">
+          <i class="icon ln-film-play"></i> Videos
+        </ion-item>
 
-                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/about">
-                    <i class="icon ln-circle-exclamation energized-bg-before"></i> about
-                </ion-item>
-                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/team">
-                    <i class="icon ln-briefcase energized-bg-before"></i> Our Team
-                </ion-item>
-                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/contact">
-                    <i class="icon ln-phone2 energized-bg-before"></i> Contact
-                </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/about">
+          <i class="icon ln-circle-exclamation"></i> about
+        </ion-item>
 
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/team">
+          <i class="icon ln-briefcase"></i> Our Team
+        </ion-item>
 
-            </div>
-            <div class="list menu-set" style="top:105px">
-                <img src="img/background/divider.png" class="full-image">
-                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/profile" style="border:0px;">
-                    <i class="icon ln-user energized-bg-before"></i> profile
-                </ion-item>
-                <ion-item  nav-clear menu-close class="item item-icon-left" href="#/app/setting">
-                    <i class="icon ln-gear2 assertive-bg-before"></i> Setting
-                </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/contact">
+          <i class="icon ln-phone2"></i> Contact
+        </ion-item>
 
-                <ion-item  nav-clear menu-close class="item item-icon-left item-content" href="#/login" ng-click="logout();">
-                    <i class="icon ln-arrow-right2 balanced-bg-before "></i> Logout
-                </ion-item>
-            </div>
-        </ion-content>
-    </ion-side-menu>
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/profile">
+          <i class="icon ln-user"></i> profile
+        </ion-item>
+        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/setting">
+          <i class="icon ln-gear2"></i> Setting
+        </ion-item>
+
+        <ion-item nav-clear menu-close class="item item-icon-left item-content" href="#/login" ng-click="logout();">
+          <i class="icon ln-arrow-right2"></i> Logout
+        </ion-item>
+
+      </div>
+    </ion-content>
+  </ion-side-menu>
 </ion-side-menus>
+
