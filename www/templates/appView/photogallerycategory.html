@@ -1,16 +1,13 @@
 <ion-view view-title="Photo Category">
 
-  <ion-content >
-    <div class="list card" ng-repeat="photos in photos" ng-click="sendphotoid(photos.id);"> 
-      <div>
-        <h2>{{photos.name}}</h2>
-      </div>
-      <div class="item item-image">
-        <img ng-src="{{photos.image | serverimage}}">
-      </div>
-    </div>
-  
-      
-  </ion-content>
+    <ion-content>
+        <div class="list">
+            <div class="item item-image photo-gallery" ng-repeat="photos in photos" ng-click="sendphotoid(photos.id);">
+                <div class="photo-title" id="radial-gradient ">
+                    <h2>{{photos.name}}</h2>
+                </div>
+                <img ng-src="{{photos.image | serverimage}}" class="full-image">
+            </div>
+        </div>ss
+    </ion-content>
 </ion-view>
-

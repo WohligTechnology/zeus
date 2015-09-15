@@ -851,14 +851,67 @@
               float: right;
               font-size: 13px;
               padding: 14px 12px;
-               color: $light;
+              color: $light;
               i {
                   margin: 0px 5px;
                   font-size: 15px;
                   color: rgb(7, 255, 239);
               }
           }
-          .margright{
-              margin-left:15px !important; 
+          .margright {
+              margin-left: 15px !important;
           }
+      }
+      
+      .profile-pics {
+          position: absolute;
+          width: 100%;
+          top: 160px;
+          img {
+              width: 100px;
+              height: 100px;
+              border: 3px solid #fff;
+              border-radius: 50%;
+          }
+      }
+      
+      .profile-cont {
+          margin-top: 50px;
+          min-height: 120px;
+          .head-name {
+              margin-bottom: 5px;
+          }
+          .profile-work,
+          .head-name {
+              text-transform: capitalize;
+          }
+          p {
+              margin-bottom: 0px;
+              color: lighten( $base-color, 40%);
+          }
+      }
+      
+      .no-padding {
+          padding: 0px;
+      }
+      
+      .item-image.photo-gallery {
+          height: 160px;
+          overflow: hidden;
+          .photo-title {
+              background-color: rgba(0, 0, 0, 0.1);
+              position: absolute;
+              width: 100%;
+              h2 {
+                  color: #fff;
+                  padding: 10px;
+                  text-align: left;
+              }
+          }
+      }
+      
+      #radial-gradient {
+          @include background-image(radial-gradient(45px 45px,
+          cyan 10px,
+          dodgerblue 30px));
       }
