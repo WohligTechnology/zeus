@@ -406,6 +406,16 @@ angular.module('starter.controllers', ['starter.services'])
 })
 
 .controller('SignupCtrl', function ($scope, $ionicLoading) {})
+    .controller('TeamCtrl', function ($scope, $ionicLoading) {
+        $scope.team = [{
+            content: "Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."
+
+        }];
+        $scope.contain = [{
+            detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a massa sit amet justo pretium condimentum. Integer sed lectus sit amet leo dictum ullamcorper nec in tellus."
+
+        }]; 
+})
     
     .controller('AboutCtrl', function ($scope, $ionicLoading , $stateParams, $window, $ionicScrollDelegate) {
     
@@ -414,6 +424,9 @@ angular.module('starter.controllers', ['starter.services'])
 
         }];
         $scope.content = [{
+            detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a massa sit amet justo pretium condimentum. Integer sed lectus sit amet leo dictum ullamcorper nec in tellus. Quisque vitae venenatis eros, vitae venenatis eros. Maecenas nec leo non tortor dignissim fermentum sed aliquet ligula."
+
+        }];    $scope.content = [{
             detail: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris a massa sit amet justo pretium condimentum. Integer sed lectus sit amet leo dictum ullamcorper nec in tellus. Quisque vitae venenatis eros, vitae venenatis eros. Maecenas nec leo non tortor dignissim fermentum sed aliquet ligula."
 
         }];

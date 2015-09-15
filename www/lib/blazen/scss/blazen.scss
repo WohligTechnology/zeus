@@ -691,13 +691,13 @@
       
       .small-video {
           .sm-video {
-                  border-radius: 4px;
-              figure{
+              border-radius: 4px;
+              figure {
                   height: 145px !important;
-                      border-radius: 4px;
+                  border-radius: 4px;
               }
               .layertw {
-                      border-radius: 4px;
+                  border-radius: 4px;
                   @extend .layers;
                   height: 145px !important;
                   padding: 5px;
@@ -709,97 +709,156 @@
                       text-transform: uppercase;
                       font-size: 12px;
                       line-height: 130%;
-                          margin: 6px 0px 10px;
+                      margin: 6px 0px 10px;
                   }
                   hr {
                       width: 50px;
-                     margin: 10px auto;
+                      margin: 10px auto;
                   }
                   .sm-play {
                       background: #D50A4E;
                       width: 40px;
                       height: 40px;
-                          margin: 4px auto;
+                      margin: 4px auto;
                       border-radius: 100%;
                       img {
                           padding: 12px 14px;
-                          
                       }
                   }
-                  .time-like{
-                         font-size: 10px;
-    color: $light;
-                      i{
+                  .time-like {
+                      font-size: 10px;
+                      color: $light;
+                      i {
                           color: #FF0047;
                           margin: 0px 7px 0px 0px;
                       }
-                      .margltw{
-                              margin-left: 20px;
+                      .margltw {
+                          margin-left: 20px;
                       }
                   }
               }
           }
       }
-.about-set {
-    width: 100%;
-    height: 212px;
-    display: block;
-    overflow: hidden;
-    text-align: center;
-    img{
-      height: 100%;
-    }
-
-}
-    .about-us h3 {
-    font-weight: 400;
-    text-transform: capitalize;
-    color: $base-color;
-    margin-bottom: 35px;
-        font-size: 16px;
-        text-align: center;
-}
-.about-us p {
-    font-size: $texts-font-size;
-    font-weight: 400;
-}
-.about-us {
-    padding: 13px;
-}
-.know-more {
-    text-align: center;
-    margin-top: 20px;
-}
-.know-btn {
-    border: 1px solid $positive;
-    padding: 10px 35px;
-    background: $positive;
-    color: $light;
-    font-weight: 300;
-}
-.know-content {
-    text-align: left;
-    height: 0px;
-    @include transition(all, 1s);
-    overflow: hidden;
-}
-p.addanimation {
-    margin-left: 28px;
-    font-size: 80%;
-    background-color: grey;
-    color: $base-color;
-    padding: 5px 10px;
-    display: block;
-}
-.showmores {
-    height: 70px !important;
-}
-p.addanimation.pop.showmores {
-    background: rgb(156, 39, 176);
-    border-radius: 6px;
-    padding: 6px 8px;
-    font-size: 13px;
-    font-weight: 300;
-    color: $light;
-    margin-top: 20px;
-}
+      
+      .about-set {
+          width: 100%;
+          height: 212px;
+          display: block;
+          overflow: hidden;
+          text-align: center;
+          img {
+              height: 100%;
+          }
+      }
+      
+      .about-us h3 {
+          font-weight: 400;
+          text-transform: capitalize;
+          color: $base-color;
+          margin-bottom: 35px;
+          font-size: 16px;
+          text-align: center;
+      }
+      
+      .about-us p {
+          font-size: $texts-font-size;
+          font-weight: 300;
+      }
+      
+      .about-us {
+          padding: 13px;
+      }
+      
+      .know-more {
+          text-align: center;
+          margin-top: 20px;
+      }
+      
+      .know-btn {
+          border: 1px solid $positive;
+          padding: 10px 35px;
+          background: $positive;
+          color: $light;
+          font-weight: 300;
+      }
+      
+      .know-content {
+          text-align: left;
+          height: 0px;
+          @include transition(all,
+          1s);
+          overflow: hidden;
+      }
+      
+      p.addanimation {
+          margin-left: 28px;
+          font-size: 80%;
+          background-color: grey;
+          color: $base-color;
+          padding: 5px 10px;
+          display: block;
+      }
+      
+      .showmores {
+          height: 70px !important;
+      }
+      
+      p.addanimation.pop.showmores {
+          background: rgb(156, 39, 176);
+          border-radius: 6px;
+          padding: 6px 8px;
+          font-size: 13px;
+          font-weight: 300;
+          color: $light;
+          margin-top: 20px;
+      }
+      
+      .team {
+          .team-set {
+              @extend .popular-set;
+              figure {
+                  margin-top: 4px;
+                  height: 200px;
+                  img {
+                      height: 100%;
+                  }
+              }
+          }
+          hr {
+              width: 50px;
+          }
+          .team-name {
+              position: absolute;
+              bottom: 0;
+              background: rgba(10, 198, 198, 0.66);
+              width: 100%;
+          }
+          .left {
+              float: left;
+              padding: 6px 12px;
+              h4 {
+                  margin: 0;
+                  font-size: 14px;
+                  color: $light;
+              }
+              p {
+                  margin: 0;
+                  font-size: 11px;
+                  color: #333;
+              }
+          }
+          .right {
+              float: right;
+              font-size: 13px;
+              padding: 14px 12px;
+               color: $light;
+              i {
+                  margin: 0px 5px;
+                  font-size: 15px;
+                  color: rgb(7, 255, 239);
+              }
+          }
+          .margright{
+              margin-left:15px !important; 
+          }
+      }
