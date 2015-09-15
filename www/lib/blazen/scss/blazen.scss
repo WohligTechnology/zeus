@@ -1,7 +1,7 @@
       //sass variable
       $light: #ffffff !default;
       $stable: #f8f8f8 !default;
-      $positive: #0ac6c6 !default;
+      $positive: #F13232 !default;
       $calm: #11c1f3 !default;
       $balanced: #33cd5f !default;
       $energized: #ffc900 !default;
@@ -113,7 +113,7 @@
       // end
       // side bar
       .bar-side {
-          background-image: url('../img/background/2.jpg') !important;
+//          background-image: url('../img/background/2.jpg') !important;
           height: 160px !important;
           background-size: 100% 100% !important;
           background-position: center, center;
@@ -863,18 +863,6 @@
           }
       }
       
-      .profile-pics {
-          position: absolute;
-          width: 100%;
-          top: 160px;
-          img {
-              width: 100px;
-              height: 100px;
-              border: 3px solid #fff;
-              border-radius: 50%;
-          }
-      }
-      
       .profile-cont {
           margin-top: 50px;
           min-height: 120px;
@@ -888,6 +876,18 @@
           p {
               margin-bottom: 0px;
               color: lighten( $base-color, 40%);
+          }
+      }
+      
+      .profile-pics {
+          position: absolute;
+          width: 100%;
+          top: 160px;
+          img {
+              width: 100px;
+              height: 100px;
+              border: 3px solid #fff;
+              border-radius: 50%;
           }
       }
       
@@ -908,10 +908,4 @@
                   text-align: left;
               }
           }
-      }
-      
-      #radial-gradient {
-          @include background-image(radial-gradient(45px 45px,
-          cyan 10px,
-          dodgerblue 30px));
       }
