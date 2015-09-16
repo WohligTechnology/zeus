@@ -3,8 +3,8 @@
     <div class="contact">
       <div class="tab">
         <div class="button-bar">
-          <a class="button" ng-click="tabchange('contactus',1)">Contact us</a>
-          <a class="button" ng-click="tabchange('contactform',2)">Contact form</a>
+          <a class="button" ng-class="{'active':tab=='contactus'}" ng-click="tabchange('contactus',1)">Contact us</a>
+          <a class="button" ng-class="{'active':tab=='contactform'}" ng-click="tabchange('contactform',2)">Contact form</a>
         </div>
 
 
