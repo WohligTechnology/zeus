@@ -5322,7 +5322,7 @@ a.item-content {
 .card {
   padding-top: 1px;
   padding-bottom: 1px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3); }
+  box-shadow: none; }
   .card .item {
     border-left: 0;
     border-right: 0; }
@@ -7819,3 +7819,10 @@ a, a:hover {
 
 .no-padding {
   padding: 0 !important; }
+
+.card {
+  border: 1px solid #ddd; }
+  .card .item {
+    padding: 15px 0; }
+  .card .item-icon-left {
+    padding-left: 54px; }

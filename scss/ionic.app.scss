@@ -25,6 +25,9 @@ $font-family-light-sans-serif: "Lato", "HelveticaNeue-Light", "Roboto-Light", "S
 
 $login-bg-image:url('../img/background/1.jpg') no-repeat center center;
 
+
+$card-box-shadow: none !default;
+
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
@@ -225,3 +228,12 @@ a:hover {
     padding: 0 !important;
 }
 
+.card {
+    border: 1px solid #ddd;
+    .item {
+        padding: 15px 0;
+    }
+    .item-icon-left {
+        padding-left: 54px;
+    }
+}
