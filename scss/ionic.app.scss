@@ -1,3 +1,7 @@
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
 //sass variable
 $light:#ffffff !default;
 $stable:#f8f8f8 !default;
@@ -256,8 +260,3 @@ a:hover {
     margin: 0 !important;
 }
 
-// The path for our ionicons font files, relative to the built CSS in www/css
-$ionicons-font-path: "../lib/ionic/fonts" !default;
-
-// Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
