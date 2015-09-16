@@ -525,8 +525,8 @@ a.card {
 }
 
 .image-holder {
-//    height: 180px;
-//    overflow: hidden;
+    //    height: 180px;
+    //    overflow: hidden;
     position: relative;
     text-align: center;
     img {
@@ -535,12 +535,35 @@ a.card {
     }
 }
 
+p {
+    font-size: 12px;
+    margin: 7px 0px 15px 0px;
+    line-height: 130%;
+    font-weight: 300;
+}
+
+h4 {
+    font-size: 15px;
+    margin: 15px 0px 06px 0px;
+}
+
+a.readmore {
+    border: 1px solid $base-color;
+    font-size: 11px;
+    font-weight: 300;
+    padding: 5px 7px;
+}
+
+.card-padding {
+    padding: 8px;
+}
+
 .home-content {
     margin-top: -5px;
     .home-feed {
+        padding: 8px;
         background-color: rgba(39, 43, 43, 0.8);
         color: $light;
-        padding: 8px;
         position: absolute;
         width: 50%;
         top: 0;
@@ -549,30 +572,23 @@ a.card {
             font-size: 11px;
             font-weight: 300;
         }
+        a.readmore {
+            border-color: $light;
+        }
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: $light;
+        }
         .small-pic {
             border-radius: 100%;
             height: 25px;
             width: 25px;
             vertical-align: middle;
             float: right;
-        }
-        p {
-            font-size: 12px;
-            margin: 7px 0px 15px 0px;
-            line-height: 130%;
-            font-weight: 300;
-        }
-        h4 {
-            font-size: 15px;
-            margin: 15px 0px 06px 0px;
-            color: $light;
-        }
-        a {
-            border: 1px solid $light;
-            font-size: 11px;
-            font-weight: 300;
-            padding: 5px 7px;
-            border-radius: 14px;
         }
     }
 }

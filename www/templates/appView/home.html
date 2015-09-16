@@ -1,24 +1,19 @@
 <ion-view view-title="Home">
     <ion-content>
-
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="slide in slides track by $index">
                 <img ng-src="{{slide.image|serverimage}}" class="full-image">
             </ion-slide>
         </ion-slide-box>
-
         <div class="home-content">
-            <div>
+            <div class="card-padding">
                 <div class="list  padzero">
                     <div class="row padzero">
                         <div class="col col-50 padzero">
                             <div class="">
-                                <h4>About us
-          </h4>
+                                <h4>About us</h4>
                                 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                <a href="" class=" bg-transparent text-center">
-  Read More
-</a>
+                                <a href="" class="bg-transparent text-center readmore">Read More</a>
                             </div>
                         </div>
                     </div>
@@ -32,12 +27,9 @@
                 <div class="row padzero">
                     <div class="col col-50 padzero">
                         <div class="home-feed">
-                            <h4>Services
-          </h4>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                            <a href="" class=" bg-transparent text-center">
-  Read More
-</a>
+                            <h4>Services</h4>
+                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<p>
+                                <a href="" class=" bg-transparent text-center readmore">Read More</a>
                         </div>
                     </div>
                 </div>
