@@ -1,6 +1,6 @@
 <ion-view view-title="Home">
     <ion-content>
-       
+
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="slide in slides track by $index">
                 <img ng-src="{{slide.image|serverimage}}" class="full-image">
@@ -8,18 +8,31 @@
         </ion-slide-box>
 
         <div class="home-content">
+            <div>
+                <div class="list  padzero">
+                    <div class="row padzero">
+                        <div class="col col-50 padzero">
+                            <div class="">
+                                <h4>About us
+          </h4>
+                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
+                                <a href="" class=" bg-transparent text-center">
+  Read More
+</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="list madzero padzero">
-
-                <div class="image-hloder">
-                    <img src="img/other/1.jpg" class="full-image">
+                <div class="">
+                    <img src="img/home/abt.jpg" class="full-image">
                 </div>
 
                 <div class="row padzero">
                     <div class="col col-50 padzero">
                         <div class="home-feed">
-                            <span class="span">15, March 2015</span>
-                            <img class="small-pic" src="img/profile/1.jpg">
-                            <h4>What's The best online shooter Game?
+                            <h4>Services
           </h4>
                             <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
                             <a href="" class=" bg-transparent text-center">
@@ -27,50 +40,8 @@
 </a>
                         </div>
                     </div>
-
                 </div>
-
-
             </div>
-
-
-            <div class="popular-set">
-                <figure>
-                    <img class="pop-img" src="img/other/2.jpg" alt="Demo" class="full-image" style="height:100%;">
-                    <div class="layer">
-                        <div class="inside-text">
-                            <div class="inside-head">
-                                <div class="row">
-                                    <div class="col col-75">
-                                        <h5>What's The best online shooter Game? </h5>
-                                        <span>Posted March 5</span>
-                                   </div>
-                                    <div class="col"><img class="inside-pic" src="img/profile/1.jpg"></div>
-                                </div>
-                                <div class="inside-play">
-                                    <img class="3" src="img/other/3.png" alt="Demo" class="full-image" style="">
-                                </div>
-                            </div>
-
-                            <!--
-                            <div class="item tabs tabs-secondary tabs-icon-left">
-                            <div class="inside-play">
-                                 <img class="3" src="img/other/3.png" alt="Demo" class="full-image" style="">
-                            </div>
--->
-                            <!--
-                                <a class="tab-item borderright" href="#">
-                                    <i class="icon ln-calendar3 "></i> {{event.startdate|date : 'dd MMM, yyyy'}}
-                                </a>
-                                <a class="tab-item" href="#">
-                                    <i class="icon ln-timer"></i> {{event.starttime|convertto12}}
-                                </a>
--->
-                            <!--                            </div>-->
-                        </div>
-                </figure>
-                </div>
-
-            </div>
+        </div>
     </ion-content>
 </ion-view>
