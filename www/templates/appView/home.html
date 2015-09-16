@@ -1,39 +1,27 @@
 <ion-view view-title="Home">
-    <ion-content>
-        <ion-slide-box on-slide-changed="slideHasChanged($index)">
-            <ion-slide ng-repeat="slide in slides track by $index">
-                <img ng-src="{{slide.image|serverimage}}" class="full-image">
-            </ion-slide>
-        </ion-slide-box>
-        <div class="home-content">
-            <div class="card-padding">
-                <div class="list  padzero">
-                    <div class="row padzero">
-                        <div class="col col-50 padzero">
-                            <div class="">
-                                <h4>About us</h4>
-                                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. </p>
-                                <a href="" class="bg-transparent text-center readmore">Read More</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="list madzero padzero">
-                <div class="">
-                    <img src="img/home/abt.jpg" class="full-image">
-                </div>
+  <ion-content>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+      <ion-slide ng-repeat="slide in slides track by $index">
+        <img ng-src="{{slide.image|serverimage}}" class="full-image">
+      </ion-slide>
+    </ion-slide-box>
 
-                <div class="row padzero">
-                    <div class="col col-50 padzero">
-                        <div class="home-feed">
-                            <h4>Services</h4>
-                            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<p>
-                                <a href="" class=" bg-transparent text-center readmore">Read More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </ion-content>
+
+    <div class="transparent-box padding">
+      <h4>About us</h4>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      <a class="button button-small button-dark button-small button-outline">Read More</a>
+    </div>
+
+
+    <div class="bg-box padding">
+      <h4>Services</h4>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<p>
+          <a href="" class="button button-small button-dark button-small button-outline">Read More</a>
+    </div>
+
+
+
+  </ion-content>
 </ion-view>
+
