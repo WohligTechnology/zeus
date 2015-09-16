@@ -1,10 +1,10 @@
 <ion-view view-title="Events">
     <ion-content>
-        <ion-lis style="padding-top:0px">
+        <ion-list>
             <a>
                 <div class="popular-set" ng-repeat="event in events" ng-click="geteventdetails(event.id);">
                     <figure>
-                        <img class="pop-img" ng-src="{{event.image|serverimage}}" alt="Demo" class="full-image">
+                        <img class="pop-img" ng-src="{{event.image|serverimage}}" class="full-image">
                         <div class="layer">
                             <figcaption class="blog-name">{{event.title}}</figcaption>
                             <p>{{event.content}}</p>

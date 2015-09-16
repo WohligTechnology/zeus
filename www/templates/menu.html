@@ -19,8 +19,9 @@
     <div class="list no-margin">
 
       <ion-item class="item-avatar">
-        <img ng-src="{{userdetails.userimage}}" ng-if="userdetails.userimage">
-        <img ng-src="img/user.png" ng-if="!userdetails.userimage">
+       <div class="image-adjust" ng-if="!userdetails.userimage"></div>
+       <div class="image-adjust" style="background-image: url('{{userdetails.userimage}}');" ng-if="userdetails.userimage"></div>
+       
         <!--
                     <h3>{{userdetails.username}}</h3>
                     <p>{{userdetails.useremail}}</p>
