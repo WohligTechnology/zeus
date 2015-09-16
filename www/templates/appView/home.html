@@ -1,13 +1,22 @@
 <ion-view view-title="Home">
-
   <ion-content>
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide ng-repeat="slide in slides track by $index">
-        <div class="box blue">
-          <img ng-src="{{slide}}" class="full-image" alt="">
-        </div>
+        <img ng-src="" class="full-image">
       </ion-slide>
     </ion-slide-box>
+
+    <div class="transparent-box padding">
+      <h4>About us</h4>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      <a class="button button-small button-dark button-small button-outline">Read More</a>
+    </div>
+
+    <div class="bg-box padding">
+      <h4>Services</h4>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.<p>
+          <a href="" class="button button-small button-dark button-small button-outline">Read More</a>
+    </div>
+
   </ion-content>
 </ion-view>
-

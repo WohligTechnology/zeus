@@ -1,8 +1,3 @@
-// The path for our ionicons font files, relative to the built CSS in www/css
-$ionicons-font-path: "../lib/ionic/fonts" !default;
-// Include all of Ionic
-@import "www/lib/ionic/scss/ionic";
-//sass variable
 $light:#ffffff !default;
 $stable:#f8f8f8 !default;
 $positive:#F13232 !default;
@@ -16,29 +11,25 @@ $base-color:#212121 !default;
 $icon-color:#9e9ea3 !default;
 $icon:#00FFE0 !default;
 $menu-color:#bbbbbd !default;
-$lato-font-weight:300 !default;
-$button-stable-text:#fff !default;
+
 $border-color:#eee;
+
 $color1:#2d4486;
 $color2:#45b0e3;
 $color3:#33477E;
 $color4:#7EBCDA;
 $color5:#343e48;
-$headings-font-weight:500 !default;
-$texts-font-size:14px !default;
-$font-family-sans-serif:"Lato",
-"Helvetica Neue",
-"Roboto",
-"Segoe UI",
-sans-serif !default;
-$font-family-light-sans-serif:"Lato",
-"HelveticaNeue-Light",
-"Roboto-Light",
-"Segoe UI-Light",
-sans-serif-light !default;
-$button-border-radius:0px !default;
-$button-border-width:0px !default;
+
+$font-family-sans-serif: "Lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
+$font-family-light-sans-serif: "Lato", "HelveticaNeue-Light", "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
+
 $login-bg-image:url('../img/background/1.jpg') no-repeat center center;
+
+// The path for our ionicons font files, relative to the built CSS in www/css
+$ionicons-font-path: "../lib/ionic/fonts" !default;
+// Include all of Ionic
+@import "www/lib/ionic/scss/ionic";
+
 // sass mixing
 @mixin transition($transition-property,
 $transition-time) {
@@ -67,28 +58,10 @@ $transition-time) {
 }
 
 //custom class
-input::-webkit-input-placeholder {
-    color: $base-color;
-}
-
-.bar.bar-positive .title {
-    color: white;
-    font-family: $font-family-sans-serif;
-    font-weight: $lato-font-weight;
-}
-
 .bg-transparent {
     background: transprent;
 }
 
-.bar .button.button-icon .icon:before,
-.bar .button.button-icon:before,
-.bar .button.button-icon.icon-left:before,
-.bar .button.button-icon.icon-right:before {
-    vertical-align: top;
-    font-size: 32px;
-    //          line-height: 16px !important;
-}
 
 .relative {
     position: relative;
@@ -96,16 +69,6 @@ input::-webkit-input-placeholder {
 
 .input-tag {
     color: $light !important;
-    font-weight: $lato-font-weight;
-    font-size: $texts-font-size;
-}
-
-.padzero {
-    padding: 0 !important;
-}
-
-.madzero {
-    margin: 0 !important;
 }
 
 // facebook or twitter button
@@ -187,7 +150,6 @@ a:hover {
                 }
                 span {
                     padding-left: 37px;
-                    font-weight: $lato-font-weight;
                     padding-bottom: 2px;
                     color: white;
                 }
@@ -258,5 +220,8 @@ a:hover {
 
 .no-margin {
     margin: 0 !important;
+}
+.no-padding {
+    padding: 0 !important;
 }
 
