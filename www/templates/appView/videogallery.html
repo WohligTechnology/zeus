@@ -2,14 +2,13 @@
 
   <ion-content>
     <ion-list class="full-width">
-      <ion-item ng-repeat="item in videos">
+      <div class="item relative" ng-repeat="item in events">
         <img ng-src="{{item.image}}" class="full-image">
-        <h2>{{item.title}}</h2>
-        <p>{{item.subtitle}}</p>
-        <ion-option-button class="button-positive" ng-click="share(item)">
-          Share
-        </ion-option-button>
-      </ion-item>
+        <div class="gradient-hold">
+            <h2 class="light">{{item.title}}</h2>
+            <p class="light">{{item.subtitle}}</p>
+        </div>
+      </div>
     </ion-list>
   </ion-content>
 </ion-view>

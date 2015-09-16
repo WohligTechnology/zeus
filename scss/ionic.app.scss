@@ -34,7 +34,7 @@ $border-radius-small:             0px !default;
 $button-border-radius:            0px !default;
 $button-border-width:             0px !default;
 
-$line-height-base:                1.8 !default; // 20/14
+//$line-height-base:                1.8 !default; // 20/14
 
 $font-size-base:                  14px !default;
 $card-border-radius:              0px !default;
@@ -257,6 +257,9 @@ a:hover {
     i.icon {
         font-size: 22px;
     }
+    .item.bordered {
+        border-left: 3px solid $positive;
+    }
 }
 
 .has-menu-photo {
@@ -294,7 +297,6 @@ a:hover {
 
 .button-bar > .button {
     border-width: $button-border-width !important;
-
 }
 .button.underline {
     border-bottom: 2px solid !important;
@@ -322,10 +324,45 @@ a:hover {
 }
 
 .half-image {
-    width: 60%;
+    width: 40%;
     max-width: 100%;
 }
 
 .button-pad {
     padding: 4px 20px;
+}
+.gradient-hold {
+    background-image: -webkit-linear-gradient(transparent 0%, black 60%);
+    position: absolute;
+    bottom: 21px;
+    right: 16px;
+    left: 16px;
+    padding: 5px 10px;
+    p {
+        color: white;
+        font-size: 12px;
+    }
+}
+
+img.play {
+    position: absolute;
+    width: 48px;
+    margin: 0 auto;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+.icon.small {
+    font-size: 20px;
+}
+
+.full-width {
+    .item.item-complex {
+        .item-content {
+        padding: 16px;
+        }
+    }
+    
+    
 }

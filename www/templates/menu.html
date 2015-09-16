@@ -18,16 +18,17 @@
 
     <div class="list no-margin">
 
-      <ion-item class="item-avatar">
-       <div class="image-adjust" ng-if="!userdetails.userimage"></div>
-       <div class="image-adjust" style="background-image: url('{{userdetails.userimage}}');" ng-if="userdetails.userimage"></div>
-       
-        <!--
-                    <h3>{{userdetails.username}}</h3>
-                    <p>{{userdetails.useremail}}</p>
--->
+      <ion-item class="item-avatar item-icon-right">
+        <div class="image-adjust" ng-if="!userdetails.userimage"></div>
+        <div class="image-adjust" style="background-image: url('{{userdetails.userimage}}');" ng-if="userdetails.userimage"></div>
+
+        <!--<h3>{{userdetails.username}}</h3>
+                    <p>{{userdetails.useremail}}</p>-->
+                    
         <h3>Adam Dale</h3>
         <p>@Adam_dale</p>
+
+        <i class="icon ln-gear2 small" ui-sref="app.setting" menu-close></i>
       </ion-item>
 
 
@@ -36,43 +37,44 @@
     <ion-content class="has-menu-photo">
       <div class="list menu-set">
 
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/home">
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.home" ui-sref-active="bordered">
           <i class="icon ln-home3"></i> Home
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/events">
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.notification" ui-sref-active="bordered">
+          <i class="icon ln-bell"></i> Notification
+        </ion-item>
+
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.events" ui-sref-active="bordered">
           <i class="icon ln-calendar2"></i> Events
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/blogs">
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.blogs" ui-sref-active="bordered">
           <i class="icon ln-papers"></i> Blog
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/photogallerycategory">
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.photogallerycategory" ui-sref-active="bordered">
           <i class="icon ln-picture"></i> Photos
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/videogallerycategory">
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.videogallerycategory" ui-sref-active="bordered">
           <i class="icon ln-film-play"></i> Videos
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/about">
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.about" ui-sref-active="bordered">
           <i class="icon ln-circle-exclamation"></i> About
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/team">
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.team" ui-sref-active="bordered">
           <i class="icon ln-briefcase"></i> Our Team
         </ion-item>
 
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/contact">
-          <i class="icon ln-phone2"></i> Contact
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/profile">
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.profile" ui-sref-active="bordered">
           <i class="icon ln-user"></i> Profile
         </ion-item>
-        <ion-item nav-clear menu-close class="item item-icon-left" href="#/app/setting">
-          <i class="icon ln-gear2"></i> Setting
+
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.contact" ui-sref-active="bordered">
+          <i class="icon ln-phone2"></i> Contact
         </ion-item>
 
         <ion-item nav-clear menu-close class="item item-icon-left item-content" href="#/login" ng-click="logout();">
