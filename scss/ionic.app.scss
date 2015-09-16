@@ -7,11 +7,13 @@ $energized:#ffc900 !default;
 $assertive:#ef473a !default;
 $royal:#886aea !default;
 $dark:#444 !default;
-$base-color:#212121 !default;
+
+$base-color:#555 !default;
+
 $icon-color:#9e9ea3 !default;
 $icon:#00FFE0 !default;
-$menu-color:#bbbbbd !default;
 
+$menu-color:#bbbbbd !default;
 $border-color:#eee;
 
 $color1:#2d4486;
@@ -21,12 +23,23 @@ $color4:#7EBCDA;
 $color5:#343e48;
 
 $font-family-sans-serif: "Lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
-$font-family-light-sans-serif: "Lato", "HelveticaNeue-Light", "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
+$font-family-light-sans-serif: "Lato-light", "HelveticaNeue-Light", "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
 
 $login-bg-image:url('../img/background/1.jpg') no-repeat center center;
 
-
 $card-box-shadow: none !default;
+
+$border-radius-base:              0px !default;
+$border-radius-large:             0px !default;
+$border-radius-small:             0px !default;
+$button-border-radius:            0px !default;
+$button-border-width:             0px !default;
+
+$line-height-base:                1.8 !default; // 20/14
+
+$font-size-base:                  14px !default;
+$card-border-radius:              0px !default;
+
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -50,7 +63,7 @@ $transition-time) {
 }
 
 @font-face {
-    font-family: 'Lato';
+    font-family: 'Lato-light';
     src: url(../fonts/Lato-Light.ttf);
     font-weight: 300;
 }
@@ -58,6 +71,14 @@ $transition-time) {
 @font-face {
     font-family: 'Lato';
     src: url(../fonts/Lato-Regular.ttf);
+}
+
+.item {
+    font-size: $font-size-base;
+}
+
+.item-icon-left .icon, .item-icon-right .icon {
+    font-size: 25px;
 }
 
 //custom class
@@ -236,4 +257,21 @@ a:hover {
     .item-icon-left {
         padding-left: 54px;
     }
+    .item-avatar {
+        padding-left: 74px;
+    }
+    .item-body {
+        padding: 16px;
+    }
+    .item.tabs {
+        padding: 0;
+    }
+}
+
+.button-bar > .button {
+    border-width: $button-border-width !important;
+
+}
+.button.underline {
+    border-bottom: 2px solid !important;
 }
