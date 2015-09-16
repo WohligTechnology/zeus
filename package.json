@@ -1,7 +1,7 @@
 {
   "name": "zeus",
   "version": "1.0.0",
-  "description": "zeus: An Ionic project",
+  "description": "Zeus",
   "dependencies": {
     "gulp": "^3.5.6",
     "gulp-sass": "^1.3.3",

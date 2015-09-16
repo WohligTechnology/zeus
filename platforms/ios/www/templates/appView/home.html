@@ -1,0 +1,30 @@
+<ion-view view-title="Home">
+  <ion-content>
+    <ion-slide-box on-slide-changed="slideHasChanged($index)">
+      <ion-slide ng-repeat="slide in slides track by $index">
+        <img ng-src="{{slide}}" class="full-image">
+      </ion-slide>
+    </ion-slide-box>
+
+    <div class="box stable-bg">
+      <h4>About us</h4>
+      <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+      <a class="button button-small button-dark button-small button-outline">Read More</a>
+    </div>
+
+    <div class="box">
+      <h4>Our Services</h4>
+      
+      <div class="row col-icon">
+          <div class="col">
+              
+          </div>
+          <div class="col">
+              
+          </div>
+      </div>
+      
+    </div>
+
+  </ion-content>
+</ion-view>

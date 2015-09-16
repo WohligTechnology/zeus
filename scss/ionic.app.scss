@@ -1,5 +1,5 @@
 $light:#ffffff !default;
-$stable:#f8f8f8 !default;
+$stable:#ccc !default;
 $positive:#F13232 !default;
 $calm:#11c1f3 !default;
 $balanced:#33cd5f !default;
@@ -11,7 +11,6 @@ $dark:#444 !default;
 $base-color:#555 !default;
 
 $icon-color:#9e9ea3 !default;
-$icon:#00FFE0 !default;
 
 $menu-color:#bbbbbd !default;
 $border-color:#eee;
@@ -25,7 +24,7 @@ $color5:#343e48;
 $font-family-sans-serif: "Lato", "Helvetica Neue", "Roboto", "Segoe UI", sans-serif !default;
 $font-family-light-sans-serif: "Lato-light", "HelveticaNeue-Light", "Roboto-Light", "Segoe UI-Light", sans-serif-light !default;
 
-$login-bg-image:url('../img/background/1.jpg') no-repeat center center;
+$login-bg-image:url('../img/login-bg.jpg') no-repeat center center;
 
 $card-box-shadow: none !default;
 
@@ -40,6 +39,10 @@ $line-height-base:                1.8 !default; // 20/14
 $font-size-base:                  14px !default;
 $card-border-radius:              0px !default;
 
+@mixin square($some-number) {
+  width: $some-number;
+  height: $some-number;
+}
 
 // The path for our ionicons font files, relative to the built CSS in www/css
 $ionicons-font-path: "../lib/ionic/fonts" !default;
@@ -125,10 +128,14 @@ a:hover {
 }
 
 .login-logo {
-    margin-top: 10%;
+    margin-top: 15%;
     text-align: center;
+    font-size: 28px;
+    font-weight: 300;
 }
-
+.bold {
+    font-weight: bold;
+}
 .login_back {
     background: $login-bg-image;
     background-size: 100% 100%;
@@ -151,18 +158,22 @@ a:hover {
         }
     }
     .login {
+        .item-input {
+            background: transparent;
+        }
+        
         margin-top: 20px;
         .list {
             margin: 0 15px;
             .item {
-                border-bottom: 1px solid $positive;
+                border-bottom: 1px solid $light;
                 border-top: 0px;
                 border-right: 0;
                 border-left: 0;
                 i {
                     display: inline-block;
-                    font-size: 22px;
-                    color: $icon;
+                    font-size: 16px;
+                    color: white;
                 }
                 input {
                     display: inline-block;
@@ -208,6 +219,13 @@ a:hover {
     margin-top: 15px !important;
 }
 
+.login-bg {
+    background: $login-bg-image;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover
+}
 .image-adjust {
     width: 50px;
     height: 50px;
@@ -221,6 +239,9 @@ a:hover {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover
+}
+.img-content {
+    @include square(80px);
 }
 
 .menu-set {
@@ -258,7 +279,7 @@ a:hover {
         padding-left: 54px;
     }
     .item-avatar {
-        padding-left: 74px;
+        padding-left: 70px;
     }
     .item-body {
         padding: 16px;
@@ -277,4 +298,34 @@ a:hover {
 }
 .button.underline {
     border-bottom: 2px solid !important;
+}
+.button.button-outline {
+    border-width: 1px;
+}
+
+.box {
+    padding: 20px 15px;
+ h4 {
+    margin: 0 0 10px;
+    color: #000;
+ }
+}
+
+.col-icon {
+    i.icon {
+        font-size: 25px;
+    }
+    h3 {
+        font-size: 12px;
+        margin: 5px 0 15px;
+    }
+}
+
+.half-image {
+    width: 60%;
+    max-width: 100%;
+}
+
+.button-pad {
+    padding: 4px 20px;
 }

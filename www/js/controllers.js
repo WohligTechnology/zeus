@@ -300,12 +300,10 @@ angular.module('starter.controllers', [])
     })
     .controller('NotificationCtrl', function ($scope) {
         $scope.events = [{
-            image: "img/image1.jpg",
             title: "Music Concert",
             date: "7 Jan, 2016",
             subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "img/image2.jpg",
             title: "Music Concert",
             date: "7 Jan, 2016",
             subtitle: "Film, Media & Entertainment by paragyte technologies"
@@ -320,7 +318,6 @@ angular.module('starter.controllers', [])
             date: "7 Jan, 2016",
             subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "img/image5.jpg",
             title: "Music Concert",
             date: "7 Jan, 2016",
             subtitle: "Film, Media & Entertainment by paragyte technologies"

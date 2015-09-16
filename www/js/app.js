@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     views: {
       'content': {
         templateUrl: 'templates/accessView/signup.html',
-        controller: "SignupCtrl"
+        controller: "LoginCtrl"
       }
     }
   })

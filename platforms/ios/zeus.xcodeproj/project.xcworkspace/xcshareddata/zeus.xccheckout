@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>BCC1B155-8BC1-490A-9198-6D5EE88700C7</string>
+	<key>IDESourceControlProjectName</key>
+	<string>zeus</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>AD47CE7AE5CA3BEE35147FE23EE5B002ABC9D6AD</key>
+		<string>https://github.com/WohligTechnology/zeus.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>platforms/ios/zeus.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>AD47CE7AE5CA3BEE35147FE23EE5B002ABC9D6AD</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/WohligTechnology/zeus.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>AD47CE7AE5CA3BEE35147FE23EE5B002ABC9D6AD</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>AD47CE7AE5CA3BEE35147FE23EE5B002ABC9D6AD</string>
+			<key>IDESourceControlWCCName</key>
+			<string>zeus</string>
+		</dict>
+	</array>
+</dict>
+</plist>
