@@ -1,6 +1,7 @@
-angular.module('starter.controllers', [])
+var reloadpage = false;
+angular.module('starter.controllers', ['starter.services'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location) {
 
     // With the new view caching in Ionic, Controllers are only called
     // when they are recreated or on app start, instead of every page change.
@@ -8,6 +9,72 @@ angular.module('starter.controllers', [])
     // listen for the $ionicView.enter event:
     //$scope.$on('$ionicView.enter', function(e) {
     //});
+
+    $scope.menudata = {};
+
+    // loader
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+
+    MyServices.getappconfig(function (data, status) {
+        console.log(data);
+        //for blog s
+        var blogdata = JSON.parse(data[1].text);
+        for (var i = 0; i < blogdata.length; i++) {
+            if (blogdata[i].value == true) {
+                $scope.menudata.blogs = true;
+                $.jStorage.set("blogType", blogdata[i].name);
+                break;
+            } else {
+                $scope.menudata.blogs = false;
+            }
+        }
+
+        //for gallery
+        if (data[2].text == "Drop down yes") {
+            $scope.menudata.gallery = true;
+        } else {
+            $scope.menudata.gallery = false;
+        }
+        //for video gallery
+        if (data[3].text == "Drop down yes") {
+            $scope.menudata.videogallery = true;
+        } else {
+            $scope.menudata.videogallery = false;
+        }
+        //for events
+        if (data[4].text == "Drop down yes") {
+            $scope.menudata.events = true;
+        } else {
+            $scope.menudata.events = false;
+        }
+        //for banner
+        if (data[5].text == "Drop down yes") {
+            $scope.menudata.banner = true;
+        } else {
+            $scope.menudata.banner = false;
+        }
+    })
+
+    var logoutsuccess = function (data, success) {
+        console.log(data);
+        if (data == 'true') {
+            $.jStorage.flush();
+            reloadpage = true;
+            $ionicLoading.hide();
+            $location.path("/access/login");
+        }
+    }
+    $scope.logout = function () {
+        $ionicLoading.show();
+        MyServices.logout().success(logoutsuccess);
+    }
 
     // Form data for the login modal
     $scope.loginData = {};
@@ -39,42 +106,296 @@ angular.module('starter.controllers', [])
             $scope.closeLogin();
         }, 1000);
     };
+
+    if ($.jStorage.get("user")) {
+        $scope.userdetails = {};
+        $scope.userdetails.username = $.jStorage.get("user").username;
+        if ($scope.userdetails.username == "") {
+            $scope.userdetails.username = $.jStorage.get("user").name;
+        }
+        $scope.userdetails.userimage = $.jStorage.get("user").image;
+        $scope.userdetails.useremail = $.jStorage.get("user").email;
+    }
+
 })
 
 .controller('AccessCtrl', function ($scope) {
 
-    })
-    .controller('LoginCtrl', function ($scope) {
-        //        ***** tabchange ****
+})
 
-        $scope.tab = 'signin';
-        $scope.classa = 'active';
-        $scope.classb = '';
+.controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
 
-        $scope.tabchange = function (tab, a) {
+    $.jStorage.flush();
 
-            $scope.tab = tab;
-            if (a == 1) {
-                $scope.classa = "active";
-                $scope.classb = '';
+    $scope.logindata = {};
 
-            } else {
-                $scope.classa = '';
-                $scope.classb = "active";
-
+    MyServices.getappconfig(function (data, status) {
+        console.log(data);
+        _.each(JSON.parse(data[0].text), function (n) {
+            console.log(n);
+            if (n.name.toLowerCase() == "email" && n.value == true) {
+                $scope.logindata.email = true;
+            } else if (n.name.toLowerCase() == "google" && n.value == true) {
+                $scope.logindata.google = true;
+            } else if (n.name.toLowerCase() == "twitter" && n.value == true) {
+                $scope.logindata.twitter = true;
+            } else if (n.name.toLowerCase() == "instagram" && n.value == true) {
+                $scope.logindata.instagram = true;
+            } else if (n.name.toLowerCase() == "facebook" && n.value == true) {
+                $scope.logindata.facebook = true;
             }
-        };
-
-        //    ****** End ******
-
+        })
+        console.log($scope.logindata);
     })
-    .controller('ResetPasswordCtrl', function ($scope) {
 
-    })
-    .controller('ForgotPasswordCtrl', function ($scope) {
+    // loader
 
-    })
-    .controller('SignupCtrl', function ($scope) {
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    //logins
+    var checktwitter = function (data, status) {
+        if (data != "false") {
+            $interval.cancel(stopinterval);
+            ref.close();
+            MyServices.authenticate().success(authenticatesuccess);
+        } else {
+
+        }
+    };
+
+    var callAtIntervaltwitter = function () {
+        MyServices.authenticate().success(checktwitter);
+    };
+    var authenticatesuccess = function (data, status) {
+        console.log(data);
+        if (data != "false") {
+            $.jStorage.set("user", data);
+            user = data;
+
+            $location.url("/app/home");
+        }
+    };
+    $scope.facebooklogin = function () {
+        ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+    $scope.twitterlogin = function () {
+        console.log("in twitter");
+
+        ref = window.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+    }
+
+    $scope.instagramlogin = function () {
+        ref = window.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+        stopinterval = $interval(callAtIntervaltwitter, 2000);
+        ref.addEventListener('exit', function (event) {
+            MyServices.authenticate().success(authenticatesuccess);
+            $interval.cancel(stopinterval);
+        });
+        //        $location.url("/tab/dash");
+    }
+
+    $scope.googlelogin = function () {
+
+            ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+            stopinterval = $interval(callAtIntervaltwitter, 2000);
+            ref.addEventListener('exit', function (event) {
+                MyServices.authenticate().success(authenticatesuccess);
+                $interval.cancel(stopinterval);
+            });
+        }
+        // popup
+    $scope.showPopupsignupsuccess = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Successfully Registered!!</p>',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    $scope.showPopupsignupfailure = function () {
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Sorry Try Again!!</p>',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+
+    //SIGN UP FORMn
+    $scope.signup = {};
+    var signupsuccess = function (data, status) {
+        console.log(data);
+        if (data == "1") {
+            $scope.showPopupsignupsuccess();
+        } else {
+            $scope.showPopupsignupfailure();
+        }
+        $ionicLoading.hide();
+        $scope.signup = {};
+    }
+    $scope.signupsubmit = function (signup) {
+        $ionicLoading.show();
+        $scope.signup = signup;
+        MyServices.signup($scope.signup, signupsuccess);
+    }
+
+    // SIGN IN
+    $scope.signin = {};
+    var signinsuccess = function (data, status) {
+        console.log(data);
+        if (data != 'false') {
+            MyServices.authenticate().success(authenticatesuccess);
+            $scope.signin = {};
+        } else {
+            $ionicLoading.hide();
+            var alertPopup = $ionicPopup.alert({
+                title: 'Login Failed!',
+                template: 'Wrong username or password!!'
+            });
+        }
+    }
+    $scope.signinsubmit = function (signin) {
+        $ionicLoading.show();
+        MyServices.signin(signin, signinsuccess);
+    }
+
+    //        ***** tabchange ****
+
+    $scope.tab = 'signin';
+    $scope.classa = 'active';
+    $scope.classb = '';
+
+    $scope.tabchange = function (tab, a) {
+
+        $scope.tab = tab;
+        if (a == 1) {
+            $scope.classa = "active";
+            $scope.classb = '';
+
+        } else {
+            $scope.classa = '';
+            $scope.classb = "active";
+
+        }
+    };
+
+    //    ****** End ******
+
+})
+
+.controller('ResetPasswordCtrl', function ($scope) {
+
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.showPopup2 = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Your Password is Changed!!</p>',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    $scope.showPopup3 = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Your New Password and Confirm Password do not Match!!</p>',
+            title: 'Sorry!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    $scope.showPopup4 = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Something went wrong!!</p>',
+            title: 'Oops Try Again!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    $scope.password = {};
+    var changepasswordcallback = function (data, status) {
+        console.log(data);
+        if (data == 1) {
+            $scope.showPopup2();
+            $ionicLoading.hide();
+            $scope.password = {};
+        } else if (data == 0) {
+            $ionicLoading.hide();
+            $scope.showPopup4();
+        } else if (data == -1) {
+            $ionicLoading.hide();
+            $scope.showPopup3();
+        }
+    }
+    $scope.changepassword = function (password) {
+        $ionicLoading.show();
+        MyServices.changepassword(password, changepasswordcallback)
+    }
+
+})
+
+.controller('ForgotPasswordCtrl', function ($scope) {
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    var forgotpasswordcallback = function (data, status) {
+        console.log(data);
+        $ionicLoading.hide();
+    }
+    $scope.forgotpassword = function (email) {
+        $ionicLoading.show();
+        MyServices.forgotpassword(email, forgotpasswordcallback)
+
+    }
+})
+
+.controller('SignupCtrl', function ($scope) {
 
     })
     .controller('HomeCtrl', function ($scope) {
