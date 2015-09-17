@@ -85,6 +85,7 @@ $transition-time) {
 }
 
 //custom class
+a {color: inherit;}
 .bg-transparent {
     background: transprent;
 }
@@ -360,9 +361,16 @@ img.play {
 .full-width {
     .item.item-complex {
         .item-content {
-        padding: 16px;
+            padding: 16px;
         }
     }
-    
-    
+}
+
+.gradient-hold.full {
+    left: 0;
+    right: 0;
+    bottom: 0;
+     h2 {
+        font-size: 17px;
+    }
 }
