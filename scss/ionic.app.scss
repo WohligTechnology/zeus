@@ -6,7 +6,7 @@ $balanced:#33cd5f !default;
 $energized:#ffc900 !default;
 $assertive:#ef473a !default;
 $royal:#886aea !default;
-$dark:#444 !default;
+$dark:#222 !default;
 
 $base-color:#555 !default;
 
@@ -372,5 +372,29 @@ img.play {
     bottom: 0;
      h2 {
         font-size: 17px;
+    }
+}
+
+.article-view {
+    h1 {
+        font-size: 26px;
+    }
+    h2 {
+        font-size: 22px;
+    }
+    h3 {
+        font-size: 20px;
+    }
+    h4 {
+        font-size: 18px;
+    }
+    h5 {
+        font-size: 16px;
+    }
+    h6 {
+        font-size: 15px;
+    }
+    .slider-pager {
+        bottom: 0;
     }
 }
