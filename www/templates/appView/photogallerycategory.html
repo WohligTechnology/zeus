@@ -1,57 +1,15 @@
 <ion-view view-title="Photo Category">
 
-  <ion-content>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="img/user1.jpg">
-        <h2>Demi Latte</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image" ui-sref="app.photogallery">
-        <img src="img/image1.jpg">
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="img/user2.jpg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image">
-        <img src="img/image2.jpg" ui-sref="app.photogallery">
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="img/user3.jpg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image">
-        <img src="img/image3.jpg" ui-sref="app.photogallery">
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="img/user4.jpg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image">
-        <img src="img/image4.jpg" ui-sref="app.photogallery">
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-avatar">
-        <img src="img/user5.jpg">
-        <h2>Pretty Hate Machine</h2>
-        <p>Nine Inch Nails</p>
-      </div>
-      <div class="item item-image">
-        <img src="img/image5.jpg" ui-sref="app.photogallery">
-      </div>
-    </div>
-      
-  </ion-content>
+    <ion-content>
+        <div class="list card" ng-repeat="photos in photos" ng-click="sendphotoid(photos.id);">
+            <div class="item item-avatar">
+                <img src="img/user5.jpg">
+                <h2>{{photos.name}}</h2>
+                <p>Nine Inch Nails</p>
+            </div>
+            <div class="item item-image">
+                <img ng-src="{{photos.image | serverimage}}">
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
-

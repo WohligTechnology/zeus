@@ -478,145 +478,220 @@ angular.module('starter.controllers', ['starter.services'])
     .controller('BlogDetailCtrl', function ($scope) {
 
     })
-    .controller('PhotoGalleryCategoryCtrl', function ($scope) {
-        $scope.events = [{
-            image: "img/image1.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image2.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image3.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image4.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image5.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image6.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }];
-    })
-    .controller('PhotoGalleryCtrl', function ($scope) {
-        $scope.events = [{
-            image: "img/image1.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image2.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image3.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image4.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image5.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image6.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }];
-    })
-    .controller('VideoGalleryCategoryCtrl', function ($scope) {
 
-        $scope.events = [{
-            image: "img/image1.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+.controller('PhotoGalleryCategoryCtrl', function ($scope, MyServices, $location, $ionicLoading) {
+
+    $ionicLoading.show();
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+
+    $scope.sendphotoid = function (id) {
+        $location.url("app/photogallery/" + id);
+    }
+
+    var getallgallerycallback = function (data, status) {
+        $ionicLoading.hide();
+        console.log(data.queryresult);
+        $scope.photos = data.queryresult;
+    }
+    MyServices.getallgallery(getallgallerycallback);
+
+})
+
+.controller('PhotoGalleryCtrl', function ($scope, MyServices, $stateParams, $ionicLoading) {
+
+    $ionicLoading.show();
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.photoid = $stateParams.id;
+    console.log($scope.photoid);
+    var getallgalleryimagecallback = function (data, status) {
+        $ionicLoading.hide();
+        $scope.photos = data.queryresult;
+        $scope.photos = _.chunk($scope.photos, 2);
+        console.log($scope.photos);
+    }
+    MyServices.getallgalleryimage($scope.photoid, getallgalleryimagecallback)
+
+})
+
+.controller('VideoGalleryCategoryCtrl', function ($scope, MyServices, $ionicLoading) {
+
+    $ionicLoading.show();
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.videos = {};
+    var getallvideogallerycallback = function (data, status) {
+        $ionicLoading.hide();
+        console.log(data.queryresult);
+        $scope.videos = data.queryresult;
+    }
+    MyServices.getallvideogallery(getallvideogallerycallback);
+
+    $scope.events = [{
+        image: "img/image1.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "img/image2.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "img/image2.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "img/image3.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "img/image3.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "img/image4.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "img/image4.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "img/image5.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "img/image5.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }, {
-            image: "img/image6.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
+        image: "img/image6.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
     }];
 
 
-    })
-    .controller('VideoGalleryCtrl', function ($scope) {
-        $scope.events = [{
-            image: "img/image1.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image2.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image3.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image4.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image5.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image6.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }];
-    })
-    .controller('AccountCtrl', function ($scope) {
+})
 
-    })
-    .controller('SettingCtrl', function ($scope) {
+.controller('VideoGalleryCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
+
+    $ionicLoading.show();
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.videoid = $stateParams.id;
+    console.log($scope.videoid);
+    var getallvideogalleryvideocallback = function (data, status) {
+        $ionicLoading.hide();
+        console.log(data.queryresult);
+        $scope.videos = data.queryresult;
+    }
+    MyServices.getallvideogalleryvideo($scope.videoid, getallvideogalleryvideocallback);
+
+    $scope.events = [{
+        image: "img/image1.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+        image: "img/image2.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+        image: "img/image3.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+        image: "img/image4.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+        image: "img/image5.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }, {
+        image: "img/image6.jpg",
+        title: "Music Concert",
+        date: "7 Jan, 2016",
+        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    }];
+})
+
+.controller('AccountCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
+
+    if ($.jStorage.get("user")) {
+        $scope.userdetails = {};
+        $scope.userdetails.username = $.jStorage.get("user").username;
+        if ($scope.userdetails.username == "") {
+            $scope.userdetails.username = $.jStorage.get("user").name;
+        }
+        $scope.userdetails.userimage = $.jStorage.get("user").image;
+        $scope.userdetails.useremail = $.jStorage.get("user").email;
+    }
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.profile = {};
+    $scope.showPopup1 = function () {
+
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Your Profile is Created!!</p>',
+            title: 'Thankyou!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    var profilesubmitcallback = function (data, status) {
+        $ionicLoading.hide();
+        console.log(data);
+        if (data == 1) {
+            $scope.showPopup1();
+            $scope.profile = {};
+        }
+    }
+    $scope.profilesubmit = function (profile) {
+        $ionicLoading.show();
+        MyServices.profilesubmit(profile, profilesubmitcallback)
+    }
+
+})
+
+.controller('SettingCtrl', function ($scope) {
 
     })
     .controller('NotificationCtrl', function ($scope) {
@@ -649,60 +724,117 @@ angular.module('starter.controllers', ['starter.services'])
             subtitle: "Film, Media & Entertainment by paragyte technologies"
     }];
     })
-    .controller('ContactCtrl', function ($scope) {
-        //        ***** tabchange ****
 
-        $scope.tab = 'contactus';
-        $scope.classa = 'active';
-        $scope.classb = '';
+.controller('ContactCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
+    // loader
 
-        $scope.tabchange = function (tab, a) {
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.enquiry = {};
+    var createenquirycallback = function (data, status) {
+        $ionicLoading.hide();
+        console.log(data);
+        if (data == 1) {
+            $scope.showPopupcontact();
+            $scope.enquiry = {};
+        } else {
+            $scope.showPopupcontactfailure();
+        }
+    }
 
-            $scope.tab = tab;
-            if (a == 1) {
-                $scope.classa = "active";
-                $scope.classb = '';
+    $scope.showPopupcontact = function () {
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Successfully Submitted!!</p>',
+            title: 'Thank you!',
+            scope: $scope,
 
-            } else {
-                $scope.classa = '';
-                $scope.classb = "active";
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+    $scope.showPopupcontactfailure = function () {
 
-            }
-        };
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Try Again!!</p>',
+            title: 'Sorry!',
+            scope: $scope,
 
-        //    ****** End ******
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
 
-    })
-    .controller('SearchCtrl', function ($scope) {
-        $scope.events = [{
-            image: "img/image1.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image2.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image3.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image4.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image5.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image6.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }];
-    });
+    $scope.enquiryform = function (enquiry) {
+        MyServices.createenquiry(enquiry, createenquirycallback)
+        $ionicLoading.show();
+    }
+
+    //        ***** tabchange ****
+
+    $scope.tab = 'contactus';
+    $scope.classa = 'active';
+    $scope.classb = '';
+
+    $scope.tabchange = function (tab, a) {
+
+        $scope.tab = tab;
+        if (a == 1) {
+            $scope.classa = "active";
+            $scope.classb = '';
+
+        } else {
+            $scope.classa = '';
+            $scope.classb = "active";
+
+        }
+    };
+
+    //    ****** End ******
+
+})
+
+.controller('SearchCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
+
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.searchresults = {};
+
+    var searchelementcallback = function (data, status) {
+        console.log(data);
+        $scope.searchresults.searchevent = data.events;
+        $scope.searchresults.searchgallery = data.gallery;
+        $scope.searchresults.searchvideogallery = data.videogallery;
+    }
+    $scope.getsearchelement = function (searchelement) {
+        MyServices.searchelement(searchelement, searchelementcallback)
+    }
+
+    // Go to Events page
+
+    $scope.openevents = function (id) {
+        $location.url("app/eventdetail/" + id);
+    }
+    $scope.openvideogallery = function (id) {
+        $location.url("app/videogallery/" + id);
+    }
+    $scope.opengallery = function (id) {
+        $location.url("app/photogallery/" + id);
+    }
+
+});

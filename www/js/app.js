@@ -146,7 +146,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('app.photogallery', {
-    url: '/photogallery',
+    url: '/photogallery/:id',
     views: {
       'menuContent': {
         templateUrl: 'templates/appView/photogallery.html',
@@ -166,7 +166,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   })
 
   .state('app.videogallery', {
-    url: '/videogallery',
+    url: '/videogallery/:id',
     views: {
       'menuContent': {
         templateUrl: 'templates/appView/videogallery.html',
@@ -230,4 +230,77 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   ;
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/app/home');
-});
+}).filter('serverimage', function () {
+    return function (image) {
+        return adminimage + image;
+    };
+})
+
+.directive('youtube', function ($sce) {
+    return {
+        restrict: 'A',
+        scope: {
+            code: '='
+        },
+        replace: true,
+        template: '<iframe style="overflow:hidden;width:100%;" src="{{url}}" frameborder="0"></iframe>',
+        //        template: '<iframe style="overflow:hidden;height:100%;width:100%" width="100%" height="100%" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
+        link: function (scope) {
+            scope.$watch('code', function (newVal) {
+                if (newVal) {
+                    scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
+                }
+            });
+        }
+    };
+})
+
+
+.filter('convertto12', function () {
+    return function (date) {
+        var newtime = "";
+        var split = date.split(":");
+        if (parseInt(split[0]) >= 12) {
+            newtime = (parseInt(split[0]) - 12) + ":" + split[1] + " PM Onwards";
+        } else {
+            newtime = split[0] + ":" + split[1] + " AM Onwards";
+        }
+        return newtime;
+    };
+})
+
+.filter('cut', function () {
+    return function (value, wordwise, max, tail) {
+        if (!value) return '';
+
+        max = parseInt(max, 10);
+        if (!max) return value;
+        if (value.length <= max) return value;
+
+        value = value.substr(0, max);
+        if (wordwise) {
+            var lastspace = value.lastIndexOf(' ');
+            if (lastspace != -1) {
+                value = value.substr(0, lastspace);
+            }
+        }
+
+        return value + (tail || ' …');
+    };
+})
+
+.filter('rawHtml', ['$sce',
+        function ($sce) {
+        return function (val) {
+            return $sce.trustAsHtml(val);
+        };
+        }
+    ])
+
+.filter('formatdate', function ($filter) {
+    return function (val) {
+        var split = val.split(" ");
+        return $filter('date')(split[0], 'MMMM, dd yyyy')
+    };
+})
+
