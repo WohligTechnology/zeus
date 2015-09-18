@@ -1,12 +1,7 @@
 <ion-view view-title="Gallery">
     <ion-content>
-        <div class="row" ng-repeat="photo in photos">
-            <div class="col col-50" ng-repeat="img in photo">
-                <figure>
-                    <img ng-src="{{img.image|serverimage}}" class="full-image">
-                </figure>
-            </div>
 
-        </div>
+       <ion-gallery ion-gallery-items="items"></ion-gallery>
+        
     </ion-content>
 </ion-view>
