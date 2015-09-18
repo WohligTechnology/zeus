@@ -1,14 +1,12 @@
 <ion-view view-title="Photo Category">
 
-    <ion-content>
-        <div class="list card" ng-repeat="photos in photos" ng-click="sendphotoid(photos.id);">
-            <div class="item item-avatar">
-                <img src="img/user5.jpg">
-                <h2>{{photos.name}}</h2>
-                <p>Nine Inch Nails</p>
-            </div>
+    <ion-content class="padding">
+        <div class="list" ng-repeat="photos in photos" ng-click="sendphotoid(photos.id);">
             <div class="item item-image">
                 <img ng-src="{{photos.image | serverimage}}">
+            </div>
+            <div class="item">
+               {{photos.name}}
             </div>
         </div>
     </ion-content>
