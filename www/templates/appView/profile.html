@@ -1,0 +1,51 @@
+<ion-view view-title="My Profile">
+  <ion-content>
+
+    <div class="relative profile-banner" style="background-image:url('../img/image1.jpg');">
+      <div class="image-adjust" ng-if="!userdetails.userimage"></div>
+      <div class="gradient-hold full">
+        <h3 class="light">{{user.name}}</h3>
+      </div>
+
+      <button class="button button-positive button-edit button-round ion-edit" ng-init="edit=false;" ng-click="edit=!edit"></button>
+
+    </div>
+
+    <div ng-if="edit==false;">
+      <ion-list>
+        <ion-item><i class="icon ln-envelope"></i> {{user.email}}</ion-item>
+        <ion-item><i class="icon ln-phone"></i> {{user.number}}</ion-item>
+        <ion-item><i class="icon ln-map-marker"></i> {{user.location}}</ion-item>
+        <ion-item><i class="icon ln-calendar2"></i> {{user.birthday}}</ion-item>
+      </ion-list>
+    </div>
+
+    <div ng-if="edit==true;">
+      <div class="list">
+        <label class="item item-input">
+          <input type="text" placeholder="Name" ng-model="user.name">
+        </label>
+        <label class="item item-input">
+          <input type="email" placeholder="Email Address" ng-model="user.email">
+        </label>
+        <label class="item item-input">
+          <input type="tel" placeholder="Phone No." ng-model="user.number">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Location" ng-model="user.location">
+        </label>
+        <label class="item item-input">
+          <input type="text" placeholder="Birth Date" onClick="" ng-model="user.birthday">
+        </label>
+      </div>
+
+      <div class="padding-horizontal">
+        <button class="button button-positive button-block">Save</button>
+      </div>
+    </div>
+
+    </ion-item>
+
+  </ion-content>
+</ion-view>
+
