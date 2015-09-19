@@ -2,17 +2,72 @@
   <ion-content>
 
     <div class="article-view">
-      <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
-      <div class="map-set">
-        <img src="http://ionicframework.com/img/docs/mcfly.jpg">
-        <h4>user name</h4>
-        <h5>January, 15, 2015</h5>
+
+      <div class="relative stable-bg min-height">
+        <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
+        <div class="gradient-hold full">
+          <h4 class="light">Adrian Carnage</h4>
+          <p class="light">January, 15, 2015</p>
+        </div>
       </div>
 
-    </div>
-    <div class="articalcontain">
-      <h3>"difference-a-header-makes...."</h3>
-      <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>
+      <div class="padding">
+        <h4>We make difference in the market, we also do a lot of work.</h4>
+        <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>
+
+        <h5 class="dark">Videos</h5>
+
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+          <ion-slide>
+            <div class="row">
+              <div class="col">
+                <img src="img/image1.jpg" class="full-image">
+              </div>
+              <div class="col">
+                <img src="img/image2.jpg" class="full-image">
+              </div>
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="row">
+              <div class="col">
+                <img src="img/image1.jpg" class="full-image">
+              </div>
+              <div class="col">
+                <img src="img/image2.jpg" class="full-image">
+              </div>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+
+        <h5 class="dark">Images</h5>
+
+        <ion-slide-box on-slide-changed="slideHasChanged($index)">
+          <ion-slide>
+            <div class="row">
+              <div class="col">
+                <img src="img/image1.jpg" class="full-image">
+              </div>
+              <div class="col">
+                <img src="img/image2.jpg" class="full-image">
+              </div>
+
+            </div>
+          </ion-slide>
+          <ion-slide>
+            <div class="row">
+              <div class="col">
+                <img src="img/image1.jpg" class="full-image">
+              </div>
+              <div class="col">
+                <img src="img/image2.jpg" class="full-image">
+              </div>
+            </div>
+          </ion-slide>
+        </ion-slide-box>
+
+      </div>
+
     </div>
   </ion-content>
 </ion-view>
