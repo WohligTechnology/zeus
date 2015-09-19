@@ -405,44 +405,90 @@ angular.module('starter.controllers', ['starter.services'])
     .controller('ContentPageCtrl', function ($scope) {
 
     })
-    .controller('EventsCtrl', function ($scope) {
 
-        $scope.events = [{
-            image: "img/image1.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image2.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image3.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image4.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image5.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }, {
-            image: "img/image6.jpg",
-            title: "Music Concert",
-            date: "7 Jan, 2016",
-            subtitle: "Film, Media & Entertainment by paragyte technologies"
-    }];
-    })
-    .controller('EventDetailCtrl', function ($scope) {
+.controller('EventsCtrl', function ($scope, MyServices, $location, $ionicLoading) {
 
+    $ionicLoading.show();
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+
+    MyServices.getallevents(function (data, status) {
+        $ionicLoading.hide();
+        $scope.events = data.queryresult;
+        console.log($scope.events);
     })
-    .controller('BlogsCtrl', function ($scope) {
+    $scope.geteventdetails = function (id) {
+        $location.url("app/eventdetail/" + id);
+    }
+
+    //    $scope.events = [{
+    //        image: "img/image1.jpg",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "img/image2.jpg",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "img/image3.jpg",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "img/image4.jpg",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "img/image5.jpg",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }, {
+    //        image: "img/image6.jpg",
+    //        title: "Music Concert",
+    //        date: "7 Jan, 2016",
+    //        subtitle: "Film, Media & Entertainment by paragyte technologies"
+    //    }];
+})
+
+.controller('EventDetailCtrl', function ($scope, $stateParams, MyServices, $ionicLoading,$ionicSlideBoxDelegate) {
+    // loader
+
+    $scope.showloading = function () {
+        $ionicLoading.show({
+            template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+        });
+        $timeout(function () {
+            $ionicLoading.hide();
+        }, 10000);
+    };
+    $scope.id = $stateParams.id;
+    var getsingleeventscallback = function (data, status) {
+        if (data.eventimages && data.eventimages.length > 0) {
+            data.eventimages = _.chunk(data.eventimages, 2);
+        }
+        if (data.eventvideos && data.eventvideos.length > 0) {
+            data.eventvideos = _.chunk(data.eventvideos, 2);
+        }
+        $scope.eventdetail = data;
+        console.log($scope.eventdetail);
+        $ionicSlideBoxDelegate.update();
+    }
+    MyServices.getsingleevents($stateParams.id, getsingleeventscallback)
+})
+
+.controller('BlogsCtrl', function ($scope) {
         $scope.events = [{
             image: "img/image1.jpg",
             title: "Music Concert",
