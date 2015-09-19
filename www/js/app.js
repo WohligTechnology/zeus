@@ -67,6 +67,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+  
+    .state('access.offline', {
+      url: '/offline',
+      views: {
+        'content': {
+          templateUrl: 'templates/accessView/offline.html',
+          controller: "OfflineCtrl"
+        }
+      }
+    })
 
   .state('access.forgotpassword', {
     url: '/forgotpassword',

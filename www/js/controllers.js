@@ -415,6 +415,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
 
 })
 
+.controller('OfflineCtrl', function($scope) {
+
+})
+
 .controller('ProfileCtrl', function($scope) {
   $scope.user = {
     name: "Adam Dale",

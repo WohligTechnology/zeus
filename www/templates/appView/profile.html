@@ -13,29 +13,34 @@
 
     <div ng-if="edit==false;">
       <ion-list>
-        <ion-item><i class="icon ln-envelope"></i> {{user.email}}</ion-item>
-        <ion-item><i class="icon ln-phone"></i> {{user.number}}</ion-item>
-        <ion-item><i class="icon ln-map-marker"></i> {{user.location}}</ion-item>
-        <ion-item><i class="icon ln-calendar2"></i> {{user.birthday}}</ion-item>
+        <ion-item><span class="icon-space"><i class="icon ln-envelope"></i></span> {{user.email}}</ion-item>
+        <ion-item><span class="icon-space"><i class="icon ln-phone"></i></span> {{user.number}}</ion-item>
+        <ion-item><span class="icon-space"><i class="icon ln-map-marker"></i></span> {{user.location}}</ion-item>
+        <ion-item><span class="icon-space"><i class="icon ln-calendar2"></i></span> {{user.birthday}}</ion-item>
       </ion-list>
     </div>
 
     <div ng-if="edit==true;">
-      <div class="list">
+      <div class="list list-icon">
         <label class="item item-input">
+          <span class="input-label"><i class="icon ln-user"></i></span>
           <input type="text" placeholder="Name" ng-model="user.name">
         </label>
         <label class="item item-input">
+          <span class="input-label"><i class="icon ln-envelope"></i></span>
           <input type="email" placeholder="Email Address" ng-model="user.email">
         </label>
         <label class="item item-input">
+          <span class="input-label"><i class="icon ln-phone"></i></span>
           <input type="tel" placeholder="Phone No." ng-model="user.number">
         </label>
         <label class="item item-input">
+          <span class="input-label"><i class="icon ln-map-marker"></i></span>
           <input type="text" placeholder="Location" ng-model="user.location">
         </label>
         <label class="item item-input">
-          <input type="text" placeholder="Birth Date" onClick="" ng-model="user.birthday">
+          <span class="input-label"><i class="icon ln-calendar2"></i></span>
+          <input type="date" placeholder="Birth Date" ng-model="user.birthday">
         </label>
       </div>
 
