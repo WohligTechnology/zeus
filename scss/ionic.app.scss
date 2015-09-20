@@ -504,3 +504,9 @@ img.play {
     width: 30px;
     display: inline-block;
 }
+
+.team-detail {
+    height: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
