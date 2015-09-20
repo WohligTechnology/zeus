@@ -23,8 +23,15 @@
   <script src="js/services.js"></script>
   <script src="lib/js/jstorage.js"></script>
   <script src="lib/js/lodash.min.js"></script>
-  <script src="http://snapwidget.com/js/snapwidget.js"></script>
+  
+    <!--Pushwoosh js-->
+  <script type="text/javascript" src="lib/pushwoosh/PushwooshAndroid.js"></script>
+  <script type="text/javascript" src="lib/pushwoosh/PushwooshiOS.js"></script>
+  <script type="text/javascript" src="lib/pushwoosh/index.js"></script>
 
+  <script>
+    app.initialize();
+  </script>
 </head>
 
 <body ng-app="starter">
