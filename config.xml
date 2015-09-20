@@ -1,23 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="com.ionicframework.zeus812333" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>zeus</name>
+<widget id="com.blazen.businessapp" version="1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" versionCode="1">
+  <name>Zeus</name>
   <description>
-        An Ionic Framework and Cordova project.
+        A Template for Business.
     </description>
-  <author email="hi@ionicframework" href="http://ionicframework.com/">
-      Ionic Framework Team
+  <author email="info@wohlig.com" href="http://www.wohlig.com/">
+      wohlig
     </author>
   <content src="index.html"/>
   <access origin="*"/>
+  <preference name="fullscreen" value="false"/>
+  <preference name="target-device" value="universal"/>
   <preference name="webviewbounce" value="false"/>
   <preference name="UIWebViewBounce" value="false"/>
   <preference name="DisallowOverscroll" value="true"/>
-  <preference name="android-minSdkVersion" value="16"/>
   <preference name="BackupWebStorage" value="none"/>
+  <preference name="android-installLocation" value="auto"/>
+  <preference name="AllowInlineMediaPlayback" value="true"/>
+  <preference name="android-minSdkVersion" value="11"/>
+  <preference name="android-targetSdkVersion" value="21"/>
+  <preference name="ErrorUrl" value=""/>
+  <preference name="KeepRunning" value="true"/>
+  <preference name="LoadUrlTimeoutValue" value="20000"/>
+  <preference name="StatusBarOverlaysWebView" value="true"/>
+  <preference name="StatusBarStyle" value="lightcontent"/>
+  <preference name="AutoHideSplashScreen" value="false"/>
+  <preference name="ShowSplashScreenSpinner" value="false"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashScreenDelay" value="3000"/>
   <feature name="StatusBar">
     <param name="ios-package" value="CDVStatusBar" onload="true"/>
+  </feature>
+  <feature name="Keyboard">
+    <param name="ios-package" value="IonicKeyboard" onload="true"/>
+  </feature>
+  <feature name="SplashScreen">
+    <param name="ios-package" value="CDVSplashScreen"/>
+    <param name="android-package" value="cordova-plugin-splashscreen"/>
+  </feature>
+  <feature name="SocialSharing">
+    <param name="ios-package" value="SocialSharing"/>
+  </feature>
+  <feature name="SocialSharing">
+    <param name="android-package" value="nl.xservices.plugins.SocialSharing"/>
+  </feature>
+  <feature name="NetworkStatus">
+    <param name="android-package" value="org.apache.cordova.networkinformation.NetworkManager"/>
   </feature>
   <platform name="ios">
     <icon src="resources/ios/icon/icon.png" width="57" height="57"/>
