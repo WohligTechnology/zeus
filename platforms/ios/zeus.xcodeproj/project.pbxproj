@@ -45,6 +45,9 @@
 		A33DFBF28B6D45A3972640DE /* CDVDevice.m in Sources */ = {isa = PBXBuildFile; fileRef = F4BD85C9EA184B91B35FD812 /* CDVDevice.m */; };
 		C114E4F4E30349E3920F062C /* CDVSplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0A238B23B3D74F68A29F36BC /* CDVSplashScreen.m */; };
 		E42E4207B29B406E925350F0 /* CDVViewController+SplashScreen.m in Sources */ = {isa = PBXBuildFile; fileRef = 0D619902C1604BF9ACF4769B /* CDVViewController+SplashScreen.m */; };
+		1E66897BF7FA491A9851B6E5 /* SocialSharing.m in Sources */ = {isa = PBXBuildFile; fileRef = E998AB04EEDF434E903FA7E5 /* SocialSharing.m */; };
+		602A35C33EFB4CEB85358487 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 52E46EFD396D4B5BAFF33114 /* Social.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		BE3D62325BBF438F8DA46BEC /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32AEFCECB56C481D9A49D62A /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +125,10 @@
 		0D619902C1604BF9ACF4769B /* CDVViewController+SplashScreen.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "CDVViewController+SplashScreen.m"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.m"; sourceTree = "<group>"; fileEncoding = 4; };
 		EBA6D0D5522546688BB9CB0C /* CDVSplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVSplashScreen.h"; path = "cordova-plugin-splashscreen/CDVSplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
 		3D7E4DA2F8D04EA4AF55C22D /* CDVViewController+SplashScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "CDVViewController+SplashScreen.h"; path = "cordova-plugin-splashscreen/CDVViewController+SplashScreen.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		E998AB04EEDF434E903FA7E5 /* SocialSharing.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = "SocialSharing.m"; path = "cordova-plugin-x-socialsharing/SocialSharing.m"; sourceTree = "<group>"; fileEncoding = 4; };
+		5BA65E8B44014EC9AF7D09C1 /* SocialSharing.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "SocialSharing.h"; path = "cordova-plugin-x-socialsharing/SocialSharing.h"; sourceTree = "<group>"; fileEncoding = 4; };
+		52E46EFD396D4B5BAFF33114 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "Social.framework"; path = "System/Library/Frameworks/Social.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
+		32AEFCECB56C481D9A49D62A /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = "MessageUI.framework"; path = "System/Library/Frameworks/MessageUI.framework"; sourceTree = SDKROOT; fileEncoding = 4; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +140,8 @@
 				301BF552109A68D80062928A /* libCordova.a in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				305D5FD1115AB8F900A74A75 /* MobileCoreServices.framework in Frameworks */,
+				602A35C33EFB4CEB85358487 /* Social.framework in Frameworks */,
+				BE3D62325BBF438F8DA46BEC /* MessageUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,6 +214,8 @@
 				5B1594DC16A7569C00FEF299 /* AssetsLibrary.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				305D5FD0115AB8F900A74A75 /* MobileCoreServices.framework */,
+				52E46EFD396D4B5BAFF33114 /* Social.framework */,
+				32AEFCECB56C481D9A49D62A /* MessageUI.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -232,6 +243,8 @@
 				0D619902C1604BF9ACF4769B /* CDVViewController+SplashScreen.m */,
 				EBA6D0D5522546688BB9CB0C /* CDVSplashScreen.h */,
 				3D7E4DA2F8D04EA4AF55C22D /* CDVViewController+SplashScreen.h */,
+				E998AB04EEDF434E903FA7E5 /* SocialSharing.m */,
+				5BA65E8B44014EC9AF7D09C1 /* SocialSharing.h */,
 			);
 			name = Plugins;
 			path = "zeus/Plugins";
@@ -422,6 +435,7 @@
 				A33DFBF28B6D45A3972640DE /* CDVDevice.m in Sources */,
 				C114E4F4E30349E3920F062C /* CDVSplashScreen.m in Sources */,
 				E42E4207B29B406E925350F0 /* CDVViewController+SplashScreen.m in Sources */,
+				1E66897BF7FA491A9851B6E5 /* SocialSharing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
