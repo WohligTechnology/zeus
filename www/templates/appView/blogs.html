@@ -1,24 +1,56 @@
 <ion-view view-title="Blog">
-  <ion-content>
+    <ion-content>
 
-    <div class="padding card">
+        <!--
+        <div class="padding card">
+            <ion-item class="item-avatar item-icon-right">
+                <div class="image-adjust img-blog" ng-style="{'background-image':'url(img/user.png)'}"></div>
+                <h2>Marty McFly</h2>
+                <p>November 05, 1955</p>
+                <i class="icon ln-share2"></i>
+            </ion-item>
 
-      <ion-item class="item-avatar item-icon-right">
-        <div class="image-adjust img-blog" ng-style="{'background-image':'url(img/user.png)'}"></div>
-        <h2>Marty McFly</h2>
-        <p>November 05, 1955</p>
-        <i class="icon ln-share2"></i>
-      </ion-item>
+            <div class="item item-body" ui-sref="app.blogdetail">
+                <img class="full-image" src="img/image1.jpg">
+                <p>
+                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item, the content is from a card-body consisting of an image and paragraph text. The footer consists of tabs, icons aligned left, within the card-footer.
+                </p>
+            </div>
+        </div>
+-->
 
-      <div class="item item-body" ui-sref="app.blogdetail">
-        <img class="full-image" src="img/image1.jpg">
-        <p>
-          This is a "Facebook" styled Card. The header is created from a Thumbnail List item, the content is from a card-body consisting of an image and paragraph text. The footer consists of tabs, icons aligned left, within the card-footer.
-        </p>
-      </div>
+        <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpress">
+            <ion-item class="item-avatar item-icon-right">
+                <div class="image-adjust img-blog" ng-style="{'background-image':'url({{blog.author.avatar_URL}})'}"></div>
+                <h2>{{blog.author.first_name}} {{blog.author.last_name}}</h2>
+                <p>{{blog.date|date:'MMMM dd, yyyy'}}</p>
+                <i class="icon ln-share2"></i>
+            </ion-item>
 
-    </div>
+            <div class="item item-body" ng-click="blogDetail(blog,'wordpress');">
+                <img class="full-image" ng-src="{{blog.featured_image}}">
+                <p>
+                    <span ng-bind-html="blog.content| cut:true:367:'. . .'| rawHtml"></span>
+                </p>
+            </div>
+        </div>
 
-  </ion-content>
+        <div class="padding card" ng-repeat="blog in blogs" ng-hide="showWordpress" ng-if="blog.type=='photo'">
+            <ion-item class="item-avatar item-icon-right">
+                <img class="image-adjust img-blog" ng-src="http://a.13cdn.com/Facebook_TaylorSwift.png">
+                <h2>{{blog.blog_name}}</h2>
+                <p ng-if="blog.date">{{blog.date|formatdate}}</p>
+                <i class="icon ln-share2"></i>
+            </ion-item>
+
+            <div class="item item-body" ng-click="blogDetail(blog,'tumblr');">
+                <img class="full-image" ng-src="{{blog.photos[0].original_size.url}}">
+                <p>
+                    <span ng-bind-html="blog.caption|cut:true:367:'. . .'|rawHtml"></span>
+                </p>
+            </div>
+        </div>
+
+
+    </ion-content>
 </ion-view>
-
