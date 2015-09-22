@@ -427,13 +427,39 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
 
 })
 
-.controller('ProfileCtrl', function ($scope, MyServices, $location, $ionicLoading) {
-    $scope.user = {
-        name: "Adam Dale",
-        number: "+1 230 456 789",
-        email: "adam@dale.com",
-        location: "California, USA",
-        birthday: "23 September, 1990"
+.controller('ProfileCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
+
+    $scope.edit = false;
+    $scope.user = {};
+    $scope.user.id = $.jStorage.get("user").id;
+    $scope.user.name = $.jStorage.get("user").name;
+    $scope.user.email = $.jStorage.get("user").email;
+    $scope.user.contact = $.jStorage.get("user").contact;
+    $scope.user.location = $.jStorage.get("user").address;
+    if ($.jStorage.get("user") && $.jStorage.get("user").dob)
+        $scope.user.dob = new Date($.jStorage.get("user").dob);
+
+    $scope.showPopup1 = function () {
+        var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">Your Profile is Updated!!</p>',
+            title: 'Thankyou!',
+            scope: $scope,
+
+        });
+        $timeout(function () {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
+    };
+
+    $scope.saveProfile = function () {
+        MyServices.editprofile($scope.user, function (data, status) {
+            console.log(data);
+            if (data != 0) {
+                $.jStorage.set("user", data);
+                $scope.showPopup1();
+                $scope.edit = !$scope.edit
+            }
+        })
     }
 })
 

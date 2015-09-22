@@ -205,6 +205,13 @@ angular.module('starter.services', [])
                     method: "POST"
                 }).success(callback);
             },
+            editprofile: function (profile, callback) {
+                return $http({
+                    url: adminurl + 'editprofile',
+                    method: "POST",
+                    data: profile
+                }).success(callback);
+            },
             getWordpressPosts: function (callback) {
                 var getdata = function (data, status) {
                     return $http.get(data.meta.links.posts, {
