@@ -1,6 +1,7 @@
 var socialShare = {};
 angular.module('starter', ['ionic', 'starter.controllers'])
 
+<<<<<<< HEAD
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         if (window && window.plugins && window.plugins.socialsharing && window.plugins.socialsharing.share) {
@@ -17,6 +18,27 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             StatusBar.styleDefault();
         }
     });
+=======
+.run(function($ionicPlatform) {
+  $ionicPlatform.ready(function() {
+    if (window && window.plugins && window.plugins.socialsharing && window.plugins.socialsharing.share) {
+      socialShare = window.plugins.socialsharing.share;
+    }
+    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
+    // for form inputs)
+    if (window.cordova && window.cordova.plugins.Keyboard) {
+      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+      cordova.plugins.Keyboard.disableScroll(true);
+    }
+    if (window.StatusBar) {
+      StatusBar.overlaysWebView(true);
+      StatusBar.styleLightContent();
+    }
+    if (window.cordova && window.cordova.platformId == 'android') {
+      StatusBar.backgroundColorByHexString("#F13232");
+    }
+  });
+>>>>>>> ae6850142c8a78a65b483bbde667ecf2cb0f4833
 })
 
 .config(function ($stateProvider, $urlRouterProvider) {
