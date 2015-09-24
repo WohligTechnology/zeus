@@ -22,7 +22,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     });
 })
 
-.config(function ($stateProvider, $urlRouterProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+  $ionicConfigProvider.views.maxCache(0);
+	
     $stateProvider
 
         .state('app', {
@@ -365,6 +367,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
 })
 
+
 .directive('tweetBox', function ($document) {
     return {
         restrict: 'EA',
@@ -382,6 +385,18 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             }(document, "script", "twitter-wjs");
         }
     }
-})
+});
 
-;
+
+var formvalidation = function (allvalidation) {
+    var isvalid2 = true;
+    for (var i = 0; i < allvalidation.length; i++) {
+        console.log("checking");
+        console.log(allvalidation[i].field);
+        if (allvalidation[i].field == "" || !allvalidation[i].field) {
+            allvalidation[i].validation = "ng-dirty";
+            isvalid2 = false;
+        }
+    }
+    return isvalid2;
+}

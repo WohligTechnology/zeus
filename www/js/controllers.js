@@ -265,11 +265,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
     $scope.signin = {};
     var signinsuccess = function (data, status) {
         console.log(data);
+	    $ionicLoading.hide();
         if (data != 'false') {
-            MyServices.authenticate().success(authenticatesuccess);
+		   
+            $.jStorage.set("user", data);
+            user = data;
+//            reloadpage = true;
+            $location.url("/app/home");
+//            MyServices.authenticate().success(authenticatesuccess);
             $scope.signin = {};
         } else {
-            $ionicLoading.hide();
+            
             var alertPopup = $ionicPopup.alert({
                 title: 'Login Failed!',
                 template: 'Wrong username or password!!'
@@ -278,7 +284,20 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
     }
     $scope.signinsubmit = function (signin) {
         $ionicLoading.show();
-        MyServices.signin(signin, signinsuccess);
+	   $scope.allvalidation = [{
+            field: $scope.signin.username,
+            validation: ""
+        }, {
+            field: $scope.signin.password,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        if (check) {
+            MyServices.signin(signin, signinsuccess);
+        }else{
+		   $ionicLoading.hide();
+	   }
+        
     }
 
     //        ***** tabchange ****

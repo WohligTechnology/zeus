@@ -13,13 +13,13 @@
 
             <div class="login" ng-show="tab=='signin'">
                 <div class="list" ng-show="logindata.email">
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label">Username</span>
+                    <label class="item item-input item-floating-label" ng-class="allvalidation[0].validation">
+                        <span class="input-label">Email</span>
                         <i class="icon ln-user"></i>
-                        <input type="text" placeholder="Username" ng-model="signin.username">
+                        <input type="text" placeholder="Email" ng-model="signin.username">
                     </label>
 
-                    <label class="item item-input item-floating-label">
+                    <label class="item item-input item-floating-label" ng-class="allvalidation[1].validation">
                         <span class="input-label">Password</span>
                         <i class="icon ln-lock"></i>
                         <input type="password" placeholder="Password" ng-model="signin.password">
