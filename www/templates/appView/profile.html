@@ -2,7 +2,7 @@
     <ion-content>
 
         <div class="relative profile-banner" ng-style="{'background-image':'url(../img/image1.jpg)'}">
-            <div class="image-adjust" ng-if="!userdetails.userimage"></div>
+            <div class="image-adjust" ng-if="!userdetails.userimage" ng-click="picFromGallery()"></div>
             <div class="gradient-hold full">
                 <h3 class="light">{{user.name}}</h3>
             </div>

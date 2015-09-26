@@ -27,6 +27,18 @@
                         {
                             "xml": "<feature name=\"SocialSharing\"><param name=\"android-package\" value=\"nl.xservices.plugins.SocialSharing\" /></feature>",
                             "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"File\"><param name=\"android-package\" value=\"org.apache.cordova.file.FileUtils\" /><param name=\"onload\" value=\"true\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"FileTransfer\"><param name=\"android-package\" value=\"org.apache.cordova.filetransfer.FileTransfer\" /></feature>",
+                            "count": 1
+                        },
+                        {
+                            "xml": "<feature name=\"ImagePicker\"><param name=\"android-package\" value=\"com.synconset.ImagePicker\" /></feature>",
+                            "count": 1
                         }
                     ]
                 }
@@ -36,6 +48,28 @@
                     "/*": [
                         {
                             "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 3
+                        }
+                    ],
+                    "/manifest/application": [
+                        {
+                            "xml": "<activity android:label=\"@string/multi_app_name\" android:name=\"com.synconset.MultiImageChooserActivity\" android:theme=\"@android:style/Theme.Holo.Light\"></activity>",
+                            "count": 1
+                        }
+                    ],
+                    "/manifest": [
+                        {
+                            "xml": "<uses-permission android:name=\"android.permission.WRITE_EXTERNAL_STORAGE\" />",
+                            "count": 1
+                        }
+                    ]
+                }
+            },
+            "config.xml": {
+                "parents": {
+                    "/*": [
+                        {
+                            "xml": "<preference name=\"AndroidPersistentFileLocation\" value=\"Internal\" />",
                             "count": 1
                         }
                     ]
@@ -61,7 +95,17 @@
         },
         "cordova-plugin-x-socialsharing": {
             "PACKAGE_NAME": "com.blazen.businessapp"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.blazen.businessapp"
+        },
+        "com.synconset.imagepicker": {
+            "PACKAGE_NAME": "com.blazen.businessapp"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.blazen.businessapp"
+        }
+    }
 }

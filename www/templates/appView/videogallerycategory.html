@@ -2,8 +2,9 @@
 
   <ion-content>
     <ion-list>
-      <ion-item collection-repeat="item in events" class="item-thumbnail-left item-text-wrap" ui-sref="app.videogallery">
-        <div class="image-adjust img-content" ng-style='{"background-image":"url("{{item.image}}")"}'></div>
+      <ion-item ng-repeat="item in videos" class="item-thumbnail-left item-text-wrap" ui-sref="app.videogallery">
+<!--        <div class="image-adjust img-content" ng-style='{"background-image":"url("{{item.image}}")"}'></div>-->
+        <div class="image-adjust img-content" ng-style="{ 'background-image': '{{item.images}}' }"></div>
         <h2>{{item.title}}</h2>
         <p>{{item.subtitle}}</p>
         <ion-option-button class="button-positive" ng-click="share(item)">

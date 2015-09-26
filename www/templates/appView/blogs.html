@@ -35,18 +35,48 @@
             </div>
         </div>
 
-        <div class="padding card" ng-repeat="blog in blogs" ng-hide="showWordpress" ng-if="blog.type=='photo'">
+        <div class="padding card" ng-repeat="blog in blogs" ng-show="showTumblr">
             <ion-item class="item-avatar item-icon-right">
                 <img class="image-adjust img-blog" ng-src="http://a.13cdn.com/Facebook_TaylorSwift.png">
-                <h2>{{blog.blog_name}}</h2>
+                <h2 ng-if="blog.slug">{{blog.slug}}</h2>
+                <h2 ng-if="blog.blog_name">{{blog.blog_name}}</h2>
                 <p ng-if="blog.date">{{blog.date|formatdate}}</p>
                 <i class="icon ln-share2"></i>
             </ion-item>
 
             <div class="item item-body" ng-click="blogDetail(blog,'tumblr');">
                 <img class="full-image" ng-src="{{blog.photos[0].original_size.url}}">
+                <p ng-if="blog.type == 'audio'">
+                   	<span>{{blog.album}}</span>
+                    <span ng-bind-html="blog.embed|rawHtml" ng-if="blog.embed"></span>
+                    <span ng-bind-html="blog.body|cut:true:367:'. . .'|rawHtml"></span>
+                </p>
+                <p ng-if="blog.type == 'quote'">
+                   	<span>{{blog.album}}</span>
+                    <span ng-bind-html="blog.text|cut:true:367:'. . .'|rawHtml"></span>
+                </p>
+                <p ng-if="blog.type == 'link'">
+                   	<span>Link</span>
+				 <a href="{{blog.url}}" target="_blank">{{blog.url}}</a>
+                </p>
                 <p>
-                    <span ng-bind-html="blog.caption|cut:true:367:'. . .'|rawHtml"></span>
+                    <span ng-bind-html="blog.body|cut:true:367:'. . .'|rawHtml"></span>
+                </p>
+            </div>
+        </div>
+        
+        <div class="padding card" ng-repeat="blog in blogs" ng-show="showCustomblog">
+            <ion-item class="item-avatar item-icon-right">
+                <img class="image-adjust img-blog" ng-src="http://a.13cdn.com/Facebook_TaylorSwift.png">
+                <h2>{{blog.name}}</h2>
+                <p ng-if="blog.date">{{blog.timestamp|formatdate}}</p>
+                <i class="icon ln-share2"></i>
+            </ion-item>
+
+            <div class="item item-body" ng-click="blogDetail(blog,'cms');">
+                <img class="full-image" ng-src="{{blog.photos[0].original_size.url}}">
+                <p>
+                    <span ng-bind-html="blog.content|cut:true:367:'. . .'|rawHtml"></span>
                 </p>
             </div>
         </div>

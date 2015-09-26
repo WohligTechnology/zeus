@@ -1,7 +1,9 @@
 <ion-view view-title="Gallery">
-    <ion-content>
+	<ion-content>
+		<div class="text-center energized middle-align" ng-if="photos == ''">
+			The gallery is empty.
+		</div>
+		<ion-gallery ion-gallery-items="photos" imgloadingsec ng-if="photos"></ion-gallery>
 
-        <ion-gallery ion-gallery-items="photos" ng-if="photos"></ion-gallery>
-
-    </ion-content>
+	</ion-content>
 </ion-view>

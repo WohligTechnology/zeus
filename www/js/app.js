@@ -278,7 +278,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('serverimage', function () {
     return function (image) {
+	    if(image){
         return adminimage + image;
+	    }else{
+		    return "img/default.png";
+	    }
     };
 })
 
@@ -289,8 +293,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             code: '='
         },
         replace: true,
-        template: '<iframe style="overflow:hidden;width:100%;" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
-        //        template: '<iframe style="overflow:hidden;height:100%;width:100%" width="100%" height="100%" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
+//        template: '<iframe style="overflow:hidden;width:100%;" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
+                template: '<iframe style="overflow:hidden;height:100%;width:100%" width="100%" height="100%" src="{{url}}" frameborder="0" allowfullscreen></iframe>',
         link: function (scope) {
             scope.$watch('code', function (newVal) {
                 if (newVal) {
@@ -345,8 +349,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('formatdate', function ($filter) {
     return function (val) {
-        var split = val.split(" ");
-        return $filter('date')(split[0], 'MMMM dd, yyyy')
+        var splitval = val.toString().split(" ");
+        return $filter('date')(splitval[0], 'MMMM dd, yyyy')
     };
 })
 
@@ -385,6 +389,26 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             }(document, "script", "twitter-wjs");
         }
     }
+})
+
+.directive('imgloadingsec', function($compile, $parse) {
+  return {
+    restrict: 'EA',
+    replace: false,
+    link: function($scope, element, attrs) {
+      var $element = $(element);
+      if (!attrs.noloading) {
+        $element.after("<img src='img/loading.gif' class='loading' />");
+        var $loading = $element.next(".loading");
+        $element.load(function() {
+          $loading.remove();
+          $(this).addClass("doneLoading");
+        });
+      } else {
+        $($element).addClass("doneLoading");
+      }
+    }
+  };
 });
 
 
@@ -396,7 +420,9 @@ var formvalidation = function (allvalidation) {
         if (allvalidation[i].field == "" || !allvalidation[i].field) {
             allvalidation[i].validation = "ng-dirty";
             isvalid2 = false;
-        }
+        }else{
+		   allvalidation[i].validation = "";
+	   }
     }
     return isvalid2;
 }

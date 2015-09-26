@@ -3,7 +3,7 @@
     <ion-content class="padding">
         <div class="list" ng-repeat="photos in photos" ng-click="sendphotoid(photos.id);">
             <div class="item item-image">
-                <img ng-src="{{photos.image | serverimage}}">
+                <img ng-src="{{photos.image | serverimage}}" imgloadingsec>
             </div>
             <div class="item">
                {{photos.name}}

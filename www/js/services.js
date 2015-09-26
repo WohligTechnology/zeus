@@ -1,5 +1,5 @@
 //var adminbase = "http://wohlig.co.in/webappbackend/";
-var adminbase = "http://localhost/apphilobackend/";
+var adminbase = "http://localhost/webappbackend/";
 //var adminbase = "http://192.168.2.9/webappbackend/";
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";
@@ -10,6 +10,7 @@ var foods = [];
 
 //FOR WORDPRESS INTEGRATION 
 var Wordpress_UserName = "en.blog.wordpress.com";
+
 //FOR FLICKR INTEGRATION
 //var Api_Key = "477a6eb655b448de7fffcb16ae4455b2";
 var Api_Key = "3e67f6179c11014cc027c6a944d7d9fb";
@@ -18,7 +19,7 @@ var User_Key = "132717193@N04";
 var WORDPRESS_API_URL = 'https://public-api.wordpress.com/rest/v1.1/';
 
 //for tumblr
-var Tumblr_UserName = "taylorswift.tumblr.com";
+var Tumblr_UserName = "";
 var TUBMLR_API_URL = 'http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + Tumblr_UserName + '/posts';
 
 angular.module('starter.services', [])
@@ -167,7 +168,8 @@ angular.module('starter.services', [])
                 }).success(callback);
             },
             logout: function () {
-                return $http({
+			  $.jStorage.flush();
+                $http({
                     url: adminurl + 'logout',
                     method: "POST"
                 });
@@ -212,18 +214,18 @@ angular.module('starter.services', [])
                     data: profile
                 }).success(callback);
             },
-            getWordpressPosts: function (callback) {
+            getWordpressPosts: function (wdp, callback) {
                 var getdata = function (data, status) {
                     return $http.get(data.meta.links.posts, {
                         withCredentials: false
                     }).success(callback);
                 }
-                $http.get(WORDPRESS_API_URL + "sites/" + Wordpress_UserName, {
+                $http.get(WORDPRESS_API_URL + "sites/" + wdp, {
                     withCredentials: false
                 }).success(getdata);
             },
-            getTumblrPosts: function (callback) {
-                $http.get(TUBMLR_API_URL, {
+            getTumblrPosts: function (tmb, callback) {
+                $http.get('http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + tmb + '/posts', {
                     withCredentials: false
                 }).success(callback);
             },

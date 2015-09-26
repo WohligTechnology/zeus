@@ -1,5 +1,5 @@
 var reloadpage = false;
-angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
+angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova'])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location) {
 
@@ -24,11 +24,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
 
     MyServices.getappconfig(function (data, status) {
         //for blog s
+	    console.log(Wordpress_UserName);
         var blogdata = JSON.parse(data[1].text);
         for (var i = 0; i < blogdata.length; i++) {
             if (blogdata[i].value == true) {
                 $scope.menudata.blogs = true;
-                $.jStorage.set("blogType", blogdata[i].name);
+                $.jStorage.set("blogType", blogdata[i]);
+//			  if(blogdata[i].name.toLowerCase() == "wordpress"){
+//			  	Wordpress_UserName = blogdata[i].appid;
+//			  }else if(blogdata[i].name.toLowerCase() == "tumblr"){
+//				Tumblr_UserName = blogdata[i].appid;
+//			  }
                 break;
             } else {
                 $scope.menudata.blogs = false;
@@ -125,7 +131,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
 
 .controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
 
-    $.jStorage.flush();
+//    $.jStorage.flush();
+	MyServices.logout();
 
     $scope.logindata = {};
 
@@ -160,7 +167,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
 
     //logins
     var checktwitter = function (data, status) {
-        if (data != "false") {
+        if (data != "false" && data!= '') {
             $interval.cancel(stopinterval);
             ref.close();
             MyServices.authenticate().success(authenticatesuccess);
@@ -176,7 +183,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
         $ionicLoading.hide();
         console.log(data);
         if (data != "false") {
-            $.jStorage.set("user", data);
+            $.jStorage.set("user", data)	;
             user = data;
             reloadpage = true;
             $location.url("/app/home");
@@ -247,8 +254,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
     $scope.signup = {};
     var signupsuccess = function (data, status) {
         console.log(data);
-        if (data == "1") {
-            $scope.showPopupsignupsuccess();
+        if (data != "false") {
+		   $.jStorage.set("user", data);
+            user = data;
+            $location.url("/app/home");
         } else {
             $scope.showPopupsignupfailure();
         }
@@ -256,9 +265,27 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
         $scope.signup = {};
     }
     $scope.signupsubmit = function (signup) {
-        $ionicLoading.show();
-        $scope.signup = signup;
-        MyServices.signup($scope.signup, signupsuccess);
+	    $ionicLoading.show();
+	   $scope.allvalidation = [{
+            field: $scope.signup.username,
+            validation: ""
+        }, {
+            field: $scope.signup.email,
+            validation: ""
+        }, {
+            field: $scope.signup.dob,
+            validation: ""
+        }, {
+            field: $scope.signup.password,
+            validation: ""
+        }];
+        var check = formvalidation($scope.allvalidation);
+        if (check) {
+            MyServices.signup($scope.signup, signupsuccess);
+        }else{
+		   $ionicLoading.hide();
+	   }
+	    
     }
 
     // SIGN IN
@@ -426,10 +453,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
     if (!$.jStorage.get("user"))
         $location.url("/access/login");
 
-    if (reloadpage == true) {
-        reloadpage = false;
-        window.location.reload();
-    }
+//    if (reloadpage == true) {
+//        reloadpage = false;
+//        window.location.reload();
+//    }
 
     $scope.slides = ["img/image1.jpg", "img/image2.jpg", "img/image3.jpg"];
 })
@@ -446,7 +473,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
 
 })
 
-.controller('ProfileCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
+.controller('ProfileCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $cordovaFileTransfer, $cordovaImagePicker) {
 
     $scope.edit = false;
     $scope.user = {};
@@ -480,6 +507,41 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
             }
         })
     }
+    
+    //	pick image from gallery
+    var options = {
+        maximumImagesCount: 1,
+        width: 800,
+        height: 800,
+        quality: 80,
+        allowEdit: true
+
+    };
+    $scope.picFromGallery = function () {
+        console.log("picture");
+        $cordovaImagePicker.getPictures(options).then(function (resultImage) {
+            // Success! Image data is here
+		   console.log(resultImage[0]);
+            $cordovaFileTransfer.upload(adminurl + "profileimageupload", resultImage[0], {})
+                        .then(function(result) {
+                            var data = JSON.parse(result.response);
+                            console.log("in response");
+                            console.log(data);
+                            
+					$ionicLoading.hide();
+                        }, function(err) {
+                            console.log(err);
+                        }, function(progress) {
+
+                            console.log("progress");
+                        });
+
+            console.log($scope.cameraimage);
+        }, function (err) {
+            // An error occured. Show a message to the user
+        });
+
+    };
 })
 
 .controller('EventsCtrl', function ($scope, MyServices, $location, $ionicLoading) {
@@ -584,31 +646,38 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
     //    $scope.showWordpress = true;
 
     $scope.blogDetail = function (blog, name) {
-        console.log(name)
+        console.log(name);
+        console.log(blog);
         $ionicLoading.show();
         blog.provider = name;
         $.jStorage.set('postdetail', blog);
+	    if(name == "cms"){
+		    $location.path('/app/blogdetail/'+blog.id);
+	    }else{
         $location.path('/app/blogdetail/0');
+	    }
     }
 
 
-    if ($.jStorage.get("blogType") && $.jStorage.get("blogType").toLowerCase() == "wordpress") {
+    if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "wordpress") {
         $scope.showWordpress = true;
-        MyServices.getWordpressPosts(function (data, status) {
+	    Wordpress_UserName = 
+        MyServices.getWordpressPosts($.jStorage.get("blogType").appid, function (data, status) {
             $ionicLoading.hide();
             console.log("WORDPRESS");
             console.log(data);
             $scope.blogs = data.posts;
         });
-    } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").toLowerCase() == "tumblr") {
-        $scope.showWordpress = false;
-        MyServices.getTumblrPosts(function (data, status) {
+    } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "tumblr") {
+        $scope.showTumblr = true;
+	    Tumblr_UserName = $.jStorage.get("blogType").appid;
+        MyServices.getTumblrPosts($.jStorage.get("blogType").appid, function (data, status) {
             $ionicLoading.hide();
             console.log("TUMBLR");
             console.log(data);
             $scope.blogs = data.response.posts;
         });
-    } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").toLowerCase() == "cms") {
+    } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "cms") {
         $scope.showCustomblog = true;
         MyServices.getallblog(function (data, status) {
             $ionicLoading.hide();
@@ -625,11 +694,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
     var getsingleblogsuccess = function (data, status) {
         $scope.showcmsdetail = true;
         console.log(data);
-        $scope.cmsdetails = data;
+        $scope.details = data;
     }
 
     $scope.id = $stateParams.id;
-    MyServices.getsingleblog($scope.id, getsingleblogsuccess)
+   
 
     //loader
     $scope.showloading = function () {
@@ -642,13 +711,15 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
     };
 
     // tumblr and wordpress
-    if ($stateParams.id == 0) {
+    if ($stateParams.id == 0) {	
         $scope.details = $.jStorage.get('postdetail');
         if ($scope.details.provider == 'tumblr') {
             var newdt = $scope.details.date.split('T');
             $scope.details.date = newdt[0];
         }
         console.log($scope.details);
+    }else{
+	     MyServices.getsingleblog($scope.id, getsingleblogsuccess);
     }
 })
 
@@ -671,6 +742,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
 
     var getallgallerycallback = function (data, status) {
         $ionicLoading.hide();
+	    console.log("");
         console.log(data.queryresult);
         $scope.photos = data.queryresult;
     }
@@ -696,10 +768,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
 
     var getallgalleryimagecallback = function (data, status) {
         $ionicLoading.hide();
+	    console.log(data.queryresult);
         $scope.photos = [];
         _.each(data.queryresult, function (n) {
             $scope.photoObj = {};
-            $scope.photoObj.src = adminimage + n.image;
+            $scope.photoObj.src = adminimage + n.src;
             $scope.photos.push($scope.photoObj);
         })
         console.log($scope.photos);
@@ -747,37 +820,37 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery'])
     }
     MyServices.getallvideogallery(getallvideogallerycallback);
 
-    $scope.events = [{
-        image: "img/image1.jpg",
-        title: "Music Concert",
-        date: "7 Jan, 2016",
-        subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-        image: "img/image2.jpg",
-        title: "Music Concert",
-        date: "7 Jan, 2016",
-        subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-        image: "img/image3.jpg",
-        title: "Music Concert",
-        date: "7 Jan, 2016",
-        subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-        image: "img/image4.jpg",
-        title: "Music Concert",
-        date: "7 Jan, 2016",
-        subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-        image: "img/image5.jpg",
-        title: "Music Concert",
-        date: "7 Jan, 2016",
-        subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-        image: "img/image6.jpg",
-        title: "Music Concert",
-        date: "7 Jan, 2016",
-        subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }];
+//    $scope.events = [{
+//        image: "img/image1.jpg",
+//        title: "Music Concert",
+//        date: "7 Jan, 2016",
+//        subtitle: "Film, Media & Entertainment by paragyte technologies"
+//  }, {
+//        image: "img/image2.jpg",
+//        title: "Music Concert",
+//        date: "7 Jan, 2016",
+//        subtitle: "Film, Media & Entertainment by paragyte technologies"
+//  }, {
+//        image: "img/image3.jpg",
+//        title: "Music Concert",
+//        date: "7 Jan, 2016",
+//        subtitle: "Film, Media & Entertainment by paragyte technologies"
+//  }, {
+//        image: "img/image4.jpg",
+//        title: "Music Concert",
+//        date: "7 Jan, 2016",
+//        subtitle: "Film, Media & Entertainment by paragyte technologies"
+//  }, {
+//        image: "img/image5.jpg",
+//        title: "Music Concert",
+//        date: "7 Jan, 2016",
+//        subtitle: "Film, Media & Entertainment by paragyte technologies"
+//  }, {
+//        image: "img/image6.jpg",
+//        title: "Music Concert",
+//        date: "7 Jan, 2016",
+//        subtitle: "Film, Media & Entertainment by paragyte technologies"
+//  }];
 
 
 })

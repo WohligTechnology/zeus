@@ -5,10 +5,17 @@
     border-left: solid red !important;
     border-right: solid red !important;
 }
+input.ng-dirty{
+	border-left: transparent !important;
+    border-right: transparent !important;
+}
+
+
+/*
 label.item.item-input.ng-dirty.ng-invalid {
-    border-left: solid red !important;
-    border-right: solid red !important;
+    border-left: solid red ;
+    border-right: solid red ;
 }
 .ng-dirty>* {
-    color: red !importnat;
-}
+    color: red ;
+}*/
