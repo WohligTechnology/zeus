@@ -3,8 +3,8 @@
     <ion-list class="full-width">
       <ion-item ng-repeat="item in events" class="item-text-wrap">
         <img ng-if="item.image" ng-src="{{item.image}}" class="full-image">
-        <h2>{{item.title}}</h2>
-        <p>{{item.subtitle}}</p>
+        <h2>{{item.link}}</h2>
+        <p>{{item.content}}</p>
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
         </ion-option-button>

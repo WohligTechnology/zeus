@@ -229,5 +229,10 @@ angular.module('starter.services', [])
                     withCredentials: false
                 }).success(callback);
             },
+            getNotification: function (callback) {
+                $http.get(adminurl + 'getallusernotification?id=' + $.jStorage.get('user').id, {
+                    withCredentials: false
+                }).success(callback);
+            },
         };
     });

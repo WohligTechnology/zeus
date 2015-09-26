@@ -970,7 +970,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('NotificationCtrl', function ($scope) {
+.controller('NotificationCtrl', function ($scope, MyServices) {
+	MyServices.getNotification(function(data){
+		console.log(data);
+		$scope.events = data.queryresult;
+	});
     $scope.events = [{
         title: "Music Concert",
         date: "7 Jan, 2016",
