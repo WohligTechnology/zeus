@@ -120,6 +120,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             }
         }
     })
+    
+    .state('app.article', {
+        url: '/article/:id',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/appView/article.html',
+                controller: "ArticleCtrl"
+            }
+        }
+    })
 
     .state('app.profile', {
         url: '/profile',

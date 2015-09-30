@@ -1,5 +1,5 @@
 //var adminbase = "http://wohlig.co.in/webappbackend/";
-var adminbase = "http://localhost/apphiloback/";
+var adminbase = "http://localhost:1234/projects/apphiloback/";
 //var adminbase = "http://192.168.2.9/webappbackend/";
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";
@@ -237,6 +237,16 @@ angular.module('starter.services', [])
             },
             getNotification: function (callback) {
                 $http.get(adminurl + 'getallusernotification?id=' + $.jStorage.get('user').id, {
+                    withCredentials: false
+                }).success(callback);
+            },
+            getallfrontmenu: function (callback) {
+                $http.get(adminurl + 'getallfrontmenu', {
+                    withCredentials: false
+                }).success(callback);
+            },
+            getarticle: function (id,callback) {
+                $http.get(adminurl + 'getsinglearticles?id='+id, {
                     withCredentials: false
                 }).success(callback);
             },

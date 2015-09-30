@@ -10,7 +10,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	//$scope.$on('$ionicView.enter', function(e) {
 	//});
 
-	$scope.menudata = {};
+	$scope.menudata = [];
 
 	// loader
 	$scope.showloading = function () {
@@ -22,37 +22,70 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}, 10000);
 	};
 
-	
-	$scope.menudata = [{
-		"id":1,
-		"name":"home",
-		"order":1,
-		"icon":"ln-home3",
-		"link_type":"home",
-		"link":"home"
-	},{
-		"id":2,
-		"name":"notification",
-		"order":1,
-		"icon":"ln-bell",
-		"link_type":"notification",
-		"link":"notification"
-	},{
-		"id":3,
-		"name":"Sonu Nigam",
-		"order":1,
-		"icon":"ln-home3",
-		"link_type":"event",
-		"typeid":1,
-		"link":"eventdetail"
-	},{
-		"id":4,
-		"name":"Event",
-		"order":1,
-		"icon":"ln-calendar2",
-		"link_type":"event list",
-		"link":"events"
-	}];
+	MyServices.getallfrontmenu(function(data){
+        console.log(data);
+        _.each(data.queryresult, function(n){
+            var newmenu = {};
+            newmenu.id = n.id;
+            newmenu.name = n.name;
+            newmenu.order = n.order;
+            newmenu.icon = n.icon;
+            newmenu.link_type = n.linktypename;
+            switch(n.linktype){
+                case '3' :
+                    newmenu.typeid = n.event;
+                    break;
+                case '6' :
+                    newmenu.typeid = n.gallery;
+                    break;
+                case '8' :
+                    newmenu.typeid = n.video;
+                    break;
+                case '10' :
+                    newmenu.typeid = n.blog;
+                    break;
+                case '2' :
+                    newmenu.typeid = n.article;
+                    break;
+                default :
+                    newmenu.typeid = 0;
+                
+            }
+            newmenu.link = n.linktypelink;
+            $scope.menudata.push(newmenu);
+        });
+    });
+    
+//	$scope.menudata = [{
+//		"id":1,
+//		"name":"home",
+//		"order":1,
+//		"icon":"ln-home3",
+//		"link_type":"home",
+//		"link":"home"
+//	},{
+//		"id":2,
+//		"name":"notification",
+//		"order":1,
+//		"icon":"ln-bell",
+//		"link_type":"notification",
+//		"link":"notification"
+//	},{
+//		"id":3,
+//		"name":"Sonu Nigam",
+//		"order":1,
+//		"icon":"ln-home3",
+//		"link_type":"event",
+//		"typeid":1,
+//		"link":"eventdetail"
+//	},{
+//		"id":4,
+//		"name":"Event",
+//		"order":1,
+//		"icon":"ln-calendar2",
+//		"link_type":"event list",
+//		"link":"events"
+//	}];
 	var loginstatus = false;
 	
 	
@@ -185,6 +218,15 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 .controller('AccessCtrl', function ($scope) {
 
+})
+
+.controller('ArticleCtrl', function ($scope, MyServices, $stateParams, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
+    $scope.article = {};
+    $scope.article.title = "my article";
+    MyServices.getarticle($stateParams.id, function(data){
+        $scope.article = data;
+    });
+    
 })
 
 .controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
