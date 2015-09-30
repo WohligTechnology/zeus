@@ -2,9 +2,10 @@
   <ion-content>
     <ion-list class="full-width">
       <ion-item ng-repeat="item in events" class="item-text-wrap">
-        <img ng-if="item.image" ng-src="{{item.image}}" class="full-image">
+        <img ng-if="item.image" ng-src="{{item.image}}" class="full-image" ng-if="item.image">
         <h2>{{item.link}}</h2>
         <p>{{item.content}}</p>
+        <p>{{item.timestampuser | formatdate}}</p>
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
         </ion-option-button>

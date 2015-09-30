@@ -16,7 +16,7 @@
 
 
 
-    <div class="list no-margin">
+    <div class="list no-margin" ng-if="menu.setting">
 
       <ion-item class="item-avatar item-icon-right">
 <!--        <div class="image-adjust"></div>-->
@@ -28,8 +28,8 @@
                     
         <h3>{{userdetails.username}}</h3>
         <p>{{userdetails.useremail}}</p>
-
-        <i class="icon ln-gear2 small" ui-sref="app.setting" menu-close></i>
+		 
+        <i class="icon ln-gear2 small" ui-sref="app.setting" menu-close ng-if="menu.setting"></i>
       </ion-item>
 
 
@@ -37,10 +37,18 @@
 
     <ion-content class="has-menu-photo">
       <div class="list menu-set">
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.home" ui-sref-active="bordered">
-          <i class="icon ln-home3"></i> Home
+      
+      <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.{{menu.link}}({id:menu.typeid})" ui-sref-active="bordered" ng-repeat="menu in menudata">
+          <i class="icon {{menu.icon}}"></i> {{menu.name}}
         </ion-item>
+      
+
+
+        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="access.login" ui-sref-active="bordered" ng-if="menu.setting">
+          <i class="icon ln-arrow-right2"></i> Logout
+        </ion-item>
+        
+<!--
 
         <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.notification" ui-sref-active="bordered">
           <i class="icon ln-bell"></i> Notification
@@ -85,6 +93,7 @@
         <ion-item nav-clear menu-close class="item item-icon-left item-content" ui-sref="access.login">
           <i class="icon ln-arrow-right2"></i> Logout
         </ion-item>
+-->
 
       </div>
     </ion-content>

@@ -2,6 +2,7 @@
     "jscodehints.detectedExclusions": [
         "/Applications/XAMPP/xamppfiles/htdocs/zeus/www/js/app.js",
         "C:/xampp/htdocs/zeus/gulpfile.js",
-        "/Applications/XAMPP/xamppfiles/htdocs/apphilo/www/js/services.js"
+        "/Applications/XAMPP/xamppfiles/htdocs/apphilo/www/js/services.js",
+        "/Applications/XAMPP/xamppfiles/htdocs/apphilo/platforms/android/build/intermediates/assets/debug/www/lib/js/jstorage.js"
     ]
 }

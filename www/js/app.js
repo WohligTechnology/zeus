@@ -350,7 +350,14 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .filter('formatdate', function ($filter) {
     return function (val) {
         var splitval = val.toString().split(" ");
-        return $filter('date')(splitval[0], 'MMMM dd, yyyy')
+        return $filter('date')(splitval[0], 'dd MMMM, yyyy')
+    };
+})
+
+.filter('url', function ($filter) {
+    return function (val) {
+        var splitval = val.split(",");
+	    return splitval[0];
     };
 })
 
