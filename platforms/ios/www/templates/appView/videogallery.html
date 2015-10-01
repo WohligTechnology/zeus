@@ -1,15 +1,16 @@
 <ion-view view-title="Videos">
-
   <ion-content>
-    <ion-list class="full-width">
-      <ion-item ng-repeat="item in videos">
-        <img ng-src="{{item.image}}" class="full-image">
-        <h2>{{item.title}}</h2>
-        <p>{{item.subtitle}}</p>
-        <ion-option-button class="button-positive" ng-click="share(item)">
+    <ion-list>
+
+      <ion-item collection-repeat="item in items" class="item-thumbnail-left" ng-click="showVideo(item.url);">
+        <div class="image-adjust img-content" ng-style="{'background-image':'url(http://img.youtube.com/vi/{{item.url}}/default.jpg)'}"></div>
+        <h2 class="item-heading">{{item.name}}</h2>
+        <p>{{item.alt}}</p>
+        <ion-option-button class="button-positive" ng-click="share(item.url);">
           Share
         </ion-option-button>
       </ion-item>
+
     </ion-list>
   </ion-content>
 </ion-view>

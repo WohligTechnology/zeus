@@ -1,16 +1,16 @@
 <ion-view view-title="Events">
-
-  <ion-content>
-    <ion-list>
-      <ion-item collection-repeat="item in events" class="item-thumbnail-left">
-        <div class="image-adjust img-content" style="background-image:url('{{item.image}}');"></div>
-        <h2>{{item.title}}</h2>
-        <p>{{item.subtitle}}</p>
-        <ion-option-button class="button-positive" ng-click="share(item)">
-          Share
-        </ion-option-button>
-      </ion-item>
-    </ion-list>
-  </ion-content>
+    <ion-content>
+        <ion-list>
+            <ion-item collection-repeat="event in events" class="item-thumbnail-left item-text-wrap" ng-click="geteventdetails(event.id);">
+                <div class="image-adjust img-content" ng-style="{'background-image':'url({{event.image|serverimage}})'}"></div>
+                <h2>{{event.title}}</h2>
+                <p>{{event.content}}</p>
+                <i class="icon ln-calendar3"></i> <span class="font-light">{{event.startdate|date : 'dd MMM, yyyy'}}</span>
+                <br><i class="icon ln-timer"></i> <span class="font-light">{{event.starttime|convertto12}}</span>
+                <ion-option-button class="button-positive" ng-click="share(item)">
+                    Share
+                </ion-option-button>
+            </ion-item>
+        </ion-list>
+    </ion-content>
 </ion-view>
-

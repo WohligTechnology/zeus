@@ -85,21 +85,22 @@
     },
     "installed_plugins": {
         "com.ionic.keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
+            "PACKAGE_NAME": "com.blazen.businessapp"
         },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
+            "PACKAGE_NAME": "com.blazen.businessapp"
         },
         "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
+            "PACKAGE_NAME": "com.blazen.businessapp"
         },
         "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
+            "PACKAGE_NAME": "com.blazen.businessapp"
         },
         "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.starter"
+            "PACKAGE_NAME": "com.blazen.businessapp"
         },
         "cordova-plugin-x-socialsharing": {
+<<<<<<< Updated upstream
             "PACKAGE_NAME": "com.ionicframework.zeus812333"
         },
         "cordova-plugin-file-transfer": {
@@ -107,6 +108,9 @@
         },
         "com.synconset.imagepicker": {
             "PACKAGE_NAME": "com.ionicframework.zeus812333"
+=======
+            "PACKAGE_NAME": "com.blazen.businessapp"
+>>>>>>> Stashed changes
         }
     },
     "dependent_plugins": {
