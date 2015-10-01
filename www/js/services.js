@@ -1,5 +1,5 @@
 //var adminbase = "http://wohlig.co.in/webappbackend/";
-var adminbase = "http://localhost:1234/projects/apphiloback/";
+var adminbase = "http://localhost/apphiloback/";
 //var adminbase = "http://192.168.2.9/webappbackend/";
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";
@@ -161,9 +161,9 @@ angular.module('starter.services', [])
                     method: "POST"
                 });
             },
-            getallblog: function (callback) {
+            getallblog: function (pageno, callback) {
                 return $http({
-                    url: adminurl + 'getallblog',
+                    url: adminurl + 'getallblog?pageno='+pageno+'&maxrow='+5,
                     method: "POST"
                 }).success(callback);
             },
@@ -249,6 +249,17 @@ angular.module('starter.services', [])
                 $http.get(adminurl + 'getsinglearticles?id='+id, {
                     withCredentials: false
                 }).success(callback);
+            },
+            getsingleuserdetail: function (callback) {
+                $http.get(adminurl + 'getsingleuserdetail?id='+$.jStorage.get("user").id, {
+                    withCredentials: false
+                }).success(callback);
+            },
+            setconfigdata: function (data) {
+                $.jStorage.set("configdata", data);
+            },
+            getconfigdata: function (data) {
+                return $.jStorage.get("configdata");
             },
         };
     });

@@ -288,9 +288,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('serverimage', function () {
     return function (image) {
-	    if(image){
-        return adminimage + image;
-	    }else{
+	    if(image) {
+		    return adminimage + image;
+	    }
+	    else {
 		    return "img/default.png";
 	    }
     };
