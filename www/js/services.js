@@ -1,6 +1,5 @@
 //var adminbase = "http://wohlig.co.in/webappbackend/";
-//var adminbase = "http://localhost/apphiloback/";
-var adminbase = "http://192.168.2.16/apphiloback/";
+var adminbase = "http://localhost/apphiloback/";
 //var adminbase = "http://192.168.2.9/webappbackend/";
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";
