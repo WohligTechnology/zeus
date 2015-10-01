@@ -10,7 +10,7 @@
 				<p><i class="icon ln-map-marker positive"></i> California, USA</p>
 
 				<!--        <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes. Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>-->
-				<p>{{eventdetail.content}}</p>
+				<p ng-bind-html="eventdetail.content"></p>
 
 				<h5 class="dark" ng-if="eventdetail.eventvideos && eventdetail.eventvideos != ''">Videos</h5>
 
