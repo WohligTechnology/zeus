@@ -7814,7 +7814,10 @@ a, a:hover {
   height: 50px;
   border-radius: 3px;
   overflow: hidden;
-  background: url(../img/user.png) center center no-repeat #ccc;
+  background-image: url(../img/user.png);
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: #ccc;
   position: absolute;
   left: 10px;
   top: 10px;
