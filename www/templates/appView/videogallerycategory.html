@@ -11,6 +11,9 @@
           Share
         </ion-option-button>
       </ion-item>
+      
+        <ion-infinite-scroll on-infinite="loadMorePolls()" ng-if="keepscrolling" distance="25%">
+        </ion-infinite-scroll>
     </ion-list>
   </ion-content>
   

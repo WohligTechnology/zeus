@@ -1,5 +1,6 @@
 <ion-view view-title="Notifications">
   <ion-content>
+	  {{msg}}
     <ion-list class="full-width">
       <ion-item ng-repeat="item in events" class="item-text-wrap">
         <img ng-if="item.image" ng-src="{{item.image}}" class="full-image" ng-if="item.image">

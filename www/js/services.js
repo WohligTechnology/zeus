@@ -128,22 +128,16 @@ angular.module('starter.services', [])
                     }
                 }).success(callback);
             },
-            getallvideogalleryvideo: function (id, callback) {
+            getallvideogalleryvideo: function (id, pageno, callback) {
                 return $http({
-                    url: adminurl + 'getallvideogalleryvideo',
-                    method: "POST",
-                    data: {
-                        'id': id
-                    }
+                    url: adminurl + 'getallvideogalleryvideo?id='+id+'&pageno='+pageno+'&maxrow='+4,
+                    method: "POST"
                 }).success(callback);
             },
-            getallgalleryimage: function (id, callback) {
+            getallgalleryimage: function (id, pageno, callback) {
                 return $http({
-                    url: adminurl + 'getallgalleryimage',
-                    method: "POST",
-                    data: {
-                        'id': id
-                    }
+                    url: adminurl + 'getallgalleryimage?id='+id+'&pageno='+pageno+'&maxrow='+15,
+                    method: "POST"
                 }).success(callback);
             },
             getsingleblog: function (id, callback) {
@@ -183,9 +177,9 @@ angular.module('starter.services', [])
                     method: "POST"
                 }).success(callback);
             },
-            getallevents: function (callback) {
+            getallevents: function (pageno, callback) {
                 return $http({
-                    url: adminurl + 'getallevents',
+                    url: adminurl + 'getallevents?pageno='+pageno+'&maxrow='+5,
                     method: "POST"
                 }).success(callback);
             },
@@ -195,15 +189,15 @@ angular.module('starter.services', [])
                     method: "POST"
                 }).success(callback);
             },
-            getallgallery: function (callback) {
+            getallgallery: function (pageno, callback) {
                 return $http({
-                    url: adminurl + 'getallgallery',
+                    url: adminurl + 'getallgallery?pageno='+pageno+'&maxrow='+2,
                     method: "POST"
                 }).success(callback);
             },
-            getallvideogallery: function (callback) {
+            getallvideogallery: function (pageno, callback) {
                 return $http({
-                    url: adminurl + 'getallvideogallery',
+                    url: adminurl + 'getallvideogallery?pageno='+pageno+'&maxrow='+2,
                     method: "POST"
                 }).success(callback);
             },
@@ -252,6 +246,11 @@ angular.module('starter.services', [])
             },
             getsingleuserdetail: function (callback) {
                 $http.get(adminurl + 'getsingleuserdetail?id='+$.jStorage.get("user").id, {
+                    withCredentials: false
+                }).success(callback);
+            },
+            gethomecontent : function (callback) {
+                $http.get(adminurl + 'gethomecontent', {
                     withCredentials: false
                 }).success(callback);
             },

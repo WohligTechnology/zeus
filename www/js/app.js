@@ -288,7 +288,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('serverimage', function () {
     return function (image) {
-	    console.log(image);
 	    if(image) {
 		    return adminimage + image;
 	    }
@@ -321,6 +320,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .filter('convertto12', function () {
     return function (date) {
         var newtime = "";
+	    if(date){
         var split = date.split(":");
         if (parseInt(split[0]) >= 12) {
             newtime = (parseInt(split[0]) - 12) + ":" + split[1] + " PM Onwards";
@@ -328,6 +328,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             newtime = split[0] + ":" + split[1] + " AM Onwards";
         }
         return newtime;
+	    }
     };
 })
 
@@ -368,8 +369,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('url', function ($filter) {
     return function (val) {
+	    if(val){
         var splitval = val.split(",");
 	    return splitval[0];
+	    }
     };
 })
 
