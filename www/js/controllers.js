@@ -165,13 +165,24 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 
 	if ($.jStorage.get("user")) {
-		$scope.userdetails = {};
-		$scope.userdetails.username = $.jStorage.get("user").username;
-		if ($scope.userdetails.username == "") {
-			$scope.userdetails.username = $.jStorage.get("user").name;
-		}
-		$scope.userdetails.userimage = $.jStorage.get("user").image;
-		$scope.userdetails.useremail = $.jStorage.get("user").email;
+		
+		MyServices.getsingleuserdetail(function (data) {
+			console.log("user");
+			console.log(data);
+			
+			$scope.userdetails = data;
+			$scope.userdetails.myimage = {
+			background: "url('"+adminimage + data.image+"')"
+		};
+	});
+		
+//		$scope.userdetails = {};
+//		$scope.userdetails.username = $.jStorage.get("user").username;
+//		if ($scope.userdetails.username == "") {
+//			$scope.userdetails.username = $.jStorage.get("user").name;
+//		}
+//		$scope.userdetails.userimage = $.jStorage.get("user").image;
+//		$scope.userdetails.useremail = $.jStorage.get("user").email;
 	}
 
 })
@@ -592,16 +603,26 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.edit = false;
 	$scope.user = {};
-	MyServices.getsingleuserdetail(function(data){
+	//	$scope.user.coverimage = "images_(1)1.jpg";
+	//	$scope.user.image = "1.png";
+	MyServices.getsingleuserdetail(function (data) {
 		console.log(data);
 		$scope.user = data;
+		$scope.user.newcoverimage = {
+			background: "url('"+adminimage + $scope.user.coverimage+"')"
+		};
+		$scope.user.newimage = {
+			background: "url('"+adminimage +  $scope.user.image+"')"
+		};
+		console.log($scope.user);
+
 	});
-//	$scope.user = {};
-//	$scope.user.id = $.jStorage.get("user").id;
-//	$scope.user.name = $.jStorage.get("user").name;
-//	$scope.user.email = $.jStorage.get("user").email;
-//	$scope.user.contact = $.jStorage.get("user").contact;
-//	$scope.user.location = $.jStorage.get("user").address;
+	//	$scope.user = {};
+	//	$scope.user.id = $.jStorage.get("user").id;
+	//	$scope.user.name = $.jStorage.get("user").name;
+	//	$scope.user.email = $.jStorage.get("user").email;
+	//	$scope.user.contact = $.jStorage.get("user").contact;
+	//	$scope.user.location = $.jStorage.get("user").address;
 	if ($.jStorage.get("user") && $.jStorage.get("user").dob)
 		$scope.user.dob = new Date($.jStorage.get("user").dob);
 
@@ -662,7 +683,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 
 	};
-	
+
 	$scope.picImageForCover = function () {
 		console.log("picture");
 		$cordovaImagePicker.getPictures(options).then(function (resultImage) {
@@ -806,17 +827,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.reloadblog = function (page) {
 		MyServices.getallblog(page, function (data, status) {
 			$ionicLoading.hide();
-			_.each(data.queryresult, function(n){
+			_.each(data.queryresult, function (n) {
 				$scope.blogs.push(n);
 			});
-			
-			if(data.queryresult.length == 0){
+
+			if (data.queryresult.length == 0) {
 				$scope.keepscrolling = false;
 			}
 		});
-		
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-            $scope.$broadcast('scroll.refreshComplete');
+
+		$scope.$broadcast('scroll.infiniteScrollComplete');
+		$scope.$broadcast('scroll.refreshComplete');
 	}
 
 
@@ -839,10 +860,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		$scope.reloadblog(1);
 	}
 
-	$scope.loadMorePolls = function(){
+	$scope.loadMorePolls = function () {
 		$scope.reloadblog($scope.pageno++);
 	}
-	
+
 })
 
 .controller('BlogDetailCtrl', function ($scope, MyServices, $ionicLoading, $stateParams) {

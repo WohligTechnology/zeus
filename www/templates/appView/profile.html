@@ -1,10 +1,10 @@
 <ion-view view-title="My Profile">
     <ion-content>
 
-        <div class="relative profile-banner" ng-style="{'background-image':'url({{user.coverimage | serverimage}})'}" ng-click="picImageForCover()">
+        <div class="relative profile-banner" ng-style="user.newcoverimage" ng-click="picImageForCover()">
            
            
-            <div class="image-adjust" ng-if="user.image" ng-click="picFromGallery()" ng-style="{'background-image':'url({{user.image | serverimage}})'}"></div>
+            <div class="image-adjust" ng-if="user.image" ng-click="picFromGallery()" ng-style="user.newimage"></div>
             
             
             <div class="gradient-hold full">

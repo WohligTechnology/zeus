@@ -288,6 +288,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('serverimage', function () {
     return function (image) {
+	    console.log(image);
 	    if(image) {
 		    return adminimage + image;
 	    }
