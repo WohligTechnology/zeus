@@ -211,7 +211,13 @@ angular.module('starter.services', [])
                 return $http({
                     url: adminurl + 'changesetting',
                     method: "POST",
-                    data: setting
+                    data: {
+					id:setting.id,
+					videonotification:JSON.stringify(setting.videonotification),
+					eventnotification:JSON.stringify(setting.eventnotification),
+					blognotification:JSON.stringify(setting.blognotification),
+					photonotification:JSON.stringify(setting.photonotification)
+				}
                 }).success(callback);
             },
             editprofile: function (profile, callback) {

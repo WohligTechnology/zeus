@@ -1343,16 +1343,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	MyServices.getsingleuserdetail(function (data) {
 		console.log(data);
 		$scope.user = data;
-		$scope.setting.video = ($scope.user.videonotification == 0) ? false : true;
-		$scope.setting.event = ($scope.user.eventnotification == 0) ? false : true;
-		$scope.setting.blog = ($scope.user.blognotification == 0) ? false : true;
-		$scope.setting.photo = ($scope.user.photonotification == 0) ? false : true;
+		$scope.setting.videonotification = JSON.parse($scope.user.videonotification);
+		$scope.setting.eventnotification = JSON.parse($scope.user.eventnotification);
+		$scope.setting.blognotification = JSON.parse($scope.user.blognotification);
+		$scope.setting.photonotification = JSON.parse($scope.user.photonotification);
 		$scope.id = $scope.user.id;
+		console.log($scope.setting);
 	});
 
 	$scope.changeSetting = function (setting) {
 		console.log(setting);
-		
+		setting.id = $scope.user.id;
 		MyServices.changesetting(setting, function (data) {
 			
 			console.log(data);
