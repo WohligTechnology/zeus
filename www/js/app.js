@@ -292,7 +292,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		    return adminimage + image;
 	    }
 	    else {
-		    return "img/default.png";
+		    return "img/image3.jpg";
+	    }
+    };
+})
+.filter('profileimg', function () {
+    return function (image) {
+	    if(image && image != null) {
+		    return adminimage + image;
+	    }
+	    else {
+		    return "img/user-2-o.jpg";
 	    }
     };
 })

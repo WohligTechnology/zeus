@@ -74,7 +74,7 @@
 		<div ng-if="msg!=''">{{msg}}</div>
 		<div class="article-view" ng-if="details.provider=='wordpress' && id==0">
 			<div class="relative stable-bg min-height">
-				<img class="full-image" ng-src="{{details.featured_image | serverimage}}">
+				<img class="full-image" ng-src="{{details.featured_image}}">
 				<div class="gradient-hold full">
 					<h4 class="light">{{details.author.first_name}} {{details.author.last_name}}</h4>
 					<p class="light">{{details.date|date : 'MMMM dd, yyyy'}}</p>
@@ -89,7 +89,7 @@
 
 		<div class="article-view" ng-if="id!=0">
 			<div class="relative stable-bg min-height" ng-if="details.blogimage[0].image">
-				<img class="full-image" ng-src="{{details.blogimage[0].image}}">
+				<img class="full-image" ng-src="{{details.blogimage[0].image | serverimage}}">
 				<div class="gradient-hold full">
 					<h4 class="light">{{details.title}} {{details.author.last_name}}</h4>
 					<p class="light">{{details.timestamp|date : 'MMMM dd, yyyy'}}</p>

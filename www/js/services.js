@@ -207,6 +207,13 @@ angular.module('starter.services', [])
                     method: "POST"
                 }).success(callback);
             },
+            changesetting : function (setting, callback) {
+                return $http({
+                    url: adminurl + 'changesetting',
+                    method: "POST",
+                    data: setting
+                }).success(callback);
+            },
             editprofile: function (profile, callback) {
                 return $http({
                     url: adminurl + 'editprofile',
@@ -250,7 +257,7 @@ angular.module('starter.services', [])
                 }).success(callback);
             },
             gethomecontent : function (callback) {
-                $http.get(adminurl + 'gethomecontent', {
+                $http.get(adminurl + 'getsinglearticles?id=1', {
                     withCredentials: false
                 }).success(callback);
             },

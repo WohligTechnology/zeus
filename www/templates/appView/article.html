@@ -1,9 +1,9 @@
 <ion-view view-title="{{article.title}}">
   <ion-content>
-      <img class="full-image" ng-src="{{article.image | serverimage}}">
+      <img class="full-image" imgloadingsec ng-src="{{article.image|serverimage}}">
 
       <div class="padding">
-        <h3>"{{article.title}}"</h3>
+        <h3>{{article.title}}</h3>
           <div ng-bind-html="article.content"></div>
       </div>
 

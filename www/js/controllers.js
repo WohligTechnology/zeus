@@ -1,8 +1,8 @@
 var reloadpage = false;
 var configreload = {};
-angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova'])
+angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter) {
 
 	// With the new view caching in Ionic, Controllers are only called
 	// when they are recreated or on app start, instead of every page change.
@@ -167,9 +167,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	if ($.jStorage.get("user")) {
 
 		MyServices.getsingleuserdetail(function (data) {
+			console.log(data.image);
 			$scope.userdetails = data;
 			$scope.userdetails.myimage = {
-				background: "url('" + adminimage + data.image + "')"
+				background: "url('" + $filter("profileimg")(data.image) + "')"
 			};
 		});
 
@@ -191,8 +192,18 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('ArticleCtrl', function ($scope, MyServices, $stateParams, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
 	$scope.article = {};
 	$scope.article.title = "my article";
+	$scope.showloading = function () {
+		$ionicLoading.show({
+			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+		});
+		$timeout(function () {
+			$ionicLoading.hide();
+		}, 10000);
+	};
+	$scope.showloading();
 	MyServices.getarticle($stateParams.id, function (data) {
 		$scope.article = data;
+		$ionicLoading.hide();
 	});
 
 })
@@ -536,7 +547,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('HomeCtrl', function ($scope, $location, $window, MyServices, $ionicLoading, $timeout) {
+.controller('HomeCtrl', function ($scope, $location, $window, MyServices, $ionicLoading, $timeout, $sce) {
 
 	//	if (!$.jStorage.get("user"))
 	//		$location.url("/access/login");
@@ -554,7 +565,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}, 10000);
 	};
 	showloading();
-	
+
 	var loginstatus = false;
 	var menu = {};
 	menu.setting = false;
@@ -562,9 +573,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.content = {};
 	MyServices.gethomecontent(function (data) {
 		console.log(data);
-				$scope.content = data;
-			$scope.content.content = $scope.content.content.toString();
-//		$scope.content.content = "<div class='box text-center'><h4>About us</h4><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p><a class='button button-small button-dark button-small button-outline button-pad'>Read More</a></div><div class='box text-center'><h4>Our Services</h4><div class='row col-icon'><div class='col'><i class='icon ln-pencil'></i><h3>Branding Design</h3></div><div class='col'><i class='icon ln-desktop'></i><h3>Web Design</h3></div></div><div class='row col-icon'><div class='col'><i class='icon ln-smartphone'></i><h3>Mobile App</h3></div><div class='col'><i class='icon ln-film-play'></i><h3>Video Production</h3></div></div></div><div class='box text-center'><h4>Our Clients</h4><div class='row'><div class='col'><img src='img/client1.jpg' class='half-image'></div><div class='col'><img src='img/client2.jpg' class='half-image'></div><div class='col'><img src='img/client3.jpg' class='half-image'></div><div class='col'><img src='img/client4.jpg' class='half-image'></div><div class='col'><img src='img/client4.jpg' class='half-image'></div></div></div>";
+		$scope.content = data;
+		$scope.content.content = $sce.trustAsHtml($scope.content.content);
+		//		$scope.content.content = "<div class='box text-center'><h4>About us</h4><p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p><a class='button button-small button-dark button-small button-outline button-pad'>Read More</a></div><div class='box text-center'><h4>Our Services</h4><div class='row col-icon'><div class='col'><i class='icon ln-pencil'></i><h3>Branding Design</h3></div><div class='col'><i class='icon ln-desktop'></i><h3>Web Design</h3></div></div><div class='row col-icon'><div class='col'><i class='icon ln-smartphone'></i><h3>Mobile App</h3></div><div class='col'><i class='icon ln-film-play'></i><h3>Video Production</h3></div></div></div><div class='box text-center'><h4>Our Clients</h4><div class='row'><div class='col'><img src='img/client1.jpg' class='half-image'></div><div class='col'><img src='img/client2.jpg' class='half-image'></div><div class='col'><img src='img/client3.jpg' class='half-image'></div><div class='col'><img src='img/client4.jpg' class='half-image'></div><div class='col'><img src='img/client4.jpg' class='half-image'></div></div></div>";
 		$ionicLoading.hide();
 	});
 
@@ -616,20 +627,32 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('ProfileCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $cordovaFileTransfer, $cordovaImagePicker) {
+.controller('ProfileCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $cordovaFileTransfer, $cordovaImagePicker, $filter) {
 
 	$scope.edit = false;
 	$scope.user = {};
+	$scope.user.newimage = "";
 	//	$scope.user.coverimage = "images_(1)1.jpg";
 	//	$scope.user.image = "1.png";
+	
+	var showloading = function () {
+		$ionicLoading.show({
+			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+		});
+		$timeout(function () {
+			$ionicLoading.hide();
+		}, 30000);
+	};
+	showloading();
 	MyServices.getsingleuserdetail(function (data) {
 		console.log(data);
+		$ionicLoading.hide();
 		$scope.user = data;
 		$scope.user.newcoverimage = {
-			background: "url('" + adminimage + $scope.user.coverimage + "')"
+			background: "url('" + $filter("serverimage")($scope.user.coverimage) + "')"
 		};
 		$scope.user.newimage = {
-			background: "url('" + adminimage + $scope.user.image + "')"
+			background: "url('" + $filter("profileimg")($scope.user.image) + "')"
 		};
 		console.log($scope.user);
 
@@ -1231,7 +1254,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 				$scope.msg = "";
 			}
 		});
-		
+
 		$scope.$broadcast('scroll.infiniteScrollComplete');
 		$scope.$broadcast('scroll.refreshComplete');
 	}
@@ -1314,7 +1337,27 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('SettingCtrl', function ($scope) {
+.controller('SettingCtrl', function ($scope, MyServices) {
+
+	$scope.setting = {};
+	MyServices.getsingleuserdetail(function (data) {
+		console.log(data);
+		$scope.user = data;
+		$scope.setting.video = ($scope.user.videonotification == 0) ? false : true;
+		$scope.setting.event = ($scope.user.eventnotification == 0) ? false : true;
+		$scope.setting.blog = ($scope.user.blognotification == 0) ? false : true;
+		$scope.setting.photo = ($scope.user.photonotification == 0) ? false : true;
+		$scope.id = $scope.user.id;
+	});
+
+	$scope.changeSetting = function (setting) {
+		console.log(setting);
+		
+		MyServices.changesetting(setting, function (data) {
+			
+			console.log(data);
+		});
+	}
 
 })
 
@@ -1502,4 +1545,3 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 
 });
-
