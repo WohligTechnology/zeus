@@ -172,7 +172,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			console.log(data.image);
 			$scope.userdetails = data;
 			$scope.userdetails.myimage = {
-				background: "url('" + $filter("profileimg")(data.image) + "')"
+				'background-image': "url('" + $filter("profileimg")(data.image) + "')"
 			};
 		});
 
@@ -651,10 +651,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		$ionicLoading.hide();
 		$scope.user = data;
 		$scope.user.newcoverimage = {
-			background: "url('" + $filter("serverimage")($scope.user.coverimage) + "')"
+			'background-image': "url('" + $filter("serverimage")($scope.user.coverimage) + "')"
 		};
 		$scope.user.newimage = {
-			background: "url('" + $filter("profileimg")($scope.user.image) + "')"
+			'background-image': "url('" + $filter("profileimg")($scope.user.image) + "')"
 		};
 		console.log($scope.user);
 
@@ -705,7 +705,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			// Success! Image data is here
 			console.log(resultImage[0]);
 			$scope.user.newimage = {
-				background: "url('" + resultImage[0] + "')"
+				'background-image': "url('" + resultImage[0] + "')"
 			};
 			$cordovaFileTransfer.upload(adminurl + "profileimageupload?id="+MyServices.getuser().id, resultImage[0], {})
 				.then(function (result) {
@@ -735,7 +735,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			console.log(resultImage[0]);
 
 			$scope.user.newcoverimage = {
-				background: "url('" + resultImage[0] + "')"
+				'background-image': "url('" + resultImage[0] + "')"
 			};
 			$cordovaFileTransfer.upload(adminurl + "coverimageupload?id="+MyServices.getuser().id, resultImage[0], {})
 				.then(function (result) {
