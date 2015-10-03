@@ -1,41 +1,43 @@
 <ion-view view-title="Events">
-	<ion-content>
-		<div class="article-view">
-			<img class="full-image" imgloadingsec ng-src="{{eventdetail.image | serverimage}}" ng-if="eventdetail.image">
-	<p>{{msg}}</p>
-			<div class="padding">
-				<h4 class="dark">{{eventdetail.title}}</h4>
+    <ion-content class="padding-bottom">
+        <div class="article-view">
+            <div class="min-height max-height">
+                <img class="full-image" imgloadingsec ng-src="{{eventdetail.image | serverimage}}" ng-if="eventdetail.image">
+            </div>
+            <p>{{msg}}</p>
+            <div class="padding-horizontal">
+                <h4 class="dark">{{eventdetail.title}}</h4>
 
-				<p ng-if="eventdetail.timestamp||eventdetail.starttime"><i class="icon ln-calendar3 positive"></i> <span ng-if="eventdetail.timestamp">&nbsp;{{eventdetail.timestamp|date : 'dd MMM, yyyy'}}</span><span ng-if="eventdetail.starttime"> @ {{eventdetail.starttime|convertto12}}</span></p>
-				<p ng-if="eventdetail.venue"><i class="icon ln-map-marker positive"></i>{{eventdetail.venue}}</p>
+                <p ng-if="eventdetail.timestamp||eventdetail.starttime"><span class="icon-space"><i class="icon ln-calendar3 positive"></i></span><span ng-if="eventdetail.timestamp">{{eventdetail.timestamp|date : 'dd MMM, yyyy'}}</span><span ng-if="eventdetail.starttime"> @ {{eventdetail.starttime|convertto12}}</span></p>
+                <p ng-if="eventdetail.venue"><span class="icon-space"><i class="icon ln-map-marker positive"></i></span>{{eventdetail.venue}}</p>
 
-				<!--        <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes. Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>-->
-				<p ng-bind-html="eventdetail.content | rawHtml"></p>
+                <!--        <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes. Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>-->
+                <p ng-bind-html="eventdetail.content | rawHtml"></p>
 
-				<h5 class="dark" ng-if="eventdetail.eventvideos && eventdetail.eventvideos != ''">Videos</h5>
+                <h5 class="dark" ng-if="eventdetail.eventvideos && eventdetail.eventvideos != ''">Videos</h5>
 
-				<ion-slide-box on-slide-changed="slideHasChanged($index)">
-					<ion-slide ng-repeat="images in eventdetail.eventvideos">
-						<div class="row">
-							<div class="col" ng-repeat="img in images">
-								<div youtube code="img.url"></div>
-							</div>
-						</div>
-					</ion-slide>
-				</ion-slide-box>
+                <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                    <ion-slide ng-repeat="images in eventdetail.eventvideos">
+                        <div class="row">
+                            <div class="col col-50" ng-repeat="img in images">
+                                <div youtube code="img.url"></div>
+                            </div>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
 
-				<h5 class="dark" ng-if="eventdetail.eventimages && eventdetail.eventimages != ''">Images</h5>
+                <h5 class="dark" ng-if="eventdetail.eventimages && eventdetail.eventimages != ''">Images</h5>
 
-				<ion-slide-box on-slide-changed="slideHasChanged($index)">
-					<ion-slide ng-repeat="images in eventdetail.eventimages">
-						<div class="row">
-							<div class="col" ng-repeat="img in images"><img ng-src="{{img.image|serverimage}}" imgloadingsec class="full-image"></div>
-						</div>
-					</ion-slide>
-				</ion-slide-box>
+                <ion-slide-box on-slide-changed="slideHasChanged($index)">
+                    <ion-slide ng-repeat="images in eventdetail.eventimages">
+                        <div class="row">
+                            <div class="col col-50" ng-repeat="img in images"><img ng-src="{{img.image|serverimage}}" imgloadingsec class="full-image"></div>
+                        </div>
+                    </ion-slide>
+                </ion-slide-box>
 
-			</div>
+            </div>
 
-		</div>
-	</ion-content>
+        </div>
+    </ion-content>
 </ion-view>

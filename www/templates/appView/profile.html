@@ -1,23 +1,17 @@
 <ion-view view-title="My Profile">
-    <ion-content>
+    <ion-content ng-init="edit=false">
 
         <div class="relative profile-banner" ng-style="user.newcoverimage">
-           
-           
-            <div class="image-adjust" ng-style="user.newimage"></div>
-            
-            
+            <button class="button button-dark button-small pull-right dark-transparent w-full" ng-click="picImageForCover()" ng-if="edit==true;">Edit Image</button>
+            <div class="image-adjust" ng-style="user.newimage">
+                <button class="button button-dark button-small dark-transparent w-full" ng-click="picFromGallery()" ng-if="edit==true;">Edit</button>
+            </div>
             <div class="gradient-hold full">
                 <h3 class="light">{{user.name}}</h3>
+                <button class="button button-positive button-edit button-round ion-edit" ng-click="edit=true" ng-show="edit==false;"></button>
+                <button class="button button-positive button-edit button-round ion-close" ng-click="edit=false" ng-show="edit==true;"></button>
             </div>
-
-            <button class="button button-positive button-edit button-round ion-edit" ng-click="edit=!edit"></button>
-
         </div>
-        
-        <button class="button button-positive button-block"  ng-click="picImageForCover()" ng-if="edit==true;">Cover Image</button>
-        <button class="button button-positive button-block"  ng-click="picFromGallery()" ng-if="edit==true;">Profile Image</button>
-
 
         <div ng-if="edit==false;">
             <ion-list>

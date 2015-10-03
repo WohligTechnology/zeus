@@ -10,15 +10,15 @@
 			<div class="address">
 				<div class="card">
 					<div class="list item-text-wrap">
-						<a href="#" class="item item-icon-left">
+						<div class="item item-icon-left">
 							<i class="icon ln-home3"></i> {{contact.content}}
-						</a>
+						</div>
 
-						<a href="#" class="item item-icon-left">
+						<a ng-href="callto:{{contact.text}}" class="item item-icon-left">
 							<i class="icon ln-phone2"></i> {{contact.text}}
 						</a>
 
-						<a href="#" class="item item-icon-left">
+						<a ng-href="mailto:{{contact.type}}" class="item item-icon-left">
 							<i class="icon ln-envelope"></i> {{contact.type}}
 						</a>
 

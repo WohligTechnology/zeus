@@ -1,4 +1,4 @@
-<ion-view view-title="BLog">
+<ion-view view-title="Blog">
 	<ion-content>
 
 		<!--
@@ -88,7 +88,7 @@
 		</div>
 
 		<div class="article-view" ng-if="id!=0">
-			<div class="relative stable-bg min-height" ng-if="details.blogimage[0].image">
+			<div class="relative stable-bg min-height max-height" ng-if="details.blogimage[0].image">
 				<img class="full-image" ng-src="{{details.blogimage[0].image | serverimage}}">
 				<div class="gradient-hold full">
 					<h4 class="light">{{details.title}} {{details.author.last_name}}</h4>
@@ -99,7 +99,7 @@
 			<div class="padding">
 				<h4>{{details.title}}</h4>
 				<p ng-bind-html="details.content"></p>
-				<img ng-src="{{img.image | serverimage}}" alt="" ng-repeat="img in details.blogimage">
+                <h5 class="dark">Video</h5>
 				<div youtube code="video.video" ng-repeat="video in details.blogvideo"></div>
 			</div>
 		</div>
