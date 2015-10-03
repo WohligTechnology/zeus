@@ -7714,7 +7714,7 @@ a {
   position: relative; }
 
 .input-tag, .login-tab .login .list .item input, .login-tab .login .list .item input[type="text"] {
-  color: #ffffff !important; }
+  color: #ffffff; }
 
 .button.button-positive-facebook {
   border-color: #2d4486;
@@ -8032,3 +8032,12 @@ img.play {
   height: 80px;
   overflow: hidden;
   text-overflow: ellipsis; }
+
+.ng-dirty.ng-invalid-email {
+  color: #F13232 !important; }
+.ng-dirty.ng-invalid {
+  color: #F13232 !important; }
+.ng-dirty.ng-invalid {
+  color: #F13232 !important; }
+.ng-dirty.ng-invalid-parse {
+  color: #F13232 !important; }

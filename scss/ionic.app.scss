@@ -96,7 +96,7 @@ a {color: inherit;}
 }
 
 .input-tag {
-    color: $light !important;
+    color: $light;
 }
 
 // facebook or twitter button
@@ -512,4 +512,19 @@ img.play {
     height: 80px;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.ng-dirty {
+    &.ng-invalid-email {
+        color: $positive !important;
+    }
+    &.ng-invalid {
+        color: $positive !important;
+    }
+    &.ng-invalid {
+        color: $positive !important;
+    } 
+    &.ng-invalid-parse {
+        color: $positive !important;
+    }
 }
