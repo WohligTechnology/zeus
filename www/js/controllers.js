@@ -115,6 +115,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		configreload.func();
 	} else {
 		MyServices.getallfrontmenu(function (data) {
+			console.log("config");
+			console.log(data);
 			MyServices.setconfigdata(data);
 			configreload.func();
 		})
@@ -634,7 +636,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.user.newimage = "";
 	//	$scope.user.coverimage = "images_(1)1.jpg";
 	//	$scope.user.image = "1.png";
-	
+
 	var showloading = function () {
 		$ionicLoading.show({
 			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
@@ -698,12 +700,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	};
 	$scope.picFromGallery = function () {
-		console.log("picture");
+		console.log("profile image");
 		$cordovaImagePicker.getPictures(options).then(function (resultImage) {
 			// Success! Image data is here
 			console.log(resultImage[0]);
-			$scope.user.image = resultImage[0];
-			$cordovaFileTransfer.upload(adminurl + "profileimageupload", resultImage[0], {})
+			$scope.user.newimage = {
+				background: "url('" + resultImage[0] + "')"
+			};
+			$cordovaFileTransfer.upload(adminurl + "profileimageupload?id="+MyServices.getuser().id, resultImage[0], {})
 				.then(function (result) {
 					var data = JSON.parse(result.response);
 					console.log("in response");
@@ -725,12 +729,15 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 
 	$scope.picImageForCover = function () {
-		console.log("picture");
+		console.log("cover image");
 		$cordovaImagePicker.getPictures(options).then(function (resultImage) {
 			// Success! Image data is here
 			console.log(resultImage[0]);
-			$scope.user.coverimage = resultImage[0];
-			$cordovaFileTransfer.upload(adminurl + "coverimageupload", resultImage[0], {})
+
+			$scope.user.newcoverimage = {
+				background: "url('" + resultImage[0] + "')"
+			};
+			$cordovaFileTransfer.upload(adminurl + "coverimageupload?id="+MyServices.getuser().id, resultImage[0], {})
 				.then(function (result) {
 					var data = JSON.parse(result.response);
 					console.log("in response");
@@ -1348,14 +1355,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		$scope.setting.blognotification = JSON.parse($scope.user.blognotification);
 		$scope.setting.photonotification = JSON.parse($scope.user.photonotification);
 		$scope.id = $scope.user.id;
-		console.log($scope.setting);
 	});
 
 	$scope.changeSetting = function (setting) {
 		console.log(setting);
 		setting.id = $scope.user.id;
 		MyServices.changesetting(setting, function (data) {
-			
+
 			console.log(data);
 		});
 	}
