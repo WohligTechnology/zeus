@@ -8041,3 +8041,6 @@ img.play {
   color: #F13232 !important; }
 .ng-dirty.ng-invalid-parse {
   color: #F13232 !important; }
+
+.imageView .gallery-slide-view {
+  border: none; }
