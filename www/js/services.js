@@ -163,7 +163,7 @@ angular.module('starter.services', [])
             },
             logout: function () {
 			  $.jStorage.flush();
-                $http({
+                return $http({
                     url: adminurl + 'logout',
                     method: "POST"
                 });
@@ -243,9 +243,15 @@ angular.module('starter.services', [])
                 }).success(callback);
             },
             getNotification: function (callback) {
+			  if($.jStorage.get('user')){
                 $http.get(adminurl + 'getallusernotification?id=' + $.jStorage.get('user').id, {
                     withCredentials: false
                 }).success(callback);
+			  }else{
+				  $http.get(adminurl + 'getallusernotification', {
+                    withCredentials: false
+                }).success(callback);
+			  }
             },
             getallfrontmenu: function (callback) {
                 $http.get(adminurl + 'getallfrontmenu', {
