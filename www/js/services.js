@@ -1,5 +1,5 @@
 var adminbase = "http://wohlig.co.in/webappbackend/";
-//var adminbase = "http://localhost/apphiloback/";
+var adminbase = "http://localhost/apphiloback/";
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";
 var adminhauth = adminbase + "index.php/hauth/";
@@ -124,7 +124,7 @@ angular.module('starter.services', [])
 			},
 			getallvideogalleryvideo: function (id, pageno, callback) {
 				return $http({
-					url: adminurl + 'getallvideogalleryvideo?id=' + id + '&pageno=' + pageno + '&maxrow=' + 4,
+					url: adminurl + 'getallvideogalleryvideo?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15,
 					method: "POST"
 				}).success(callback);
 			},
@@ -151,7 +151,7 @@ angular.module('starter.services', [])
 			},
 			getallblog: function (pageno, callback) {
 				return $http({
-					url: adminurl + 'getallblog?pageno=' + pageno + '&maxrow=' + 5,
+					url: adminurl + 'getallblog?pageno=' + pageno + '&maxrow=' + 15,
 					method: "POST"
 				}).success(callback);
 			},
@@ -173,7 +173,7 @@ angular.module('starter.services', [])
 			},
 			getallevents: function (pageno, callback) {
 				return $http({
-					url: adminurl + 'getallevents?pageno=' + pageno + '&maxrow=' + 5,
+					url: adminurl + 'getallevents?pageno=' + pageno + '&maxrow=' + 15,
 					method: "POST"
 				}).success(callback);
 			},
@@ -185,13 +185,13 @@ angular.module('starter.services', [])
 			},
 			getallgallery: function (pageno, callback) {
 				return $http({
-					url: adminurl + 'getallgallery?pageno=' + pageno + '&maxrow=' + 2,
+					url: adminurl + 'getallgallery?pageno=' + pageno + '&maxrow=' + 15,
 					method: "POST"
 				}).success(callback);
 			},
 			getallvideogallery: function (pageno, callback) {
 				return $http({
-					url: adminurl + 'getallvideogallery?pageno=' + pageno + '&maxrow=' + 2,
+					url: adminurl + 'getallvideogallery?pageno=' + pageno + '&maxrow=' + 15,
 					method: "POST"
 				}).success(callback);
 			},

@@ -3,33 +3,30 @@ var configreload = {};
 angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize'])
 
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $ionicLoading, $cordovaNetwork) {
+	addanalytics("flexible menu");
 
 	$ionicLoading.hide();
-	
-	console.log($cordovaNetwork.getNetwork());
-//	function internetaccess(toState) {
-//		if (navigator) {
-////			console.log(navigator.onLine);
-//			if (navigator.onLine != true) {
-////				console.log("on login false");
-//				onoffline = false;
-//				$location.url("/access/offline");
-//			} else {
-//
-////				console.log("on login true");
-//				onoffline = true;
-//			}
-//		}
-//	}
-//	$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-//		internetaccess(toState);
-//	});
-//	window.addEventListener("offline", function (e) {
-//		internetaccess();
-//	})
-//	window.addEventListener("online", function (e) {
-//		internetaccess();
-//	})
+
+	function internetaccess(toState) {
+		if (navigator) {
+			if (navigator.onLine != true) {
+				onoffline = false;
+				$location.url("/access/offline");
+			} else {
+				onoffline = true;
+			}
+		}
+	}
+	$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+		internetaccess(toState);
+	});
+	window.addEventListener("offline", function (e) {
+		internetaccess();
+	})
+	window.addEventListener("online", function (e) {
+		internetaccess();
+	})
+
 	$scope.menudata = [];
 	var loginstatus = false;
 
@@ -159,7 +156,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	MyServices.getallfrontmenu(function (data) {
 		MyServices.setconfigdata(data);
-			configreload.func();
+		configreload.func();
 	})
 	var logoutsuccess = function (data, success) {
 		if (data == 'true') {
@@ -236,40 +233,38 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showloading();
 	MyServices.getarticle($stateParams.id, function (data) {
 		$scope.article = data;
+		addanalytics(data.title);
 		$ionicLoading.hide();
 	});
 
 })
 
 .controller('LoginCtrl', function ($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
+	addanalytics("flexible login page");
 	$scope.logindata = {};
 	$.jStorage.flush();
 	$scope.config = MyServices.getconfigdata();
 	var loginstatus = false;
-	
-//	function internetaccess(toState) {
-//		if (navigator) {
-//			console.log(navigator.onLine);
-//			if (navigator.onLine != true) {
-//				console.log("on login false");
-//				onoffline = false;
-//				$location.url("/access/offline");
-//			} else {
-//
-//				console.log("on login true");
-//				onoffline = true;
-//			}
-//		}
-//	}
-//	$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-//		internetaccess(toState);
-//	});
-//	window.addEventListener("offline", function (e) {
-//		internetaccess();
-//	})
-//	window.addEventListener("online", function (e) {
-//		internetaccess();
-//	})
+
+	function internetaccess(toState) {
+		if (navigator) {
+			if (navigator.onLine != true) {
+				onoffline = false;
+				$location.url("/access/offline");
+			} else {
+				onoffline = true;
+			}
+		}
+	}
+	$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+		internetaccess(toState);
+	});
+	window.addEventListener("offline", function (e) {
+		internetaccess();
+	})
+	window.addEventListener("online", function (e) {
+		internetaccess();
+	})
 
 	$scope.setup = function () {
 		$scope.config = MyServices.getconfigdata();
@@ -300,7 +295,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		MyServices.setconfigdata(data);
 		$scope.setup();
 	})
-
 
 	// loader
 	$scope.showloading = function () {
@@ -501,7 +495,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('ResetPasswordCtrl', function ($scope) {
-
+	addanalytics("Reset password");
 	// loader
 	$scope.showloading = function () {
 		$ionicLoading.show({
@@ -572,6 +566,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('ForgotPasswordCtrl', function ($scope) {
+	addanalytics("Forgot password");
 	// loader
 	$scope.showloading = function () {
 		$ionicLoading.show({
@@ -595,8 +590,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('HomeCtrl', function ($scope, $location, $window, MyServices, $ionicLoading, $timeout, $sce) {
-
+.controller('HomeCtrl', function ($scope, $location, $window, MyServices, $ionicLoading, $timeout, $sce,$ionicSlideBoxDelegate) {
+	addanalytics("Home page");
 	configreload.onallpage();
 	var showloading = function () {
 		$ionicLoading.show({
@@ -642,11 +637,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	})
 
 	MyServices.getallsliders(function (data) {
-		//		console.log(data);
 		$scope.slides = data;
+		$ionicSlideBoxDelegate.update();
 	});
 
-	$scope.slides = ["img/image1.jpg", "img/image2.jpg", "img/image3.jpg"];
 })
 
 .controller('AboutCtrl', function ($scope) {
@@ -658,6 +652,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('OfflineCtrl', function ($scope, $ionicLoading) {
+	addanalytics("Offline page");
 	$ionicLoading.hide();
 })
 
@@ -680,6 +675,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	MyServices.getsingleuserdetail(function (data) {
 		$ionicLoading.hide();
 		$scope.user = data;
+		addanalytics(data.name);
 		$scope.user.newcoverimage = {
 			'background-image': "url('" + $filter("serverimage")($scope.user.coverimage) + "')"
 		};
@@ -757,7 +753,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('EventsCtrl', function ($scope, MyServices, $location, $ionicLoading) {
-
+	addanalytics("Event page");
 	configreload.onallpage();
 	$ionicLoading.show();
 	$scope.pageno = 1;
@@ -823,8 +819,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	var getsingleeventscallback = function (data, status) {
 		if (data == "") {
 			$scope.msg = "No data found";
+			addanalytics("Event detail page");
 		} else {
 			$scope.msg = "";
+			addanalytics(data.title);
 		}
 		if (data.eventimages && data.eventimages.length > 0) {
 			data.eventimages = _.chunk(data.eventimages, 2);
@@ -840,38 +838,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 .controller('BlogsCtrl', function ($scope, MyServices, $location, $ionicLoading) {
 	configreload.onallpage();
-	$scope.events = [{
-		image: "img/image1.jpg",
-		title: "Music Concert",
-		date: "7 Jan, 2016",
-		subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-		image: "img/image2.jpg",
-		title: "Music Concert",
-		date: "7 Jan, 2016",
-		subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-		image: "img/image3.jpg",
-		title: "Music Concert",
-		date: "7 Jan, 2016",
-		subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-		image: "img/image4.jpg",
-		title: "Music Concert",
-		date: "7 Jan, 2016",
-		subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-		image: "img/image5.jpg",
-		title: "Music Concert",
-		date: "7 Jan, 2016",
-		subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }, {
-		image: "img/image6.jpg",
-		title: "Music Concert",
-		date: "7 Jan, 2016",
-		subtitle: "Film, Media & Entertainment by paragyte technologies"
-  }];
-
 	$scope.blogs = [];
 	$ionicLoading.show();
 	$scope.pageno = 1;
@@ -924,6 +890,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 
 	if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "wordpress") {
+		addanalytics("Wordpress blog");
 		$scope.showWordpress = true;
 		$scope.keepscrolling = false;
 		Wordpress_UserName = $.jStorage.get("blogType").appid;
@@ -932,6 +899,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$scope.blogs = data.posts;
 		});
 	} else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "tumblr") {
+		addanalytics("Tumblr Blog");
 		$scope.showTumblr = true;
 		$scope.keepscrolling = false;
 		Tumblr_UserName = $.jStorage.get("blogType").appid;
@@ -946,6 +914,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			}
 		});
 	} else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "cms") {
+		addanalytics("Custom blog");
 		$scope.showCustomblog = true;
 		$scope.reloadblog(1);
 	}
@@ -964,6 +933,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	var getsingleblogsuccess = function (data, status) {
 		$scope.showcmsdetail = true;
 		$scope.details = data;
+		addanalytics(data.title);
 		if (data == '') {
 			$scope.msg = "No such blog";
 		} else {
@@ -986,6 +956,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	if ($stateParams.id == 0) {
 		$scope.msg = "";
 		$scope.details = $.jStorage.get('postdetail');
+		addanalytics("tumblr wordpress blog" + $scope.details.album);
 		if ($scope.details.provider == 'tumblr') {
 			var newdt = $scope.details.date.split('T');
 			$scope.details.date = newdt[0];
@@ -996,7 +967,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('PhotoGalleryCategoryCtrl', function ($scope, MyServices, $location, $ionicLoading) {
-
+	addanalytics("Photo gallery");
 	configreload.onallpage();
 	$ionicLoading.show();
 	$scope.msg = "Loading....";
@@ -1018,7 +989,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.loadgallery = function (pageno) {
 		MyServices.getallgallery(pageno, function (data, status) {
-			//			console.log(data.queryresult);
 			$ionicLoading.hide();
 
 			_.each(data.queryresult, function (n) {
@@ -1026,7 +996,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			});
 
 			if (data.queryresult == '') {
-				//				console.log("keep scrolling false");
 				$scope.keepscrolling = false;
 			}
 
@@ -1050,7 +1019,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('PhotoGalleryCtrl', function ($scope, MyServices, $stateParams, $ionicLoading, $timeout) {
-
+	addanalytics("Photo gallery Details");
 	configreload.onallpage();
 	$ionicLoading.show();
 	$scope.msg = "Loading....";
@@ -1103,8 +1072,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('VideoGalleryCategoryCtrl', function ($scope, MyServices, $ionicLoading) {
-
-
+	addanalytics("Video Gallery Page");
 	configreload.onallpage();
 	$ionicLoading.show();
 	$scope.videos = [];
@@ -1152,7 +1120,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('VideoGalleryCtrl', function ($scope, MyServices, $location, $ionicModal, $stateParams, $ionicLoading, $ionicPopup, $timeout) {
-
+	addanalytics("Video gallery detail page");
 	configreload.onallpage();
 	$ionicLoading.show();
 	$scope.pageno = 1;
@@ -1223,7 +1191,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('AccountCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
-
+	addanalytics("Account page");
 	configreload.onallpage();
 	if ($.jStorage.get("user")) {
 		$scope.userdetails = {};
@@ -1270,11 +1238,18 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 })
 
-.controller('SettingCtrl', function ($scope, MyServices) {
-
+.controller('SettingCtrl', function ($scope, MyServices, $ionicLoading, $timeout) {
+	addanalytics("Setting page");
 	configreload.onallpage();
+	$ionicLoading.show({
+		template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+	});
+	$timeout(function () {
+		$ionicLoading.hide();
+	}, 5000);
 	$scope.setting = {};
 	MyServices.getsingleuserdetail(function (data) {
+		$ionicLoading.hide();
 		$scope.user = data;
 		$scope.setting.videonotification = $scope.user.videonotification;
 		$scope.setting.eventnotification = $scope.user.eventnotification;
@@ -1291,12 +1266,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('SocialCtrl', function ($scope) {
+	addanalytics("Social page");
 	configreload.onallpage();
 	$scope.tab = 'fb';
 })
 
 .controller('NotificationCtrl', function ($scope, MyServices, $ionicLoading) {
-
+	addanalytics("Notification page");
 	configreload.onallpage();
 	$scope.showloading = function () {
 		$ionicLoading.show({
@@ -1313,6 +1289,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('ContactCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $compile) {
+	addanalytics("Contact page");
 	configreload.onallpage();
 	$scope.showloading = function () {
 		$ionicLoading.show({
@@ -1403,9 +1380,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('SearchCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
-
+	addanalytics("Search page");
 	// loader
-
+	$scope.search = {};
+	$scope.search.text = "";
 	configreload.onallpage();
 
 	$scope.showloading = function () {
@@ -1416,26 +1394,41 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 		}, 5000);
 	};
-	$scope.searchresults = {};
+	$scope.searchresults = [];
 
 	var searchelementcallback = function (data, status) {
 		$scope.searchresults.searchevent = data.events;
 		$scope.searchresults.searchgallery = data.gallery;
 		$scope.searchresults.searchvideogallery = data.videogallery;
+		$scope.searchresults.blog = data.blog;
+		$scope.searchresults.article = data.article;
 	}
 	$scope.getsearchelement = function (searchelement) {
-		MyServices.searchelement(searchelement, searchelementcallback)
+		$timeout(function () {
+			MyServices.searchelement(searchelement, searchelementcallback);
+		}, 2000)
+
 	}
 
 	// Go to Events page
 	$scope.openevents = function (id) {
-		$location.url("app/eventdetail/" + id);
+		$location.url("/app/eventdetail/" + id);
 	}
 	$scope.openvideogallery = function (id) {
-		$location.url("app/videogallery/" + id);
+		$location.url("/app/videogallery/" + id);
 	}
 	$scope.opengallery = function (id) {
-		$location.url("app/photogallery/" + id);
+		$location.url("/app/photogallery/" + id);
+	}
+	$scope.opengallery = function (id) {
+		$location.url("/app/blogdetail/" + id);
+	}
+	$scope.openarticle = function (id) {
+		$location.url("/app/article/" + id);
+	}
+	$scope.clear = function () {
+		$scope.search.text = "";
+		$scope.searchresults = [];
 	}
 
 });
