@@ -2,35 +2,34 @@ var reloadpage = false;
 var configreload = {};
 angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize'])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $ionicLoading, $cordovaNetwork) {
 
-	function internetaccess(toState) {
-		if (navigator) {
-			if (navigator.onLine != true) {
-				onoffline = false;
-				if (toState) {
-					if (toState.name != "app.create") {
-						$location.url("/access/offline");
-					} else {
-						if (!MyServices.getUSer()) {
-							$location.url("/access/offline");
-						}
-					}
-				}
-			} else {
-				onoffline = true;
-			}
-		}
-	}
-	$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
-		internetaccess(toState);
-	});
-	window.addEventListener("offline", function (e) {
-		internetaccess();
-	})
-	window.addEventListener("online", function (e) {
-		internetaccess();
-	})
+	$ionicLoading.hide();
+	
+	console.log($cordovaNetwork.getNetwork());
+//	function internetaccess(toState) {
+//		if (navigator) {
+////			console.log(navigator.onLine);
+//			if (navigator.onLine != true) {
+////				console.log("on login false");
+//				onoffline = false;
+//				$location.url("/access/offline");
+//			} else {
+//
+////				console.log("on login true");
+//				onoffline = true;
+//			}
+//		}
+//	}
+//	$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+//		internetaccess(toState);
+//	});
+//	window.addEventListener("offline", function (e) {
+//		internetaccess();
+//	})
+//	window.addEventListener("online", function (e) {
+//		internetaccess();
+//	})
 	$scope.menudata = [];
 	var loginstatus = false;
 
@@ -160,7 +159,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	MyServices.getallfrontmenu(function (data) {
 		MyServices.setconfigdata(data);
-		configreload.func();
+			configreload.func();
 	})
 	var logoutsuccess = function (data, success) {
 		if (data == 'true') {
@@ -232,7 +231,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 	$scope.showloading();
 	MyServices.getarticle($stateParams.id, function (data) {
@@ -247,6 +246,30 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$.jStorage.flush();
 	$scope.config = MyServices.getconfigdata();
 	var loginstatus = false;
+	
+//	function internetaccess(toState) {
+//		if (navigator) {
+//			console.log(navigator.onLine);
+//			if (navigator.onLine != true) {
+//				console.log("on login false");
+//				onoffline = false;
+//				$location.url("/access/offline");
+//			} else {
+//
+//				console.log("on login true");
+//				onoffline = true;
+//			}
+//		}
+//	}
+//	$scope.$on('$stateChangeSuccess', function (event, toState, toParams, fromState, fromParams) {
+//		internetaccess(toState);
+//	});
+//	window.addEventListener("offline", function (e) {
+//		internetaccess();
+//	})
+//	window.addEventListener("online", function (e) {
+//		internetaccess();
+//	})
 
 	$scope.setup = function () {
 		$scope.config = MyServices.getconfigdata();
@@ -385,7 +408,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$timeout(function () {
 				myPopup.close(); //close the popup after 3 seconds for some reason
 				$location.url("/app/home");
-			}, 4000);
+			}, 2000);
 
 		} else {
 			$scope.showPopupsignupfailure();
@@ -486,7 +509,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 
 	$scope.showPopup2 = function () {
@@ -556,7 +579,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 	var forgotpasswordcallback = function (data, status) {
 		$ionicLoading.hide();
@@ -581,7 +604,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 	showloading();
 
@@ -634,8 +657,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('OfflineCtrl', function ($scope) {
-
+.controller('OfflineCtrl', function ($scope, $ionicLoading) {
+	$ionicLoading.hide();
 })
 
 .controller('ProfileCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $cordovaFileTransfer, $cordovaImagePicker, $filter) {
@@ -651,7 +674,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 30000);
+		}, 5000);
 	};
 	showloading();
 	MyServices.getsingleuserdetail(function (data) {
@@ -747,7 +770,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 
 	$scope.loadevents = function (pageno) {
@@ -791,7 +814,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 
 	$scope.msg = "Loading...";
@@ -865,7 +888,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 
 	$scope.blogDetail = function (blog, name) {
@@ -956,7 +979,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 
 	// tumblr and wordpress
@@ -986,7 +1009,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 
 	$scope.sendphotoid = function (id) {
@@ -1042,7 +1065,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 30000);
+		}, 5000);
 	};
 
 	$scope.showloading();
@@ -1095,7 +1118,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 	$scope.loadphoto = function (pageno) {
 		MyServices.getallvideogallery(pageno, function (data, status) {
@@ -1143,7 +1166,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 30000);
+		}, 5000);
 	};
 	$scope.showloading();
 	$scope.videoid = $stateParams.id;
@@ -1218,7 +1241,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 	$scope.profile = {};
 	$scope.showPopup1 = function () {
@@ -1281,7 +1304,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 30000);
+		}, 5000);
 	};
 	MyServices.getNotification(function (data) {
 		$scope.events = data.queryresult;
@@ -1297,7 +1320,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 	$scope.enquiry = {};
 	var createenquirycallback = function (data, status) {
@@ -1391,7 +1414,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 10000);
+		}, 5000);
 	};
 	$scope.searchresults = {};
 

@@ -13,11 +13,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
             cordova.plugins.Keyboard.disableScroll(true);
         }
         if (window.StatusBar) {
-            StatusBar.overlaysWebView(true);
-            StatusBar.styleLightContent();
+//            StatusBar.overlaysWebView(true);
+//            StatusBar.styleLightContent();
         }
         if (window.cordova && window.cordova.platformId == 'android') {
-            StatusBar.backgroundColorByHexString("#F13232");
+//            StatusBar.backgroundColorByHexString("#F13232");
         }
     });
 })

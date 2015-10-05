@@ -10,9 +10,6 @@ var foods = [];
 //FOR WORDPRESS INTEGRATION 
 var Wordpress_UserName = "en.blog.wordpress.com";
 
-//FOR FLICKR INTEGRATION
-var Api_Key = "3e67f6179c11014cc027c6a944d7d9fb";
-var User_Key = "132717193@N04";
 var WORDPRESS_API_URL = 'https://public-api.wordpress.com/rest/v1.1/';
 
 //for tumblr
