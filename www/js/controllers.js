@@ -590,7 +590,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('HomeCtrl', function ($scope, $location, $window, MyServices, $ionicLoading, $timeout, $sce,$ionicSlideBoxDelegate) {
+.controller('HomeCtrl', function ($scope, $location, $window, MyServices, $ionicLoading, $timeout, $sce, $ionicSlideBoxDelegate) {
 	addanalytics("Home page");
 	configreload.onallpage();
 	var showloading = function () {
