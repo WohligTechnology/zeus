@@ -870,6 +870,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.reloadblog = function (page) {
 		MyServices.getallblog(page, function (data, status) {
+			console.log(data);
 			$ionicLoading.hide();
 			_.each(data.queryresult, function (n) {
 				$scope.blogs.push(n);
@@ -931,6 +932,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$ionicLoading.hide();
 	$scope.msg = "Loading....";
 	var getsingleblogsuccess = function (data, status) {
+		console.log(data);
 		$scope.showcmsdetail = true;
 		$scope.details = data;
 		addanalytics(data.title);

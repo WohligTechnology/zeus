@@ -1,76 +1,5 @@
 <ion-view view-title="Blog">
 	<ion-content>
-
-		<!--
-        <div class="article-view">
-
-            <div class="relative stable-bg min-height">
-                <img class="full-image" src="http://ionicframework.com/img/docs/delorean.jpg">
-                <div class="gradient-hold full">
-                    <h4 class="light">Adrian Carnage</h4>
-                    <p class="light">January, 15, 2015</p>
-                </div>
-            </div>
-
-            <div class="padding">
-                <h4>We make difference in the market, we also do a lot of work.</h4>
-                <p>Our websites are our online homes. It makes sense that we want &nbsp; to give them personality and warmth, &nbsp; just like we do with our physical homes.</p>
-
-                <h5 class="dark">Videos</h5>
-
-                <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                    <ion-slide>
-                        <div class="row">
-                            <div class="col">
-                                <img src="img/image1.jpg" class="full-image">
-                            </div>
-                            <div class="col">
-                                <img src="img/image2.jpg" class="full-image">
-                            </div>
-                        </div>
-                    </ion-slide>
-                    <ion-slide>
-                        <div class="row">
-                            <div class="col">
-                                <img src="img/image1.jpg" class="full-image">
-                            </div>
-                            <div class="col">
-                                <img src="img/image2.jpg" class="full-image">
-                            </div>
-                        </div>
-                    </ion-slide>
-                </ion-slide-box>
-
-                <h5 class="dark">Images</h5>
-
-                <ion-slide-box on-slide-changed="slideHasChanged($index)">
-                    <ion-slide>
-                        <div class="row">
-                            <div class="col">
-                                <img src="img/image1.jpg" class="full-image">
-                            </div>
-                            <div class="col">
-                                <img src="img/image2.jpg" class="full-image">
-                            </div>
-
-                        </div>
-                    </ion-slide>
-                    <ion-slide>
-                        <div class="row">
-                            <div class="col">
-                                <img src="img/image1.jpg" class="full-image">
-                            </div>
-                            <div class="col">
-                                <img src="img/image2.jpg" class="full-image">
-                            </div>
-                        </div>
-                    </ion-slide>
-                </ion-slide-box>
-
-            </div>
-
-        </div>
--->
 		<div ng-if="msg!=''">{{msg}}</div>
 		<div class="article-view" ng-if="details.provider=='wordpress' && id==0">
 			<div class="relative stable-bg min-height">
@@ -92,7 +21,7 @@
 				<img class="full-image" ng-src="{{details.blogimage[0].image | serverimage}}">
 				<div class="gradient-hold full">
 					<h4 class="light">{{details.title}} {{details.author.last_name}}</h4>
-					<p class="light">{{details.timestamp|date : 'MMMM dd, yyyy'}}</p>
+					<p class="light">{{details.timestamp | formatdate}}</p>
 				</div>
 			</div>
 

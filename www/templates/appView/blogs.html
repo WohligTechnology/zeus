@@ -1,24 +1,5 @@
 <ion-view view-title="Blog">
     <ion-content>
-
-        <!--
-        <div class="padding card">
-            <ion-item class="item-avatar item-icon-right">
-                <div class="image-adjust img-blog" ng-style="{'background-image':'url(img/user.png)'}"></div>
-                <h2>Marty McFly</h2>
-                <p>November 05, 1955</p>
-                <i class="icon ln-share2"></i>
-            </ion-item>
-
-            <div class="item item-body" ui-sref="app.blogdetail">
-                <img class="full-image" src="img/image1.jpg">
-                <p>
-                    This is a "Facebook" styled Card. The header is created from a Thumbnail List item, the content is from a card-body consisting of an image and paragraph text. The footer consists of tabs, icons aligned left, within the card-footer.
-                </p>
-            </div>
-        </div>
--->
-
 	    <p>{{msg}}</p>
         <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpress">
             <ion-item class="item-avatar item-icon-right">
@@ -70,7 +51,7 @@
             <ion-item class="item-avatar item-icon-right">
                 <img class="image-adjust img-blog" ng-src="http://a.13cdn.com/Facebook_TaylorSwift.png">
                 <h2>{{blog.name}}</h2>
-                <p ng-if="blog.date">{{blog.timestamp|formatdate}}</p>
+                <p ng-if="blog.timestamp">{{blog.timestamp|formatdate}}</p>
                 <i class="icon ln-share2"></i>
             </ion-item>
 
