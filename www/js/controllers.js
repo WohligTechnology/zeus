@@ -221,7 +221,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('ArticleCtrl', function ($scope, MyServices, $stateParams, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
 	configreload.onallpage();
 	$scope.article = {};
-	$scope.article.title = "my article";
+	$scope.msg = "";
 	$scope.showloading = function () {
 		$ionicLoading.show({
 			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
@@ -233,6 +233,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showloading();
 	MyServices.getarticle($stateParams.id, function (data) {
 		$scope.article = data;
+		if(data == ''){
+			$scope.msg = "Blank Article.";
+		}
 		addanalytics(data.title);
 		$ionicLoading.hide();
 	});
@@ -243,6 +246,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	addanalytics("flexible login page");
 	$scope.logindata = {};
 	$.jStorage.flush();
+
+	$scope.forgotpass = function () {
+		$location.url("/access/forgotpassword");
+	}
+
 	$scope.config = MyServices.getconfigdata();
 	var loginstatus = false;
 
@@ -410,6 +418,21 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		$ionicLoading.hide();
 		$scope.signup = {};
 	}
+	
+	var msgforall = function(msg){
+		$ionicLoading.hide();
+		var myPopup = $ionicPopup.show({
+				template: '<p class="text-center">'+msg+'</p>',
+				title: 'Login',
+				scope: $scope,
+
+			});
+			$timeout(function () {
+				myPopup.close(); //close the popup after 3 seconds for some reason
+			}, 2000);
+
+	}
+	
 	$scope.signupsubmit = function (signup) {
 		$ionicLoading.show();
 		$scope.allvalidation = [{
@@ -429,6 +452,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		if (check) {
 			MyServices.signup($scope.signup, signupsuccess);
 		} else {
+			msgforall("Fill all data");
 			$ionicLoading.hide();
 		}
 
@@ -465,6 +489,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		if (check) {
 			MyServices.signin(signin, signinsuccess);
 		} else {
+			msgforall("Fill all data");
 			$ionicLoading.hide();
 		}
 
@@ -560,12 +585,35 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.changepassword = function (password) {
 		$ionicLoading.show();
-		MyServices.changepassword(password, changepasswordcallback)
+		
+		$ionicLoading.show();
+		$scope.allvalidation = [{
+			field: $scope.password.oldpassword,
+			validation: ""
+        }, {
+			field: $scope.password.newpassword,
+			validation: ""
+        }, {
+			field: $scope.password.confirmpassword,
+			validation: ""
+        }];
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			MyServices.changepassword(password, changepasswordcallback);
+		} else {
+			msgforall("Fill all data");
+			$ionicLoading.hide();
+		}
+
+		
+		
+		
+		
 	}
 
 })
 
-.controller('ForgotPasswordCtrl', function ($scope) {
+.controller('ForgotPasswordCtrl', function ($scope, $ionicLoading, $timeout, MyServices, $location, $ionicPopup) {
 	addanalytics("Forgot password");
 	// loader
 	$scope.showloading = function () {
@@ -577,12 +625,35 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}, 5000);
 	};
 	var forgotpasswordcallback = function (data, status) {
+		console.log(data);
 		$ionicLoading.hide();
+		if (data == "true") {
+			var myPopup = $ionicPopup.show({
+				template: '<p class="text-center">Email has been send to you</p>',
+				title: 'Email send',
+				scope: $scope,
+
+			});
+			$timeout(function () {
+				myPopup.close(); //close the popup after 3 seconds for some reason
+				$location.url("/access/login");
+			}, 2000);
+			
+		} else {
+			var myPopup = $ionicPopup.show({
+				template: '<p class="text-center">Not a valid email.</p>',
+				title: 'Oops Try Again!',
+				scope: $scope,
+
+			});
+			$timeout(function () {
+				myPopup.close(); //close the popup after 3 seconds for some reason
+			}, 2000);
+		}
 	}
 	$scope.forgotpassword = function (email) {
 		$ionicLoading.show();
-		MyServices.forgotpassword(email, forgotpasswordcallback)
-
+		MyServices.forgotpassword(email, forgotpasswordcallback);
 	}
 })
 
@@ -662,6 +733,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.edit = false;
 	$scope.user = {};
 	$scope.user.newimage = "";
+	$scope.password = {};
 
 	var showloading = function () {
 		$ionicLoading.show({
@@ -707,6 +779,54 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 				$scope.edit = !$scope.edit
 			}
 		})
+	}
+	
+	$scope.passwordpopup = function (msg) {
+		var myPopup = $ionicPopup.show({
+			template: '<p class="text-center">'+msg+'</p>',
+			title: 'Forgot Password!',
+			scope: $scope,
+
+		});
+		$timeout(function () {
+			myPopup.close(); //close the popup after 3 seconds for some reason
+		}, 2000);
+	};
+	
+	$scope.changePassword = function () {
+		$scope.password.id = MyServices.getuser().id;
+		
+		
+		$scope.allvalidation = [{
+			field: $scope.password.oldpassword,
+			validation: ""
+        }, {
+			field: $scope.password.newpassword,
+			validation: ""
+        }, {
+			field: $scope.password.confirmpassword,
+			validation: ""
+        }];
+		var check = formvalidation($scope.allvalidation);
+		if (check) {
+			MyServices.changepassword($scope.password, function(data){
+			if(data == -1){
+				$scope.passwordpopup("New password and Confirm password does not match");
+			}else if(data == 0){
+				$scope.passwordpopup("Old password does not match");
+			}else{
+				$scope.passwordpopup("Password changed successfully");
+			}
+			console.log(data);
+		});
+		} else {
+			$ionicLoading.hide();
+			$scope.passwordpopup("Fill all data.");
+		}
+		
+		
+		
+		
 	}
 
 	//	pick image from gallery
@@ -1301,7 +1421,21 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 		}, 5000);
 	};
+	$scope.showloading();
 	$scope.enquiry = {};
+	var msgforall = function(msg){
+		$ionicLoading.hide();
+		var myPopup = $ionicPopup.show({
+				template: '<p class="text-center">'+msg+'</p>',
+				title: 'Contact Us',
+				scope: $scope,
+
+			});
+			$timeout(function () {
+				myPopup.close(); //close the popup after 3 seconds for some reason
+			}, 2000);
+
+	}
 	var createenquirycallback = function (data, status) {
 		$ionicLoading.hide();
 		if (data == 1) {
@@ -1352,6 +1486,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		if (check) {
 			MyServices.createenquiry(enquiry, createenquirycallback)
 		} else {
+			msgforall('Fill all data');
 			$ionicLoading.hide();
 		}
 

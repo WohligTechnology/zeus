@@ -96,11 +96,8 @@ angular.module('starter.services', [])
 			},
 			forgotpassword: function (email, callback) {
 				return $http({
-					url: adminurl + 'forgotpassword',
-					method: "POST",
-					data: {
-						'email': email
-					}
+					url: adminurl + 'forgotpassword?email=' + email,
+					method: "POST"
 				}).success(callback);
 			},
 			getsingleevents: function (id, callback) {
@@ -141,6 +138,13 @@ angular.module('starter.services', [])
 					data: {
 						'id': id
 					}
+				}).success(callback);
+			},
+			changepassword: function (password, callback) {
+				return $http({
+					url: adminurl + 'changepassword',
+					method: "POST",
+					data: password
 				}).success(callback);
 			},
 			authenticate: function () {
