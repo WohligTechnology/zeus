@@ -50,7 +50,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			});
 		}
 		if (loginstatus == true && !MyServices.getuser()) {
-			
+
 			$location.url("/access/login");
 		}
 	}
@@ -408,7 +408,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			user = data;
 			var myPopup = $ionicPopup.show({
 				template: '<p class="text-center">Signed up successfully!</p>',
-			 title: 'Congrats!',
+				title: 'Congrats!',
 				scope: $scope,
 
 			});
@@ -740,6 +740,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.user = {};
 	$scope.user.newimage = "";
 	$scope.password = {};
+	if (!_.isDate($scope.user.dob)) {
+		$scope.user.dob = moment($scope.user.dob, "YYYY-MM-DD");
+	}
+	$scope.changeedit = function (val) {
+
+		if (!_.isDate($scope.user.dob)) {
+			$scope.user.dob = moment($scope.user.dob, "YYYY-MM-DD");
+		}
+
+		$scope.edit = val;
+	}
 
 	var showloading = function () {
 		$ionicLoading.show({
@@ -1336,7 +1347,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$ionicPlatform.onHardwareBackButton(function () {
 		console.log("hardwarebutton");
-//		alert("back back");
+		//		alert("back back");
 		$scope.closeVideo();
 		//		console.log("Back Button");
 	});
@@ -1430,28 +1441,28 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.tab = 'fb';
 })
 
-.controller('NotificationCtrl', function ($scope, MyServices, $ionicLoading,$filter) {
+.controller('NotificationCtrl', function ($scope, MyServices, $ionicLoading, $filter) {
 	addanalytics("Notification page");
 	configreload.onallpage();
 	$scope.notification = {};
 	$scope.notify = [];
 	$scope.pageno = 1;
 	$scope.user = MyServices.getuser();
-	
-	
-	
-	$scope.share= function(item) { 
-		
+
+
+
+	$scope.share = function (item) {
+
 		window.plugins.socialsharing.share(item.content, null, $filter('serverimage')(item.image));
 	}
-	
+
 	if ($scope.user) {
-		MyServices.getsingleuserdetail(function(data){
-		$scope.notification.video = data.videonotification;
-		$scope.notification.event = data.eventnotification;
-		$scope.notification.blog = data.blognotification;
-		$scope.notification.photo = data.photonotification;
-			
+		MyServices.getsingleuserdetail(function (data) {
+			$scope.notification.video = data.videonotification;
+			$scope.notification.event = data.eventnotification;
+			$scope.notification.blog = data.blognotification;
+			$scope.notification.photo = data.photonotification;
+
 		})
 	} else {
 
@@ -1473,30 +1484,30 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		MyServices.getNotification(pageno, $scope.notification, function (data) {
 			console.log(data);
 			console.log(data.queryresult);
-			_.each(data.queryresult, function(n){
-					switch (n.linktype) {
-					case '3':
-						n.tolink = n.event;
-						break;
-					case '6':
-						n.tolink = n.gallery;
-						break;
-					case '8':
-						n.tolink = n.video;
-						break;
-					case '10':
-						n.tolink = n.blog;
-						break;
-					case '2':
-						n.tolink = n.article;
-						break;
-					default:
-						n.tolink = 0;
+			_.each(data.queryresult, function (n) {
+				switch (n.linktype) {
+				case '3':
+					n.tolink = n.event;
+					break;
+				case '6':
+					n.tolink = n.gallery;
+					break;
+				case '8':
+					n.tolink = n.video;
+					break;
+				case '10':
+					n.tolink = n.blog;
+					break;
+				case '2':
+					n.tolink = n.article;
+					break;
+				default:
+					n.tolink = 0;
 
-					}	
+				}
 				n.tolinkpath = n.linktypelink;
-				
-			$scope.notify.push(n);
+
+				$scope.notify.push(n);
 			});
 			$ionicLoading.hide();
 		});
@@ -1504,14 +1515,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		$scope.$broadcast('scroll.infiniteScrollComplete');
 		$scope.$broadcast('scroll.refreshComplete');
 	}
-	
+
 	$scope.loadnotification(1);
 
 	$scope.loadMoreNotification = function () {
 		$scope.loadnotification(++$scope.pageno);
 	}
-	
-	$scope.notifyclick = function(item){
+
+	$scope.notifyclick = function (item) {
 		console.log(item);
 	}
 
