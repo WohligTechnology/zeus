@@ -17,7 +17,7 @@ var Tumblr_UserName = "";
 var TUBMLR_API_URL = 'http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + Tumblr_UserName + '/posts';
 
 angular.module('starter.services', [])
-	.factory('MyServices', function ($http) {
+	.factory('MyServices', function ($http,$filter) {
 		return {
 			all: function () {
 				return chats;
@@ -204,10 +204,13 @@ angular.module('starter.services', [])
 				}).success(callback);
 			},
 			editprofile: function (profile, callback) {
+				var user=_.cloneDeep(profile);
+				user.dob=$filter("date")(user.dob,"yyyy-MM-dd");
+				
 				return $http({
 					url: adminurl + 'editprofile',
 					method: "POST",
-					data: profile
+					data: user
 				}).success(callback);
 			},
 			getWordpressPosts: function (wdp, callback) {

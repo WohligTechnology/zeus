@@ -782,7 +782,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			if (data != 0) {
 				$.jStorage.set("user", data);
 				$scope.showPopup1();
-				$scope.edit = !$scope.edit
+				$scope.edit = !$scope.edit;
 			}
 		})
 	}
