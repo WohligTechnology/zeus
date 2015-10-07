@@ -1438,7 +1438,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	
 	$scope.share= function(item) { 
 		
-		socialShare(item.content, null, $filter('serverimage')(item.image));
+		window.plugins.socialsharing.share(item.content, null, $filter('serverimage')(item.image));
 	}
 	
 	if ($scope.user) {
