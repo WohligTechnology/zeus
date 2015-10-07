@@ -9388,7 +9388,7 @@ a:hover {
         .login-tab .login .list .item input::-webkit-input-placeholder {
           color: #ffffff; }
         .login-tab .login .list .item span {
-          padding-left: 35px;
+          padding-left: 32px;
           padding-bottom: 2px;
           color: white; }
     .login-tab .login .login-btn {
@@ -9675,3 +9675,11 @@ img.play {
 
 .button.dark-transparent {
   background-color: rgba(34, 34, 34, 0.5); }
+
+.middle-align {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  left: 0;
+  transform: translateY(-50%);
+  font-size: 16px; }

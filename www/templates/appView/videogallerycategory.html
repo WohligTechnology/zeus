@@ -1,9 +1,8 @@
 <ion-view view-title="Videos Category">
-
-  <ion-content>
-		<div class="text-center energized middle-align" ng-if="msg != ''">
+<div class="text-center positive middle-align" ng-if="msg != ''">
 			{{msg}}.
-		</div>
+</div>
+  <ion-content>
     <ion-list>
       <ion-item ng-repeat="item in videos" class="item-thumbnail-left item-text-wrap" ui-sref="app.videogallery({id:item.id})">
 <!--        <div class="image-adjust img-content" ng-style='{"background-image":"url("{{item.image}}")"}'></div>-->

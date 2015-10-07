@@ -1,6 +1,8 @@
 <ion-view view-title="Notifications">
+ <div class="text-center positive middle-align" ng-if="msg != ''">
+			{{msg}}.
+</div>
   <ion-content>
-	  {{msg}}
     <ion-list class="full-width">
       <ion-item ng-repeat="item in notify" class="item-text-wrap" ui-sref="app.{{item.tolinkpath}}({id:item.tolink})" >
         <img ng-if="item.image" ng-src="{{item.image | serverimage}}" class="full-image" ng-if="item.image">

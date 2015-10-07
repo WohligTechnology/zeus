@@ -1,6 +1,8 @@
 <ion-view view-title="{{article.title}}">
+ <div class="text-center positive middle-align" ng-if="msg != ''">
+			{{msg}}
+</div>
   <ion-content>
-	  <span ng-if = "msg != ''">{{msg}}</span>
       <img class="full-image" imgloadingsec ng-src="{{article.image|serverimage}}" ng-if="article.image">
 
       <div class="padding">

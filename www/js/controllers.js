@@ -33,7 +33,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	// loader
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -226,7 +226,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.msg = "";
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -309,7 +309,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	// loader
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -380,6 +380,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 		var myPopup = $ionicPopup.show({
 			template: '<p class="text-center">Successfully registered!</p>',
+			title: 'Congrats!',
 			scope: $scope,
 
 		});
@@ -390,6 +391,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showPopupsignupfailure = function () {
 		var myPopup = $ionicPopup.show({
 			template: '<p class="text-center">Sorry! Try again.</p>',
+			title: 'Oops!',
 			scope: $scope,
 
 		});
@@ -406,6 +408,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			user = data;
 			var myPopup = $ionicPopup.show({
 				template: '<p class="text-center">Signed up successfully!</p>',
+			 title: 'Congrats!',
 				scope: $scope,
 
 			});
@@ -526,7 +529,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	// loader
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -536,6 +539,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showPopup2 = function () {
 		var myPopup = $ionicPopup.show({
 			template: '<p class="text-center">Your password is updated!</p>',
+			title: 'Password updated!',
 			scope: $scope,
 
 		});
@@ -620,7 +624,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	// loader
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -631,8 +635,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		$ionicLoading.hide();
 		if (data == "true") {
 			var myPopup = $ionicPopup.show({
-				template: '<p class="text-center">Email has been send to you</p>',
-				title: 'Email send',
+				template: '<p class="text-center">Please check your email, an email has been send to your id.</p>',
+				title: 'Email sent!',
 				scope: $scope,
 
 			});
@@ -668,7 +672,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	configreload.onallpage();
 	var showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -739,7 +743,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	var showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -764,7 +768,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showPopup1 = function () {
 		var myPopup = $ionicPopup.show({
 			template: '<p class="text-center">Your profile is updated!</p>',
-			title: 'Thankyou!',
+			title: 'Thank you!',
 			scope: $scope,
 
 		});
@@ -884,7 +888,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.msg = "Loading....";
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -928,7 +932,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	configreload.onallpage();
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -972,7 +976,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 	showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1069,7 +1073,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1101,7 +1105,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.keepscrolling = true;
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1155,7 +1159,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1207,7 +1211,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	// loader
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1255,7 +1259,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1360,7 +1364,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1371,7 +1375,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 		var myPopup = $ionicPopup.show({
 			template: '<p class="text-center">Your profile is created!</p>',
-			title: 'Thankyou!',
+			title: 'Thank you!',
 			scope: $scope,
 		});
 		$timeout(function () {
@@ -1397,7 +1401,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	addanalytics("Setting page");
 	configreload.onallpage();
 	$ionicLoading.show({
-		template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+		template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 	});
 	$timeout(function () {
 		$ionicLoading.hide();
@@ -1459,7 +1463,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	//	console.log(
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1518,7 +1522,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	configreload.onallpage();
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
@@ -1628,7 +1632,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.showloading = function () {
 		$ionicLoading.show({
-			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
+			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
 		});
 		$timeout(function () {
 			$ionicLoading.hide();

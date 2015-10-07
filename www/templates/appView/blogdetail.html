@@ -1,6 +1,8 @@
 <ion-view view-title="Blog">
+	<div class="text-center positive middle-align" ng-if="msg != ''">
+			{{msg}}.
+</div>
 	<ion-content>
-		<div ng-if="msg!=''">{{msg}}</div>
 		<div class="article-view" ng-if="details.provider=='wordpress' && id==0">
 			<div class="relative stable-bg min-height">
 				<img class="full-image" ng-src="{{details.featured_image}}">

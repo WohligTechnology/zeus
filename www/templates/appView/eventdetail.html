@@ -1,10 +1,12 @@
 <ion-view view-title="Events">
+<div class="text-center positive middle-align" ng-if="msg != ''">
+			{{msg}}.
+</div>
 	<ion-content class="padding-bottom">
 		<div class="article-view">
 			<div class="min-height max-height" ng-if="eventdetail.image">
 				<img class="full-image" imgloadingsec ng-src="{{eventdetail.image | serverimage}}">
 			</div>
-			<p>{{msg}}</p>
 			<div class="padding-horizontal">
 				<h4 class="dark">{{eventdetail.title}}</h4>
 

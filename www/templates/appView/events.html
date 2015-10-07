@@ -1,7 +1,9 @@
 <ion-view view-title="Events">
+   <div class="text-center positive middle-align" ng-if="msg != ''">
+			{{msg}}.
+</div>
     <ion-content>
         <ion-list>
-		   {{msg}}
             <ion-item ng-repeat="event in events" class="item-thumbnail-left item-text-wrap" ng-click="geteventdetails(event.id);">
                 <div class="image-adjust img-content" ng-style="{'background-image':'url({{event.image|serverimage}})'}"></div>
                 <h2>{{event.title}}</h2>
