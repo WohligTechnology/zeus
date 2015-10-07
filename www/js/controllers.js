@@ -39,6 +39,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 		}, 5000);
 	};
+	$scope.showloading();
 	configreload.onallpage = function () {
 		var loginstatus = false;
 		if (MyServices.getconfigdata()) {
@@ -49,6 +50,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			});
 		}
 		if (loginstatus == true && !MyServices.getuser()) {
+			
 			$location.url("/access/login");
 		}
 	}
@@ -1319,14 +1321,19 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 				$scope.modal = null;
 			});
 	};
-	
+
+	document.addEventListener('backbutton', function (event) {
+		console.log("on back button");
+		event.preventDefault(); // EDIT
+		$scope.closeVideo();
+		//		navigator.app.exitApp(); // exit the app
+	});
+
+
 	$ionicPlatform.onHardwareBackButton(function () {
 		console.log("hardwarebutton");
 		alert("back back");
-		$scope.modal.remove()
-			.then(function () {
-				$scope.modal = null;
-			});
+		$scope.closeVideo();
 		//		console.log("Back Button");
 	});
 
@@ -1422,6 +1429,23 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('NotificationCtrl', function ($scope, MyServices, $ionicLoading) {
 	addanalytics("Notification page");
 	configreload.onallpage();
+	$scope.notification = {};
+	$scope.notify = [];
+	$scope.pageno = 1;
+	$scope.user = MyServices.getuser();
+	if ($scope.user) {
+		$scope.notification.video = $scope.user.videonotification;
+		$scope.notification.event = $scope.user.eventnotification;
+		$scope.notification.blog = $scope.user.blognotification;
+		$scope.notification.photo = $scope.user.photonotification;
+	} else {
+
+		$scope.notification.video = "true";
+		$scope.notification.event = "true";
+		$scope.notification.blog = "true";
+		$scope.notification.photo = "true";
+	}
+	//	console.log(
 	$scope.showloading = function () {
 		$ionicLoading.show({
 			template: '<ion-spinner class="spinner-royal"></ion-spinner>'
@@ -1430,10 +1454,52 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 		}, 5000);
 	};
-	MyServices.getNotification(function (data) {
-		$scope.events = data.queryresult;
-		$ionicLoading.hide();
-	});
+	$scope.loadnotification = function (pageno) {
+		MyServices.getNotification(pageno, $scope.notification, function (data) {
+			console.log(data);
+			console.log(data.queryresult);
+			_.each(data.queryresult, function(n){
+					switch (n.linktype) {
+					case '3':
+						n.tolink = n.event;
+						break;
+					case '6':
+						n.tolink = n.gallery;
+						break;
+					case '8':
+						n.tolink = n.video;
+						break;
+					case '10':
+						n.tolink = n.blog;
+						break;
+					case '2':
+						n.tolink = n.article;
+						break;
+					default:
+						n.tolink = 0;
+
+					}	
+				n.tolinkpath = n.linktypelink;
+				
+			$scope.notify.push(n);
+			});
+			$ionicLoading.hide();
+		});
+
+		$scope.$broadcast('scroll.infiniteScrollComplete');
+		$scope.$broadcast('scroll.refreshComplete');
+	}
+	
+	$scope.loadnotification(1);
+
+	$scope.loadMoreNotification = function () {
+		$scope.loadnotification(++$scope.pageno);
+	}
+	
+	$scope.notifyclick = function(item){
+		console.log(item);
+	}
+
 })
 
 .controller('ContactCtrl', function ($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $compile) {
