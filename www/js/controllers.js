@@ -379,7 +379,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showPopupsignupsuccess = function () {
 
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Successfully Registered!!</p>',
+			template: '<p class="text-center">Successfully registered!</p>',
 			scope: $scope,
 
 		});
@@ -389,7 +389,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 	$scope.showPopupsignupfailure = function () {
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Sorry Try Again!!</p>',
+			template: '<p class="text-center">Sorry! Try again.</p>',
 			scope: $scope,
 
 		});
@@ -405,7 +405,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$.jStorage.set("user", data);
 			user = data;
 			var myPopup = $ionicPopup.show({
-				template: '<p class="text-center">Signup successfully.</p>',
+				template: '<p class="text-center">Signed up successfully!</p>',
 				scope: $scope,
 
 			});
@@ -473,8 +473,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		} else {
 
 			var alertPopup = $ionicPopup.alert({
-				title: 'Login Failed!',
-				template: 'Wrong username or password!!'
+				title: 'Login failed!',
+				template: 'Wrong username or password!'
 			});
 		}
 	}
@@ -535,7 +535,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.showPopup2 = function () {
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Your Password is Changed!!</p>',
+			template: '<p class="text-center">Your password is updated!</p>',
 			scope: $scope,
 
 		});
@@ -547,7 +547,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showPopup3 = function () {
 
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Your New Password and Confirm Password do not Match!!</p>',
+			template: '<p class="text-center">Your passwords do not match!</p>',
 			title: 'Sorry!',
 			scope: $scope,
 
@@ -560,8 +560,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showPopup4 = function () {
 
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Something went wrong!!</p>',
-			title: 'Oops Try Again!',
+			template: '<p class="text-center">Something went wrong!</p>',
+			title: 'Oops! Try again.',
 			scope: $scope,
 
 		});
@@ -644,7 +644,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		} else {
 			var myPopup = $ionicPopup.show({
 				template: '<p class="text-center">Not a valid email.</p>',
-				title: 'Oops Try Again!',
+				title: 'Oops! Try again.',
 				scope: $scope,
 
 			});
@@ -763,7 +763,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.showPopup1 = function () {
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Your Profile is Updated!!</p>',
+			template: '<p class="text-center">Your profile is updated!</p>',
 			title: 'Thankyou!',
 			scope: $scope,
 
@@ -813,7 +813,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		if (check) {
 			MyServices.changepassword($scope.password, function (data) {
 				if (data == -1) {
-					$scope.passwordpopup("New password and Confirm password does not match");
+					$scope.passwordpopup("Both the passwords does not match");
 				} else if (data == 0) {
 					$scope.passwordpopup("Old password does not match");
 				} else {
@@ -823,7 +823,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			});
 		} else {
 			$ionicLoading.hide();
-			$scope.passwordpopup("Fill all data.");
+			$scope.passwordpopup("Please enter all the fields.");
 		}
 
 
@@ -1332,7 +1332,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$ionicPlatform.onHardwareBackButton(function () {
 		console.log("hardwarebutton");
-		alert("back back");
+//		alert("back back");
 		$scope.closeVideo();
 		//		console.log("Back Button");
 	});
@@ -1370,7 +1370,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showPopup1 = function () {
 
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Your Profile is Created!!</p>',
+			template: '<p class="text-center">Your profile is created!</p>',
 			title: 'Thankyou!',
 			scope: $scope,
 		});
@@ -1544,7 +1544,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.showPopupcontact = function () {
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Successfully Submitted!!</p>',
+			template: '<p class="text-center">Successfully submitted!</p>',
 			title: 'Thank you!',
 			scope: $scope,
 		});
@@ -1555,7 +1555,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showPopupcontactfailure = function () {
 
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Try Again!!</p>',
+			template: '<p class="text-center">Try again!</p>',
 			title: 'Sorry!',
 			scope: $scope,
 		});
