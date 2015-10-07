@@ -1433,11 +1433,15 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.notify = [];
 	$scope.pageno = 1;
 	$scope.user = MyServices.getuser();
+	
 	if ($scope.user) {
-		$scope.notification.video = $scope.user.videonotification;
-		$scope.notification.event = $scope.user.eventnotification;
-		$scope.notification.blog = $scope.user.blognotification;
-		$scope.notification.photo = $scope.user.photonotification;
+		MyServices.getsingleuserdetail(function(data){
+		$scope.notification.video = data.videonotification;
+		$scope.notification.event = data.eventnotification;
+		$scope.notification.blog = data.blognotification;
+		$scope.notification.photo = data.photonotification;
+			
+		})
 	} else {
 
 		$scope.notification.video = "true";
