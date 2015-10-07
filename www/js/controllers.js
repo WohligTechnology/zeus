@@ -1242,7 +1242,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 })
 
-.controller('VideoGalleryCtrl', function ($scope, MyServices, $location, $ionicModal, $stateParams, $ionicLoading, $ionicPopup, $timeout) {
+.controller('VideoGalleryCtrl', function ($scope, MyServices, $location, $ionicModal, $stateParams, $ionicLoading, $ionicPopup, $timeout, $ionicPlatform) {
 	addanalytics("Video gallery detail page");
 	configreload.onallpage();
 	$ionicLoading.show();
@@ -1294,17 +1294,18 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 
 
-	$ionicModal.fromTemplateUrl('templates/appView/modal-video.html', {
-		scope: $scope,
-		animation: 'slide-in-up'
-	}).then(function (modal) {
-		$scope.modal = modal;
+	var init = function () {
+		return $ionicModal.fromTemplateUrl('templates/appView/modal-video.html', {
+			scope: $scope,
+			animation: 'slide-in-up'
+		}).then(function (modal) {
+			$scope.modal = modal;
 
-	});
+		});
+	};
 
 
 	$scope.showVideo = function (url) {
-		//		$scope.modal.show();
 		init().then(function () {
 			$scope.modal.show();
 		});
@@ -1313,12 +1314,22 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 
 	$scope.closeVideo = function () {
-		//		$scope.modal.remove();
 		$scope.modal.remove()
 			.then(function () {
 				$scope.modal = null;
 			});
 	};
+	
+	$ionicPlatform.onHardwareBackButton(function () {
+		console.log("hardwarebutton");
+		alert("back back");
+		$scope.modal.remove()
+			.then(function () {
+				$scope.modal = null;
+			});
+		//		console.log("Back Button");
+	});
+
 	$scope.$on('modal.remove', function () {
 		// Execute action
 		console.log("on removed");

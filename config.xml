@@ -7,6 +7,7 @@
   <author email="info@wohlig.com" href="http://www.wohlig.com/">
             wohlig
         </author>
+        
   <content src="index.html"/>
   <access origin="*"/>
   <allow-navigation href="*"/>
