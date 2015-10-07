@@ -233,7 +233,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showloading();
 	MyServices.getarticle($stateParams.id, function (data) {
 		$scope.article = data;
-		if(data == ''){
+		if (data == '') {
 			$scope.msg = "Blank Article.";
 		}
 		addanalytics(data.title);
@@ -418,21 +418,21 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		$ionicLoading.hide();
 		$scope.signup = {};
 	}
-	
-	var msgforall = function(msg){
+
+	var msgforall = function (msg) {
 		$ionicLoading.hide();
 		var myPopup = $ionicPopup.show({
-				template: '<p class="text-center">'+msg+'</p>',
-				title: 'Login',
-				scope: $scope,
+			template: '<p class="text-center">' + msg + '</p>',
+			title: 'Login',
+			scope: $scope,
 
-			});
-			$timeout(function () {
-				myPopup.close(); //close the popup after 3 seconds for some reason
-			}, 2000);
+		});
+		$timeout(function () {
+			myPopup.close(); //close the popup after 3 seconds for some reason
+		}, 2000);
 
 	}
-	
+
 	$scope.signupsubmit = function (signup) {
 		$ionicLoading.show();
 		$scope.allvalidation = [{
@@ -585,7 +585,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.changepassword = function (password) {
 		$ionicLoading.show();
-		
+
 		$ionicLoading.show();
 		$scope.allvalidation = [{
 			field: $scope.password.oldpassword,
@@ -605,10 +605,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 		}
 
-		
-		
-		
-		
+
+
+
+
 	}
 
 })
@@ -638,7 +638,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 				myPopup.close(); //close the popup after 3 seconds for some reason
 				$location.url("/access/login");
 			}, 2000);
-			
+
 		} else {
 			var myPopup = $ionicPopup.show({
 				template: '<p class="text-center">Not a valid email.</p>',
@@ -780,10 +780,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			}
 		})
 	}
-	
+
 	$scope.passwordpopup = function (msg) {
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">'+msg+'</p>',
+			template: '<p class="text-center">' + msg + '</p>',
 			title: 'Forgot Password!',
 			scope: $scope,
 
@@ -792,11 +792,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			myPopup.close(); //close the popup after 3 seconds for some reason
 		}, 2000);
 	};
-	
+
 	$scope.changePassword = function () {
 		$scope.password.id = MyServices.getuser().id;
-		
-		
+
+
 		$scope.allvalidation = [{
 			field: $scope.password.oldpassword,
 			validation: ""
@@ -809,24 +809,24 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         }];
 		var check = formvalidation($scope.allvalidation);
 		if (check) {
-			MyServices.changepassword($scope.password, function(data){
-			if(data == -1){
-				$scope.passwordpopup("New password and Confirm password does not match");
-			}else if(data == 0){
-				$scope.passwordpopup("Old password does not match");
-			}else{
-				$scope.passwordpopup("Password changed successfully");
-			}
-			console.log(data);
-		});
+			MyServices.changepassword($scope.password, function (data) {
+				if (data == -1) {
+					$scope.passwordpopup("New password and Confirm password does not match");
+				} else if (data == 0) {
+					$scope.passwordpopup("Old password does not match");
+				} else {
+					$scope.passwordpopup("Password changed successfully");
+				}
+				console.log(data);
+			});
 		} else {
 			$ionicLoading.hide();
 			$scope.passwordpopup("Fill all data.");
 		}
-		
-		
-		
-		
+
+
+
+
 	}
 
 	//	pick image from gallery
@@ -1046,13 +1046,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('BlogDetailCtrl', function ($scope, MyServices, $ionicLoading, $stateParams) {
+.controller('BlogDetailCtrl', function ($scope, MyServices, $ionicLoading, $stateParams, $timeout) {
 
 	configreload.onallpage();
 	$ionicLoading.hide();
 	$scope.msg = "Loading....";
 	var getsingleblogsuccess = function (data, status) {
-		console.log(data);
+		$ionicLoading.hide();
 		$scope.showcmsdetail = true;
 		$scope.details = data;
 		addanalytics(data.title);
@@ -1073,6 +1073,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 		}, 5000);
 	};
+	$scope.showloading();
 
 	// tumblr and wordpress
 	if ($stateParams.id == 0) {
@@ -1298,17 +1299,31 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		animation: 'slide-in-up'
 	}).then(function (modal) {
 		$scope.modal = modal;
+
 	});
 
+
 	$scope.showVideo = function (url) {
-		$scope.modal.show();
+		//		$scope.modal.show();
+		init().then(function () {
+			$scope.modal.show();
+		});
 		$scope.video = [];
 		$scope.video.url = url + "?autoplay=1";
 	};
 
 	$scope.closeVideo = function () {
-		$scope.modal.hide();
+		//		$scope.modal.remove();
+		$scope.modal.remove()
+			.then(function () {
+				$scope.modal = null;
+			});
 	};
+	$scope.$on('modal.remove', function () {
+		// Execute action
+		console.log("on removed");
+		$scope.currentURL = {};
+	});
 
 })
 
@@ -1423,17 +1438,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 	$scope.showloading();
 	$scope.enquiry = {};
-	var msgforall = function(msg){
+	var msgforall = function (msg) {
 		$ionicLoading.hide();
 		var myPopup = $ionicPopup.show({
-				template: '<p class="text-center">'+msg+'</p>',
-				title: 'Contact Us',
-				scope: $scope,
+			template: '<p class="text-center">' + msg + '</p>',
+			title: 'Contact Us',
+			scope: $scope,
 
-			});
-			$timeout(function () {
-				myPopup.close(); //close the popup after 3 seconds for some reason
-			}, 2000);
+		});
+		$timeout(function () {
+			myPopup.close(); //close the popup after 3 seconds for some reason
+		}, 2000);
 
 	}
 	var createenquirycallback = function (data, status) {

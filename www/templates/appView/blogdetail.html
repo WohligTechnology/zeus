@@ -28,7 +28,7 @@
 			<div class="padding">
 				<h4>{{details.title}}</h4>
 				<p ng-bind-html="details.content"></p>
-                <h5 class="dark">Video</h5>
+                <h5 class="dark" ng-if="details.blogvideo">Video</h5>
 				<div youtube code="video.video" ng-repeat="video in details.blogvideo"></div>
 			</div>
 		</div>
