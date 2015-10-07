@@ -1,7 +1,7 @@
 {
-  "name": "zeus",
+  "name": "businessapp",
   "version": "1.0.0",
-  "description": "Zeus",
+  "description": "BusinessApp",
   "dependencies": {
     "end-of-stream": "^1.1.0",
     "gulp": "^3.5.6",

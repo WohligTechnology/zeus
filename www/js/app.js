@@ -33,7 +33,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			StatusBar.styleLightContent();
 		}
 		if (window.cordova && window.cordova.platformId == 'android') {
-			StatusBar.backgroundColorByHexString("#F13232");
+			StatusBar.backgroundColorByHexString("#c12828");
 		}
 	});
 })
