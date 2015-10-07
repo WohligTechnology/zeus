@@ -6,7 +6,10 @@ $balanced:#33cd5f !default;
 $energized:#ffc900 !default;
 $assertive:#ef473a !default;
 $royal:#886aea !default;
-$dark:#222 !default;
+$twitter: #00aced;
+$facebook: #3b5998;
+$google: #dd4b39;
+$instagram: #517fa4;
 
 $base-color:#555 !default;
 
@@ -99,27 +102,49 @@ a {color: inherit;}
     color: $light;
 }
 
-// facebook or twitter button
+// Social Buttons
 .button.button-positive-facebook {
-    border-color: $color1;
-    background-color: $color1;
+    border-color: $facebook;
+    background-color: $facebook;
     color: white;
 }
 
 .button.button-positive-twitter {
-    border-color: $color2;
-    background-color: $color2;
+    border-color: $twitter;
+    background-color: $twitter;
+    color: white;
+}
+
+.button.button-positive-google {
+    border-color: $google;
+    background-color: $google;
+    color: white;
+}
+
+.button.button-positive-instagram {
+    border-color: $instagram;
+    background-color: $instagram;
     color: white;
 }
 
 .button-positive-facebook.button.activated {
-    border-color: $color3 !important;
-    background-color: $color3!important;
+    border-color: $facebook !important;
+    background-color: darken($facebook, 20%)!important;
 }
 
 .button-positive-twitter.button.activated {
-    border-color: $color4;
-    background-color: $color4;
+    border-color: $twitter !important;
+    background-color: darken($twitter, 20%)!important;
+}
+
+.button-positive-google.button.activated {
+    border-color: $google !important;
+    background-color: darken($google, 20%)!important;
+}
+
+.button-positive-instagram.button.activated {
+    border-color: $instagram !important;
+    background-color: darken($instagram, 20%)!important;
 }
 
 // end
