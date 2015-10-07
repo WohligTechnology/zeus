@@ -1426,13 +1426,20 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.tab = 'fb';
 })
 
-.controller('NotificationCtrl', function ($scope, MyServices, $ionicLoading) {
+.controller('NotificationCtrl', function ($scope, MyServices, $ionicLoading,$filter) {
 	addanalytics("Notification page");
 	configreload.onallpage();
 	$scope.notification = {};
 	$scope.notify = [];
 	$scope.pageno = 1;
 	$scope.user = MyServices.getuser();
+	
+	
+	
+	$scope.share= function(item) { 
+		
+		socialShare(item.content, null, $filter('serverimage')(item.image));
+	}
 	
 	if ($scope.user) {
 		MyServices.getsingleuserdetail(function(data){
