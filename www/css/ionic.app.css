@@ -9458,7 +9458,7 @@ a:hover {
   border-left: 3px solid #F13232; }
 
 .has-menu-photo {
-  top: 74px; }
+  top: 72px; }
 
 .no-margin {
   margin: 0 !important; }
@@ -9504,8 +9504,9 @@ a:hover {
   margin: 5px 0 15px; }
 
 .half-image {
-  width: 40%;
-  max-width: 100%; }
+  width: 50%;
+  max-width: 100%;
+  height: auto; }
 
 .button-pad {
   padding: 4px 20px; }
@@ -9683,3 +9684,36 @@ img.play {
   left: 0;
   transform: translateY(-50%);
   font-size: 16px; }
+
+.loading-container {
+  background-color: white;
+  top: 44px; }
+  .loading-container .loading {
+    background-color: white; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .loading-container {
+  top: 64px; }
+
+.platform-ios.platform-cordova:not(.fullscreen) .has-menu-photo {
+  top: 72px; }
+
+.popup-container .popup {
+  border: 1px solid #F13232; }
+
+.backdrop {
+  background-color: transparent; }
+
+.spinner-android {
+  stroke: #F13232; }
+
+.spinner-ios,
+.spinner-ios-small {
+  stroke: #F13232; }
+
+.slider-pager {
+  bottom: 15px; }
+  .slider-pager .slider-pager-page {
+    opacity: 1;
+    color: white; }
+    .slider-pager .slider-pager-page.active {
+      color: #F13232; }

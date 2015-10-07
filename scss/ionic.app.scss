@@ -93,7 +93,6 @@ a {color: inherit;}
     background: transprent;
 }
 
-
 .relative {
     position: relative;
 }
@@ -297,7 +296,7 @@ a:hover {
 }
 
 .has-menu-photo {
-    top: 74px;
+    top: 72px;
 }
 
 .no-margin {
@@ -358,8 +357,9 @@ a:hover {
 }
 
 .half-image {
-    width: 40%;
+    width: 50%;
     max-width: 100%;
+    height: auto;
 }
 
 .button-pad {
@@ -576,4 +576,48 @@ img.play {
     left: 0;
     transform: translateY(-50%);
     font-size: 16px;
+}
+
+.loading-container {
+    background-color: white;
+    top: 44px;
+    .loading {
+        background-color: white;
+    }
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) {
+    .loading-container {
+          top: 64px; 
+    }
+    .has-menu-photo {
+        top: 72px;
+    }
+}
+
+.popup-container .popup {
+    border: 1px solid $positive;
+}
+
+.backdrop {
+    background-color: transparent;
+}
+
+.spinner-android {
+  stroke: $positive; }
+
+.spinner-ios,
+.spinner-ios-small {
+  stroke: $positive; }
+
+.slider-pager {
+    bottom: 15px;
+    .slider-pager-page {
+        opacity: 1;
+        color: white;
+        &.active {
+            color: $positive;
+        }
+    }
+    
 }
