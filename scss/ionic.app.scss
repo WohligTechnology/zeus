@@ -308,7 +308,7 @@ a:hover {
     border-width: $button-border-width !important;
 }
 .button.underline {
-    border-bottom: 2px solid !important;
+    border-bottom: 2px solid $positive !important;
 }
 .button.button-outline {
     border-width: 1px;
