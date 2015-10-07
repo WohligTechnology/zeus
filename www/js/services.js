@@ -95,9 +95,8 @@ angular.module('starter.services', [])
 				}).success(callback);
 			},
 			forgotpassword: function (email, callback) {
-				return $http({
-					url: adminurl + 'forgotpassword?email=' + email,
-					method: "POST"
+				return $http.get(adminurl + 'forgotpassword?email=' + email, {
+					withCredentials: false
 				}).success(callback);
 			},
 			getsingleevents: function (id, callback) {
@@ -120,15 +119,13 @@ angular.module('starter.services', [])
 				}).success(callback);
 			},
 			getallvideogalleryvideo: function (id, pageno, callback) {
-				return $http({
-					url: adminurl + 'getallvideogalleryvideo?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15,
-					method: "POST"
+				return $http.get(adminurl + 'getallvideogalleryvideo?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
+					withCredentials: false
 				}).success(callback);
 			},
 			getallgalleryimage: function (id, pageno, callback) {
-				return $http({
-					url: adminurl + 'getallgalleryimage?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15,
-					method: "POST"
+				return $http.get(adminurl + 'getallgalleryimage?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
+					withCredentials: false
 				}).success(callback);
 			},
 			getsingleblog: function (id, callback) {
@@ -154,55 +151,43 @@ angular.module('starter.services', [])
 				});
 			},
 			getallblog: function (pageno, callback) {
-				return $http({
-					url: adminurl + 'getallblog?pageno=' + pageno + '&maxrow=' + 15,
-					method: "POST"
+				return $http.get(adminurl + 'getallblog?pageno=' + pageno + '&maxrow=' + 15, {
+					withCredentials: false
 				}).success(callback);
 			},
 			logout: function () {
 				$.jStorage.flush();
-				return $http({
-					url: adminurl + 'logout',
-					method: "POST"
-				});
+				return $http.get(adminurl + 'logout', {
+					withCredentials: false
+				}).success(callback);
 			},
 			getuser: function () {
 				return $.jStorage.get("user");
 			},
 			getallsliders: function (callback) {
-				return $http({
-					url: adminurl + 'getallsliders',
-					method: "POST"
+				return $http.get(adminurl + 'getallsliders', {
+					withCredentials: false
 				}).success(callback);
 			},
 			getallevents: function (pageno, callback) {
-				return $http({
-					url: adminurl + 'getallevents?pageno=' + pageno + '&maxrow=' + 15,
-					method: "POST"
+				
+				return $http.get(adminurl + 'getallevents?pageno=' + pageno + '&maxrow=' + 15, {
+					withCredentials: false
 				}).success(callback);
 			},
 			getappconfig: function (callback) {
-				return $http({
-					url: adminurl + 'getappconfig',
-					method: "POST"
+				return $http.get(adminurl + 'getappconfig', {
+					withCredentials: false
 				}).success(callback);
 			},
 			getallgallery: function (pageno, callback) {
-				return $http({
-					url: adminurl + 'getallgallery?pageno=' + pageno + '&maxrow=' + 15,
-					method: "POST"
+				return $http.get(adminurl + 'getallgallery?pageno=' + pageno + '&maxrow=' + 15, {
+					withCredentials: false
 				}).success(callback);
 			},
 			getallvideogallery: function (pageno, callback) {
-				return $http({
-					url: adminurl + 'getallvideogallery?pageno=' + pageno + '&maxrow=' + 15,
-					method: "POST"
-				}).success(callback);
-			},
-			getallsliders: function (callback) {
-				return $http({
-					url: adminurl + 'getallsliders',
-					method: "POST"
+				return $http.get(adminurl + 'getallvideogallery?pageno=' + pageno + '&maxrow=' + 15, {
+					withCredentials: false
 				}).success(callback);
 			},
 			changesetting: function (setting, callback) {
