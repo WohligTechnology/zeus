@@ -27,7 +27,9 @@
     {
       "locator": "https://github.com/Pushwoosh/pushwoosh-phonegap-3.0-plugin.git",
       "id": "com.pushwoosh.plugins.pushwoosh"
-    }
+    },
+    "cordova-plugin-file-transfer",
+    "cordova-plugin-statusbar"
   ],
   "cordovaPlatforms": [
     "ios",
