@@ -29,7 +29,8 @@
       "id": "com.pushwoosh.plugins.pushwoosh"
     },
     "cordova-plugin-file-transfer",
-    "cordova-plugin-statusbar"
+    "cordova-plugin-statusbar",
+    "cordova-plugin-inappbrowser"
   ],
   "cordovaPlatforms": [
     "ios",
