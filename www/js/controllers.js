@@ -5,7 +5,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $ionicLoading, $cordovaNetwork) {
 	addanalytics("flexible menu");
 
-	$ionicLoading.hide();
+//	$ionicLoading.hide();
 
 	function internetaccess(toState) {
 		if (navigator) {
@@ -170,7 +170,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 	$scope.logout = function () {
 		$ionicLoading.show();
-		MyServices.logout().success(logoutsuccess);
+		MyServices.logout(logoutsuccess);
 	}
 
 	// Form data for the login modal
@@ -699,7 +699,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		if (loginstatus == false) {
 			menu.setting = false;
 			$.jStorage.deleteKey("user");
-		$ionicLoading.hide();
+			$ionicLoading.hide();
 		} else {
 			if (!MyServices.getuser() && MyServices.getuser() == null) {
 				$location.url("/access/login");

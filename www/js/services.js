@@ -1,5 +1,5 @@
 var adminbase = "http://wohlig.co.in/webappbackend/";
-var adminbase = "http://localhost/apphiloback/";
+//var adminbase = "http://localhost/apphiloback/";
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";
 var adminhauth = adminbase + "index.php/hauth/";
@@ -155,7 +155,7 @@ angular.module('starter.services', [])
 					withCredentials: false
 				}).success(callback);
 			},
-			logout: function () {
+			logout: function (callback) {
 				$.jStorage.flush();
 				return $http.get(adminurl + 'logout', {
 					withCredentials: false
