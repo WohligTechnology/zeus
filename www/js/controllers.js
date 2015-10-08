@@ -5,7 +5,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('AppCtrl', function ($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $ionicLoading, $cordovaNetwork) {
 	addanalytics("flexible menu");
 
-//	$ionicLoading.hide();
+	//	$ionicLoading.hide();
 
 	function internetaccess(toState) {
 		if (navigator) {
@@ -39,7 +39,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 		}, 5000);
 	};
-	$scope.showloading();
+//	$scope.showloading();
 	configreload.onallpage = function () {
 		var loginstatus = false;
 		if (MyServices.getconfigdata()) {
@@ -688,6 +688,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	MyServices.gethomecontent(function (data) {
 		$scope.content = data;
 		$scope.content.content = $sce.trustAsHtml($scope.content.content);
+//		$ionicLoading.hide();
 	});
 	$scope.setup = function () {
 		var blogdata = JSON.parse(MyServices.getconfigdata().config[0].text);
@@ -699,12 +700,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		if (loginstatus == false) {
 			menu.setting = false;
 			$.jStorage.deleteKey("user");
-			$ionicLoading.hide();
 		} else {
 			if (!MyServices.getuser() && MyServices.getuser() == null) {
 				$location.url("/access/login");
 				menu.setting = true;
-//		$ionicLoading.hide();
+				//		$ionicLoading.hide();
+			}else{
+				$ionicLoading.hide();
 			}
 		}
 	}
@@ -741,12 +743,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.user = {};
 	$scope.user.newimage = "";
 	$scope.password = {};
-//	$scope.user.dob = moment().format("YYYY-MM-DD");
+	//	$scope.user.dob = moment().format("YYYY-MM-DD");
 
 	$scope.changeedit = function (val) {
-		
-	if ($.jStorage.get("user") && $.jStorage.get("user").dob)
-		$scope.user.dob = new Date($.jStorage.get("user").dob);
+
+		if ($.jStorage.get("user") && $.jStorage.get("user").dob)
+			$scope.user.dob = new Date($.jStorage.get("user").dob);
 		if (!_.isDate($scope.user.dob)) {
 			$scope.user.dob = moment($scope.user.dob, "YYYY-MM-DD");
 		}
@@ -1450,6 +1452,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.notify = [];
 	$scope.pageno = 1;
 	$scope.user = MyServices.getuser();
+	$scope.msg = "Loading...";
 
 
 
@@ -1514,9 +1517,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 				$scope.notify.push(n);
 			});
+			
+			if ($scope.notify.length == 0) {
+				$scope.msg = "No notifications.";
+			} else {
+				$scope.msg = "";
+			}
 			$ionicLoading.hide();
 		});
-
 		$scope.$broadcast('scroll.infiniteScrollComplete');
 		$scope.$broadcast('scroll.refreshComplete');
 	}
@@ -1528,10 +1536,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 
 	$scope.notifyclick = function (item) {
-		if(item.linktype == 17){
+		if (item.linktype == 17) {
 			window.open(item.link, '_blank', 'location=no');
-		}else{
-			$location.url("/app/"+item.tolinkpath+"/"+item.tolink);
+		} else {
+			$location.url("/app/" + item.tolinkpath + "/" + item.tolink);
 		}
 	}
 
