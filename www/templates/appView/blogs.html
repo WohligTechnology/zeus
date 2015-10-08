@@ -8,7 +8,6 @@
                 <div class="image-adjust img-blog" ng-style="{'background-image':'url({{blog.author.avatar_URL}})'}"></div>
                 <h2>{{blog.author.first_name}} {{blog.author.last_name}}</h2>
                 <p>{{blog.date|date:'MMMM dd, yyyy'}}</p>
-                <i class="icon ln-share2"></i>
             </ion-item>
 
             <div class="item item-body" ng-click="blogDetail(blog,'wordpress');">
@@ -25,7 +24,6 @@
                 <h2 ng-if="blog.slug">{{blog.slug}}</h2>
                 <h2 ng-if="blog.blog_name">{{blog.blog_name}}</h2>
                 <p ng-if="blog.date">{{blog.date|formatdate}}</p>
-                <i class="icon ln-share2"></i>
             </ion-item>
 
             <div class="item item-body" ng-click="blogDetail(blog,'tumblr');">
@@ -54,7 +52,6 @@
                 <img class="image-adjust img-blog" ng-src="http://a.13cdn.com/Facebook_TaylorSwift.png">
                 <h2>{{blog.name}}</h2>
                 <p ng-if="blog.timestamp">{{blog.timestamp|formatdate}}</p>
-                <i class="icon ln-share2"></i>
             </ion-item>
 
             <div class="item item-body" ng-click="blogDetail(blog,'cms');">
