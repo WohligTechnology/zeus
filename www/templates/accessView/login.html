@@ -26,8 +26,8 @@
                         Sign In
                     </button>
                     <p class="light" ng-click="forgotpass()" ng-show="logindata.email">Forgot password?</p>
-                    <div class="or text-center" ng-show="!logindata.email || logindata.facebook || logindata.twitter || logindata.google  || logindata.instagram">
-                        <p>- OR -</p>
+                    <div class="or text-center" ng-show="logindata.facebook || logindata.twitter || logindata.google  || logindata.instagram">
+                        <p ng-show="logindata.email">- OR -</p>
                     </div>
                     <button ng-click="facebooklogin()" class="button button-full button-positive-facebook button-block" ng-show="logindata.facebook">
                         Sign in with Facebook
