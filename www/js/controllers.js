@@ -1442,7 +1442,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.tab = 'fb';
 })
 
-.controller('NotificationCtrl', function ($scope, MyServices, $ionicLoading, $filter) {
+.controller('NotificationCtrl', function ($scope, MyServices, $ionicLoading, $filter, $location) {
 	addanalytics("Notification page");
 	configreload.onallpage();
 	$scope.notification = {};
@@ -1527,7 +1527,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 
 	$scope.notifyclick = function (item) {
-		console.log(item);
+		if(item.linktype == 17){
+			window.open(item.link, '_blank', 'location=no');
+		}else{
+			$location.url("/app/"+item.tolinkpath+"/"+item.tolink);
+		}
 	}
 
 })
