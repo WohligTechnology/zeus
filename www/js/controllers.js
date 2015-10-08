@@ -340,7 +340,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}
 	};
 	$scope.facebooklogin = function () {
-		ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+		ref = cordova.InAppBrowser.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
 		stopinterval = $interval(callAtIntervaltwitter, 2000);
 		ref.addEventListener('exit', function (event) {
 			MyServices.authenticate().success(authenticatesuccess);
@@ -349,7 +349,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 	$scope.twitterlogin = function () {
 
-		ref = window.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+		ref = cordova.InAppBrowser.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
 		stopinterval = $interval(callAtIntervaltwitter, 2000);
 		ref.addEventListener('exit', function (event) {
 			MyServices.authenticate().success(authenticatesuccess);
@@ -358,7 +358,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 
 	$scope.instagramlogin = function () {
-		ref = window.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+		ref = cordova.InAppBrowser.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
 		stopinterval = $interval(callAtIntervaltwitter, 2000);
 		ref.addEventListener('exit', function (event) {
 			MyServices.authenticate().success(authenticatesuccess);
@@ -368,7 +368,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.googlelogin = function () {
 
-			ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+			ref = cordova.InAppBrowser.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
 			stopinterval = $interval(callAtIntervaltwitter, 2000);
 			ref.addEventListener('exit', function (event) {
 				MyServices.authenticate().success(authenticatesuccess);
@@ -688,7 +688,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	MyServices.gethomecontent(function (data) {
 		$scope.content = data;
 		$scope.content.content = $sce.trustAsHtml($scope.content.content);
-		$ionicLoading.hide();
 	});
 	$scope.setup = function () {
 		var blogdata = JSON.parse(MyServices.getconfigdata().config[0].text);
@@ -700,10 +699,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		if (loginstatus == false) {
 			menu.setting = false;
 			$.jStorage.deleteKey("user");
+		$ionicLoading.hide();
 		} else {
 			if (!MyServices.getuser() && MyServices.getuser() == null) {
 				$location.url("/access/login");
 				menu.setting = true;
+//		$ionicLoading.hide();
 			}
 		}
 	}

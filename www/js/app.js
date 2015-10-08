@@ -38,7 +38,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 	});
 })
 
-.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider,$httpProvider) {
+.config(function ($stateProvider, $urlRouterProvider, $ionicConfigProvider, $httpProvider) {
 	$ionicConfigProvider.views.maxCache(0);
 	$httpProvider.defaults.withCredentials = true;
 	$stateProvider
@@ -304,13 +304,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('serverimage', function () {
 		return function (image) {
-			var start=image.substr(0,4);
+			if (image && image != null) {
+				var start = image.substr(0, 4);
 
-			if(start=="http")
-			{
-				return image;
-			}
-			if (image) {
+				if (start == "http") {
+					return image;
+				}
+
 				return adminimage + image;
 			} else {
 				return undefined;
@@ -319,13 +319,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 	})
 	.filter('profileimg', function () {
 		return function (image) {
-			var start=image.substr(0,4);
-
-			if(start=="http")
-			{
-				return image;
-			}
 			if (image && image != null) {
+				var start = image.substr(0, 4);
+
+				if (start == "http") {
+					return image;
+				}
+
 				return adminimage + image;
 			} else {
 				return "img/user-2-o.jpg";
@@ -344,7 +344,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		link: function (scope) {
 			scope.$watch('code', function (newVal) {
 				if (newVal) {
-					scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal );
+					scope.url = $sce.trustAsResourceUrl("http://www.youtube.com/embed/" + newVal);
 				}
 			});
 		}
