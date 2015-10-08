@@ -579,19 +579,17 @@ img.play {
 }
 
 .loading-container {
-    background-color: white;
-    top: 44px;
     .loading {
         background-color: white;
     }
 }
 
 .platform-ios.platform-cordova:not(.fullscreen) {
-    .loading-container {
-          top: 64px; 
-    }
     .has-menu-photo {
-        top: 72px;
+        top: 92px;
+    }
+    .top-statusbar {
+        margin-top: 20px !important;
     }
 }
 
