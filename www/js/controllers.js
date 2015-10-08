@@ -893,7 +893,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 })
 
-.controller('EventsCtrl', function ($scope, MyServices, $location, $ionicLoading) {
+.controller('EventsCtrl', function ($scope, MyServices, $location, $ionicLoading, $filter) {
 	addanalytics("Event page");
 	configreload.onallpage();
 	$ionicLoading.show();
@@ -910,6 +910,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}, 5000);
 	};
 
+	$scope.share = function (item) {
+		console.log(item);
+		console.log(moment().format(item.startdate, 'dd MMM, yyyy'));
+//		window.plugins.socialsharing.share('Checkout '+item.title+' starting on '+item.startdate+', 12PM onwards.', null, 'http://img.youtube.com/vi/'+item.url+'/default.jpg', 'https://www.youtube.com/watch?v='+item.url);
+	}
+	
 	$scope.loadevents = function (pageno) {
 		MyServices.getallevents(pageno, function (data) {
 			$ionicLoading.hide();
@@ -1272,6 +1278,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.keepscrolling = true;
 	$scope.msg = "Loading....";
 
+	$scope.share = function (item) {
+		console.log(item);
+		window.plugins.socialsharing.share(item.alt, null, 'http://img.youtube.com/vi/'+item.url+'/default.jpg', 'https://www.youtube.com/watch?v='+item.url);
+	}
+	
 	$scope.showloading = function () {
 		$ionicLoading.show({
 			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
@@ -1457,8 +1468,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 
 	$scope.share = function (item) {
-
-		window.plugins.socialsharing.share(item.content, null, $filter('serverimage')(item.image));
+		console.log(item);
+		item.image = $filter('serverimage')(item.image);
+		if(item.linktype == 17){
+			item.link = item.link;
+		}else{
+			item.link = null;
+		}
+		window.plugins.socialsharing.share(item.content, null, item.image, item.link);
 	}
 
 	if ($scope.user) {
