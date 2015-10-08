@@ -27,7 +27,7 @@
                     </button>
                         <p class="light" ng-click="forgotpass()" ng-show="logindata.email">Forgot password?</p>
 
-                    <div class="or text-center" ng-show="logindata.facebook || logindata.twitter || logindata.google  || logindata.instagram">
+                    <div class="or text-center" ng-show="!logindata.email || logindata.facebook || logindata.twitter || logindata.google  || logindata.instagram">
                         <p>- OR -</p>
                     </div>
                     <div class="btn-set" ng-show="logindata.facebook">
