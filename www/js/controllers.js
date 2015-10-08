@@ -740,13 +740,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.user = {};
 	$scope.user.newimage = "";
 	$scope.password = {};
-	if (!_.isDate($scope.user.dob)) {
-		$scope.user.dob = moment($scope.user.dob, "YYYY-MM-DD");
-	}
-	$scope.changeedit = function (val) {
+//	$scope.user.dob = moment().format("YYYY-MM-DD");
 
+	$scope.changeedit = function (val) {
+		
+	if ($.jStorage.get("user") && $.jStorage.get("user").dob)
+		$scope.user.dob = new Date($.jStorage.get("user").dob);
 		if (!_.isDate($scope.user.dob)) {
 			$scope.user.dob = moment($scope.user.dob, "YYYY-MM-DD");
+		}
+		if (!_.isDate($scope.user.dob)) {
+			$scope.user.dob = moment($scope.user.dob);
 		}
 
 		$scope.edit = val;
@@ -773,9 +777,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		};
 
 	});
-	if ($.jStorage.get("user") && $.jStorage.get("user").dob)
-		$scope.user.dob = new Date($.jStorage.get("user").dob);
-
 	$scope.showPopup1 = function () {
 		var myPopup = $ionicPopup.show({
 			template: '<p class="text-center">Your profile is updated!</p>',
@@ -1499,6 +1500,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 					n.tolink = n.blog;
 					break;
 				case '2':
+					n.tolink = n.article;
+					break;
+				case '17':
 					n.tolink = n.article;
 					break;
 				default:
