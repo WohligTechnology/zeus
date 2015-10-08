@@ -911,9 +911,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 
 	$scope.share = function (item) {
-		console.log(item);
-		console.log(moment().format(item.startdate, 'dd MMM, yyyy'));
-//		window.plugins.socialsharing.share('Checkout '+item.title+' starting on '+item.startdate+', 12PM onwards.', null, 'http://img.youtube.com/vi/'+item.url+'/default.jpg', 'https://www.youtube.com/watch?v='+item.url);
+		var data = {};
+		data.startdate = $filter('date')(item.startdate, 'dd MMM, yyyy');
+		data.starttime = $filter('convertto12')(item.starttime);
+		data.image = $filter('serverimage')(item.image);
+		window.plugins.socialsharing.share('Checkout "'+item.title+'" starting on '+data.startdate+', '+data.starttime, null, data.image+'At '+item.venue);
 	}
 	
 	$scope.loadevents = function (pageno) {

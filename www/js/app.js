@@ -358,9 +358,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		if (date) {
 			var split = date.split(":");
 			if (parseInt(split[0]) >= 12) {
-				newtime = (parseInt(split[0]) - 12) + ":" + split[1] + " PM Onwards";
+				newtime = (parseInt(split[0]) - 12) + ":" + split[1] + " PM onwards .";
 			} else {
-				newtime = split[0] + ":" + split[1] + " AM Onwards";
+				newtime = split[0] + ":" + split[1] + " AM onwards .";
 			}
 			return newtime;
 		}
