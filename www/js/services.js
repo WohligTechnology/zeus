@@ -1,9 +1,5 @@
 var adminbase = "http://wohlig.co.in/webappbackend/";
-<<<<<<< HEAD
-//var adminbase = "http://localhost/apphiloback/";
-=======
 // var adminbase = "http://localhost/apphiloback/";
->>>>>>> origin/Wireframe
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";
 var adminhauth = adminbase + "index.php/hauth/";
