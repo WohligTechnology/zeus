@@ -695,7 +695,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$timeout(function () {
 			$ionicLoading.hide();
-		}, 5000);
+		}, 3000);
 	};
 	showloading();
 
