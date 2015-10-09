@@ -1,6 +1,6 @@
 {
-  "name": "zeus",
-  "app_id": "",
+  "name": "BusinessApp",
+  "app_id": "b99a7549",
   "gulpStartupTasks": [
     "sass",
     "watch"
