@@ -9711,7 +9711,8 @@ img.play {
   top: 92px; }
 
 .platform-ios.platform-cordova:not(.fullscreen) .top-statusbar {
-  border-top: 20px solid #F13232 !important; }
+  border-top: 20px solid #F13232 !important;
+  width: 100%; }
 
 .popup-container .popup {
   border: 1px solid #F13232; }

@@ -15,19 +15,16 @@
         <ion-nav-view name="menuContent"></ion-nav-view>
     </ion-side-menu-content>
     <ion-side-menu side="left">
-        <div class="list no-margin top-statusbar" ng-if="menu.setting">
+        <div class="list no-margin" ng-if="menu.setting">
             <ion-item class="item-avatar item-icon-right">
-                <!--        <div class="image-adjust"></div>-->
-                <!--        <div class="image-adjust" ng-style="{'background-image':'url({{userdetails.userimage}})'}" ng-if="userdetails.userimage"></div>-->
                 <div class="image-adjust" ng-style="userdetails.myimage"></div>
-                <!--<h3>{{userdetails.username}}</h3>
-                    <p>{{userdetails.useremail}}</p>-->
                 <h3>{{userdetails.name}}</h3>
                 <p>{{userdetails.email}}</p>
                 <i class="icon ln-gear2 small" ui-sref="app.setting" menu-close ng-if="menu.setting"></i>
             </ion-item>
         </div>
         <ion-content ng-class="logso">
+            <div class="top-statusbar"></div>
             <div class="list menu-set">
                 <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.{{menu.link}}({id:menu.typeid})" ui-sref-active="bordered" ng-repeat="menu in menudata">
                     <i class="icon {{menu.icon}}"></i>{{menu.name}}
@@ -35,52 +32,6 @@
                 <ion-item nav-clear menu-close class="item item-icon-left item-complex" ng-click="logout()" ui-sref-active="bordered" ng-if="menu.setting">
                     <div class="item-content"><i class="icon ln-arrow-right2"></i>Logout</div>
                 </ion-item>
-                <!--
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.notification" ui-sref-active="bordered">
-          <i class="icon ln-bell"></i> Notification
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.events" ui-sref-active="bordered" ng-show="menudata.events">
-          <i class="icon ln-calendar2"></i> Events
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.blogs" ui-sref-active="bordered" ng-show="menudata.blogs">
-          <i class="icon ln-papers"></i> Blog
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.photogallerycategory" ui-sref-active="bordered" ng-show="menudata.gallery">
-          <i class="icon ln-picture"></i> Photos
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.videogallerycategory" ui-sref-active="bordered"ng-show="menudata.videogallery">
-          <i class="icon ln-film-play"></i> Videos
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.about" ui-sref-active="bordered">
-          <i class="icon ln-circle-exclamation"></i> About
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.team" ui-sref-active="bordered">
-          <i class="icon ln-briefcase"></i> Our Team
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.profile" ui-sref-active="bordered">
-          <i class="icon ln-user"></i> Profile
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.social" ui-sref-active="bordered">
-          <i class="icon ln-users2"></i> Social Feeds
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.contact" ui-sref-active="bordered">
-          <i class="icon ln-phone2"></i> Contact
-        </ion-item>
-
-        <ion-item nav-clear menu-close class="item item-icon-left item-content" ui-sref="access.login">
-          <i class="icon ln-arrow-right2"></i> Logout
-        </ion-item>
--->
             </div>
         </ion-content>
     </ion-side-menu>
