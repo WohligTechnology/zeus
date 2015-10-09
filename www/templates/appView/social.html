@@ -1,38 +1,11 @@
 <ion-view view-title="Social Feeds">
-  <ion-content overflow-scroll="true">
-
-<!--
-    <div class="button-bar">
-      <a class="button button-positive button-outline" ng-class="{'underline':tab=='fb'}" ng-click="tab='fb'">Facebook</a>
-      <a class="button button-positive button-outline" ng-class="{'underline':tab=='tw'}" ng-click="tab='tw'">Twitter</a>
-    </div>
-
-    <div ng-show="tab=='fb';">
-      <div fb-post class="fb-page" data-href="https://www.facebook.com/envato/" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="false" data-show-posts="true">
-      </div>
-    </div>
-
-    <div ng-show="tab=='tw';">
-      <div tweet-box class="twitter-timeline" data-widget-id="645125196832075776">
-        <div class="middle text-center">
-          <ion-spinner class="spinner-positive"></ion-spinner>
+    <ion-content>
+        <div class="row" ng-repeat="socs in social">
+            <div class="col" ng-repeat="soc in socs">
+                <div class="social-link text-center {{soc.name|noappid}}" ng-click="goSocial(soc.value)">
+                    <i class="icon ion-social-{{soc.name|noappid}}"></i>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
--->
-  
-  
-  <div class="row" ng-repeat="socs in social">
-  	
-  	<div class="col" ng-repeat="soc in socs">
-  		<div class="sociallink {{soc.name|noappid}}" ng-click="goSocial(soc.value)">
-  			<span>{{soc.name|noappid}}</span>
-  		</div>
-  	</div>
-  	
-  </div>
-  
-
-  </ion-content>
+    </ion-content>
 </ion-view>
-
