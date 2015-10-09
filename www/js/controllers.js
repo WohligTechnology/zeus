@@ -1576,7 +1576,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.goSocial = function (link) {
 		console.log(link);
 		console.log("dfasdf");
-		cordova.InAppBrowser.open(link, '_blank', 'location=yes');
+		if (cordova) {
+			cordova.InAppBrowser.open(link, '_blank', 'location=yes');
+		} else {
+			window.open(link,"_blank");
+		}
 	}
 
 })
