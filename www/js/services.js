@@ -33,7 +33,7 @@ angular.module('starter.services', [])
 				}
 				return null;
 			},
-			signup: function (signup, callback) {
+			signup: function (signup, callback, err) {
 				return $http({
 					url: adminurl + 'signup',
 					method: "POST",
@@ -43,9 +43,9 @@ angular.module('starter.services', [])
 						'password': signup.password,
 						'dob': signup.dob
 					}
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			signin: function (signin, callback) {
+			signin: function (signin, callback, err) {
 				return $http({
 					url: adminurl + 'signin',
 					method: "POST",
@@ -53,21 +53,9 @@ angular.module('starter.services', [])
 						'username': signin.username,
 						'password': signin.password
 					}
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			changepassword: function (password, callback) {
-				return $http({
-					url: adminurl + 'changepassword',
-					method: "POST",
-					data: {
-						'id': $.jStorage.get("user").id,
-						'oldpassword': password.oldpassword,
-						'newpassword': password.newpassword,
-						'confirmpassword': password.confirmpassword
-					}
-				}).success(callback);
-			},
-			profilesubmit: function (profile, callback) {
+			profilesubmit: function (profile, callback, err) {
 				return $http({
 					url: adminurl + 'profilesubmit',
 					method: "POST",
@@ -79,9 +67,9 @@ angular.module('starter.services', [])
 						'dob': profile.dob,
 						'contact': profile.contact,
 					}
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			createenquiry: function (enquiry, callback) {
+			createenquiry: function (enquiry, callback, err) {
 				return $http({
 					url: adminurl + 'createenquiry',
 					method: "POST",
@@ -92,57 +80,57 @@ angular.module('starter.services', [])
 						'title': enquiry.title,
 						'content': enquiry.content
 					}
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			forgotpassword: function (email, callback) {
+			forgotpassword: function (email, callback, err) {
 				return $http.get(adminurl + 'forgotpassword?email=' + email, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getsingleevents: function (id, callback) {
+			getsingleevents: function (id, callback, err) {
 				return $http({
 					url: adminurl + 'getsingleevents',
 					method: "POST",
 					data: {
 						'id': id
 					}
-				}).success(callback);
+				}).success(callback).error(err);
 			},
 
-			searchelement: function (searchelement, callback) {
+			searchelement: function (searchelement, callback, err) {
 				return $http({
 					url: adminurl + 'searchelement',
 					method: "POST",
 					data: {
 						'searchelement': searchelement
 					}
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getallvideogalleryvideo: function (id, pageno, callback) {
+			getallvideogalleryvideo: function (id, pageno, callback, err) {
 				return $http.get(adminurl + 'getallvideogalleryvideo?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getallgalleryimage: function (id, pageno, callback) {
+			getallgalleryimage: function (id, pageno, callback,err) {
 				return $http.get(adminurl + 'getallgalleryimage?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getsingleblog: function (id, callback) {
+			getsingleblog: function (id, callback, err) {
 				return $http({
 					url: adminurl + 'getsingleblog',
 					method: "POST",
 					data: {
 						'id': id
 					}
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			changepassword: function (password, callback) {
+			changepassword: function (password, callback, err) {
 				return $http({
 					url: adminurl + 'changepassword',
 					method: "POST",
 					data: password
-				}).success(callback);
+				}).success(callback).error(err);
 			},
 			authenticate: function () {
 				return $http({
@@ -150,47 +138,47 @@ angular.module('starter.services', [])
 					method: "POST"
 				});
 			},
-			getallblog: function (pageno, callback) {
+			getallblog: function (pageno, callback, err) {
 				return $http.get(adminurl + 'getallblog?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			logout: function (callback) {
+			logout: function (callback, err) {
 				$.jStorage.flush();
 				return $http.get(adminurl + 'logout', {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
 			getuser: function () {
 				return $.jStorage.get("user");
 			},
-			getallsliders: function (callback) {
+			getallsliders: function (callback, err) {
 				return $http.get(adminurl + 'getallsliders', {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getallevents: function (pageno, callback) {
+			getallevents: function (pageno, callback, err) {
 				
 				return $http.get(adminurl + 'getallevents?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getappconfig: function (callback) {
+			getappconfig: function (callback,err) {
 				return $http.get(adminurl + 'getappconfig', {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getallgallery: function (pageno, callback) {
+			getallgallery: function (pageno, callback, err) {
 				return $http.get(adminurl + 'getallgallery?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getallvideogallery: function (pageno, callback) {
+			getallvideogallery: function (pageno, callback, err) {
 				return $http.get(adminurl + 'getallvideogallery?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			changesetting: function (setting, callback) {
+			changesetting: function (setting, callback, err) {
 				return $http({
 					url: adminurl + 'changesetting',
 					method: "POST",
@@ -201,9 +189,9 @@ angular.module('starter.services', [])
 						blognotification: JSON.stringify(setting.blognotification),
 						photonotification: JSON.stringify(setting.photonotification)
 					}
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			editprofile: function (profile, callback) {
+			editprofile: function (profile, callback, err) {
 				var user=_.cloneDeep(profile);
 				user.dob=$filter("date")(user.dob,"yyyy-MM-dd");
 				
@@ -211,7 +199,7 @@ angular.module('starter.services', [])
 					url: adminurl + 'editprofile',
 					method: "POST",
 					data: user
-				}).success(callback);
+				}).success(callback).error(err);
 			},
 			getWordpressPosts: function (wdp, callback) {
 				var getdata = function (data, status) {
@@ -228,30 +216,30 @@ angular.module('starter.services', [])
 					withCredentials: false
 				}).success(callback);
 			},
-			getNotification: function (pageno, data, callback) {
-					$http.get(adminurl + 'getallnotification?event='+data.event+'&blog='+data.blog+'&video='+data.video+'&photo='+data.photo+'&pageno='+pageno, {
+			getNotification: function (pageno, data, callback, err) {
+					return $http.get(adminurl + 'getallnotification?event='+data.event+'&blog='+data.blog+'&video='+data.video+'&photo='+data.photo+'&pageno='+pageno, {
 						withCredentials: false
-					}).success(callback);
+					}).success(callback).error(err);
 			},
-			getallfrontmenu: function (callback) {
+			getallfrontmenu: function (callback, err) {
 				$http.get(adminurl + 'getallfrontmenu', {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getarticle: function (id, callback) {
+			getarticle: function (id, callback, err) {
 				$http.get(adminurl + 'getsinglearticles?id=' + id, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			getsingleuserdetail: function (callback) {
+			getsingleuserdetail: function (callback, err) {
 				$http.get(adminurl + 'getsingleuserdetail?id=' + $.jStorage.get("user").id, {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
-			gethomecontent: function (callback) {
+			gethomecontent: function (callback, err) {
 				$http.get(adminurl + 'getsinglearticles?id=1', {
 					withCredentials: false
-				}).success(callback);
+				}).success(callback).error(err);
 			},
 			setconfigdata: function (data) {
 				$.jStorage.set("configdata", data);
