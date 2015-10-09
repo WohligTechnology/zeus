@@ -402,6 +402,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 	};
 })
 
+.filter('noappid', function () {
+	return function (val) {
+		var val=val.replace("appid", "");
+		return val;
+	};
+})
+
 .filter('url', function ($filter) {
 	return function (val) {
 		if (val) {

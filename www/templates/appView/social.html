@@ -22,24 +22,16 @@
 -->
   
   
-  <div class="button button-positive button-outline" ng-click="goSocial('https://www.facebook.com/wepick181')">
-  	<div>Facebook</div>
+  <div class="row">
+  	
+  	<div class="col" ng-repeat="soc in social">
+  		<div class="sociallink {{soc.name|noappid}}" ng-click="goSocial(soc.value)">
+  			<span>{{soc.name|noappid}}</span>
+  		</div>
+  	</div>
+  	
   </div>
-  <div class="button button-positive button-outline" ng-click="goSocial()">
-  	<div>Twitter</div>
-  </div>
-  <div class="button button-positive button-outline" ng-click="goSocial()">
-  	<div>Instagam</div>
-  </div>
-  <div class="button button-positive button-outline" ng-click="goSocial()">
-  	<div>Tumblr</div>
-  </div>
-  <div class="button button-positive button-outline" ng-click="goSocial()">
-  	<div>Google</div>
-  </div>
-  <div class="button button-positive button-outline" ng-click="goSocial()">
-  	<div>YouTube</div>
-  </div>
+  
 
   </ion-content>
 </ion-view>

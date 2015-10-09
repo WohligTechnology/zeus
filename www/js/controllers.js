@@ -158,11 +158,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	MyServices.getallfrontmenu(function (data) {
 		MyServices.setconfigdata(data);
-			_.each(data.config[0], function (n) {
-				if (n.value == true) {
-					loginstatus = true;
-				}
-			});
+		_.each(data.config[0], function (n) {
+			if (n.value == true) {
+				loginstatus = true;
+			}
+		});
 		configreload.func();
 	}, function (err) {
 		$location.url("/access/offline");
@@ -1556,14 +1556,23 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	configreload.onallpage();
 	$scope.tab = 'fb';
 	$scope.social = {};
-	
-	console.log("social");
-	$scope.go = function(){
+	$scope.showsocial = {};
+
+	$scope.go = function () {
 		console.log("demo demo");
 	}
-	
-	
-	$scope.goSocial = function(link){
+
+	console.log(MyServices.getconfigdata());
+	$scope.config = MyServices.getconfigdata().config;
+	if ($scope.config[6]) {
+		$scope.social = JSON.parse($scope.config[6].text);
+		$scope.social = _.filter($scope.social, function (n) {
+			return n.value != ""
+		});
+	}
+	console.log($scope.social);
+
+	$scope.goSocial = function (link) {
 		console.log(link);
 		console.log("dfasdf");
 		cordova.InAppBrowser.open(link, '_blank', 'location=yes');
