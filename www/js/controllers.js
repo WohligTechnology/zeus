@@ -158,6 +158,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	MyServices.getallfrontmenu(function (data) {
 		MyServices.setconfigdata(data);
+			_.each(data.config[0], function (n) {
+				if (n.value == true) {
+					loginstatus = true;
+				}
+			});
 		configreload.func();
 	}, function (err) {
 		$location.url("/access/offline");
@@ -627,10 +632,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 		}
 
-
-
-
-
 	}
 
 })
@@ -983,7 +984,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('EventDetailCtrl', function ($scope, $stateParams, MyServices, $ionicLoading, $ionicSlideBoxDelegate) {
+.controller('EventDetailCtrl', function ($scope, $stateParams, MyServices, $ionicLoading, $ionicSlideBoxDelegate, $ionicModal) {
 	configreload.onallpage();
 	$scope.showloading = function () {
 		$ionicLoading.show({
@@ -995,6 +996,49 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 
 	$scope.msg = "Loading...";
+	$scope.video = {};
+	$scope.image = {};
+
+
+	var init = function () {
+		return $ionicModal.fromTemplateUrl('templates/appView/modal-video.html', {
+			scope: $scope,
+			animation: 'slide-in-up'
+		}).then(function (modal) {
+			$scope.modal = modal;
+
+		});
+	};
+
+	$ionicModal.fromTemplateUrl('templates/appView/modal-image.html', {
+		scope: $scope,
+		animation: 'slide-in-up'
+	}).then(function (modal) {
+		$scope.modal = modal;
+
+	});
+
+	$scope.showVideo = function (url) {
+		console.log(url);
+		init().then(function () {
+			$scope.modal.show();
+		});
+		$scope.video.url = url + "?autoplay=1";
+	};
+	$scope.showImage = function (url) {
+		$scope.modal.show();
+		$scope.image.img = url;
+	};
+
+	$scope.closeVideo = function () {
+		$scope.modal.remove()
+			.then(function () {
+				$scope.modal = null;
+			});
+	};
+	$scope.closeImage = function () {
+		$scope.modal.hide()
+	};
 
 	$scope.id = $stateParams.id;
 	var getsingleeventscallback = function (data, status) {
@@ -1511,6 +1555,19 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	addanalytics("Social page");
 	configreload.onallpage();
 	$scope.tab = 'fb';
+	$scope.social = {};
+	
+	console.log("social");
+	$scope.go = function(){
+		console.log("demo demo");
+	}
+	
+	
+	$scope.goSocial = function(link){
+		console.log(link);
+		console.log("dfasdf");
+		cordova.InAppBrowser.open(link, '_blank', 'location=yes');
+	}
 
 })
 
@@ -1536,23 +1593,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		window.plugins.socialsharing.share(item.content, null, item.image, item.link);
 	}
 
-	if ($scope.user) {
-		MyServices.getsingleuserdetail(function (data) {
-			$scope.notification.video = data.videonotification;
-			$scope.notification.event = data.eventnotification;
-			$scope.notification.blog = data.blognotification;
-			$scope.notification.photo = data.photonotification;
-
-		}, function (err) {
-			$location.url("/access/offline");
-		})
-	} else {
-
-		$scope.notification.video = "true";
-		$scope.notification.event = "true";
-		$scope.notification.blog = "true";
-		$scope.notification.photo = "true";
-	}
 	//	console.log(
 	$scope.showloading = function () {
 		$ionicLoading.show({
@@ -1563,7 +1603,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}, 5000);
 	};
 	$scope.loadnotification = function (pageno) {
-		MyServices.getNotification(pageno, $scope.notification, function (data) {
+		console.log($scope.notification);
+		MyServices.getNotification(pageno, function (data) {
 			console.log(data);
 			console.log(data.queryresult);
 			_.each(data.queryresult, function (n) {

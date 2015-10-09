@@ -23,8 +23,8 @@
 				<ion-slide-box on-slide-changed="slideHasChanged($index)">
 					<ion-slide ng-repeat="images in eventdetail.eventvideos">
 						<div class="row">
-							<div class="col col-50" ng-repeat="img in images">
-								<div youtube code="img.url"></div>
+							<div class="col col-50" ng-repeat="img in images" ng-click="showVideo(img.url);">
+								<img src="http://img.youtube.com/vi/{{img.url | url}}/default.jpg" alt="">
 							</div>
 						</div>
 					</ion-slide>
@@ -35,7 +35,7 @@
 				<ion-slide-box on-slide-changed="slideHasChanged($index)">
 					<ion-slide ng-repeat="images in eventdetail.eventimages">
 						<div class="row">
-							<div class="col col-50" ng-repeat="img in images"><img ng-src="{{img.image|serverimage}}" imgloadingsec class="full-image"></div>
+							<div class="col col-50" ng-repeat="img in images" ng-click="showImage(img.image);"><img ng-src="{{img.image|serverimage}}" imgloadingsec class="full-image"></div>
 						</div>
 					</ion-slide>
 				</ion-slide-box>

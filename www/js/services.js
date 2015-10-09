@@ -17,7 +17,7 @@ var Tumblr_UserName = "";
 var TUBMLR_API_URL = 'http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + Tumblr_UserName + '/posts';
 
 angular.module('starter.services', [])
-	.factory('MyServices', function ($http,$filter) {
+	.factory('MyServices', function ($http, $filter) {
 		return {
 			all: function () {
 				return chats;
@@ -111,7 +111,7 @@ angular.module('starter.services', [])
 					withCredentials: false
 				}).success(callback).error(err);
 			},
-			getallgalleryimage: function (id, pageno, callback,err) {
+			getallgalleryimage: function (id, pageno, callback, err) {
 				return $http.get(adminurl + 'getallgalleryimage?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
 				}).success(callback).error(err);
@@ -158,12 +158,12 @@ angular.module('starter.services', [])
 				}).success(callback).error(err);
 			},
 			getallevents: function (pageno, callback, err) {
-				
+
 				return $http.get(adminurl + 'getallevents?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
-			getappconfig: function (callback,err) {
+			getappconfig: function (callback, err) {
 				return $http.get(adminurl + 'getappconfig', {
 					withCredentials: false
 				}).success(callback).error(err);
@@ -192,9 +192,9 @@ angular.module('starter.services', [])
 				}).success(callback).error(err);
 			},
 			editprofile: function (profile, callback, err) {
-				var user=_.cloneDeep(profile);
-				user.dob=$filter("date")(user.dob,"yyyy-MM-dd");
-				
+				var user = _.cloneDeep(profile);
+				user.dob = $filter("date")(user.dob, "yyyy-MM-dd");
+
 				return $http({
 					url: adminurl + 'editprofile',
 					method: "POST",
@@ -216,10 +216,25 @@ angular.module('starter.services', [])
 					withCredentials: false
 				}).success(callback);
 			},
-			getNotification: function (pageno, data, callback, err) {
-					return $http.get(adminurl + 'getallnotification?event='+data.event+'&blog='+data.blog+'&video='+data.video+'&photo='+data.photo+'&pageno='+pageno, {
+			getNotification: function (pageno, callback, err) {
+				if ($.jStorage.get("user")) {
+					var notificationres = function (data) {
+						return $http.get(adminurl + 'getallnotification?event=' + data.eventnotification + '&blog=' + data.blognotification + '&video=' + data.videonotification + '&photo=' + data.photonotification + '&pageno=' + pageno, {
+							withCredentials: false
+						}).success(callback).error(err);
+					}
+
+					$http.get(adminurl + 'getsingleuserdetail?id=' + $.jStorage.get("user").id, {
+						withCredentials: false
+					}).success(notificationres);
+
+				} else {
+					console.log("else user");
+					return $http.get(adminurl + 'getallnotification?event=true&blog=true&video=true&photo=true&pageno='+pageno, {
 						withCredentials: false
 					}).success(callback).error(err);
+				}
+
 			},
 			getallfrontmenu: function (callback, err) {
 				$http.get(adminurl + 'getallfrontmenu', {
