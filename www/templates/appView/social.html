@@ -22,9 +22,9 @@
 -->
   
   
-  <div class="row">
+  <div class="row" ng-repeat="socs in social">
   	
-  	<div class="col" ng-repeat="soc in social">
+  	<div class="col" ng-repeat="soc in socs">
   		<div class="sociallink {{soc.name|noappid}}" ng-click="goSocial(soc.value)">
   			<span>{{soc.name|noappid}}</span>
   		</div>

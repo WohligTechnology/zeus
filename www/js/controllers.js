@@ -1570,6 +1570,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			return n.value != ""
 		});
 	}
+	$scope.social = _.chunk($scope.social, 2);
 	console.log($scope.social);
 
 	$scope.goSocial = function (link) {
