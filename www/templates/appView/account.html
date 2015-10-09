@@ -1,10 +1,9 @@
 <ion-view view-title="My Account">
     <ion-content>
-
         <div class="side-image">
             <figure>
                 <a href="#/app/profile" menu-close>
-                   <img ng-src="{{userdetails.userimage | serverimage}}" ng-if="userdetails.userimage">
+                    <img ng-src="{{userdetails.userimage | serverimage}}" ng-if="userdetails.userimage">
                     <img src="img/user.png" ng-if="!userdetails.userimage">
                 </a>
                 <figcaption>Ana Todurie</figcaption>
@@ -14,7 +13,6 @@
                 </a>
             </div>
         </div>
-
         <div class="user-from">
             <h4>My account</h4>
             <div class="list">
@@ -43,6 +41,5 @@
                 Submit
             </button>
         </div>
-
     </ion-content>
 </ion-view>

@@ -1,4 +1,4 @@
-<ion-view view-title="Login" class="login-bg">
+<ion-view class="login-bg">
     <ion-content>
         <div class="login-logo light">
             Business<span class="bold positive">App</span>
@@ -25,8 +25,7 @@
                     <button class="button button-block button-positive" ng-click="signinsubmit(signin);" ng-show="logindata.email">
                         Sign In
                     </button>
-                        <p class="light" ng-click="forgotpass()" ng-show="logindata.email">Forgot password?</p>
-
+                    <p class="light" ng-click="forgotpass()" ng-show="logindata.email">Forgot password?</p>
                     <div class="or text-center" ng-show="logindata.facebook || logindata.twitter || logindata.google  || logindata.instagram">
                         <p>- OR -</p>
                     </div>

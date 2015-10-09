@@ -1,6 +1,5 @@
 <ion-view view-title="My Profile">
     <ion-content>
-
         <div class="relative profile-banner" ng-style="user.newcoverimage">
             <button class="button button-dark button-small pull-right dark-transparent w-full" ng-click="picImageForCover()" ng-if="edit==true;">Edit Image</button>
             <div class="image-adjust" ng-style="user.newimage">
@@ -8,12 +7,10 @@
             </div>
             <div class="gradient-hold full">
                 <h3 class="light">{{user.name}}</h3>
-			  
                 <button class="button button-positive button-edit button-round ion-edit" ng-click="changeedit(true)" ng-show="edit==false;"></button>
                 <button class="button button-positive button-edit button-round ion-close" ng-click="changeedit(false)" ng-show="edit==true;"></button>
             </div>
         </div>
-
         <div ng-if="edit==false;">
             <ion-list>
                 <ion-item><span class="icon-space"><i class="icon ln-envelope"></i></span> {{user.email}}</ion-item>
@@ -22,7 +19,6 @@
                 <ion-item><span class="icon-space"><i class="icon ln-calendar2"></i></span> {{user.dob|date:'MMMM dd, yyyy'}}</ion-item>
             </ion-list>
         </div>
-
         <div ng-if="edit==true;">
             <div class="list list-icon">
                 <label class="item item-input">
@@ -46,11 +42,9 @@
                     <input type="date" placeholder="Birth Date" ng-model="user.dob">
                 </label>
             </div>
-            
             <div class="padding-horizontal padding-bottom">
                 <button class="button button-positive button-block" ng-click="saveProfile();">Save</button>
             </div>
-            
             <div class="list list-icon">
                 <div class="item item-divider">Change Password</div>
                 <label class="item item-input">
@@ -70,8 +64,6 @@
                 <button class="button button-positive button-block" ng-click="changePassword();">Change password</button>
             </div>
         </div>
-
         </ion-item>
-
     </ion-content>
 </ion-view>
