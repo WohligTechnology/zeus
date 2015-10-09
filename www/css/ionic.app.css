@@ -9439,7 +9439,6 @@ a:hover {
   height: 50px;
   border-radius: 3px;
   overflow: hidden;
-  background-image: url(../img/user.jpg);
   background-position: center center;
   background-repeat: no-repeat;
   background-color: #ccc;
@@ -9632,7 +9631,6 @@ img.play {
   font-family: Lato-Light; }
 
 .profile-banner {
-  background-image: url("../img/image1.jpg");
   background-size: cover;
   height: 140px; }
   .profile-banner > * {

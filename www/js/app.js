@@ -328,7 +328,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 				return adminimage + image;
 			} else {
-				return "img/user-2-o.jpg";
+				return "img/user.jpg";
 			}
 		};
 	})
