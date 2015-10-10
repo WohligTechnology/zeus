@@ -9531,6 +9531,7 @@ a:hover {
 
 .gradient-hold {
   background-image: -webkit-linear-gradient(transparent 0%, black 60%);
+  background-image: linear-gradient(transparent 0%, black 60%);
   position: absolute;
   bottom: 21px;
   right: 16px;
@@ -9700,6 +9701,9 @@ img.play {
   width: 100%;
   left: 0;
   transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
   font-size: 16px; }
 
 .loading-container .loading {
@@ -9740,6 +9744,8 @@ img.play {
 img[imgloadingsec] {
   opacity: 0;
   -webkit-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
   transition: all 1s ease; }
 
 img.loading {
