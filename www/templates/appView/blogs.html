@@ -3,6 +3,7 @@
         {{msg}}
     </div>
     <ion-content>
+
         <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpress">
             <ion-item class="item-avatar item-icon-right">
                 <div class="image-adjust img-blog" ng-style="{'background-image':'url({{blog.author.avatar_URL}})'}"></div>
@@ -16,9 +17,10 @@
                 </p>
             </div>
         </div>
+
         <div class="padding card" ng-repeat="blog in blogs" ng-show="showTumblr">
             <ion-item class="item-avatar item-icon-right">
-                <img class="image-adjust img-blog" ng-src="http://a.13cdn.com/Facebook_TaylorSwift.png">
+            <div class="image-adjust img-blog" ng-style="{'background-image': 'url(http://a.13cdn.com/Facebook_TaylorSwift.png)'}"></div>
                 <h2 ng-if="blog.slug">{{blog.slug}}</h2>
                 <h2 ng-if="blog.blog_name">{{blog.blog_name}}</h2>
                 <p ng-if="blog.date">{{blog.date|formatdate}}</p>
@@ -43,9 +45,10 @@
                 </p>
             </div>
         </div>
+        
         <div class="padding card" ng-repeat="blog in blogs" ng-show="showCustomblog">
             <ion-item class="item-avatar item-icon-right">
-                <img class="image-adjust img-blog" ng-src="http://a.13cdn.com/Facebook_TaylorSwift.png">
+            <div class="image-adjust img-blog" ng-style="{'background-image':'url(http://a.13cdn.com/Facebook_TaylorSwift.png)'}"></div>
                 <h2>{{blog.name}}</h2>
                 <p ng-if="blog.timestamp">{{blog.timestamp|formatdate}}</p>
             </ion-item>
