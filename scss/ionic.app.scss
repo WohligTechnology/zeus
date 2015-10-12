@@ -1,4 +1,4 @@
-$light:#ffffff !default;
+$light: #ffffff !default;
 $stable:#ccc !default;
 $positive: #F13232 !default;
 $calm: #11c1f3 !default;
@@ -53,16 +53,6 @@ $card-border-radius:              0px !default;
 $ionicons-font-path: "../lib/ionic/fonts" !default;
 // Include all of Ionic
 @import "www/lib/ionic/scss/ionic";
-
-// sass mixing
-@mixin transition($transition-property,
-$transition-time) {
-    -webkit-transition: $transition-property $transition-time;
-    -moz-transition: $transition-property $transition-time;
-    -ms-transition: $transition-property $transition-time;
-    -o-transition: $transition-property $transition-time;
-    transition: $transition-property $transition-time;
-}
 
 @font-face {
     font-family: 'Lato';
