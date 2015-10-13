@@ -35,7 +35,7 @@ angular.module('starter.services', [])
 			},
 			signup: function (signup, callback, err) {
 				return $http({
-					url: adminurl + 'signup',
+					url: adminurl + 'signUp',
 					method: "POST",
 					data: {
 						'username': signup.username,
@@ -47,7 +47,7 @@ angular.module('starter.services', [])
 			},
 			signin: function (signin, callback, err) {
 				return $http({
-					url: adminurl + 'signin',
+					url: adminurl + 'signIn',
 					method: "POST",
 					data: {
 						'username': signin.username,
@@ -57,7 +57,7 @@ angular.module('starter.services', [])
 			},
 			profilesubmit: function (profile, callback, err) {
 				return $http({
-					url: adminurl + 'profilesubmit',
+					url: adminurl + 'profileSubmit',
 					method: "POST",
 					data: {
 						'id': $.jStorage.get("user").id,
@@ -71,7 +71,7 @@ angular.module('starter.services', [])
 			},
 			createenquiry: function (enquiry, callback, err) {
 				return $http({
-					url: adminurl + 'createenquiry',
+					url: adminurl + 'createEnquiry',
 					method: "POST",
 					data: {
 						'id': $.jStorage.get("user").id,
@@ -83,13 +83,13 @@ angular.module('starter.services', [])
 				}).success(callback).error(err);
 			},
 			forgotpassword: function (email, callback, err) {
-				return $http.get(adminurl + 'forgotpassword?email=' + email, {
+				return $http.get(adminurl + 'forgotPassword?email=' + email, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getsingleevents: function (id, callback, err) {
 				return $http({
-					url: adminurl + 'getsingleevents',
+					url: adminurl + 'getSingleEvents',
 					method: "POST",
 					data: {
 						'id': id
@@ -99,7 +99,7 @@ angular.module('starter.services', [])
 
 			searchelement: function (searchelement, callback, err) {
 				return $http({
-					url: adminurl + 'searchelement',
+					url: adminurl + 'searchElement',
 					method: "POST",
 					data: {
 						'searchelement': searchelement
@@ -107,18 +107,18 @@ angular.module('starter.services', [])
 				}).success(callback).error(err);
 			},
 			getallvideogalleryvideo: function (id, pageno, callback, err) {
-				return $http.get(adminurl + 'getallvideogalleryvideo?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
+				return $http.get(adminurl + 'getAllVideoGalleryVideo?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getallgalleryimage: function (id, pageno, callback, err) {
-				return $http.get(adminurl + 'getallgalleryimage?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
+				return $http.get(adminurl + 'getAllGalleryImage?id=' + id + '&pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getsingleblog: function (id, callback, err) {
 				return $http({
-					url: adminurl + 'getsingleblog',
+					url: adminurl + 'getSingleBlog',
 					method: "POST",
 					data: {
 						'id': id
@@ -127,7 +127,7 @@ angular.module('starter.services', [])
 			},
 			changepassword: function (password, callback, err) {
 				return $http({
-					url: adminurl + 'changepassword',
+					url: adminurl + 'changePassword',
 					method: "POST",
 					data: password
 				}).success(callback).error(err);
@@ -139,7 +139,7 @@ angular.module('starter.services', [])
 				});
 			},
 			getallblog: function (pageno, callback, err) {
-				return $http.get(adminurl + 'getallblog?pageno=' + pageno + '&maxrow=' + 15, {
+				return $http.get(adminurl + 'getAllBlog?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
@@ -153,34 +153,34 @@ angular.module('starter.services', [])
 				return $.jStorage.get("user");
 			},
 			getallsliders: function (callback, err) {
-				return $http.get(adminurl + 'getallsliders', {
+				return $http.get(adminurl + 'getAllSliders', {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getallevents: function (pageno, callback, err) {
 
-				return $http.get(adminurl + 'getallevents?pageno=' + pageno + '&maxrow=' + 15, {
+				return $http.get(adminurl + 'getAllEvents?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getappconfig: function (callback, err) {
-				return $http.get(adminurl + 'getappconfig', {
+				return $http.get(adminurl + 'getAppConfig', {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getallgallery: function (pageno, callback, err) {
-				return $http.get(adminurl + 'getallgallery?pageno=' + pageno + '&maxrow=' + 15, {
+				return $http.get(adminurl + 'getAllGallery?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getallvideogallery: function (pageno, callback, err) {
-				return $http.get(adminurl + 'getallvideogallery?pageno=' + pageno + '&maxrow=' + 15, {
+				return $http.get(adminurl + 'getAllVideoGallery?pageno=' + pageno + '&maxrow=' + 15, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			changesetting: function (setting, callback, err) {
 				return $http({
-					url: adminurl + 'changesetting',
+					url: adminurl + 'changeSetting',
 					method: "POST",
 					data: {
 						id: setting.id,
@@ -196,7 +196,7 @@ angular.module('starter.services', [])
 				user.dob = $filter("date")(user.dob, "yyyy-MM-dd");
 
 				return $http({
-					url: adminurl + 'editprofile',
+					url: adminurl + 'editProfile',
 					method: "POST",
 					data: user
 				}).success(callback).error(err);
@@ -219,40 +219,40 @@ angular.module('starter.services', [])
 			getNotification: function (pageno, callback, err) {
 				if ($.jStorage.get("user")) {
 					var notificationres = function (data) {
-						return $http.get(adminurl + 'getallnotification?event=' + data.eventnotification + '&blog=' + data.blognotification + '&video=' + data.videonotification + '&photo=' + data.photonotification + '&pageno=' + pageno, {
+						return $http.get(adminurl + 'getAllNotification?event=' + data.eventnotification + '&blog=' + data.blognotification + '&video=' + data.videonotification + '&photo=' + data.photonotification + '&pageno=' + pageno, {
 							withCredentials: false
 						}).success(callback).error(err);
 					}
 
-					$http.get(adminurl + 'getsingleuserdetail?id=' + $.jStorage.get("user").id, {
+					$http.get(adminurl + 'getSingleUserDetail?id=' + $.jStorage.get("user").id, {
 						withCredentials: false
 					}).success(notificationres);
 
 				} else {
 					console.log("else user");
-					return $http.get(adminurl + 'getallnotification?event=true&blog=true&video=true&photo=true&pageno='+pageno, {
+					return $http.get(adminurl + 'getAllNotification?event=true&blog=true&video=true&photo=true&pageno='+pageno, {
 						withCredentials: false
 					}).success(callback).error(err);
 				}
 
 			},
 			getallfrontmenu: function (callback, err) {
-				$http.get(adminurl + 'getallfrontmenu', {
+				$http.get(adminurl + 'getAllFrontmenu', {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getarticle: function (id, callback, err) {
-				$http.get(adminurl + 'getsinglearticles?id=' + id, {
+				$http.get(adminurl + 'getSingleArticles?id=' + id, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			getsingleuserdetail: function (callback, err) {
-				$http.get(adminurl + 'getsingleuserdetail?id=' + $.jStorage.get("user").id, {
+				$http.get(adminurl + 'getSingleUserDetail?id=' + $.jStorage.get("user").id, {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
 			gethomecontent: function (callback, err) {
-				$http.get(adminurl + 'getsinglearticles?id=1', {
+				$http.get(adminurl + 'getSingleArticles?id=1', {
 					withCredentials: false
 				}).success(callback).error(err);
 			},
