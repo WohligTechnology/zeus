@@ -53,7 +53,7 @@
                 <p ng-if="blog.timestamp">{{blog.timestamp|formatdate}}</p>
             </ion-item>
             <div class="item item-body" ng-click="blogDetail(blog,'cms');">
-                <img class="full-image" ng-src="{{blog.photos[0].original_size.url}}">
+<!--                <img class="full-image" ng-src="{{blog.photos[0].original_size.url}}">-->
                 <p>
                     <span ng-bind-html="blog.content|cut:true:367:'. . .'|rawHtml"></span>
                 </p>
