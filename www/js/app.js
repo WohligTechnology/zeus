@@ -38,7 +38,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     console.log("This should work");
     push = PushNotification.init({
       "android": {
-        "senderID": "824698645594"
+        "senderID": "824698645594",
+        "icon":"www/img/icon.png"
       },
       "ios": {
         "alert": "true",
