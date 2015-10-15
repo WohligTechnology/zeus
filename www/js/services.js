@@ -7,7 +7,7 @@ var imgpath = adminimage + "image?name=";
 
 var foods = [];
 
-//FOR WORDPRESS INTEGRATION 
+//FOR WORDPRESS INTEGRATION
 var Wordpress_UserName = "en.blog.wordpress.com";
 
 var WORDPRESS_API_URL = 'https://public-api.wordpress.com/rest/v1.1/';
@@ -261,6 +261,11 @@ angular.module('starter.services', [])
 			},
 			getconfigdata: function (data) {
 				return $.jStorage.get("configdata");
+			},
+			setNotificationToken: function (callback) {
+				$http.get(adminurl + 'setNotificationToken?os=' + $.jStorage.get("os")+"&token="+$.jStorage.get("token"), {
+					withCredentials: false
+				}).success(callback);
 			},
 		};
 	});
