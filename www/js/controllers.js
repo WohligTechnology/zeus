@@ -292,23 +292,23 @@ angular.module('starter.controllers', ['starter.services'])
 
     //        ***** tabchange ****
 
-    $scope.tab = 'signin';
-    $scope.classa = 'active';
-    $scope.classb = '';
-
-    $scope.tabchange = function (tab, a) {
-
-        $scope.tab = tab;
-        if (a == 1) {
-            $scope.classa = "active";
-            $scope.classb = '';
-
-        } else {
-            $scope.classa = '';
-            $scope.classb = "active";
-
-        }
-    };
+//    $scope.tab = 'signin';
+//    $scope.classa = 'active';
+//    $scope.classb = '';
+//
+//    $scope.tabchange = function (tab, a) {
+//
+//        $scope.tab = tab;
+//        if (a == 1) {
+//            $scope.classa = "active";
+//            $scope.classb = '';
+//
+//        } else {
+//            $scope.classa = '';
+//            $scope.classb = "active";
+//
+//        }
+//    };
 
     //    ***** End ******
 
