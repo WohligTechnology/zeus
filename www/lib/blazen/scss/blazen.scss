@@ -404,7 +404,6 @@ a:hover {
         background: -moz-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
         background: -ms-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
         background: -o-linear-gradient(hsla(258, 59%, 57%, 0.62) 55%, rgba(22, 22, 22, 1));
-        position: relative;
         @include transition(all,
         0.5s);
         position: absolute;
@@ -477,11 +476,10 @@ a:hover {
     }
 }
 
-.item.item-body {
-    overflow: hidden;
-    height: 160px;
-}
-
+ti //.item.item-body {
+//    overflow: hidden;
+//    height: 160px;
+//}
 a {
     color: inherit;
 }
@@ -928,4 +926,13 @@ p.addanimation.pop.showmores {
 
 .no-margin {
     margin: 0 !important;
+}
+
+h2.title {
+    margin-top: 8px;
+    margin-bottom: 5px;
+}
+
+h4.dates {
+    margin-top: 5px;
 }

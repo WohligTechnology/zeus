@@ -1,0 +1,42 @@
+<ion-view view-title="Login" class="login_back">
+    <ion-content>
+        <div class="login-logo">
+            <img src="img/logo.png" class="full-image">
+        </div>
+        <div class="login-tab">
+            <div class="login">
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Username</span>
+                        <i class="icon ln-user"></i>
+                        <input type="text" placeholder="Username" ng-model="signup.username">
+                    </label>
+
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
+                        <i class="icon ln-envelope"></i>
+                        <input type="email" placeholder="Email" ng-model="signup.email">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Date of birth</span>
+                        <i class="icon ln-gift"></i>
+                        <input type="text" onfocus="(this.type='date')" placeholder="Birth Date" ng-model="signup.dob">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Password</span>
+                        <i class="icon ln-lock"></i>
+                        <input type="password" placeholder="Password" ng-model="signup.password">
+                    </label>
+                </div>
+                <div class="login-btn footer">
+                    <button class="button button-block button-positive" ng-click="signupsubmit(signup);">
+                        Sign up
+                    </button>
+                    <div class="sign text-center" ng-show="logindata.email">
+                        <span>All ready have an account?<a href="#/user-signup">Sign In</a></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
