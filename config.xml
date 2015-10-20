@@ -35,7 +35,7 @@
   <preference name="StatusBarStyle" value="lightcontent"/>
   <preference name="SplashScreenBackgroundColor" value="#000"/>
   <preference name="AutoHideSplashScreen" value="true"/>
-  <preference name="ShowSplashScreenSp`inner" value="false"/>
+  <preference name="ShowSplashScreenSpinner" value="false"/>
   <preference name="SplashScreen" value="screen"/>
   <preference name="SplashMaintainAspectRatio" value="true"/>
   <preference name="SplashScreenDelay" value="3000"/>
