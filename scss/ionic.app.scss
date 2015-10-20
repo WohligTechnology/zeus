@@ -204,7 +204,7 @@ a:hover {
         .item-input {
             background: transparent;
         }
-        
+
         margin-top: 20px;
         .list {
             margin: 0 15px;
@@ -288,7 +288,7 @@ a:hover {
     @include square(80px);
 }
 .img-blog {
-    @include square(40px);    
+    @include square(40px);
     left: 15px;
     top: 15px;
 }
@@ -452,6 +452,7 @@ img.play {
     img {
         width: 100%;
         max-width: 100%;
+        height: auto;
     }
     p {
         font-size: 14px;
@@ -567,7 +568,7 @@ img.play {
     }
     &.ng-invalid {
         color: $positive !important;
-    } 
+    }
     &.ng-invalid-parse {
         color: $positive !important;
     }
@@ -637,7 +638,7 @@ img.play {
             color: $positive;
         }
     }
-    
+
 }
 
 #map {
