@@ -1097,7 +1097,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.reloadblog = function (page) {
 		MyServices.getallblog(page, function (data, status) {
-			console.log(data);
+//			console.log(data);
 			$ionicLoading.hide();
 			_.each(data.queryresult, function (n) {
 				$scope.blogs.push(n);
@@ -1147,6 +1147,19 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		addanalytics("Custom blog");
 		$scope.showCustomblog = true;
 		$scope.reloadblog(1);
+	} else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "wordpressself") {
+		addanalytics("Wordpress self blog");
+		$scope.showWordpressSelf = true;
+		$scope.keepscrolling = false;
+		Wordpress_UserName = $.jStorage.get("blogType").appid;
+		MyServices.getWordpressSelfPosts($.jStorage.get("blogType").appid, function (data, status) {
+			$ionicLoading.hide();
+			console.log(data);
+			$scope.blogs = data;
+			_.each($scope.blogs, function(n){
+				n.content = n.content.rendered;
+			});
+		});
 	}
 
 	$scope.loadMorePolls = function () {
@@ -1188,6 +1201,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	// tumblr and wordpress
 	if ($stateParams.id == 0) {
 		$scope.msg = "";
+		$ionicLoading.hide();
 		$scope.details = $.jStorage.get('postdetail');
 		addanalytics("tumblr wordpress blog" + $scope.details.album);
 		if ($scope.details.provider == 'tumblr') {

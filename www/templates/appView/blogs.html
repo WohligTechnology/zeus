@@ -18,6 +18,20 @@
             </div>
         </div>
 
+        <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpressSelf">
+            <ion-item class="item-avatar item-icon-right">
+                <div class="image-adjust img-blog" ng-style="{'background-image':'url(img/blog.png)'}"></div>
+<!--                <h2>{{blog.author.first_name}} {{blog.author.last_name}}</h2>-->
+                <h2>{{blog.title.rendered}}</h2>
+                <p>{{blog.date|date:'MMMM dd, yyyy'}}</p>
+            </ion-item>
+            <div class="item item-body" ng-click="blogDetail(blog,'wordpressself');">
+                <p>
+                    <span ng-bind-html="blog.content|cut:true:367:'. . .'|rawHtml"></span>
+                </p>
+            </div>
+        </div>
+
         <div class="padding card" ng-repeat="blog in blogs" ng-show="showTumblr">
             <ion-item class="item-avatar item-icon-right">
             <div class="image-adjust img-blog" ng-style="{'background-image': 'url(http://a.13cdn.com/Facebook_TaylorSwift.png)'}"></div>

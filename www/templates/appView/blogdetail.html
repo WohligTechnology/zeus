@@ -16,6 +16,19 @@
                 <p ng-bind-html="details.content"></p>
             </div>
         </div>
+        <div class="article-view" ng-if="details.provider=='wordpressself' && id==0">
+            <div class="relative stable-bg min-height">
+                <img class="full-image" ng-src="{{details.featured_image | serverimage}}">
+                <div class="gradient-hold full">
+                    <h4 class="light">{{blog.title.rendered}}</h4>
+                    <p class="light">{{details.date|date : 'MMMM dd, yyyy'}}</p>
+                </div>
+            </div>
+            <div class="padding">
+                <h4>{{details.title.rendered}}</h4>
+                <p ng-bind-html="details.content"></p>
+            </div>
+        </div>
         <div class="article-view" ng-if="id!=0">
             <div class="relative stable-bg min-height max-height" ng-if="details.image">
                 <img class="full-image" ng-src="{{details.image | serverimage}}">

@@ -11,6 +11,7 @@ var foods = [];
 var Wordpress_UserName = "en.blog.wordpress.com";
 
 var WORDPRESS_API_URL = 'https://public-api.wordpress.com/rest/v1.1/';
+var WORDPRESS_self_API_URL = 'wp-json/wp/v2/posts';
 
 //for tumblr
 var Tumblr_UserName = "";
@@ -210,6 +211,11 @@ angular.module('starter.services', [])
 				$http.get(WORDPRESS_API_URL + "sites/" + wdp, {
 					withCredentials: false
 				}).success(getdata);
+			},
+			getWordpressSelfPosts: function (wdp, callback) {
+				$http.get(wdp + WORDPRESS_self_API_URL, {
+					withCredentials: false
+				}).success(callback);
 			},
 			getTumblrPosts: function (tmb, callback) {
 				$http.get('http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + tmb + '/posts', {
