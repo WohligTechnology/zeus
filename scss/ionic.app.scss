@@ -646,6 +646,11 @@ img.play {
   height: 100%;
 }
 
+.map iframe {
+    width: 100%;
+    padding: 10px;
+}
+
 img[imgloadingsec] {
   opacity: 0;
   -webkit-transition: all 1s ease;
