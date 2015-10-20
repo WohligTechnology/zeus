@@ -1,4 +1,4 @@
-var adminbase = "http://wohlig.co.in/webappbackend/";
+var adminbase = "http://businessapp.wohlig.com/admin/";
 
 var adminurl = adminbase + "index.php/json/";
 var adminimage = adminbase + "uploads/";

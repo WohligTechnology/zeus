@@ -35,7 +35,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		if (window.cordova && window.cordova.platformId == 'android') {
 			StatusBar.backgroundColorByHexString("#c12828");
 		}
-		console.log("This should work");
 		if (PushNotification) {
 			push = PushNotification.init({
 				"android": {
