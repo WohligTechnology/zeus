@@ -405,7 +405,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	};
 	$scope.showPopupsignupfailure = function () {
 		var myPopup = $ionicPopup.show({
-			template: '<p class="text-center">Sorry! Try again.</p>',
+			template: '<p class="text-center">User already exist</p>',
 			title: 'Oops!',
 			scope: $scope,
 
