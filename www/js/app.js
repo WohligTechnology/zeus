@@ -36,7 +36,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			StatusBar.backgroundColorByHexString("#c12828");
 		}
 		console.log("This should work");
-		if (PushNotification) {
 			push = PushNotification.init({
 				"android": {
 					"senderID": "824698645594",
@@ -80,9 +79,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 				conosle.log("ERROR");
 				console.log(e);
 			});
-		}
-
-
 	});
 })
 
