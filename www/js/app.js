@@ -35,6 +35,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		if (window.cordova && window.cordova.platformId == 'android') {
 			StatusBar.backgroundColorByHexString("#c12828");
 		}
+		try {
 			push = PushNotification.init({
 				"android": {
 					"senderID": "824698645594",
@@ -78,6 +79,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 				conosle.log("ERROR");
 				console.log(e);
 			});
+		}
+		catch (e) {
+			console.log(e)
+		}
 	});
 })
 
