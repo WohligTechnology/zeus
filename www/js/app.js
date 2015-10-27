@@ -1,6 +1,7 @@
 var socialShare = {};
 var push = {};
 var googleanalyticsid = 'UA-67616258-1';
+var isapp = true;
 
 function addanalytics(screen) {
 	if (window.analytics) {
@@ -34,6 +35,11 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 		}
 		if (window.cordova && window.cordova.platformId == 'android') {
 			StatusBar.backgroundColorByHexString("#c12828");
+		}
+		if(window.cordova){
+			isapp = true;
+		}else{
+			isapp = false;
 		}
 		try {
 			push = PushNotification.init({

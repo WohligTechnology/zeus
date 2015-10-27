@@ -355,7 +355,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}
 	};
 	$scope.facebooklogin = function () {
+		if(isapp){
 		ref = cordova.InAppBrowser.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+		}else{
+			ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+		}
 		stopinterval = $interval(callAtIntervaltwitter, 2000);
 		ref.addEventListener('exit', function (event) {
 			MyServices.authenticate().success(authenticatesuccess);
@@ -363,8 +367,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 	}
 	$scope.twitterlogin = function () {
-
+		if(isapp){
 		ref = cordova.InAppBrowser.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+		}else{
+		ref = window.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+		}
 		stopinterval = $interval(callAtIntervaltwitter, 2000);
 		ref.addEventListener('exit', function (event) {
 			MyServices.authenticate().success(authenticatesuccess);
@@ -373,7 +380,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 
 	$scope.instagramlogin = function () {
+		if(isapp){
 		ref = cordova.InAppBrowser.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+		}else{
+		ref = window.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+		}
 		stopinterval = $interval(callAtIntervaltwitter, 2000);
 		ref.addEventListener('exit', function (event) {
 			MyServices.authenticate().success(authenticatesuccess);
@@ -382,8 +393,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	}
 
 	$scope.googlelogin = function () {
-
+			if(isapp){
 			ref = cordova.InAppBrowser.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+			}else{
+			ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+			}
 			stopinterval = $interval(callAtIntervaltwitter, 2000);
 			ref.addEventListener('exit', function (event) {
 				MyServices.authenticate().success(authenticatesuccess);
