@@ -64,7 +64,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		_.each(data.menu, function (n) {
 			if (loginstatus == false) {
-				if (n.linktypelink != "setting" && n.linktypelink != "contact" && n.linktypelink != "profile") {
+				if (n.linktypelink != "setting" && n.linktypelink != "profile") {
 					var newmenu = {};
 					newmenu.id = n.id;
 					newmenu.name = n.name;

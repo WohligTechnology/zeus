@@ -74,7 +74,7 @@ angular.module('starter.services', [])
 					url: adminurl + 'createEnquiry',
 					method: "POST",
 					data: {
-						'id': $.jStorage.get("user").id,
+//						'id': $.jStorage.get("user").id,
 						'name': enquiry.name,
 						'email': enquiry.email,
 						'title': enquiry.title,
