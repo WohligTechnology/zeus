@@ -220,6 +220,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			}
 		}
 	})
+	.state('app.audiogallery', {
+		url: '/audiogallery',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/appView/audiogallery.html',
+				controller: "AudiogalleryCtrl"
+			}
+		}
+	})
+	.state('app.audiogallerycategory', {
+		url: '/audiogallerycategory',
+		views: {
+			'menuContent': {
+				templateUrl: 'templates/appView/audiogallerycategory.html',
+				controller: "AudiogallerycategoryCtrl"
+			}
+		}
+	})
 
 	.state('app.eventdetail', {
 		url: '/eventdetail/:id',

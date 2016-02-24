@@ -292,7 +292,9 @@ a:hover {
     left: 15px;
     top: 15px;
 }
-
+.audio-img{
+@include square(40px);
+}
 .menu-set {
     .item {
         border-color: $border-color;
@@ -678,5 +680,41 @@ img {
     }
     &.doneLoading {
       opacity: 1;
+    }
+}
+.audio-box{
+  .item-content {
+    padding-top: 8px;
+    padding-left: 60px !important;
+    min-height: 55px !important;
+}
+}
+.on-hover {
+    position: absolute;
+    left: 10px;
+    top: 10px;
+    background: rgba(0, 0, 0, 0.51);
+    height: 40px;
+    width: 40px;
+        border-radius: 3px;
+}
+
+.on-hover {
+  i {
+      color: #FCFCFC;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%,-50%);
+      font-size: 20px;
+  }
+}
+.audio-btn {
+    text-align: center;
+    margin: 4px auto;
+    i{
+      font-size: 26px;
+margin: 0px 5px;
+color: #fff;
     }
 }

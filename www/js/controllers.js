@@ -230,6 +230,52 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('AccessCtrl', function ($scope) {
 
 })
+.controller('AudiogalleryCtrl', function ($scope,MyServices, $stateParams) {
+	$scope.audio = [{
+  img: "img/audio.jpg",
+  name:"Fever Ray",
+  desc:"if i had a heart"
+
+},{
+  img: "img/audio.jpg",
+  name:"Moby",
+  desc:"Mistake"
+
+},{
+  img: "img/audio.jpg",
+  name:"Uppermost",
+  desc:"Revolution"
+
+},{
+  img: "img/audio.jpg",
+  name:"Nigel Standford",
+  desc:"cyamatics"
+
+}];
+})
+.controller('AudiogallerycategoryCtrl', function ($scope,MyServices, $stateParams) {
+	$scope.audio = [{
+  img: "img/audio.jpg",
+  name:"Fever Ray",
+  desc:"if i had a heart"
+
+},{
+  img: "img/audio.jpg",
+  name:"Moby",
+  desc:"Mistake"
+
+},{
+  img: "img/audio.jpg",
+  name:"Uppermost",
+  desc:"Revolution"
+
+},{
+  img: "img/audio.jpg",
+  name:"Nigel Standford",
+  desc:"cyamatics"
+
+}];
+})
 
 .controller('ArticleCtrl', function ($scope, MyServices, $stateParams, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
 	configreload.onallpage();
