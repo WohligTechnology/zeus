@@ -236,6 +236,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 				templateUrl: 'templates/appView/audiogallerycategory.html',
 				controller: "AudiogallerycategoryCtrl"
 			}
+		},
+		params: {
+			item: "",
+			items:""
 		}
 	})
 

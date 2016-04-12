@@ -6,6 +6,13 @@ var imgpath = adminimage + "image?name=";
 
 var foods = [];
 
+// FOR SOUNDCLOUD
+var options = {};
+options.client_id = '3316b4d5bb6dc355bef2c72c161a9084';
+var user  = "hiimharsh";
+// For SoundCloud
+var SC_API_URL = "";
+
 //FOR WORDPRESS INTEGRATION
 var Wordpress_UserName = "en.blog.wordpress.com";
 
@@ -16,8 +23,8 @@ var WORDPRESS_self_API_URL = 'wp-json/wp/v2/posts';
 var Tumblr_UserName = "";
 var TUBMLR_API_URL = 'http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + Tumblr_UserName + '/posts';
 
-angular.module('starter.services', [])
-	.factory('MyServices', function ($http, $filter) {
+angular.module('starter.services', ['httpService'])
+	.factory('MyServices', function ($http, $filter,httpService) {
 		return {
 			all: function () {
 				return chats;
@@ -272,5 +279,13 @@ angular.module('starter.services', [])
 					withCredentials: false
 				}).success(callback);
 			},
+			getAllAudio: function (callback) {
+				$http({
+					method: 'GET',
+					url: 'http://api.soundcloud.com/users/'+ user +'/tracks',
+					params: options,
+					withCredentials: false
+				}).success(callback);
+			}
 		};
 	});

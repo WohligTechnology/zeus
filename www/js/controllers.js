@@ -230,51 +230,165 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('AccessCtrl', function ($scope) {
 
 })
-.controller('AudiogalleryCtrl', function ($scope,MyServices, $stateParams) {
-	$scope.audio = [{
-  img: "img/audio.jpg",
-  name:"Fever Ray",
-  desc:"if i had a heart"
+.controller('AudiogalleryCtrl', function ($scope, MyServices, $stateParams, $http) {
+// 	$scope.audio = [{
+//   img: "img/audio.jpg",
+//   name:"Fever Ray",
+//   desc:"if i had a heart"
 
-},{
-  img: "img/audio.jpg",
-  name:"Moby",
-  desc:"Mistake"
+// },{
+//   img: "img/audio.jpg",
+//   name:"Moby",
+//   desc:"Mistake"
 
-},{
-  img: "img/audio.jpg",
-  name:"Uppermost",
-  desc:"Revolution"
+// },{
+//   img: "img/audio.jpg",
+//   name:"Uppermost",
+//   desc:"Revolution"
 
-},{
-  img: "img/audio.jpg",
-  name:"Nigel Standford",
-  desc:"cyamatics"
+// },{
+//   img: "img/audio.jpg",
+//   name:"Nigel Standford",
+//   desc:"cyamatics"
 
-}];
+// }];
+				// $scope.audio = [];
+	var options = {};
+	options.client_id = 'cbd22121cc1612b8146c72dd16651cb4';
+	var user  = "hiimharsh";
+	$http({
+		method: 'GET',
+		url: 'http://api.soundcloud.com/users/'+ user +'/tracks',
+		params: options,
+		withCredentials: false
+	}).then(function (data) {
+		$scope.audio = data.data;
+		console.log('audio: ', $scope.audio);
+	});
+	// return audio;
+	// var sound = MyServices.getTracks();
+	// console.log('sound: ', sound);
 })
 .controller('AudiogallerycategoryCtrl', function ($scope,MyServices, $stateParams) {
-	$scope.audio = [{
-  img: "img/audio.jpg",
-  name:"Fever Ray",
-  desc:"if i had a heart"
+// 	$scope.audio = [{
+//   img: "img/audio.jpg",
+//   name:"Fever Ray",
+//   desc:"if i had a heart"
 
-},{
-  img: "img/audio.jpg",
-  name:"Moby",
-  desc:"Mistake"
+// },{
+//   img: "img/audio.jpg",
+//   name:"Moby",
+//   desc:"Mistake"
 
-},{
-  img: "img/audio.jpg",
-  name:"Uppermost",
-  desc:"Revolution"
+// },{
+//   img: "img/audio.jpg",
+//   name:"Uppermost",
+//   desc:"Revolution"
 
-},{
-  img: "img/audio.jpg",
-  name:"Nigel Standford",
-  desc:"cyamatics"
+// },{
+//   img: "img/audio.jpg",
+//   name:"Nigel Standford",
+//   desc:"cyamatics"
 
-}];
+// }];
+
+	SC.initialize({
+	  client_id: '3316b4d5bb6dc355bef2c72c161a9084'
+	});
+	var pauser;
+	$scope.item = $stateParams.item;
+	var allAudio = $stateParams.items;
+	console.log('each item: ', $stateParams);
+	$scope.isPlaying = 0;
+	console.log('isPlaying: ', $scope.isPlaying);
+
+	$scope.streamNow = function (value, isPlaying) {
+		console.log("stream now cliked");
+		console.log("is playing value: ", isPlaying);
+		if(isPlaying ==  1) {
+			console.log("value: ", value);
+			$scope.isPlaying = 0;
+			SC.stream('/tracks/'+value.id).then(function(player){
+			  pauser.pause();
+			  // $.jStorage.set('pauser', pauser);
+			  // $.jStorage.set('id', value.id);
+			  console.log('1');
+			});
+		}
+		else {
+			console.log("value: ", value);
+			$scope.isPlaying = 1;
+			SC.stream('/tracks/'+value.id).then(function(player){
+			  player.play();
+			  pauser = player;
+			  // $.jStorage.set('pauser', pauser);
+			  // $.jStorage.set('id', value.id);
+			  console.log('0');
+			});
+		}
+	}
+	console.log('all audio length: ', allAudio.length);
+	$scope.nextPlay = function (value) {
+		var index = allAudio.indexOf(value);
+		if(index >= allAudio.length-1) {
+			// $scope.isPlaying = 1;
+			index = 0;
+			$scope.item = allAudio[index];
+			SC.stream('/tracks/'+allAudio[index].id).then(function(player){
+			  player.play();
+			  pauser = player;
+			  // $.jStorage.set('pauser', pauser);
+			  // $.jStorage.set('id', allAudio[index].id);
+			});
+		}
+		else {
+			// $scope.isPlaying = 1;
+			++index;
+			$scope.item = allAudio[index];
+			SC.stream('/tracks/'+allAudio[index].id).then(function(player){
+			  player.play();
+			  pauser = player;
+			  // $.jStorage.set('pauser', pauser);
+			  // $.jStorage.set('id', allAudio[index].id);
+			});
+		}
+	}
+
+	$scope.prevPlay = function (value) {
+		var index = allAudio.indexOf(value);
+		if(index == 0) {
+			$scope.isPlaying = 1;
+			index = allAudio.length - 1;
+			$scope.item = allAudio[index];
+			SC.stream('/tracks/'+allAudio[index].id).then(function(player){
+			  player.play();
+			  pauser = player;
+			  // $.jStorage.set('pauser', pauser);
+			  // $.jStorage.set('id', allAudio[index].id);
+			});
+		}
+		else {
+			$scope.isPlaying = 1;
+			--index;
+			$scope.item = allAudio[index];
+			SC.stream('/tracks/'+allAudio[index].id).then(function(player){
+			  player.play();
+			  pauser = player;
+			  // $.jStorage.set('pauser', pauser);
+			  // $.jStorage.set('id', allAudio[index].id);
+			});
+		}
+	}
+
+	$scope.$on('$destroy', function () {
+		// console.log('exiting AudiogallerycategoryCtrl!')
+		SC.stream('/tracks/'+$scope.item.id).then(function(player){
+		  pauser.pause();
+		  // pauser = player;
+		  // $.jStorage.set('pauser', pauser);
+		  // $.jStorage.set('id', allAudio[index].id);
+		});
+	})
 })
 
 .controller('ArticleCtrl', function ($scope, MyServices, $stateParams, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
