@@ -133,7 +133,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		// config data
 		var blogdata = JSON.parse(data.config[1].text);
 		for (var i = 0; i < blogdata.length; i++) {
-			if (blogdata[i].value == true) {
+			if (blogdata[i].value === true) {
 				$scope.menudata.blogs = true;
 				$.jStorage.set("blogType", blogdata[i]);
 				break;
@@ -142,13 +142,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			}
 		}
 		_.each(blogdata1, function (n) {
-			if (n.value == true) {
+			if (n.value === true) {
 				loginstatus = true;
 			}
 		});
 
 		$scope.logso = "";
-		if (loginstatus == false) {
+		if (loginstatus === false) {
 			$scope.menu.setting = false;
 		} else {
 			$scope.menu.setting = true;
@@ -159,14 +159,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	MyServices.getallfrontmenu(function (data) {
 		MyServices.setconfigdata(data);
 		_.each(data.config[0], function (n) {
-			if (n.value == true) {
+			if (n.value === true) {
 				loginstatus = true;
 			}
 		});
 		configreload.func();
 	}, function (err) {
 		$location.url("/access/offline");
-	})
+	});
 	var logoutsuccess = function (data, success) {
 		if (data == 'true') {
 			$.jStorage.flush();
@@ -174,13 +174,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$ionicLoading.hide();
 			$location.path("/access/login");
 		}
-	}
+	};
 	$scope.logout = function () {
 		$ionicLoading.show();
 		MyServices.logout(logoutsuccess, function (err) {
 			$location.url("/access/offline");
 		});
-	}
+	};
 
 	// Form data for the login modal
 	$scope.loginData = {};
@@ -299,7 +299,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.item = $stateParams.item;
 	var allAudio = $stateParams.items;
 	console.log('each item: ', $stateParams);
-	$scope.isPlaying = 0;
+	$scope.isPlaying = 1;
 	console.log('isPlaying: ', $scope.isPlaying);
 
 	$scope.streamNow = function (value, isPlaying) {
@@ -326,7 +326,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			  console.log('0');
 			});
 		}
-	}
+	};
+
 	console.log('all audio length: ', allAudio.length);
 	$scope.nextPlay = function (value) {
 		var index = allAudio.indexOf(value);
@@ -352,11 +353,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			  // $.jStorage.set('id', allAudio[index].id);
 			});
 		}
-	}
+	};
 
 	$scope.prevPlay = function (value) {
 		var index = allAudio.indexOf(value);
-		if(index == 0) {
+		if(index === 0) {
 			$scope.isPlaying = 1;
 			index = allAudio.length - 1;
 			$scope.item = allAudio[index];
@@ -378,7 +379,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			  // $.jStorage.set('id', allAudio[index].id);
 			});
 		}
-	}
+	};
 
 	$scope.$on('$destroy', function () {
 		// console.log('exiting AudiogallerycategoryCtrl!')
@@ -388,7 +389,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		  // $.jStorage.set('pauser', pauser);
 		  // $.jStorage.set('id', allAudio[index].id);
 		});
-	})
+	});
 })
 
 .controller('ArticleCtrl', function ($scope, MyServices, $stateParams, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
@@ -406,7 +407,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showloading();
 	MyServices.getarticle($stateParams.id, function (data) {
 		$scope.article = data;
-		if (data == '') {
+		if (data === '') {
 			$scope.msg = "Blank Article.";
 		}
 		addanalytics(data.title);
@@ -424,14 +425,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.forgotpass = function () {
 		$location.url("/access/forgotpassword");
-	}
+	};
 
 	$scope.config = MyServices.getconfigdata();
 	var loginstatus = false;
 
 	function internetaccess(toState) {
 		if (navigator) {
-			if (navigator.onLine != true) {
+			if (navigator.onLine !== true) {
 				onoffline = false;
 				$location.url("/access/offline");
 			} else {
@@ -444,42 +445,42 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	});
 	window.addEventListener("offline", function (e) {
 		internetaccess();
-	})
+	});
 	window.addEventListener("online", function (e) {
 		internetaccess();
-	})
+	});
 
 	$scope.setup = function () {
 		$scope.config = MyServices.getconfigdata();
 		_.each(JSON.parse($scope.config.config[0].text), function (n) {
-			if (n.name.toLowerCase() == "email" && n.value == true) {
+			if (n.name.toLowerCase() === "email" && n.value === true) {
 				$scope.logindata.email = true;
 				loginstatus = true;
-			} else if (n.name.toLowerCase() == "google" && n.value == true) {
+			} else if (n.name.toLowerCase() === "google" && n.value === true) {
 				$scope.logindata.google = true;
 				loginstatus = true;
-			} else if (n.name.toLowerCase() == "twitter" && n.value == true) {
+			} else if (n.name.toLowerCase() === "twitter" && n.value === true) {
 				$scope.logindata.twitter = true;
 				loginstatus = true;
-			} else if (n.name.toLowerCase() == "instagram" && n.value == true) {
+			} else if (n.name.toLowerCase() === "instagram" && n.value === true) {
 				$scope.logindata.instagram = true;
 				loginstatus = true;
-			} else if (n.name.toLowerCase() == "facebook" && n.value == true) {
+			} else if (n.name.toLowerCase() === "facebook" && n.value === true) {
 				$scope.logindata.facebook = true;
 				loginstatus = true;
 			} else {}
-		})
-		if (loginstatus == false) {
+		});
+		if (loginstatus === false) {
 			$location.url("/app/home");
 		}
-	}
+	};
 
 	MyServices.getallfrontmenu(function (data) {
 		MyServices.setconfigdata(data);
 		$scope.setup();
 	}, function (err) {
 		$location.url("/access/offline");
-	})
+	});
 
 	// loader
 	$scope.showloading = function () {
@@ -493,7 +494,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	//logins
 	var checktwitter = function (data, status) {
-		if (data != "false" && data != '') {
+		if (data !== "false" && data !== '') {
 			$interval.cancel(stopinterval);
 			ref.close();
 			MyServices.authenticate().success(authenticatesuccess);
@@ -525,7 +526,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			MyServices.authenticate().success(authenticatesuccess);
 			$interval.cancel(stopinterval);
 		});
-	}
+	};
 	$scope.twitterlogin = function () {
 		if(isapp){
 		ref = cordova.InAppBrowser.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
@@ -537,7 +538,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			MyServices.authenticate().success(authenticatesuccess);
 			$interval.cancel(stopinterval);
 		});
-	}
+	};
 
 	$scope.instagramlogin = function () {
 		if(isapp){
@@ -563,7 +564,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 				MyServices.authenticate().success(authenticatesuccess);
 				$interval.cancel(stopinterval);
 			});
-		}
+		};
 		// popup
 	$scope.showPopupsignupsuccess = function () {
 
