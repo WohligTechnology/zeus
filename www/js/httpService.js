@@ -55,13 +55,9 @@ httpService.service('httpService', function($http, $webSql) {
             //HTTP SERVER CALL
             var httpCall;
             if (type == "GET") {
-                httpCall = $http.get(url, {
-                    params: req
-                });
+                httpCall = $http.get(url, req);
             } else if (type == "POST") {
-                httpCall = $http.post(url, {
-                    params: req
-                });
+                httpCall = $http.post(url, req);
             }
 
             //HTTP SUCCESS

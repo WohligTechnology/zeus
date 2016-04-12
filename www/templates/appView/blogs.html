@@ -59,11 +59,12 @@
                 </p>
             </div>
         </div>
-        
-        <div class="padding card" ng-repeat="blog in blogs" ng-show="showCustomblog">
+
+        <div class="padding card" collection-repeat="blog in blogs" ng-show="showCustomblog">
             <ion-item class="item-avatar item-icon-right">
-            <div class="image-adjust img-blog" ng-style="{'background-image':'url(http://a.13cdn.com/Facebook_TaylorSwift.png)'}"></div>
-                <h2>{{blog.name}}</h2>
+            <!-- <div class="image-adjust img-blog" ng-style="{'background-image':'url(http://a.13cdn.com/Facebook_TaylorSwift.png)'}"></div> -->
+            <img ng-src="{{blog.image | serverpath}}" alt="" />
+                <h2>{{blog.blogtitle}}</h2>
                 <p ng-if="blog.timestamp">{{blog.timestamp|formatdate}}</p>
             </ion-item>
             <div class="item item-body" ng-click="blogDetail(blog,'cms');">

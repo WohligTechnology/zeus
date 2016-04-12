@@ -1232,10 +1232,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}
 		$scope.eventdetail = data;
 		$ionicSlideBoxDelegate.update();
-	}
+	};
 	MyServices.getsingleevents($stateParams.id, getsingleeventscallback, function (err) {
 		$location.url("/access/offline");
-	})
+	});
 })
 
 .controller('BlogsCtrl', function ($scope, MyServices, $location, $ionicLoading) {
@@ -1249,7 +1249,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.getblogdetailscms = function (id) {
 		$location.path('/app/blogdetail/' + id);
-	}
+	};
 	showloading = function () {
 		$ionicLoading.show({
 			template: '<ion-spinner class="spinner-positive"></ion-spinner>'
@@ -1264,24 +1264,24 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		blog.provider = name;
 		$.jStorage.set('postdetail', blog);
 		if (name == "cms") {
-			$location.path('/app/blogdetail/' + blog.id);
+			$location.path('/app/blogdetail/' + blog._id);
 		} else {
 			$location.path('/app/blogdetail/0');
 		}
-	}
+	};
 
 	$scope.reloadblog = function (page) {
-		MyServices.getallblog(page, function (data, status) {
+		MyServices.getBlogAllMob(page, function (data, status) {
 //			console.log(data);
 			$ionicLoading.hide();
-			_.each(data.queryresult, function (n) {
+			_.each(data.data.data, function (n) {
 				$scope.blogs.push(n);
 			});
 
-			if (data.queryresult.length == 0) {
+			if (data.data.data.length === 0) {
 				$scope.keepscrolling = false;
 			}
-			if ($scope.blogs.length != 0) {
+			if ($scope.blogs.length !== 0) {
 				$scope.msg = "";
 			} else {
 				$scope.msg = "No data found";
@@ -1291,7 +1291,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		});
 		$scope.$broadcast('scroll.infiniteScrollComplete');
 		$scope.$broadcast('scroll.refreshComplete');
-	}
+	};
 
 
 	if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "wordpress") {
@@ -1339,7 +1339,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.loadMorePolls = function () {
 		$scope.reloadblog(++$scope.pageno);
-	}
+	};
 
 })
 
@@ -1352,14 +1352,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		console.log(data);
 		$ionicLoading.hide();
 		$scope.showcmsdetail = true;
-		$scope.details = data;
-		addanalytics(data.title);
-		if (data == '') {
+		$scope.details = data.data;
+		addanalytics(data.data.blogtitle);
+		if (data === '') {
 			$scope.msg = "No such blog";
 		} else {
 			$scope.msg = "";
 		}
-	}
+	};
 
 	$scope.id = $stateParams.id;
 
@@ -1374,7 +1374,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.showloading();
 
 	// tumblr and wordpress
-	if ($stateParams.id == 0) {
+	if ($stateParams.id === 0) {
 		$scope.msg = "";
 		$ionicLoading.hide();
 		$scope.details = $.jStorage.get('postdetail');
@@ -1384,7 +1384,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 			$scope.details.date = newdt[0];
 		}
 	} else {
-		MyServices.getsingleblog($scope.id, getsingleblogsuccess, function (err) {
+		MyServices.getBlogOneMob($scope.id, getsingleblogsuccess, function (err) {
 			$location.url("/access/offline");
 		});
 	}
@@ -1409,21 +1409,21 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.sendphotoid = function (id) {
 		$location.url("app/photogallery/" + id);
-	}
+	};
 
 	$scope.loadgallery = function (pageno) {
-		MyServices.getallgallery(pageno, function (data, status) {
+		MyServices.getPhotoAllMob(pageno, function (data, status) {
 			$ionicLoading.hide();
 
-			_.each(data.queryresult, function (n) {
+			_.each(data.data.data, function (n) {
 				$scope.photos.push(n);
 			});
 
-			if (data.queryresult == '') {
+			if (data.data.data.length === 0) {
 				$scope.keepscrolling = false;
 			}
 
-			if ($scope.photos.length == 0) {
+			if ($scope.photos.length === 0) {
 				$scope.msg = "The gallery is empty.";
 			} else {
 				$scope.msg = "";
@@ -1434,13 +1434,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 		$scope.$broadcast('scroll.infiniteScrollComplete');
 		$scope.$broadcast('scroll.refreshComplete');
-	}
+	};
 
 	$scope.loadgallery(1);
 
 	$scope.loadMorePolls = function () {
 		$scope.loadgallery(++$scope.pageno);
-	}
+	};
 
 })
 
@@ -1517,14 +1517,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 		}, 5000);
 	};
 	$scope.loadphoto = function (pageno) {
-		MyServices.getallvideogallery(pageno, function (data, status) {
+		MyServices.getAllMob(pageno, function (data, status) {
 			$ionicLoading.hide();
 
-			_.each(data.queryresult, function (n) {
+			_.each(data.data.data, function (n) {
 				$scope.videos.push(n);
 			});
 
-			if (data.queryresult == '') {
+			if (data.data.data == '') {
 				$scope.keepscrolling = false;
 			}
 
@@ -1536,7 +1536,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 		}, function (err) {
 			$location.url("/access/offline");
-		});
+		},function(err){console.log(err);});
 
 		$scope.$broadcast('scroll.infiniteScrollComplete');
 		$scope.$broadcast('scroll.refreshComplete');
@@ -1575,7 +1575,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 	$scope.videoid = $stateParams.id;
 
 	$scope.loadphoto = function (pageno) {
-		MyServices.getallvideogalleryvideo($scope.videoid, pageno, function (data, status) {
+		MyServices.getOneMob($scope.videoid, pageno, function (data, status) {
 			$ionicLoading.hide();
 			_.each(data.queryresult, function (n) {
 				$scope.videos.push(n);
@@ -1602,9 +1602,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 	$scope.loadphoto(1);
 
-	$scope.loadMorePolls = function () {
-		$scope.loadphoto(++$scope.pageno);
-	}
+	// $scope.loadMorePolls = function () {
+	// 	$scope.loadphoto(++$scope.pageno);
+	// }
 
 
 

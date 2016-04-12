@@ -3,12 +3,12 @@
         {{msg}}
     </div>
     <ion-content class="padding">
-        <div class="list" ng-repeat="photos in photos" ng-click="sendphotoid(photos.id);">
+        <div class="list" collection-repeat="photos in photos" item-height="40%" ng-click="sendphotoid(photos._id);">
             <div class="item item-image">
-                <img ng-src="{{photos.image | serverimage}}" imgloadingsec>
+                <img ng-src="{{photos.icon | serverpath:100:100:'fill'}}" imgloadingsec>
             </div>
             <div class="item">
-                {{photos.name}}
+                {{photos.title}}
             </div>
         </div>
         <ion-infinite-scroll on-infinite="loadMorePolls()" ng-if="keepscrolling" distance="25%">

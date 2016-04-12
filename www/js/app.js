@@ -378,6 +378,24 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 })
 
+.filter('serverpath', function () {
+	return function(input, width, height, style) {
+			var other = "";
+			if (width && width !== "") {
+					other += "&width=" + width;
+			}
+			if (height && height !== "") {
+					other += "&height=" + height;
+			}
+			if (style && style !== "") {
+					other += "&style=" + style;
+			}
+			if (input) {
+					return adminimage + input + other;
+			}
+	};
+})
+
 .filter('serverimage', function () {
 		return function (image) {
 			if (image && image != null) {
@@ -393,6 +411,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			}
 		};
 	})
+
 	.filter('profileimg', function () {
 		return function (image) {
 			if (image && image != null) {
