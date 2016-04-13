@@ -6,8 +6,9 @@ var adminhauth = adminbase + "index.php/hauth/";
 var imgpath = adminimage + "image?name=";
 
 //Node admin
+var vigzserver = "http://wohlig.biz/";
 // var adminurl = "http://wohlig.biz/";
-var adminimage = "http://wohlig.biz/" + "upload/readFile?file=";
+var adminimage = vigzserver + "upload/readFile?file=";
 // var adminhauth = adminurl + "index.php/hauth/";
 // var imgpath = adminimage + "image?name=";
 
@@ -35,27 +36,56 @@ angular.module('starter.services', ['httpService'])
     return {
 			getAllMob: function(pageno, callback,errCallback){
 				var data = {"pagesize":100, "pagenumber":pageno};
-				httpService.post("http://wohlig.biz/" + "videogallery/getAllMob", data, callback, errCallback);
+				httpService.post(vigzserver + "videogallery/getAllMob", data, callback, errCallback);
 			},
       getOneMob: function(id, pageno, callback, errCallback){
         var data = {"_id":id,"pagesize":100,"pagenumber":pageno};
-				httpService.post("http://wohlig.biz/" + "videogallery/getOneMob", data, callback, errCallback);
+				httpService.post(vigzserver + "videogallery/getOneMob", data, callback, errCallback);
       },
       getBlogAllMob: function(pageno, callback, errCallback){
         var data = {"pagesize":100, "pagenumber":pageno};
-				httpService.post("http://wohlig.biz/" + "blog/getAllMob", data, callback, errCallback);
+				httpService.post(vigzserver + "blog/getAllMob", data, callback, errCallback);
       },
       getBlogOneMob: function(id, callback, errCallback){
         var data = {"_id":id};
-				httpService.post("http://wohlig.biz/" + "blog/getOneMob", data, callback, errCallback);
+				httpService.post(vigzserver + "blog/getOneMob", data, callback, errCallback);
       },
       getPhotoAllMob: function(pageno, callback, errCallback){
         var data = {"pagesize":100, "pagenumber":pageno};
-				httpService.post("http://wohlig.biz/" + "photogallery/getAllMob", data, callback, errCallback);
+				httpService.post(vigzserver + "photogallery/getAllMob", data, callback, errCallback);
       },
-      getPhotoOneMob: function(id, callback,errCallback){
+      getPhotoOneMob: function(id, pageno, callback,errCallback){
+        var data = {"_id":id,"pagesize":100,"pagenumber":pageno};
+				httpService.post(vigzserver + "photogallery/getOneMob", data, callback, errCallback);
+      },
+      getEventAllMob: function(pageno, callback, errCallback){
+        var data = {"pagesize":100, "pagenumber":pageno};
+				httpService.post(vigzserver + "event/getAllMob", data, callback, errCallback);
+      },
+      getEventOneMob: function(id, callback,errCallback){
         var data = {"_id":id};
-				httpService.post("http://wohlig.biz/" + "photogallery/getOneMob", data, callback, errCallback);
+				httpService.post(vigzserver + "event/getOneMob", data, callback, errCallback);
+      },
+      getNotificationMob: function(pageno, callback, errCallback){
+        var data = {"pagesize":100, "pagenumber":pageno};
+				httpService.post(vigzserver + "notification/getAllMob", data, callback, errCallback);
+      },
+      getContactAllMob: function(callback,errCallback){
+        var data = {};
+				httpService.post(vigzserver + "contact/getAllMob", data, callback, errCallback);
+      },
+      submitEnquiry: function(enquiry, callback,errCallback){
+        var data = {
+          'name': enquiry.name,
+          'email': enquiry.email,
+          'subject': enquiry.title,
+          'comment': enquiry.content
+        };
+        return $http({
+          url: vigzserver + "enquiry/savemob",
+          method: "POST",
+          data: data
+        }).success(callback).error(errCallback);
       },
       all: function() {
         return chats;

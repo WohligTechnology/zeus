@@ -3,7 +3,7 @@
         {{msg}}
     </div>
     <ion-content class="padding">
-        <div class="list" collection-repeat="photos in photos" item-height="40%" ng-click="sendphotoid(photos._id);">
+        <div class="list" collection-repeat="photos in photos" item-height="100%" ng-click="sendphotoid(photos._id);">
             <div class="item item-image">
                 <img ng-src="{{photos.icon | serverpath:100:100:'fill'}}" imgloadingsec>
             </div>

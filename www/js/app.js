@@ -87,7 +87,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			});
 		}
 		catch (e) {
-			console.log(e)
+			console.log(e);
 		}
 	});
 })
@@ -398,7 +398,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('serverimage', function () {
 		return function (image) {
-			if (image && image != null) {
+			if (image && image !== null) {
 				var start = image.substr(0, 4);
 
 				if (start == "http") {
@@ -411,6 +411,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 			}
 		};
 	})
+	.filter('extractVideoId', function () {
+			return function (url) {
+				var videoid = url.match(/(?:https?:\/{2})?(?:w{3}\.)?youtu(?:be)?\.(?:com|be)(?:\/watch\?v=|\/)([^\s&]+)/);
+        if (videoid !== null) {
+						return videoid[1];
+        } else {
+            return false;
+        }
+			};
+		})
 
 	.filter('profileimg', function () {
 		return function (image) {
@@ -511,13 +521,13 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 .filter('formatdate', function ($filter) {
 	return function (val) {
 		var splitval = val.toString().split(" ");
-		return $filter('date')(splitval[0], 'dd MMMM, yyyy')
+		return $filter('date')(splitval[0], 'dd MMMM, yyyy');
 	};
 })
 
 .filter('noappid', function () {
 	return function (val) {
-		var val = val.replace("appid", "");
+		var val = val.replace("appid","");
 		return val;
 	};
 })
@@ -545,7 +555,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
 		}
-	}
+	};
 })
 
 
@@ -565,7 +575,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 				}
 			}(document, "script", "twitter-wjs");
 		}
-	}
+	};
 })
 
 .directive('imgloadingsec', function ($compile, $parse) {
@@ -600,4 +610,4 @@ var formvalidation = function (allvalidation) {
 		}
 	}
 	return isvalid2;
-}
+};

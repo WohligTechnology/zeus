@@ -10,7 +10,7 @@
             <div class="padding-horizontal">
                 <h4 class="dark">{{eventdetail.title}}</h4>
                 <p ng-if="eventdetail.timestamp||eventdetail.starttime">
-                    <span class="icon-space"><i class="icon ln-calendar3 positive"></i></span><span ng-if="eventdetail.timestamp">{{eventdetail.timestamp|date : 'dd MMM, yyyy'}}</span><span ng-if="eventdetail.starttime"> @ {{eventdetail.starttime|convertto12}}</span>
+                    <span class="icon-space"><i class="icon ln-calendar3 positive"></i></span><span ng-if="eventdetail.timestamp">{{eventdetail.timestamp|date : 'dd MMM, yyyy'}}</span><span ng-if="eventdetail.starttime"> @ {{eventdetail.startTime|convertto12}}</span>
                 </p>
                 <p ng-if="eventdetail.venue">
                     <span class="icon-space"><i class="icon ln-map-marker positive"></i></span><span ng-bind-html="eventdetail.venue"></span>

@@ -4,12 +4,13 @@
     </div>
     <ion-content>
         <ion-list>
-            <ion-item ng-repeat="event in events" class="item-thumbnail-left item-text-wrap" ng-click="geteventdetails(event.id);">
-                <div class="image-adjust img-content" ng-style="{'background-image':'url({{event.image|serverimage}})'}"></div>
-                <h2>{{event.title}}</h2>
-                <span class="icon-space"><i class="icon ln-calendar3"></i></span><span class="font-light">{{event.startdate|date : 'dd MMM, yyyy'}}</span>
+            <ion-item collection-repeat="event in events" class="item-thumbnail-left item-text-wrap" ng-click="geteventdetails(event._id);">
+                <!-- <div class="image-adjust img-content" ng-style="{'background-image':'url({{event.image|serverimage}})'}"></div> -->
+                <img ng-src="{{event.image | serverpath}}" alt="" />
+                <h2>{{event.name}}</h2>
+                <span class="icon-space"><i class="icon ln-calendar3"></i></span><span class="font-light">{{event.startTime|date : 'dd MMM, yyyy'}}</span>
                 <br>
-                <span class="icon-space"><i class="icon ln-timer"></i></span><span class="font-light">{{event.starttime|convertto12}}</span>
+                <span class="icon-space"><i class="icon ln-timer"></i></span><span class="font-light">{{event.endTime|convertto12}}</span>
                 <ion-option-button class="button-positive" ng-click="share(event)">
                     Share
                 </ion-option-button>
