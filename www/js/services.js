@@ -1,12 +1,12 @@
 //Php admin
 var adminbase = "http://wohlig.co.in/webappbackend/";
-  var adminurl = adminbase + "index.php/json/";
+var adminurl = adminbase + "index.php/json/";
 // var adminimage = adminbase + "uploads/";
 var adminhauth = adminbase + "index.php/hauth/";
 var imgpath = adminimage + "image?name=";
 
 //Node admin
-var vigzserver = "http://wohlig.biz/";
+var vigzserver = "http://wohlig.biz:1337/";
 // var adminurl = "http://wohlig.biz/";
 var adminimage = vigzserver + "upload/readFile?file=";
 // var adminhauth = adminurl + "index.php/hauth/";
@@ -34,47 +34,74 @@ var TUBMLR_API_URL = 'http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/b
 angular.module('starter.services', ['httpService'])
   .factory('MyServices', function($http, $filter, httpService) {
     return {
-			getAllMob: function(pageno, callback,errCallback){
-				var data = {"pagesize":100, "pagenumber":pageno};
-				httpService.post(vigzserver + "videogallery/getAllMob", data, callback, errCallback);
-			},
-      getOneMob: function(id, pageno, callback, errCallback){
-        var data = {"_id":id,"pagesize":100,"pagenumber":pageno};
-				httpService.post(vigzserver + "videogallery/getOneMob", data, callback, errCallback);
+      getAllMob: function(pageno, callback, errCallback) {
+        var data = {
+          "pagesize": 100,
+          "pagenumber": pageno
+        };
+        httpService.post(vigzserver + "videogallery/getAllMob", data, callback, errCallback);
       },
-      getBlogAllMob: function(pageno, callback, errCallback){
-        var data = {"pagesize":100, "pagenumber":pageno};
-				httpService.post(vigzserver + "blog/getAllMob", data, callback, errCallback);
+      getOneMob: function(id, pageno, callback, errCallback) {
+        var data = {
+          "_id": id,
+          "pagesize": 100,
+          "pagenumber": pageno
+        };
+        httpService.post(vigzserver + "videogallery/getOneMob", data, callback, errCallback);
       },
-      getBlogOneMob: function(id, callback, errCallback){
-        var data = {"_id":id};
-				httpService.post(vigzserver + "blog/getOneMob", data, callback, errCallback);
+      getBlogAllMob: function(pageno, callback, errCallback) {
+        var data = {
+          "pagesize": 100,
+          "pagenumber": pageno
+        };
+        httpService.post(vigzserver + "blog/getAllMob", data, callback, errCallback);
       },
-      getPhotoAllMob: function(pageno, callback, errCallback){
-        var data = {"pagesize":100, "pagenumber":pageno};
-				httpService.post(vigzserver + "photogallery/getAllMob", data, callback, errCallback);
+      getBlogOneMob: function(id, callback, errCallback) {
+        var data = {
+          "_id": id
+        };
+        httpService.post(vigzserver + "blog/getOneMob", data, callback, errCallback);
       },
-      getPhotoOneMob: function(id, pageno, callback,errCallback){
-        var data = {"_id":id,"pagesize":100,"pagenumber":pageno};
-				httpService.post(vigzserver + "photogallery/getOneMob", data, callback, errCallback);
+      getPhotoAllMob: function(pageno, callback, errCallback) {
+        var data = {
+          "pagesize": 100,
+          "pagenumber": pageno
+        };
+        httpService.post(vigzserver + "photogallery/getAllMob", data, callback, errCallback);
       },
-      getEventAllMob: function(pageno, callback, errCallback){
-        var data = {"pagesize":100, "pagenumber":pageno};
-				httpService.post(vigzserver + "event/getAllMob", data, callback, errCallback);
+      getPhotoOneMob: function(id, pageno, callback, errCallback) {
+        var data = {
+          "_id": id,
+          "pagesize": 100,
+          "pagenumber": pageno
+        };
+        httpService.post(vigzserver + "photogallery/getOneMob", data, callback, errCallback);
       },
-      getEventOneMob: function(id, callback,errCallback){
-        var data = {"_id":id};
-				httpService.post(vigzserver + "event/getOneMob", data, callback, errCallback);
+      getEventAllMob: function(pageno, callback, errCallback) {
+        var data = {
+          "pagesize": 100,
+          "pagenumber": pageno
+        };
+        httpService.post(vigzserver + "event/getAllMob", data, callback, errCallback);
       },
-      getNotificationMob: function(pageno, callback, errCallback){
-        var data = {"pagesize":100, "pagenumber":pageno};
-				httpService.post(vigzserver + "notification/getAllMob", data, callback, errCallback);
+      getEventOneMob: function(id, callback, errCallback) {
+        var data = {
+          "_id": id
+        };
+        httpService.post(vigzserver + "event/getOneMob", data, callback, errCallback);
       },
-      getContactAllMob: function(callback,errCallback){
+      getNotificationMob: function(pageno, callback, errCallback) {
+        var data = {
+          "pagesize": 100,
+          "pagenumber": pageno
+        };
+        httpService.post(vigzserver + "notification/getAllMob", data, callback, errCallback);
+      },
+      getContactAllMob: function(callback, errCallback) {
         var data = {};
-				httpService.post(vigzserver + "contact/getAllMob", data, callback, errCallback);
+        httpService.post(vigzserver + "contact/getAllMob", data, callback, errCallback);
       },
-      submitEnquiry: function(enquiry, callback,errCallback){
+      submitEnquiry: function(enquiry, callback, errCallback) {
         var data = {
           'name': enquiry.name,
           'email': enquiry.email,
@@ -86,6 +113,51 @@ angular.module('starter.services', ['httpService'])
           method: "POST",
           data: data
         }).success(callback).error(errCallback);
+      },
+      getUserMob: function(callback, errCallback) {
+        var data = {};
+        httpService.post(vigzserver + "user/getOneMob", data, callback, errCallback);
+      },
+      signinMob: function(data, callback, errCallback) {
+        var data2 = {
+          "email": data.username,
+          "password": data.password
+        };
+        httpService.post(vigzserver + "user/login", data2, callback, errCallback);
+      },
+      saveProfileMob: function(data, callback, errCallback) {
+        var data2 = {
+          "email": data.email,
+          "name": data.name,
+          "phone": data.phone,
+          "location": data.location,
+          "dob": data.dob
+        };
+        httpService.post(vigzserver + "user/savemob", data2, callback, errCallback);
+      },
+      updateProfileMob: function(data, callback, errCallback) {
+        var data2 = {
+          "_id": "0",
+          "email": data.email,
+          "name": data.name,
+          "phone": data.phone,
+          "location": data.location,
+          "dob": data.dob
+        };
+        httpService.post(vigzserver + "user/savemob", data2, callback, errCallback);
+      },
+      changePasswordMob: function(data, callback, errCallback) {
+        var data2 = {
+          "password": data.oldpassword,
+          "editpassword": data.newpassword
+        };
+        httpService.post(vigzserver + "user/changePasswordMob", data2, callback, errCallback);
+      },
+      getStaticPages: function(id, callback, errCallback){
+        var data2 = {
+          "_id": id
+        };
+        httpService.post(vigzserver + "article/getOneMob", data2, callback, errCallback);
       },
       all: function() {
         return chats;

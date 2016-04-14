@@ -14,7 +14,7 @@
         <div ng-if="edit==false;">
             <ion-list>
                 <ion-item><span class="icon-space"><i class="icon ln-envelope"></i></span> {{user.email}}</ion-item>
-                <ion-item><span class="icon-space"><i class="icon ln-phone"></i></span> {{user.contact}}</ion-item>
+                <ion-item><span class="icon-space"><i class="icon ln-phone"></i></span> {{user.phone}}</ion-item>
                 <ion-item><span class="icon-space"><i class="icon ln-map-marker"></i></span> {{user.location}}</ion-item>
                 <ion-item><span class="icon-space"><i class="icon ln-calendar2"></i></span> {{user.dob|date:'MMMM dd, yyyy'}}</ion-item>
             </ion-list>
@@ -31,7 +31,7 @@
                 </label>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ln-phone"></i></span>
-                    <input type="tel" placeholder="Phone No." ng-model="user.contact">
+                    <input type="tel" placeholder="Phone No." ng-model="user.phone">
                 </label>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ln-map-marker"></i></span>

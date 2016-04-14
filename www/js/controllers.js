@@ -154,7 +154,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       $scope.menu.setting = true;
       $scope.logso = "has-menu-photo";
     }
-  }
+  };
 
   MyServices.getallfrontmenu(function(data) {
     MyServices.setconfigdata(data);
@@ -214,8 +214,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   if ($.jStorage.get("user")) {
 
-    MyServices.getsingleuserdetail(function(data) {
-      $scope.userdetails = data;
+    MyServices.getUserMob(function(data) {
+      $scope.userdetails = data.data;
       $scope.userdetails.myimage = {
         'background-image': "url('" + $filter("profileimg")(data.image) + "')"
       };
@@ -402,9 +402,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }, 5000);
   };
   $scope.showloading();
-  MyServices.getarticle($stateParams.id, function(data) {
+  MyServices.getStaticPages($stateParams.id, function(data) {
     $scope.article = data;
-    if (data === '') {
+    if (data.value === false) {
       $scope.msg = "Blank Article.";
     }
     addanalytics(data.title);
@@ -623,7 +623,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       myPopup.close(); //close the popup after 3 seconds for some reason
     }, 2000);
 
-  }
+  };
 
   $scope.signupsubmit = function(signup) {
     $ionicLoading.show();
@@ -650,26 +650,24 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       $ionicLoading.hide();
     }
 
-  }
+  };
 
   // SIGN IN
   $scope.signin = {};
   var signinsuccess = function(data, status) {
     $ionicLoading.hide();
-    if (data != 'false') {
-
-      $.jStorage.set("user", data);
+    if (data.value !== false) {
+      $.jStorage.set("user", data.data);
       user = data;
       $location.url("/app/home");
       $scope.signin = {};
     } else {
-
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',
         template: 'Wrong username or password!'
       });
     }
-  }
+  };
   $scope.signinsubmit = function(signin) {
     $ionicLoading.show();
     $scope.allvalidation = [{
@@ -681,15 +679,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }];
     var check = formvalidation($scope.allvalidation);
     if (check) {
-      MyServices.signin(signin, signinsuccess, function(err) {
+      MyServices.signinMob(signin, signinsuccess, function(err) {
         $location.url("/access/offline");
       });
     } else {
       msgforall("Fill all data");
       $ionicLoading.hide();
     }
-
-  }
+  };
 
   //        ***** tabchange ****
 
@@ -954,7 +951,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
 
     $scope.edit = val;
-  }
+  };
 
   var showloading = function() {
     $ionicLoading.show({
@@ -965,9 +962,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }, 5000);
   };
   showloading();
-  MyServices.getsingleuserdetail(function(data) {
+  MyServices.getUserMob(function(data) {
     $ionicLoading.hide();
-    $scope.user = data;
+    $scope.user = data.data;
     addanalytics(data.name);
     $scope.user.newcoverimage = {
       'background-image': "url('" + $filter("serverimage")($scope.user.coverimage) + "')"
@@ -992,16 +989,16 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   $scope.saveProfile = function() {
-    MyServices.editprofile($scope.user, function(data, status) {
-      if (data != 0) {
+    MyServices.updateProfileMob($scope.user, function(data, status) {
+      if (data !== 0) {
         $.jStorage.set("user", data);
         $scope.showPopup1();
         $scope.edit = !$scope.edit;
       }
     }, function(err) {
       $location.url("/access/offline");
-    })
-  }
+    });
+  };
 
   $scope.passwordpopup = function(msg) {
     var myPopup = $ionicPopup.show({
@@ -1031,27 +1028,25 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }];
     var check = formvalidation($scope.allvalidation);
     if (check) {
-      MyServices.changepassword($scope.password, function(data) {
-        if (data == -1) {
-          $scope.passwordpopup("Both the passwords does not match");
-        } else if (data == 0) {
-          $scope.passwordpopup("Old password does not match");
+			if($scope.password.newpassword === $scope.password.confirmpassword){
+      MyServices.changePasswordMob($scope.password, function(data) {
+        if (data.value === true) {
+					$scope.passwordpopup("Password changed successfully");
         } else {
-          $scope.passwordpopup("Password changed successfully");
+          $scope.passwordpopup("Old password does not match");
         }
         console.log(data);
       }, function(err) {
         $location.url("/access/offline");
       });
+		}else {
+			$scope.passwordpopup("Both the passwords does not match");
+		}
     } else {
       $ionicLoading.hide();
       $scope.passwordpopup("Please enter all the fields.");
     }
-
-
-
-
-  }
+  };
 
   //	pick image from gallery
   var options = {
@@ -1087,7 +1082,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         .then(function(result) {
           var data = JSON.parse(result.response);
           $ionicLoading.hide();
-        }, function(err) {}, function(progress) {;
+        }, function(err) {}, function(progress) {
         });
     }, function(err) {
       // An error occured. Show a message to the user
@@ -1658,11 +1653,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 .controller('AccountCtrl', function($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
   addanalytics("Account page");
+	console.log("fasdfasd&&&&&&&&&&&&&&&");
   configreload.onallpage();
   if ($.jStorage.get("user")) {
     $scope.userdetails = {};
-    $scope.userdetails.username = $.jStorage.get("user").username;
-    if ($scope.userdetails.username == "") {
+    $scope.userdetails.username = $.jStorage.get("user").name;
+    if ($scope.userdetails.username === "") {
       $scope.userdetails.username = $.jStorage.get("user").name;
     }
     $scope.userdetails.userimage = $.jStorage.get("user").image;
@@ -1696,14 +1692,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       $scope.showPopup1();
       $scope.profile = {};
     }
-  }
+  };
 
   $scope.profilesubmit = function(profile) {
     $ionicLoading.show();
     MyServices.profilesubmit(profile, profilesubmitcallback, function(err) {
       $location.url("/access/offline");
-    })
-  }
+    });
+  };
 })
 
 .controller('SettingCtrl', function($scope, MyServices, $ionicLoading, $timeout, $location) {
@@ -1716,9 +1712,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $ionicLoading.hide();
   }, 5000);
   $scope.setting = {};
-  MyServices.getsingleuserdetail(function(data) {
+  MyServices.getUserMob(function(data) {
     $ionicLoading.hide();
-    $scope.user = data;
+    $scope.user = data.data;
     $scope.setting.videonotification = $scope.user.videonotification;
     $scope.setting.eventnotification = $scope.user.eventnotification;
     $scope.setting.blognotification = $scope.user.blognotification;
