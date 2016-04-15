@@ -2,7 +2,7 @@ var reloadpage = false;
 var configreload = {};
 angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $ionicLoading, $cordovaNetwork) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork) {
   addanalytics("flexible menu");
 
   //	$ionicLoading.hide();
@@ -11,7 +11,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     if (navigator) {
       if (navigator.onLine !== true) {
         onoffline = false;
-        $location.url("/access/offline");
+        // $location.url("/access/offline");
       } else {
         onoffline = true;
       }
@@ -165,7 +165,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     });
     configreload.func();
   }, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
   var logoutsuccess = function(data, success) {
     if (data == 'true') {
@@ -178,7 +178,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.logout = function() {
     $ionicLoading.show();
     MyServices.logout(logoutsuccess, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
   };
 
@@ -213,14 +213,18 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   if ($.jStorage.get("user")) {
-
     MyServices.getUserMob(function(data) {
+      if (data.value === false) {
+        $scope.userdetails = $.jStorage.get("user");
+      }else{
       $scope.userdetails = data.data;
       $scope.userdetails.myimage = {
         'background-image': "url('" + $filter("profileimg")(data.image) + "')"
       };
+    }
     }, function(err) {
-      $location.url("/access/offline");
+      $scope.userdetails = $.jStorage.get("user");
+      // $location.url("/access/offline");
     });
 
   }
@@ -403,14 +407,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
   $scope.showloading();
   MyServices.getStaticPages($stateParams.id, function(data) {
-    $scope.article = data;
+    $scope.article = data.data;
     if (data.value === false) {
       $scope.msg = "Blank Article.";
     }
     addanalytics(data.title);
     $ionicLoading.hide();
   }, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
 
 })
@@ -431,7 +435,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     if (navigator) {
       if (navigator.onLine !== true) {
         onoffline = false;
-        $location.url("/access/offline");
+        // $location.url("/access/offline");
       } else {
         onoffline = true;
       }
@@ -476,7 +480,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     MyServices.setconfigdata(data);
     $scope.setup();
   }, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
 
   // loader
@@ -643,7 +647,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     var check = formvalidation($scope.allvalidation);
     if (check) {
       MyServices.signup($scope.signup, signupsuccess, function(err) {
-        $location.url("/access/offline");
+        // $location.url("/access/offline");
       });
     } else {
       msgforall("Fill all data");
@@ -680,7 +684,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     var check = formvalidation($scope.allvalidation);
     if (check) {
       MyServices.signinMob(signin, signinsuccess, function(err) {
-        $location.url("/access/offline");
+        // $location.url("/access/offline");
       });
     } else {
       msgforall("Fill all data");
@@ -794,7 +798,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     var check = formvalidation($scope.allvalidation);
     if (check) {
       MyServices.changepassword(password, changepasswordcallback, function(err) {
-        $location.url("/access/offline");
+        // $location.url("/access/offline");
       });
     } else {
       msgforall("Fill all data");
@@ -846,7 +850,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.forgotpassword = function(email) {
     $ionicLoading.show();
     MyServices.forgotpassword(email, forgotpasswordcallback, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
   }
 })
@@ -878,20 +882,20 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.content.content = $sce.trustAsHtml($scope.content.content);
     //		$ionicLoading.hide();
   }, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
   $scope.setup = function() {
     var blogdata = JSON.parse(MyServices.getconfigdata().config[0].text);
     _.each(blogdata, function(n) {
-      if (n.value == true) {
+      if (n.value === true) {
         loginstatus = true;
       }
     });
-    if (loginstatus == false) {
+    if (loginstatus === false) {
       menu.setting = false;
       $.jStorage.deleteKey("user");
     } else {
-      if (!MyServices.getuser() && MyServices.getuser() == null) {
+      if (!MyServices.getuser() && MyServices.getuser() === null) {
         $location.url("/access/login");
         menu.setting = true;
         //		$ionicLoading.hide();
@@ -899,20 +903,20 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $ionicLoading.hide();
       }
     }
-  }
+  };
 
   MyServices.getallfrontmenu(function(data) {
     MyServices.setconfigdata(data);
     $scope.setup();
   }, function(err) {
-    $location.url("/access/offline");
-  })
+    // $location.url("/access/offline");
+  });
 
   MyServices.getallsliders(function(data) {
     $scope.slides = data;
     $ionicSlideBoxDelegate.update();
   }, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
 
 })
@@ -974,7 +978,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     };
 
   }, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
   $scope.showPopup1 = function() {
     var myPopup = $ionicPopup.show({
@@ -996,7 +1000,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.edit = !$scope.edit;
       }
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
   };
 
@@ -1037,7 +1041,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         }
         console.log(data);
       }, function(err) {
-        $location.url("/access/offline");
+        // $location.url("/access/offline");
       });
 		}else {
 			$scope.passwordpopup("Both the passwords does not match");
@@ -1133,7 +1137,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.keepscrolling = false;
       }
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
     $scope.$broadcast('scroll.refreshComplete');
@@ -1226,7 +1230,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $ionicSlideBoxDelegate.update();
   };
   MyServices.getEventOneMob($stateParams.id, getsingleeventscallback, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
 })
 
@@ -1279,7 +1283,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "No data found";
       }
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
     $scope.$broadcast('scroll.refreshComplete');
@@ -1294,6 +1298,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     MyServices.getWordpressPosts($.jStorage.get("blogType").appid, function(data, status) {
       $ionicLoading.hide();
       $scope.blogs = data.posts;
+      $scope.msg = "";
     });
   } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "tumblr") {
     addanalytics("Tumblr Blog");
@@ -1321,6 +1326,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     Wordpress_UserName = $.jStorage.get("blogType").appid;
     MyServices.getWordpressSelfPosts($.jStorage.get("blogType").appid, function(data, status) {
       $ionicLoading.hide();
+      $scope.msg = "";
       console.log(data);
       $scope.blogs = data;
       _.each($scope.blogs, function(n) {
@@ -1377,7 +1383,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
   } else {
     MyServices.getBlogOneMob($scope.id, getsingleblogsuccess, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
   }
 })
@@ -1421,7 +1427,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "";
       }
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
 
     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1477,7 +1483,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "";
       }
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
     $scope.$broadcast('scroll.refreshComplete');
@@ -1516,18 +1522,18 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.videos.push(n);
       });
 
-      if (data.data.data == '') {
+      if (data.data.data === '') {
         $scope.keepscrolling = false;
       }
 
-      if ($scope.videos.length == 0) {
+      if ($scope.videos.length === 0) {
         $scope.msg = "The gallery is empty.";
       } else {
         $scope.msg = "";
       }
 
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     }, function(err) {
       console.log(err);
     });
@@ -1586,7 +1592,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "";
       }
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
 
     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1697,7 +1703,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.profilesubmit = function(profile) {
     $ionicLoading.show();
     MyServices.profilesubmit(profile, profilesubmitcallback, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
   };
 })
@@ -1721,7 +1727,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.setting.photonotification = $scope.user.photonotification;
     $scope.id = $scope.user.id;
   }, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
 
   $scope.changeSetting = function(setting) {
@@ -1729,7 +1735,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     MyServices.changesetting(setting, function(data) {
       console.log(data);
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
   };
 
@@ -1837,7 +1843,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       }
       $ionicLoading.hide();
     }, function(err) {
-      $location.url("/access/offline");
+      // $location.url("/access/offline");
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
     $scope.$broadcast('scroll.refreshComplete');
@@ -1934,7 +1940,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     var check = formvalidation($scope.allvalidation);
     if (check) {
       MyServices.submitEnquiry(enquiry, createenquirycallback, function(err) {
-        $location.url("/access/offline");
+        // $location.url("/access/offline");
       });
     } else {
       msgforall('Fill all data');
@@ -1972,7 +1978,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     console.log();
 		$scope.contacts = data.data;
   }, function(err) {
-    $location.url("/access/offline");
+    // $location.url("/access/offline");
   });
 
   $scope.tabchange = function(tab, a) {
@@ -2012,41 +2018,43 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   var searchelementcallback = function(data, status) {
     console.log(data);
-    $scope.searchresults.searchevent = data.events;
-    $scope.searchresults.searchgallery = data.gallery;
-    $scope.searchresults.searchvideogallery = data.videogallery;
-    $scope.searchresults.blog = data.blog;
-    $scope.searchresults.article = data.article;
-  }
+    $scope.searchresults.searchevent = data.data.event;
+    $scope.searchresults.searchgallery = data.data.photo;
+    $scope.searchresults.searchvideogallery = data.data.video;
+    $scope.searchresults.blog = data.data.blog;
+    $scope.searchresults.article = data.data.article;
+    $scope.searchresults.notification = data.data.notification;
+    $scope.searchresults.contacts = data.data.contact;
+  };
   $scope.getsearchelement = function(searchelement) {
     $timeout(function() {
-      MyServices.searchelement(searchelement, searchelementcallback, function(err) {
-        $location.url("/access/offline");
+      MyServices.searchAll(searchelement, searchelementcallback, function(err) {
+        // $location.url("/access/offline");
       });
-    }, 2000)
+    }, 2000);
 
-  }
+  };
 
   // Go to Events page
   $scope.openevents = function(id) {
     $location.url("/app/eventdetail/" + id);
-  }
+  };
   $scope.openvideogallery = function(id) {
     $location.url("/app/videogallery/" + id);
-  }
+  };
   $scope.opengallery = function(id) {
     $location.url("/app/photogallery/" + id);
-  }
+  };
   $scope.openblog = function(id) {
     console.log(id);
     $location.url("/app/blogdetail/" + id);
-  }
+  };
   $scope.openarticle = function(id) {
     $location.url("/app/article/" + id);
-  }
+  };
   $scope.clear = function() {
     $scope.search.text = "";
     $scope.searchresults = [];
-  }
+  };
 
 });

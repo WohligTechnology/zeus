@@ -23,7 +23,6 @@ var SC_API_URL = "";
 
 //FOR WORDPRESS INTEGRATION
 var Wordpress_UserName = "en.blog.wordpress.com";
-
 var WORDPRESS_API_URL = 'https://public-api.wordpress.com/rest/v1.1/';
 var WORDPRESS_self_API_URL = 'wp-json/wp/v2/posts';
 
@@ -159,6 +158,16 @@ angular.module('starter.services', ['httpService'])
         };
         httpService.post(vigzserver + "article/getOneMob", data2, callback, errCallback);
       },
+      searchAll: function(search, callback, errCallback) {
+        return $http({
+          url: vigzserver + 'config/searchData',
+          method: "POST",
+          data: {
+            'search': search
+          }
+        }).success(callback).error(errCallback);
+      },
+
       all: function() {
         return chats;
       },
@@ -346,12 +355,14 @@ angular.module('starter.services', ['httpService'])
           return $http.get(data.meta.links.posts, {
             withCredentials: false
           }).success(callback);
-        }
+        };
         $http.get(WORDPRESS_API_URL + "sites/" + wdp, {
           withCredentials: false
         }).success(getdata);
       },
       getWordpressSelfPosts: function(wdp, callback) {
+        console.log(WORDPRESS_self_API_URL);
+        console.log(wdp);
         $http.get(wdp + WORDPRESS_self_API_URL, {
           withCredentials: false
         }).success(callback);
@@ -367,7 +378,7 @@ angular.module('starter.services', ['httpService'])
             return $http.get(adminurl + 'getAllNotification?event=' + data.eventnotification + '&blog=' + data.blognotification + '&video=' + data.videonotification + '&photo=' + data.photonotification + '&pageno=' + pageno, {
               withCredentials: false
             }).success(callback).error(err);
-          }
+          };
 
           $http.get(adminurl + 'getSingleUserDetail?id=' + $.jStorage.get("user").id, {
             withCredentials: false
