@@ -1,11 +1,12 @@
 var reloadpage = false;
 var configreload = {};
-angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize'])
+angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize', 'vcRecaptcha'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork) {
   addanalytics("flexible menu");
 
   //	$ionicLoading.hide();
+  console.log("in app controller");
 
   function internetaccess(toState) {
     if (navigator) {
@@ -846,13 +847,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         myPopup.close(); //close the popup after 3 seconds for some reason
       }, 2000);
     }
-  }
+  };
   $scope.forgotpassword = function(email) {
     $ionicLoading.show();
     MyServices.forgotpassword(email, forgotpasswordcallback, function(err) {
       // $location.url("/access/offline");
     });
-  }
+  };
 })
 
 .controller('SignupCtrl', function($scope) {
@@ -1865,7 +1866,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('ContactCtrl', function($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $compile, $ionicModal) {
+.controller('ContactCtrl', function($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $compile, $ionicModal, vcRecaptchaService) {
   addanalytics("Contact page");
   configreload.onallpage();
   $scope.showloading = function() {
@@ -1996,6 +1997,57 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   //    ****** End ******
+
+
+  $scope.response = null;
+  $scope.widgetId = null;
+
+  $scope.model = {
+      key: '6LfUix0TAAAAAJoY6U1m13_4reMUI2g4x2cVLUEu'
+  };
+
+  $scope.setResponse = function (response) {
+      console.info('Response available');
+
+      $scope.response = response;
+  };
+
+  $scope.setWidgetId = function (widgetId) {
+      console.info('Created widget ID: %s', widgetId);
+
+      $scope.widgetId = widgetId;
+  };
+
+  $scope.cbExpiration = function() {
+      console.info('Captcha expired. Resetting response object');
+
+      vcRecaptchaService.reload($scope.widgetId);
+
+      $scope.response = null;
+   };
+
+  $scope.submit = function () {
+      var valid;
+
+      /**
+       * SERVER SIDE VALIDATION
+       *
+       * You need to implement your server side validation here.
+       * Send the reCaptcha response to the server and use some of the server side APIs to validate it
+       * See https://developers.google.com/recaptcha/docs/verify
+       */
+      console.log('sending the captcha response to the server', $scope.response);
+
+      if (valid) {
+          console.log('Success');
+      } else {
+          console.log('Failed validation');
+
+          // In case of a failed validation you need to reload the captcha
+          // because each response can be checked just once
+          vcRecaptchaService.reload($scope.widgetId);
+      }
+  };
 
 })
 

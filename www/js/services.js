@@ -6,7 +6,7 @@ var adminhauth = adminbase + "index.php/hauth/";
 var imgpath = adminimage + "image?name=";
 
 //Node admin
-var vigzserver = "http://wohlig.biz:1337/";
+var vigzserver = "http://wohlig.biz/";
 // var adminurl = "http://wohlig.biz/";
 var adminimage = vigzserver + "upload/readFile?file=";
 // var adminhauth = adminurl + "index.php/hauth/";
@@ -165,6 +165,13 @@ angular.module('starter.services', ['httpService'])
           data: {
             'search': search
           }
+        }).success(callback).error(errCallback);
+      },
+      getNavigationMob: function(callback, errCallback) {
+        return $http({
+          url: vigzserver + 'navigation/getAll',
+          method: "POST",
+          data: {}
         }).success(callback).error(errCallback);
       },
 
