@@ -474,7 +474,10 @@ configreload.func();
 
   //logins
   var checktwitter = function(data, status) {
-    if (data.value !== false) {
+    console.log("resp data");
+    var repdata = {};
+    console.log(data);
+    if (data._id) {
       $interval.cancel(stopinterval);
       ref.close();
       MyServices.authenticate().success(authenticatesuccess);
@@ -488,7 +491,7 @@ configreload.func();
   };
   var authenticatesuccess = function(data, status) {
     $ionicLoading.hide();
-    if (data.value !== false) {
+    if (data.name) {
       $.jStorage.set("user", data);
       user = data;
       reloadpage = true;
@@ -497,9 +500,9 @@ configreload.func();
   };
   $scope.facebooklogin = function() {
     if (isapp) {
-      ref = cordova.InAppBrowser.open(vigzserver + 'login/userFacebook', '_blank', 'location=no');
+      ref = cordova.InAppBrowser.open(vigzserver + 'user/loginFacebook', '_blank', 'location=no');
     } else {
-      ref = window.open(vigzserver + 'login/userFacebook', '_blank', 'location=no');
+      ref = window.open(vigzserver + 'user/loginFacebook', '_blank', 'location=no');
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
@@ -509,9 +512,9 @@ configreload.func();
   };
   $scope.twitterlogin = function() {
     if (isapp) {
-      ref = cordova.InAppBrowser.open(vigzserver + 'login/userTwitter', '_blank', 'location=no');
+      ref = cordova.InAppBrowser.open(vigzserver + 'user/loginTwitter', '_blank', 'location=no');
     } else {
-      ref = window.open(vigzserver + 'login/userTwitter', '_blank', 'location=no');
+      ref = window.open(vigzserver + 'user/loginTwitter', '_blank', 'location=no');
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
@@ -522,9 +525,9 @@ configreload.func();
 
   $scope.instagramlogin = function() {
     if (isapp) {
-      ref = cordova.InAppBrowser.open(vigzserver + 'login/userInstagram', '_blank', 'location=no');
+      ref = cordova.InAppBrowser.open(vigzserver + 'user/loginInstagram', '_blank', 'location=no');
     } else {
-      ref = window.open(vigzserver + 'login/userInstagram', '_blank', 'location=no');
+      ref = window.open(vigzserver + 'user/loginInstagram', '_blank', 'location=no');
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
@@ -1820,6 +1823,7 @@ configreload.func();
       } else {
         $scope.msg = "";
       }
+      
       $ionicLoading.hide();
     }, function(err) {
       // $location.url("/access/offline");
