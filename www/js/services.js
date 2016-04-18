@@ -6,7 +6,7 @@ var adminhauth = adminbase + "index.php/hauth/";
 var imgpath = adminimage + "image?name=";
 
 //Node admin
-var vigzserver = "http://wohlig.biz/";
+var vigzserver = "http://blazen.io/";
 // var adminurl = "http://wohlig.biz/";
 var adminimage = vigzserver + "upload/readFile?file=";
 // var adminhauth = adminurl + "index.php/hauth/";
@@ -297,7 +297,7 @@ angular.module('starter.services', ['httpService'])
       },
       authenticate: function() {
         return $http({
-          url: adminurl + 'authenticate',
+          url: vigzserver + 'user/profile',
           method: "POST"
         });
       },
@@ -308,7 +308,7 @@ angular.module('starter.services', ['httpService'])
       },
       logout: function(callback, err) {
         $.jStorage.deleteKey('user');
-        return $http.get(adminurl + 'logout', {
+        return $http.get(vigzserver + 'user/logout', {
           withCredentials: false
         }).success(callback).error(err);
       },

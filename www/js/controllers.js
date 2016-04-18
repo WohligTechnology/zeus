@@ -175,7 +175,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   // });
 configreload.func();
   var logoutsuccess = function(data, success) {
-    if (data == 'true') {
+    if (data.value === true) {
       $.jStorage.deleteKey('user');
       reloadpage = true;
       $ionicLoading.hide();
@@ -312,7 +312,7 @@ configreload.func();
     $scope.item = $stateParams.item;
     var allAudio = $stateParams.items;
     console.log('each item: ', $stateParams);
-    $scope.isPlaying = 1;
+    $scope.isPlaying = 0;
     console.log('isPlaying: ', $scope.isPlaying);
 
     $scope.streamNow = function(value, isPlaying) {
@@ -325,7 +325,7 @@ configreload.func();
           pauser.pause();
           // $.jStorage.set('pauser', pauser);
           // $.jStorage.set('id', value.id);
-          console.log('1');
+          console.log($scope.isPlaying);
         });
       } else {
         console.log("value: ", value);
@@ -335,10 +335,12 @@ configreload.func();
           pauser = player;
           // $.jStorage.set('pauser', pauser);
           // $.jStorage.set('id', value.id);
-          console.log('0');
+          console.log($scope.isPlaying);
         });
       }
     };
+
+    $scope.streamNow($scope.item, $scope.isPlaying);
 
     console.log('all audio length: ', allAudio.length);
     $scope.nextPlay = function(value) {
@@ -472,7 +474,7 @@ configreload.func();
 
   //logins
   var checktwitter = function(data, status) {
-    if (data !== "false" && data !== '') {
+    if (data.value !== false) {
       $interval.cancel(stopinterval);
       ref.close();
       MyServices.authenticate().success(authenticatesuccess);
@@ -486,7 +488,7 @@ configreload.func();
   };
   var authenticatesuccess = function(data, status) {
     $ionicLoading.hide();
-    if (data != "false") {
+    if (data.value !== false) {
       $.jStorage.set("user", data);
       user = data;
       reloadpage = true;
@@ -495,9 +497,9 @@ configreload.func();
   };
   $scope.facebooklogin = function() {
     if (isapp) {
-      ref = cordova.InAppBrowser.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+      ref = cordova.InAppBrowser.open(vigzserver + 'login/userFacebook', '_blank', 'location=no');
     } else {
-      ref = window.open(adminhauth + 'login/Facebook?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+      ref = window.open(vigzserver + 'login/userFacebook', '_blank', 'location=no');
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
@@ -507,9 +509,9 @@ configreload.func();
   };
   $scope.twitterlogin = function() {
     if (isapp) {
-      ref = cordova.InAppBrowser.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+      ref = cordova.InAppBrowser.open(vigzserver + 'login/userTwitter', '_blank', 'location=no');
     } else {
-      ref = window.open(adminhauth + 'login/Twitter', '_blank', 'location=no');
+      ref = window.open(vigzserver + 'login/userTwitter', '_blank', 'location=no');
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
@@ -520,9 +522,9 @@ configreload.func();
 
   $scope.instagramlogin = function() {
     if (isapp) {
-      ref = cordova.InAppBrowser.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+      ref = cordova.InAppBrowser.open(vigzserver + 'login/userInstagram', '_blank', 'location=no');
     } else {
-      ref = window.open(adminhauth + 'login/Instagram?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+      ref = window.open(vigzserver + 'login/userInstagram', '_blank', 'location=no');
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
@@ -533,9 +535,9 @@ configreload.func();
 
   $scope.googlelogin = function() {
     if (isapp) {
-      ref = cordova.InAppBrowser.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+      ref = cordova.InAppBrowser.open(vigzserver + 'user/loginGoogle', '_blank', 'location=no');
     } else {
-      ref = window.open(adminhauth + 'login/Google?returnurl=http://www.wohlig.com', '_blank', 'location=no');
+      ref = window.open(vigzserver + 'user/loginGoogle', '_blank', 'location=no');
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
