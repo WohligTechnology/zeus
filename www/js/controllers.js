@@ -4,9 +4,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork) {
   addanalytics("flexible menu");
-
   //	$ionicLoading.hide();
-  console.log("in app controller");
+  $scope.config = MyServices.getconfigdata();
 
   function internetaccess(toState) {
     if (navigator) {
@@ -56,45 +55,51 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
   };
   configreload.func = function() {
+    console.log(config);
     $scope.menudata = [];
     var data = MyServices.getconfigdata();
-    _.each(data.config[0], function(n) {
-      if (n.value === true) {
-        loginstatus = true;
-      }
-    });
+    console.log(data);
+    // _.each(data.config[0], function(n) {
+    //   if (n.value === true) {
+    //     loginstatus = true;
+    //   }
+    // });
     _.each(data.menu, function(n) {
-      if (loginstatus === false) {
-        if (n.linktypelink != "setting" && n.linktypelink != "profile") {
+      if (data.config.login.hasLogin) {
           var newmenu = {};
-          newmenu.id = n.id;
+          newmenu.id = n._id;
           newmenu.name = n.name;
           newmenu.order = n.order;
-          newmenu.icon = n.icon;
+          newmenu.icon = n.iconType;
           newmenu.link_type = n.linktypename;
-          switch (n.linktype) {
-            case '3':
-              newmenu.typeid = n.event;
-              break;
-            case '6':
-              newmenu.typeid = n.gallery;
-              break;
-            case '8':
-              newmenu.typeid = n.video;
-              break;
-            case '10':
-              newmenu.typeid = n.blog;
-              break;
-            case '2':
-              newmenu.typeid = n.article;
-              break;
-            default:
-              newmenu.typeid = 0;
+            switch (n.type) {
+              case 'Blog':
+                newmenu.typeid = n.link._id;
+                newmenu.link = 'blogdetail';
+                break;
+              case 'Event':
+                newmenu.typeid = n.link._id;
+                newmenu.link = 'eventdetail';
+                break;
+              case 'Video Gallery':
+                newmenu.typeid = n.link._id;
+                newmenu.link = "videogallery";
+                break;
+              case 'Photo Gallery':
+                newmenu.typeid = n.link._id;
+                newmenu.link = "photogallery";
+                break;
+              case '2':
+                newmenu.typeid = n.article;
+                break;
+              default:
+                newmenu.link = $filter('lowercase')(n.link);
 
-          }
-          newmenu.link = n.linktypelink;
+            }
+
+          // newmenu.link = n.linktypelink;
           $scope.menudata.push(newmenu);
-        }
+
       } else {
         var newmenu = {};
         newmenu.id = n.id;
@@ -126,51 +131,52 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.menudata.push(newmenu);
       }
     });
-    $scope.contact = data.config[5];
-    $scope.menu = {};
-    $scope.menu.setting = false;
-    var blogdata1 = JSON.parse(data.config[0].text);
-
-    // config data
-    var blogdata = JSON.parse(data.config[1].text);
-    for (var i = 0; i < blogdata.length; i++) {
-      if (blogdata[i].value === true) {
-        $scope.menudata.blogs = true;
-        $.jStorage.set("blogType", blogdata[i]);
-        break;
-      } else {
-        $scope.menudata.blogs = false;
-      }
-    }
-    _.each(blogdata1, function(n) {
-      if (n.value === true) {
-        loginstatus = true;
-      }
-    });
-
+    // $scope.contact = data.config[5];
+    // $scope.menu = {};
+    // $scope.menu.setting = false;
+    // var blogdata1 = JSON.parse(data.config[0].text);
+    //
+    // // config data
+    // var blogdata = JSON.parse(data.config[1].text);
+    // for (var i = 0; i < blogdata.length; i++) {
+    //   if (blogdata[i].value === true) {
+    //     $scope.menudata.blogs = true;
+    //     $.jStorage.set("blogType", blogdata[i]);
+    //     break;
+    //   } else {
+    //     $scope.menudata.blogs = false;
+    //   }
+    // }
+    // _.each(blogdata1, function(n) {
+    //   if (n.value === true) {
+    //     loginstatus = true;
+    //   }
+    // });
+    //
     $scope.logso = "";
-    if (loginstatus === false) {
-      $scope.menu.setting = false;
+    if (!data.config.login.hasLogin) {
+      // $scope.menu.setting = false;
     } else {
-      $scope.menu.setting = true;
+      // $scope.menu.setting = true;
       $scope.logso = "has-menu-photo";
     }
   };
 
-  MyServices.getallfrontmenu(function(data) {
-    MyServices.setconfigdata(data);
-    _.each(data.config[0], function(n) {
-      if (n.value === true) {
-        loginstatus = true;
-      }
-    });
-    configreload.func();
-  }, function(err) {
-    // $location.url("/access/offline");
-  });
+  // MyServices.getallfrontmenu(function(data) {
+  //   MyServices.setconfigdata(data);
+  //   _.each(data.config[0], function(n) {
+  //     if (n.value === true) {
+  //       loginstatus = true;
+  //     }
+  //   });
+  //   configreload.func();
+  // }, function(err) {
+  //   // $location.url("/access/offline");
+  // });
+configreload.func();
   var logoutsuccess = function(data, success) {
     if (data == 'true') {
-      $.jStorage.flush();
+      $.jStorage.deleteKey('user');
       reloadpage = true;
       $ionicLoading.hide();
       $location.path("/access/login");
@@ -214,7 +220,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   if ($.jStorage.get("user")) {
+    console.log("user in");
     MyServices.getUserMob(function(data) {
+      console.log(data);
       if (data.value === false) {
         $scope.userdetails = $.jStorage.get("user");
       }else{
@@ -423,7 +431,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('LoginCtrl', function($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
   addanalytics("flexible login page");
   $scope.logindata = {};
-  $.jStorage.flush();
+  $.jStorage.deleteKey("user");
 
   $scope.forgotpass = function() {
     $location.url("/access/forgotpassword");
@@ -450,38 +458,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   });
   window.addEventListener("online", function(e) {
     internetaccess();
-  });
-
-  $scope.setup = function() {
-    $scope.config = MyServices.getconfigdata();
-    _.each(JSON.parse($scope.config.config[0].text), function(n) {
-      if (n.name.toLowerCase() === "email" && n.value === true) {
-        $scope.logindata.email = true;
-        loginstatus = true;
-      } else if (n.name.toLowerCase() === "google" && n.value === true) {
-        $scope.logindata.google = true;
-        loginstatus = true;
-      } else if (n.name.toLowerCase() === "twitter" && n.value === true) {
-        $scope.logindata.twitter = true;
-        loginstatus = true;
-      } else if (n.name.toLowerCase() === "instagram" && n.value === true) {
-        $scope.logindata.instagram = true;
-        loginstatus = true;
-      } else if (n.name.toLowerCase() === "facebook" && n.value === true) {
-        $scope.logindata.facebook = true;
-        loginstatus = true;
-      } else {}
-    });
-    if (loginstatus === false) {
-      $location.url("/app/home");
-    }
-  };
-
-  MyServices.getallfrontmenu(function(data) {
-    MyServices.setconfigdata(data);
-    $scope.setup();
-  }, function(err) {
-    // $location.url("/access/offline");
   });
 
   // loader
@@ -553,7 +529,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       MyServices.authenticate().success(authenticatesuccess);
       $interval.cancel(stopinterval);
     });
-  }
+  };
 
   $scope.googlelogin = function() {
     if (isapp) {
@@ -614,7 +590,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
     $ionicLoading.hide();
     $scope.signup = {};
-  }
+  };
 
   var msgforall = function(msg) {
     $ionicLoading.hide();
@@ -661,7 +637,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.signin = {};
   var signinsuccess = function(data, status) {
     $ionicLoading.hide();
-    if (data.value !== false) {
+    if (data.value === true) {
       $.jStorage.set("user", data.data);
       user = data;
       $location.url("/app/home");
@@ -906,12 +882,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
   };
 
-  MyServices.getallfrontmenu(function(data) {
-    MyServices.setconfigdata(data);
-    $scope.setup();
-  }, function(err) {
-    // $location.url("/access/offline");
-  });
+  // MyServices.getallfrontmenu(function(data) {
+  //   MyServices.setconfigdata(data);
+  //   $scope.setup();
+  // }, function(err) {
+  //   // $location.url("/access/offline");
+  // });
 
   MyServices.getallsliders(function(data) {
     $scope.slides = data;

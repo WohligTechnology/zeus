@@ -2,6 +2,7 @@ var socialShare = {};
 var push = {};
 var googleanalyticsid = 'UA-67616258-1';
 var isapp = true;
+var config = {};
 
 function addanalytics(screen) {
   if (window.analytics) {
@@ -601,8 +602,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 });
 
 var loadMenu = function(MyServices) {
-  MyServices.getallfrontmenu(function(data) {
-    console.log(data);
+  var navigation = {};
+  MyServices.getNavigationMob(function(nav) {
+    navigation.menu = nav.data;
+    MyServices.getConfigMob(function(conf) {
+      navigation.config = conf.data[0];
+      config = navigation;
+      MyServices.setconfigdata(navigation);
+    }, function(err){
+      console.log(err);
+    });
   }, function(err) {
     console.log(err);
   });

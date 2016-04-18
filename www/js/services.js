@@ -174,6 +174,13 @@ angular.module('starter.services', ['httpService'])
           data: {}
         }).success(callback).error(errCallback);
       },
+      getConfigMob: function(callback, errCallback) {
+        return $http({
+          url: vigzserver + 'config/getAll',
+          method: "POST",
+          data: {}
+        }).success(callback).error(errCallback);
+      },
 
       all: function() {
         return chats;
@@ -300,7 +307,7 @@ angular.module('starter.services', ['httpService'])
         }).success(callback).error(err);
       },
       logout: function(callback, err) {
-        $.jStorage.flush();
+        $.jStorage.deleteKey('user');
         return $http.get(adminurl + 'logout', {
           withCredentials: false
         }).success(callback).error(err);

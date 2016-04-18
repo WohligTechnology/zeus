@@ -16,7 +16,7 @@
     </ion-side-menu-content>
     <ion-side-menu side="left">
         <div class="top-statusbar"></div>
-        <div class="list no-margin" ng-if="menu.setting">
+        <div class="list no-margin" ng-if="config.config.login.hasLogin">
             <ion-item class="item-avatar item-icon-right">
                 <div class="image-adjust" ng-style="userdetails.myimage"></div>
                 <h3>{{userdetails.name}}</h3>
@@ -29,7 +29,7 @@
                 <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.{{menu.link}}({id:menu.typeid})" ui-sref-active="bordered" ng-repeat="menu in menudata">
                     <i class="icon {{menu.icon}}"></i>{{menu.name}}
                 </ion-item>
-                <ion-item nav-clear menu-close class="item item-icon-left item-complex" ng-click="logout()" ui-sref-active="bordered" ng-if="menu.setting">
+                <ion-item nav-clear menu-close class="item item-icon-left item-complex" ng-click="logout()" ui-sref-active="bordered" ng-if="config.config.login.hasLogin">
                     <div class="item-content"><i class="icon ln-arrow-right2"></i>Logout</div>
                 </ion-item>
             </div>
