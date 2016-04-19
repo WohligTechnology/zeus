@@ -181,6 +181,9 @@ angular.module('starter.services', ['httpService'])
           data: {}
         }).success(callback).error(errCallback);
       },
+      homeSlider: function(callback, errCallback){
+        httpService.post(vigzserver + "homeslider/getAll", {}, callback, errCallback);
+      },
 
       all: function() {
         return chats;
@@ -315,11 +318,7 @@ angular.module('starter.services', ['httpService'])
       getuser: function() {
         return $.jStorage.get("user");
       },
-      getallsliders: function(callback, err) {
-        return $http.get(adminurl + 'getAllSliders', {
-          withCredentials: false
-        }).success(callback).error(err);
-      },
+      
       getallevents: function(pageno, callback, err) {
 
         return $http.get(adminurl + 'getAllEvents?pageno=' + pageno + '&maxrow=' + 15, {

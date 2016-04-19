@@ -21,7 +21,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .run(function($ionicPlatform, MyServices) {
   $ionicPlatform.ready(function() {
-    console.log("app loaded");
 		loadMenu(MyServices);
     // MyServices.getall
     if (window && window.plugins && window.plugins.socialsharing && window.plugins.socialsharing.share) {
@@ -427,7 +426,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('profileimg', function() {
   return function(image) {
-    if (image && image != null) {
+    if (image && image !== null) {
       var start = image.substr(0, 4);
 
       if (start == "http") {

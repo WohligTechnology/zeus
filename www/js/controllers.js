@@ -1,6 +1,6 @@
 var reloadpage = false;
 var configreload = {};
-angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize', 'vcRecaptcha'])
+angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork) {
   addanalytics("flexible menu");
@@ -41,95 +41,87 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
   //	$scope.showloading();
   configreload.onallpage = function() {
+    console.log("in on all pages");
+    console.log(config);
     var loginstatus = false;
     if (MyServices.getconfigdata()) {
-      _.each(MyServices.getconfigdata().config[0], function(n) {
-        if (n.value === true) {
-          loginstatus = true;
+      if (MyServices.getconfigdata().config.login.hasLogin) {
+        loginstatus = true;
+        if (loginstatus && MyServices.getuser()===null) {
+          $location.url("/access/login");
         }
-      });
-    }
-    if (loginstatus === true && !MyServices.getuser()) {
-
-      $location.url("/access/login");
+      }
     }
   };
+  $timeout(function(){
+    configreload.onallpage();
+  },1000);
+
   configreload.func = function() {
-    console.log(config);
     $scope.menudata = [];
     var data = MyServices.getconfigdata();
-    console.log(data);
     // _.each(data.config[0], function(n) {
     //   if (n.value === true) {
     //     loginstatus = true;
     //   }
     // });
     _.each(data.menu, function(n) {
-      if (data.config.login.hasLogin) {
-          var newmenu = {};
-          newmenu.id = n._id;
-          newmenu.name = n.name;
-          newmenu.order = n.order;
-          newmenu.icon = n.iconType;
-          newmenu.link_type = n.linktypename;
-            switch (n.type) {
-              case 'Blog':
-                newmenu.typeid = n.link._id;
-                newmenu.link = 'blogdetail';
-                break;
-              case 'Event':
-                newmenu.typeid = n.link._id;
-                newmenu.link = 'eventdetail';
-                break;
-              case 'Video Gallery':
-                newmenu.typeid = n.link._id;
-                newmenu.link = "videogallery";
-                break;
-              case 'Photo Gallery':
-                newmenu.typeid = n.link._id;
-                newmenu.link = "photogallery";
-                break;
-              case '2':
-                newmenu.typeid = n.article;
-                break;
-              default:
-                newmenu.link = $filter('lowercase')(n.link);
+      var newmenu = {};
+      newmenu.id = n._id;
+      newmenu.name = n.name;
+      newmenu.order = n.order;
+      newmenu.icon = n.iconType;
+      newmenu.link_type = n.linktypename;
+      switch (n.type) {
+        case 'Blog':
+          newmenu.typeid = n.link._id;
+          newmenu.link = 'blogdetail';
+          break;
+        case 'Event':
+          newmenu.typeid = n.link._id;
+          newmenu.link = 'eventdetail';
+          break;
+        case 'Video Gallery':
+          newmenu.typeid = n.link._id;
+          newmenu.link = "videogallery";
+          break;
+        case 'Photo Gallery':
+          newmenu.typeid = n.link._id;
+          newmenu.link = "photogallery";
+          break;
+        case 'Home':
+          newmenu.typeid = n.link._id;
+          newmenu.link = "article";
+          break;
+        default:
+        {
+          switch (n.link) {
+            case 'Home':
+              newmenu.link = "home";
+              break;
+            case 'Event':
+              newmenu.link = "events";
+              break;
+            case 'Photo Gallery':
+              newmenu.link = "photogallerycategory";
+              break;
+            case 'Video Gallery':
+              newmenu.link = "videogallerycategory";
+              break;
+            case 'Setting':
+              newmenu.link = "setting";
+              break;
+            case 'Profile':
+              newmenu.link = "profile";
+              break;
+            default:
 
-            }
-
-          // newmenu.link = n.linktypelink;
-          $scope.menudata.push(newmenu);
-
-      } else {
-        var newmenu = {};
-        newmenu.id = n.id;
-        newmenu.name = n.name;
-        newmenu.order = n.order;
-        newmenu.icon = n.icon;
-        newmenu.link_type = n.linktypename;
-        switch (n.linktype) {
-          case '3':
-            newmenu.typeid = n.event;
-            break;
-          case '6':
-            newmenu.typeid = n.gallery;
-            break;
-          case '8':
-            newmenu.typeid = n.video;
-            break;
-          case '10':
-            newmenu.typeid = n.blog;
-            break;
-          case '2':
-            newmenu.typeid = n.article;
-            break;
-          default:
-            newmenu.typeid = 0;
+          }
 
         }
-        newmenu.link = n.linktypelink;
-        $scope.menudata.push(newmenu);
+
       }
+      $scope.menudata.push(newmenu);
     });
     // $scope.contact = data.config[5];
     // $scope.menu = {};
@@ -173,7 +165,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   // }, function(err) {
   //   // $location.url("/access/offline");
   // });
-configreload.func();
+  $timeout(function() {
+    configreload.func();
+  }, 2000);
+
   var logoutsuccess = function(data, success) {
     if (data.value === true) {
       $.jStorage.deleteKey('user');
@@ -220,17 +215,15 @@ configreload.func();
   };
 
   if ($.jStorage.get("user")) {
-    console.log("user in");
     MyServices.getUserMob(function(data) {
-      console.log(data);
       if (data.value === false) {
         $scope.userdetails = $.jStorage.get("user");
-      }else{
-      $scope.userdetails = data.data;
-      $scope.userdetails.myimage = {
-        'background-image': "url('" + $filter("profileimg")(data.image) + "')"
-      };
-    }
+      } else {
+        $scope.userdetails = data.data;
+        $scope.userdetails.myimage = {
+          'background-image': "url('" + $filter("profileimg")(data.image) + "')"
+        };
+      }
     }, function(err) {
       $scope.userdetails = $.jStorage.get("user");
       // $location.url("/access/offline");
@@ -438,8 +431,9 @@ configreload.func();
   $scope.forgotpass = function() {
     $location.url("/access/forgotpassword");
   };
-
-  $scope.config = MyServices.getconfigdata();
+  $timeout(function() {
+    $scope.config = MyServices.getconfigdata();
+  }, 1000);
   var loginstatus = false;
 
   function internetaccess(toState) {
@@ -474,9 +468,7 @@ configreload.func();
 
   //logins
   var checktwitter = function(data, status) {
-    console.log("resp data");
     var repdata = {};
-    console.log(data);
     if (data._id) {
       $interval.cancel(stopinterval);
       ref.close();
@@ -643,10 +635,12 @@ configreload.func();
   var signinsuccess = function(data, status) {
     $ionicLoading.hide();
     if (data.value === true) {
-      $.jStorage.set("user", data.data);
-      user = data;
-      $location.url("/app/home");
-      $scope.signin = {};
+      MyServices.authenticate().success(function(data){
+        $.jStorage.set("user", data);
+        user = data;
+        $location.url("/app/home");
+        $scope.signin = {};
+      });
     } else {
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',
@@ -754,14 +748,14 @@ configreload.func();
       $scope.showPopup2();
       $ionicLoading.hide();
       $scope.password = {};
-    } else if (data == 0) {
+    } else if (data === 0) {
       $ionicLoading.hide();
       $scope.showPopup4();
     } else if (data == -1) {
       $ionicLoading.hide();
       $scope.showPopup3();
     }
-  }
+  };
 
   $scope.changepassword = function(password) {
     $ionicLoading.show();
@@ -787,7 +781,7 @@ configreload.func();
       $ionicLoading.hide();
     }
 
-  }
+  };
 
 })
 
@@ -858,34 +852,32 @@ configreload.func();
   var menu = {};
   menu.setting = false;
 
-  $scope.content = {};
-  MyServices.gethomecontent(function(data) {
-    $scope.content = data;
-    $scope.content.content = $sce.trustAsHtml($scope.content.content);
-    //		$ionicLoading.hide();
-  }, function(err) {
-    // $location.url("/access/offline");
-  });
-  $scope.setup = function() {
-    var blogdata = JSON.parse(MyServices.getconfigdata().config[0].text);
-    _.each(blogdata, function(n) {
-      if (n.value === true) {
-        loginstatus = true;
-      }
-    });
-    if (loginstatus === false) {
-      menu.setting = false;
-      $.jStorage.deleteKey("user");
-    } else {
-      if (!MyServices.getuser() && MyServices.getuser() === null) {
-        $location.url("/access/login");
-        menu.setting = true;
-        //		$ionicLoading.hide();
-      } else {
-        $ionicLoading.hide();
-      }
-    }
-  };
+  config = MyServices.getconfigdata();
+
+  MyServices.homeSlider(function(data) {
+    $scope.slides = data.data;
+  }, function(err) {});
+  configreload.onallpage();
+  // $scope.setup = function() {
+  //   var blogdata = JSON.parse(MyServices.getconfigdata().config[0].text);
+  //   _.each(blogdata, function(n) {
+  //     if (n.value === true) {
+  //       loginstatus = true;
+  //     }
+  //   });
+  //   if (loginstatus === false) {
+  //     menu.setting = false;
+  //     $.jStorage.deleteKey("user");
+  //   } else {
+  //     if (!MyServices.getuser() && MyServices.getuser() === null) {
+  //       $location.url("/access/login");
+  //       menu.setting = true;
+  //       //		$ionicLoading.hide();
+  //     } else {
+  //       $ionicLoading.hide();
+  //     }
+  //   }
+  // };
 
   // MyServices.getallfrontmenu(function(data) {
   //   MyServices.setconfigdata(data);
@@ -1014,20 +1006,20 @@ configreload.func();
     }];
     var check = formvalidation($scope.allvalidation);
     if (check) {
-			if($scope.password.newpassword === $scope.password.confirmpassword){
-      MyServices.changePasswordMob($scope.password, function(data) {
-        if (data.value === true) {
-					$scope.passwordpopup("Password changed successfully");
-        } else {
-          $scope.passwordpopup("Old password does not match");
-        }
-        console.log(data);
-      }, function(err) {
-        // $location.url("/access/offline");
-      });
-		}else {
-			$scope.passwordpopup("Both the passwords does not match");
-		}
+      if ($scope.password.newpassword === $scope.password.confirmpassword) {
+        MyServices.changePasswordMob($scope.password, function(data) {
+          if (data.value === true) {
+            $scope.passwordpopup("Password changed successfully");
+          } else {
+            $scope.passwordpopup("Old password does not match");
+          }
+          console.log(data);
+        }, function(err) {
+          // $location.url("/access/offline");
+        });
+      } else {
+        $scope.passwordpopup("Both the passwords does not match");
+      }
     } else {
       $ionicLoading.hide();
       $scope.passwordpopup("Please enter all the fields.");
@@ -1068,8 +1060,7 @@ configreload.func();
         .then(function(result) {
           var data = JSON.parse(result.response);
           $ionicLoading.hide();
-        }, function(err) {}, function(progress) {
-        });
+        }, function(err) {}, function(progress) {});
     }, function(err) {
       // An error occured. Show a message to the user
     });
@@ -1641,7 +1632,7 @@ configreload.func();
 
 .controller('AccountCtrl', function($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout) {
   addanalytics("Account page");
-	console.log("fasdfasd&&&&&&&&&&&&&&&");
+  console.log("fasdfasd&&&&&&&&&&&&&&&");
   configreload.onallpage();
   if ($.jStorage.get("user")) {
     $scope.userdetails = {};
@@ -1823,7 +1814,7 @@ configreload.func();
       } else {
         $scope.msg = "";
       }
-      
+
       $ionicLoading.hide();
     }, function(err) {
       // $location.url("/access/offline");
@@ -1848,7 +1839,7 @@ configreload.func();
 
 })
 
-.controller('ContactCtrl', function($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $compile, $ionicModal, vcRecaptchaService) {
+.controller('ContactCtrl', function($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $compile, $ionicModal) {
   addanalytics("Contact page");
   configreload.onallpage();
   $scope.showloading = function() {
@@ -1933,7 +1924,7 @@ configreload.func();
   };
 
   //        ***** tabchange ****
-	// $scope.mapframe = "<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7543.043871128432!2d72.8626547!3d19.04077635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cf2cc4000001%3A0xc683a42662527334!2sSadhana+English+Primary+School!5e0!3m2!1sen!2sin!4v1443430462486' width='600' height='450' frameborder='0' style='border:0' allowfullscreen></iframe>";
+  // $scope.mapframe = "<iframe src='https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7543.043871128432!2d72.8626547!3d19.04077635!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7cf2cc4000001%3A0xc683a42662527334!2sSadhana+English+Primary+School!5e0!3m2!1sen!2sin!4v1443430462486' width='600' height='450' frameborder='0' style='border:0' allowfullscreen></iframe>";
 
 
 
@@ -1941,25 +1932,25 @@ configreload.func();
   $scope.classa = 'active';
   $scope.classb = '';
 
-	$ionicModal.fromTemplateUrl('templates/appView/modal-map.html', {
+  $ionicModal.fromTemplateUrl('templates/appView/modal-map.html', {
     scope: $scope
   }).then(function(modal) {
     $scope.modal = modal;
   });
 
-	$scope.showMap = function(lat, long){
-		$scope.mapframe = "<iframe width='600' height='450' frameborder='0' scrolling='yes' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?q="+lat+","+long+"&hl=es;z=14&amp;output=embed' allowfullscreen></iframe>";
-		console.log($scope.mapframe);
-		$scope.modal.show();
-	};
+  $scope.showMap = function(lat, long) {
+    $scope.mapframe = "<iframe width='600' height='450' frameborder='0' scrolling='yes' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?q=" + lat + "," + long + "&hl=es;z=14&amp;output=embed' allowfullscreen></iframe>";
+    console.log($scope.mapframe);
+    $scope.modal.show();
+  };
 
-	$scope.closeMap = function(){
-		$scope.modal.hide();
-	};
+  $scope.closeMap = function() {
+    $scope.modal.hide();
+  };
 
   MyServices.getContactAllMob(function(data, status) {
     console.log();
-		$scope.contacts = data.data;
+    $scope.contacts = data.data;
   }, function(err) {
     // $location.url("/access/offline");
   });
@@ -1984,51 +1975,51 @@ configreload.func();
   $scope.response = null;
   $scope.widgetId = null;
 
-  $scope.model = {
-      key: '6LfUix0TAAAAAJoY6U1m13_4reMUI2g4x2cVLUEu'
-  };
+  // $scope.model = {
+  //   key: '6LfUix0TAAAAAJoY6U1m13_4reMUI2g4x2cVLUEu'
+  // };
+  //
+  // $scope.setResponse = function(response) {
+  //   console.info('Response available');
+  //
+  //   $scope.response = response;
+  // };
+  //
+  // $scope.setWidgetId = function(widgetId) {
+  //   console.info('Created widget ID: %s', widgetId);
+  //
+  //   $scope.widgetId = widgetId;
+  // };
+  //
+  // $scope.cbExpiration = function() {
+  //   console.info('Captcha expired. Resetting response object');
+  //
+  //   vcRecaptchaService.reload($scope.widgetId);
+  //
+  //   $scope.response = null;
+  // };
 
-  $scope.setResponse = function (response) {
-      console.info('Response available');
+  $scope.submit = function() {
+    var valid;
 
-      $scope.response = response;
-  };
+    /**
+     * SERVER SIDE VALIDATION
+     *
+     * You need to implement your server side validation here.
+     * Send the reCaptcha response to the server and use some of the server side APIs to validate it
+     * See https://developers.google.com/recaptcha/docs/verify
+     */
+    console.log('sending the captcha response to the server', $scope.response);
 
-  $scope.setWidgetId = function (widgetId) {
-      console.info('Created widget ID: %s', widgetId);
+    if (valid) {
+      console.log('Success');
+    } else {
+      console.log('Failed validation');
 
-      $scope.widgetId = widgetId;
-  };
-
-  $scope.cbExpiration = function() {
-      console.info('Captcha expired. Resetting response object');
-
-      vcRecaptchaService.reload($scope.widgetId);
-
-      $scope.response = null;
-   };
-
-  $scope.submit = function () {
-      var valid;
-
-      /**
-       * SERVER SIDE VALIDATION
-       *
-       * You need to implement your server side validation here.
-       * Send the reCaptcha response to the server and use some of the server side APIs to validate it
-       * See https://developers.google.com/recaptcha/docs/verify
-       */
-      console.log('sending the captcha response to the server', $scope.response);
-
-      if (valid) {
-          console.log('Success');
-      } else {
-          console.log('Failed validation');
-
-          // In case of a failed validation you need to reload the captcha
-          // because each response can be checked just once
-          vcRecaptchaService.reload($scope.widgetId);
-      }
+      // In case of a failed validation you need to reload the captcha
+      // because each response can be checked just once
+      // vcRecaptchaService.reload($scope.widgetId);
+    }
   };
 
 })
