@@ -236,70 +236,25 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
+.controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http) {
+
+  MyServices.getIntroslider(function(data){
+    $scope.slider = data.data;
+  });
+
+})
+
 .controller('AccessCtrl', function($scope) {
 
   })
   .controller('AudiogalleryCtrl', function($scope, MyServices, $stateParams, $http) {
-    // 	$scope.audio = [{
-    //   img: "img/audio.jpg",
-    //   name:"Fever Ray",
-    //   desc:"if i had a heart"
 
-    // },{
-    //   img: "img/audio.jpg",
-    //   name:"Moby",
-    //   desc:"Mistake"
-
-    // },{
-    //   img: "img/audio.jpg",
-    //   name:"Uppermost",
-    //   desc:"Revolution"
-
-    // },{
-    //   img: "img/audio.jpg",
-    //   name:"Nigel Standford",
-    //   desc:"cyamatics"
-
-    // }];
-    // $scope.audio = [];
-    var options = {};
-    options.client_id = 'cbd22121cc1612b8146c72dd16651cb4';
-    var user = "mimie-rubc";
-    $http({
-      method: 'GET',
-      url: 'http://api.soundcloud.com/users/' + user + '/tracks',
-      params: options,
-      withCredentials: false
-    }).then(function(data) {
+    MyServices.getAllAudio(function(data){
       $scope.audio = data.data;
-      console.log('audio: ', $scope.audio);
     });
-    // return audio;
-    // var sound = MyServices.getTracks();
-    // console.log('sound: ', sound);
+
   })
   .controller('AudiogallerycategoryCtrl', function($scope, MyServices, $stateParams) {
-    // 	$scope.audio = [{
-    //   img: "img/audio.jpg",
-    //   name:"Fever Ray",
-    //   desc:"if i had a heart"
-
-    // },{
-    //   img: "img/audio.jpg",
-    //   name:"Moby",
-    //   desc:"Mistake"
-
-    // },{
-    //   img: "img/audio.jpg",
-    //   name:"Uppermost",
-    //   desc:"Revolution"
-
-    // },{
-    //   img: "img/audio.jpg",
-    //   name:"Nigel Standford",
-    //   desc:"cyamatics"
-
-    // }];
 
     SC.initialize({
       client_id: 'f4f861b2fb75e16adfe48c4140d826f5'

@@ -16,8 +16,8 @@ var foods = [];
 
 // FOR SOUNDCLOUD
 var options = {};
-options.client_id = '3316b4d5bb6dc355bef2c72c161a9084';
-var user = "hiimharsh";
+options.client_id = 'f4f861b2fb75e16adfe48c4140d826f5';
+var soundclouduser = "mimie-rubc";
 // For SoundCloud
 var SC_API_URL = "";
 
@@ -183,6 +183,9 @@ angular.module('starter.services', ['httpService'])
       },
       homeSlider: function(callback, errCallback){
         httpService.post(vigzserver + "homeslider/getAll", {}, callback, errCallback);
+      },
+      getIntroslider: function(callback, errCallback){
+        httpService.post(vigzserver + "introslider/getAll", {}, callback, errCallback);
       },
 
       all: function() {
@@ -439,10 +442,10 @@ angular.module('starter.services', ['httpService'])
       getAllAudio: function(callback) {
         $http({
           method: 'GET',
-          url: 'http://api.soundcloud.com/users/' + user + '/tracks',
+          url: 'http://api.soundcloud.com/users/' + soundclouduser + '/tracks',
           params: options,
           withCredentials: false
-        }).success(callback);
+        }).then(callback);
       }
     };
   });

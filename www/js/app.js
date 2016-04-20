@@ -163,6 +163,16 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   })
 
+  .state('access.slider', {
+    url: '/introslider',
+    views: {
+      'content': {
+        templateUrl: 'templates/accessView/introslider.html',
+        controller: 'IntroSliderCtrl'
+      }
+    }
+  })
+
   .state('app.home', {
     url: '/home',
     views: {
