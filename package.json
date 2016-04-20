@@ -21,7 +21,6 @@
     "cordova-plugin-console",
     "cordova-plugin-whitelist",
     "cordova-plugin-splashscreen",
-    "com.ionic.keyboard",
     "cordova-plugin-x-socialsharing",
     "cordova-plugin-network-information",
     "cordova-plugin-file-transfer",
@@ -35,10 +34,11 @@
       "locator": "https://github.com/danwilson/google-analytics-plugin.git",
       "id": "cordova-plugin-google-analytics"
     },
+    "ionic-plugin-keyboard",
     "phonegap-plugin-push"
   ],
   "cordovaPlatforms": [
-    "ios",
-    "android"
+    "android",
+    "ios"
   ]
 }

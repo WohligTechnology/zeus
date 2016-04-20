@@ -608,6 +608,7 @@ var loadMenu = function(MyServices) {
       navigation.config = conf.data[0];
       config = navigation;
       MyServices.setconfigdata(navigation);
+      $.jStorage.set("blogType",config.config.blog);
     }, function(err){
       console.log(err);
     });

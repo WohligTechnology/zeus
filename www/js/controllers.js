@@ -31,14 +31,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   var loginstatus = false;
 
   // loader
-  $scope.showloading = function() {
-    $ionicLoading.show({
-      template: '<ion-spinner class="spinner-positive"></ion-spinner>'
-    });
-    $timeout(function() {
-      $ionicLoading.hide();
-    }, 5000);
-  };
+  // $scope.showloading = function() {
+  //   $ionicLoading.show({
+  //     template: '<ion-spinner class="spinner-positive"></ion-spinner>'
+  //   });
+  //   $timeout(function() {
+  //     $ionicLoading.hide();
+  //   }, 5000);
+  // };
   //	$scope.showloading();
   configreload.onallpage = function() {
     console.log("in on all pages");
@@ -113,6 +113,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
               break;
             case 'Profile':
               newmenu.link = "profile";
+              break;
+            case 'Blog':
+              newmenu.link = "blogs";
               break;
             default:
 
@@ -261,7 +264,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     // $scope.audio = [];
     var options = {};
     options.client_id = 'cbd22121cc1612b8146c72dd16651cb4';
-    var user = "hiimharsh";
+    var user = "mimie-rubc";
     $http({
       method: 'GET',
       url: 'http://api.soundcloud.com/users/' + user + '/tracks',
@@ -299,7 +302,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     // }];
 
     SC.initialize({
-      client_id: '3316b4d5bb6dc355bef2c72c161a9084'
+      client_id: 'f4f861b2fb75e16adfe48c4140d826f5'
     });
     var pauser;
     $scope.item = $stateParams.item;
@@ -846,7 +849,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       $ionicLoading.hide();
     }, 3000);
   };
-  showloading();
+  // showloading();
 
   var loginstatus = false;
   var menu = {};
@@ -886,7 +889,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   //   // $location.url("/access/offline");
   // });
 
-  MyServices.getallsliders(function(data) {
+  MyServices.homeSlider(function(data) {
     $scope.slides = data;
     $ionicSlideBoxDelegate.update();
   }, function(err) {
@@ -982,8 +985,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     var myPopup = $ionicPopup.show({
       template: '<p class="text-center">' + msg + '</p>',
       title: 'Forgot Password!',
-      scope: $scope,
-
+      scope: $scope
     });
     $timeout(function() {
       myPopup.close(); //close the popup after 3 seconds for some reason
@@ -1262,23 +1264,24 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.$broadcast('scroll.refreshComplete');
   };
 
-
-  if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "wordpress") {
+console.log("blog ctrl");
+  if ($.jStorage.get("blogType") && $.jStorage.get("blogType").blogType == "Wordpress Blog") {
+    console.log("wordpress blog");
     addanalytics("Wordpress blog");
     $scope.showWordpress = true;
     $scope.keepscrolling = false;
-    Wordpress_UserName = $.jStorage.get("blogType").appid;
-    MyServices.getWordpressPosts($.jStorage.get("blogType").appid, function(data, status) {
+    Wordpress_UserName = $.jStorage.get("blogType").username;
+    MyServices.getWordpressPosts($.jStorage.get("blogType").username, function(data, status) {
       $ionicLoading.hide();
       $scope.blogs = data.posts;
       $scope.msg = "";
     });
-  } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "tumblr") {
+  } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").blogType == "Tumblr Blog") {
     addanalytics("Tumblr Blog");
     $scope.showTumblr = true;
     $scope.keepscrolling = false;
-    Tumblr_UserName = $.jStorage.get("blogType").appid;
-    MyServices.getTumblrPosts($.jStorage.get("blogType").appid, function(data, status) {
+    Tumblr_UserName = $.jStorage.get("blogType").username;
+    MyServices.getTumblrPosts($.jStorage.get("blogType").username, function(data, status) {
 
       $ionicLoading.hide();
       if (data) {
@@ -1288,16 +1291,16 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "No blog data or Invalid blog";
       }
     });
-  } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "cms") {
+  } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").blogType == "CMS") {
     addanalytics("Custom blog");
     $scope.showCustomblog = true;
     $scope.reloadblog(1);
-  } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").name.toLowerCase() == "wordpressself") {
+  } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").blogType == "Self Hosted Wordpress") {
     addanalytics("Wordpress self blog");
     $scope.showWordpressSelf = true;
     $scope.keepscrolling = false;
-    Wordpress_UserName = $.jStorage.get("blogType").appid;
-    MyServices.getWordpressSelfPosts($.jStorage.get("blogType").appid, function(data, status) {
+    Wordpress_UserName = $.jStorage.get("blogType").username;
+    MyServices.getWordpressSelfPosts($.jStorage.get("blogType").username, function(data, status) {
       $ionicLoading.hide();
       $scope.msg = "";
       console.log(data);
@@ -1727,10 +1730,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   console.log(MyServices.getconfigdata());
   $scope.config = MyServices.getconfigdata().config;
-  if ($scope.config[6]) {
+  _.each($scope.config.socialfeeds,function(n, key){
+    console.log(n);
+  });
+  if ($scope.socialfeeds) {
     $scope.social = JSON.parse($scope.config[6].text);
     $scope.social = _.filter($scope.social, function(n) {
-      return n.value !== ""
+      return n.value !== "";
     });
   }
   $scope.social = _.chunk($scope.social, 2);

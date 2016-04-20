@@ -24,7 +24,7 @@ var SC_API_URL = "";
 //FOR WORDPRESS INTEGRATION
 var Wordpress_UserName = "en.blog.wordpress.com";
 var WORDPRESS_API_URL = 'https://public-api.wordpress.com/rest/v1.1/';
-var WORDPRESS_self_API_URL = 'wp-json/wp/v2/posts';
+var WORDPRESS_self_API_URL = '/wp-json/wp/v2/posts';
 
 //for tumblr
 var Tumblr_UserName = "";
@@ -318,7 +318,7 @@ angular.module('starter.services', ['httpService'])
       getuser: function() {
         return $.jStorage.get("user");
       },
-      
+
       getallevents: function(pageno, callback, err) {
 
         return $http.get(adminurl + 'getAllEvents?pageno=' + pageno + '&maxrow=' + 15, {
@@ -381,7 +381,7 @@ angular.module('starter.services', ['httpService'])
         }).success(callback);
       },
       getTumblrPosts: function(tmb, callback) {
-        $http.get('http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + tmb + '/posts', {
+        $http.get('http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + tmb + '/posts?api_key=z1dnwToZiXGJkx1fTMtwqYkzcpf83G381TnPgH3wuft4EcEQTU', {
           withCredentials: false
         }).success(callback);
       },
