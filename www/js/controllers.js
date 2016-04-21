@@ -3,6 +3,7 @@ var configreload = {};
 angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork) {
+  console.log("in app controller");
   addanalytics("flexible menu");
   //	$ionicLoading.hide();
   $scope.config = MyServices.getconfigdata();
@@ -533,13 +534,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         template: '<p class="text-center">Signed up successfully!</p>',
         title: 'Congrats!',
         scope: $scope,
-
       });
       $timeout(function() {
         myPopup.close(); //close the popup after 3 seconds for some reason
         $location.url("/app/home");
       }, 2000);
-
     } else {
       $scope.showPopupsignupfailure();
     }
@@ -593,7 +592,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   var signinsuccess = function(data, status) {
     $ionicLoading.hide();
     if (data.value === true) {
-      MyServices.authenticate().success(function(data){
+      MyServices.authenticate(function(data){
         $.jStorage.set("user", data);
         user = data;
         $location.url("/app/home");

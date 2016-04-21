@@ -301,11 +301,11 @@ angular.module('starter.services', ['httpService'])
           data: password
         }).success(callback).error(err);
       },
-      authenticate: function() {
+      authenticate: function(callback) {
         return $http({
           url: vigzserver + 'user/profile',
           method: "POST"
-        });
+        }).success(callback);
       },
       getallblog: function(pageno, callback, err) {
         return $http.get(adminurl + 'getAllBlog?pageno=' + pageno + '&maxrow=' + 15, {
