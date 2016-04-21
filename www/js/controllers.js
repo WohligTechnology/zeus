@@ -10,12 +10,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   function internetaccess(toState) {
     if (navigator) {
-      if (navigator.onLine !== true) {
-        onoffline = false;
-        // $location.url("/access/offline");
-      } else {
-        onoffline = true;
-      }
+        onoffline = navigator.onLine;
     }
   }
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
@@ -109,14 +104,20 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
               case 'Video Gallery':
                 newmenu.link = "videogallerycategory";
                 break;
-              case 'Setting':
-                newmenu.link = "setting";
+              case 'Audio':
+                newmenu.link = "audiogallery";
                 break;
               case 'Profile':
                 newmenu.link = "profile";
                 break;
               case 'Blog':
                 newmenu.link = "blogs";
+                break;
+              case 'Notification':
+                newmenu.link = "notification";
+                break;
+              case 'Contact':
+                newmenu.link = "contact";
                 break;
               default:
 
@@ -247,10 +248,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
   };
   if (MyServices.getIntroJstorage()) {
-    $scope.showButton = true;
+    $scope.showButton = false;
     $timeout(function(){
       $scope.redirectPage();
-    },100);
+    },1000);
 
   } else {
     MyServices.setIntroJstorage();
@@ -414,12 +415,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   function internetaccess(toState) {
     if (navigator) {
-      if (navigator.onLine !== true) {
-        onoffline = false;
-        // $location.url("/access/offline");
-      } else {
-        onoffline = true;
-      }
+        onoffline = navigator.onLine;
     }
   }
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
@@ -940,6 +936,18 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }, 2000);
   };
 
+  $scope.showMsg = function(msg,title) {
+    var myPopup = $ionicPopup.show({
+      template: '<p class="text-center">'+msg+'</p>',
+      title: title,
+      scope: $scope,
+
+    });
+    $timeout(function() {
+      myPopup.close(); //close the popup after 3 seconds for some reason
+    }, 2000);
+  };
+
   $scope.saveProfile = function() {
     MyServices.updateProfileMob($scope.user, function(data, status) {
       if (data !== 0) {
@@ -1009,35 +1017,45 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   };
   $scope.picFromGallery = function() {
-    $cordovaImagePicker.getPictures(options).then(function(resultImage) {
-      $scope.user.newimage = {
-        'background-image': "url('" + resultImage[0] + "')"
-      };
-      $cordovaFileTransfer.upload(adminurl + "profileimageupload?id=" + MyServices.getuser().id, resultImage[0], {})
-        .then(function(result) {
-          var data = JSON.parse(result.response);
-          $ionicLoading.hide();
-        }, function(err) {}, function(progress) {});
+    if(navigator.onLine){
+      $cordovaImagePicker.getPictures(options).then(function(resultImage) {
+        $scope.user.newimage = {
+          'background-image': "url('" + resultImage[0] + "')"
+        };
+        $cordovaFileTransfer.upload(vigzserver + "upload/uploadMob", resultImage[0], {})
+          .then(function(result) {
+            console.log(result.response);
+            var data = JSON.parse(result.response);
+            $ionicLoading.hide();
+          }, function(err) {}, function(progress) {});
 
-    }, function(err) {
-      // An error occured. Show a message to the user
-    });
+      }, function(err) {
+        // An error occured. Show a message to the user
+      });
+    }else {
+      $scope.showMsg("Interner Connection Required To Edit Profile Image. ");
+    }
+
   };
 
   $scope.picImageForCover = function() {
+      if(navigator.onLine){
     $cordovaImagePicker.getPictures(options).then(function(resultImage) {
       $scope.user.newcoverimage = {
         'background-image': "url('" + resultImage[0] + "')"
       };
-      $cordovaFileTransfer.upload(adminurl + "coverimageupload?id=" + MyServices.getuser().id, resultImage[0], {})
+      $cordovaFileTransfer.upload(vigzserver + "upload/uploadMob", resultImage[0], {})
         .then(function(result) {
+          console.log(result.response);
           var data = JSON.parse(result.response);
           $ionicLoading.hide();
         }, function(err) {}, function(progress) {});
     }, function(err) {
       // An error occured. Show a message to the user
     });
-
+  }else {
+    $scope.showMsg("Interner Connection Required To Edit Profile Image. ");
+  }
   };
 })
 

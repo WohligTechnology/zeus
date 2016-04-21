@@ -3,6 +3,7 @@ var push = {};
 var googleanalyticsid = 'UA-67616258-1';
 var isapp = true;
 var config = {};
+var onoffline = false;
 
 function addanalytics(screen) {
   if (window.analytics) {

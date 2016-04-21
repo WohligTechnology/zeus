@@ -168,18 +168,10 @@ angular.module('starter.services', ['httpService'])
         }).success(callback).error(errCallback);
       },
       getNavigationMob: function(callback, errCallback) {
-        return $http({
-          url: vigzserver + 'navigation/getAll',
-          method: "POST",
-          data: {}
-        }).success(callback).error(errCallback);
+        httpService.post(vigzserver + "navigation/getAll", {}, callback, errCallback);
       },
       getConfigMob: function(callback, errCallback) {
-        return $http({
-          url: vigzserver + 'config/getAll',
-          method: "POST",
-          data: {}
-        }).success(callback).error(errCallback);
+        httpService.post(vigzserver + "config/getAll", {}, callback, errCallback);
       },
       homeSlider: function(callback, errCallback){
         httpService.post(vigzserver + "homeslider/getAll", {}, callback, errCallback);
