@@ -48,15 +48,15 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     if (MyServices.getconfigdata()) {
       if (MyServices.getconfigdata().config.login.hasLogin) {
         loginstatus = true;
-        if (loginstatus && MyServices.getuser()===null) {
+        if (loginstatus && MyServices.getuser() === null) {
           $location.url("/access/login");
         }
       }
     }
   };
-  $timeout(function(){
+  $timeout(function() {
     configreload.onallpage();
-  },1000);
+  }, 1000);
 
   configreload.func = function() {
     $scope.menudata = [];
@@ -95,34 +95,34 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
           newmenu.link = "article";
           break;
         default:
-        {
-          switch (n.link) {
-            case 'Home':
-              newmenu.link = "home";
-              break;
-            case 'Event':
-              newmenu.link = "events";
-              break;
-            case 'Photo Gallery':
-              newmenu.link = "photogallerycategory";
-              break;
-            case 'Video Gallery':
-              newmenu.link = "videogallerycategory";
-              break;
-            case 'Setting':
-              newmenu.link = "setting";
-              break;
-            case 'Profile':
-              newmenu.link = "profile";
-              break;
-            case 'Blog':
-              newmenu.link = "blogs";
-              break;
-            default:
+          {
+            switch (n.link) {
+              case 'Home':
+                newmenu.link = "home";
+                break;
+              case 'Event':
+                newmenu.link = "events";
+                break;
+              case 'Photo Gallery':
+                newmenu.link = "photogallerycategory";
+                break;
+              case 'Video Gallery':
+                newmenu.link = "videogallerycategory";
+                break;
+              case 'Setting':
+                newmenu.link = "setting";
+                break;
+              case 'Profile':
+                newmenu.link = "profile";
+                break;
+              case 'Blog':
+                newmenu.link = "blogs";
+                break;
+              default:
+
+            }
 
           }
-
-        }
 
       }
       $scope.menudata.push(newmenu);
@@ -237,11 +237,28 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http) {
+.controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http, $timeout, $state) {
+  $scope.showButton = true;
+  $scope.redirectPage = function() {
+    if (!MyServices.getuser() && config.config.login.hasLogin) {
+      $state.go("access.login");
+    }else {
+      $state.go("app.home");
+    }
+  };
+  if (MyServices.getIntroJstorage()) {
+    $scope.showButton = true;
+    $timeout(function(){
+      $scope.redirectPage();
+    },100);
 
-  MyServices.getIntroslider(function(data){
-    $scope.slider = data.data;
-  });
+  } else {
+    MyServices.setIntroJstorage();
+    MyServices.getIntroslider(function(data) {
+      $scope.slider = data.data;
+    });
+    $scope.showButton = true;
+  }
 
 })
 
@@ -250,7 +267,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   })
   .controller('AudiogalleryCtrl', function($scope, MyServices, $stateParams, $http) {
 
-    MyServices.getAllAudio(function(data){
+    MyServices.getAllAudio(function(data) {
       $scope.audio = data.data;
     });
 
@@ -592,7 +609,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   var signinsuccess = function(data, status) {
     $ionicLoading.hide();
     if (data.value === true) {
-      MyServices.authenticate(function(data){
+      MyServices.authenticate(function(data) {
         $.jStorage.set("user", data);
         user = data;
         $location.url("/app/home");
@@ -1218,7 +1235,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.$broadcast('scroll.refreshComplete');
   };
 
-console.log("blog ctrl");
+  console.log("blog ctrl");
   if ($.jStorage.get("blogType") && $.jStorage.get("blogType").blogType == "Wordpress Blog") {
     console.log("wordpress blog");
     addanalytics("Wordpress blog");
@@ -1684,7 +1701,7 @@ console.log("blog ctrl");
 
   console.log(MyServices.getconfigdata());
   $scope.config = MyServices.getconfigdata().config;
-  _.each($scope.config.socialfeeds,function(n, key){
+  _.each($scope.config.socialfeeds, function(n, key) {
     console.log(n);
   });
   if ($scope.socialfeeds) {

@@ -187,6 +187,12 @@ angular.module('starter.services', ['httpService'])
       getIntroslider: function(callback, errCallback){
         httpService.post(vigzserver + "introslider/getAll", {}, callback, errCallback);
       },
+      setIntroJstorage:function(){
+        $.jStorage.set('introslider',true);
+      },
+      getIntroJstorage:function(){
+        return $.jStorage.get('introslider');
+      },
 
       all: function() {
         return chats;

@@ -20,8 +20,9 @@ function addanalytics(screen) {
 angular.module('starter', ['ionic', 'starter.controllers'])
 
 .run(function($ionicPlatform, MyServices) {
+  loadMenu(MyServices);
   $ionicPlatform.ready(function() {
-		loadMenu(MyServices);
+
     // MyServices.getall
     if (window && window.plugins && window.plugins.socialsharing && window.plugins.socialsharing.share) {
       socialShare = window.plugins.socialsharing.share;
