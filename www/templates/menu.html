@@ -21,13 +21,13 @@
                 <div class="image-adjust" ng-style="userdetails.myimage"></div>
                 <h3>{{userdetails.name}}</h3>
                 <p>{{userdetails.email}}</p>
-                <i class="icon ln-gear2 small" ui-sref="app.setting" menu-close></i>
+                <i class="icon ln-gear2 small" ng-click="toSetting();  $event.stopPropagation();" menu-close></i>
             </ion-item>
         </div>
         <ion-content ng-class="logso">
             <div class="list menu-set">
-                <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="app.{{menu.link}}({id:menu.typeid})" ui-sref-active="bordered" ng-repeat="menu in menudata">
-                    <i class="icon {{menu.icon}}"></i>{{menu.name}}
+                <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="{{menu | toPages}}" ui-sref-active="bordered" ng-repeat="menu in menudata">
+                    <i class="icon {{menu.iconType}}"></i>{{menu.name}}
                 </ion-item>
                 <ion-item nav-clear menu-close class="item item-icon-left item-complex" ng-click="logout()" ui-sref-active="bordered" ng-if="config.config.login.hasLogin">
                     <div class="item-content"><i class="icon ln-arrow-right2"></i>Logout</div>

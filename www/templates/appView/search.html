@@ -12,8 +12,7 @@
     <ion-list>
       <ion-item ng-repeat="item in searchresults.searchevent" ng-click="openevents(item._id)">
         <span>{{item.name}}</span>
-        <span class="item-note">Event
-    </span>
+        <span class="item-note">Event</span>
         <!-- <p>{{item.subtitle}}</p> -->
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
@@ -21,8 +20,7 @@
       </ion-item>
       <ion-item ng-repeat="item in searchresults.searchgallery" ng-click="opengallery(item.id)">
         <span>{{item.name}}</span>
-        <span class="item-note">Gallery
-    </span>
+        <span class="item-note">Gallery</span>
         <!-- <p>{{item.subtitle}}</p> -->
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
@@ -30,8 +28,7 @@
       </ion-item>
       <ion-item ng-repeat="item in searchresults.searchvideogallery" ng-click="openvideogallery(item._id)">
         <span>{{item.title}}</span>
-        <span class="item-note">Video
-    </span>
+        <span class="item-note">Video</span>
         <!-- <p>{{item.subtitle}}</p> -->
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
@@ -39,8 +36,7 @@
       </ion-item>
       <ion-item ng-repeat="item in searchresults.blog" ng-click="openblog(item.id)">
         <span>{{item.title}}</span>
-        <span class="item-note">Blog
-    </span>
+        <span class="item-note">Blog</span>
         <!-- <p>{{item.subtitle}}</p> -->
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
@@ -48,19 +44,16 @@
       </ion-item>
       <ion-item ng-repeat="item in searchresults.article" ng-click="openarticle(item._id)">
         <span>{{item.name}}</span>
-        <span class="item-note">Page
-    </span>
+        <span class="item-note">Page</span>
         <!-- <p>{{item.subtitle}}</p> -->
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
         </ion-option-button>
       </ion-item>
-      </ion-item>
       <ion-item ng-repeat="item in searchresults.notification" ui-sref="app.notification">
         <span ng-bind-html="item.content"></span>
         <!-- <p>{{item.subtitle}}</p> -->
-        <span class="item-note">Notification
-    </span>
+        <span class="item-note">Notification</span>
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
         </ion-option-button>
@@ -68,8 +61,15 @@
       <ion-item ng-repeat="item in searchresults.contacts" ui-sref="app.contact">
         <span>{{item.title}}</span>
         <!-- <p>{{item.subtitle}}</p> -->
-        <span class="item-note">Contact
-    </span>
+        <span class="item-note">Contact</span>
+        <ion-option-button class="button-positive" ng-click="share(item)">
+          Share
+        </ion-option-button>
+      </ion-item>
+      <ion-item ng-repeat="item in searchresults.home" ui-sref="app.home">
+        <span>{{item.name}}</span>
+        <!-- <p>{{item.subtitle}}</p> -->
+        <span class="item-note">Home</span>
         <ion-option-button class="button-positive" ng-click="share(item)">
           Share
         </ion-option-button>

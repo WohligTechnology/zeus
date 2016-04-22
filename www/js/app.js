@@ -505,6 +505,72 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   };
 })
 
+.filter('toPages', function(){
+  return function(menu){
+    var newmenu = {};
+    switch (menu.type) {
+      case 'Blog':
+        newmenu.typeid = menu.link._id;
+        newmenu.link = 'blogdetail';
+        break;
+      case 'Event':
+        newmenu.typeid = menu.link._id;
+        newmenu.link = 'eventdetail';
+        break;
+      case 'Video Gallery':
+        newmenu.typeid = menu.link._id;
+        newmenu.link = "videogallery";
+        break;
+      case 'Photo Gallery':
+        newmenu.typeid = menu.link._id;
+        newmenu.link = "photogallery";
+        break;
+      case 'Home':
+        newmenu.typeid = menu.link._id;
+        newmenu.link = "article";
+        break;
+      default:
+        {
+          switch (menu.link) {
+            case 'Home':
+              newmenu.link = "home";
+              break;
+            case 'Event':
+              newmenu.link = "events";
+              break;
+            case 'Photo Gallery':
+              newmenu.link = "photogallerycategory";
+              break;
+            case 'Video Gallery':
+              newmenu.link = "videogallerycategory";
+              break;
+            case 'Audio':
+              newmenu.link = "audiogallery";
+              break;
+            case 'Profile':
+              newmenu.link = "profile";
+              break;
+            case 'Blog':
+              newmenu.link = "blogs";
+              break;
+            case 'Notification':
+              newmenu.link = "notification";
+              break;
+            case 'Contact':
+              newmenu.link = "contact";
+              break;
+            default:
+          }
+        }
+    }
+    if (newmenu.typeid) {
+      return "app."+newmenu.link+"({id:'"+newmenu.typeid+"'})";
+    }else {
+      return "app."+newmenu.link;
+    }
+  };
+})
+
 .filter('cuthtml', function() {
   return function(value, wordwise, max, tail) {
     if (!value) return '';
@@ -591,6 +657,21 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   };
 })
+
+.directive('noInt', function() {
+    return {
+        restrict: 'A',
+        link: function(scope, element, attrs) {
+          if (checkConnectivity) {
+            element.attr("disabled",false);
+          }else {
+            element.attr("disabled",true);
+          }
+
+        }
+    };
+})
+
 
 .directive('imgloadingsec', function($compile, $parse) {
   return {

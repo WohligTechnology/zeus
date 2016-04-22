@@ -1,20 +1,21 @@
 var reloadpage = false;
 var configreload = {};
-angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize'])
+var checkConnectivity = navigator.onLine;
+angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize', 'ionic-cache-src'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork, $state) {
   console.log("in app controller");
   addanalytics("flexible menu");
   //	$ionicLoading.hide();
   $scope.config = MyServices.getconfigdata();
 
-  function internetaccess(toState) {
+  function internetaccess() {
     if (navigator) {
-        onoffline = navigator.onLine;
+      checkConnectivity = navigator.onLine;
     }
   }
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
-    internetaccess(toState);
+    internetaccess();
   });
   window.addEventListener("offline", function(e) {
     internetaccess();
@@ -53,103 +54,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     configreload.onallpage();
   }, 1000);
 
+  $scope.toSetting = function(){
+    $state.go("app.setting");
+  };
+
   configreload.func = function() {
-    $scope.menudata = [];
     var data = MyServices.getconfigdata();
-    // _.each(data.config[0], function(n) {
-    //   if (n.value === true) {
-    //     loginstatus = true;
-    //   }
-    // });
-    _.each(data.menu, function(n) {
-      var newmenu = {};
-      newmenu.id = n._id;
-      newmenu.name = n.name;
-      newmenu.order = n.order;
-      newmenu.icon = n.iconType;
-      newmenu.link_type = n.linktypename;
-      switch (n.type) {
-        case 'Blog':
-          newmenu.typeid = n.link._id;
-          newmenu.link = 'blogdetail';
-          break;
-        case 'Event':
-          newmenu.typeid = n.link._id;
-          newmenu.link = 'eventdetail';
-          break;
-        case 'Video Gallery':
-          newmenu.typeid = n.link._id;
-          newmenu.link = "videogallery";
-          break;
-        case 'Photo Gallery':
-          newmenu.typeid = n.link._id;
-          newmenu.link = "photogallery";
-          break;
-        case 'Home':
-          newmenu.typeid = n.link._id;
-          newmenu.link = "article";
-          break;
-        default:
-          {
-            switch (n.link) {
-              case 'Home':
-                newmenu.link = "home";
-                break;
-              case 'Event':
-                newmenu.link = "events";
-                break;
-              case 'Photo Gallery':
-                newmenu.link = "photogallerycategory";
-                break;
-              case 'Video Gallery':
-                newmenu.link = "videogallerycategory";
-                break;
-              case 'Audio':
-                newmenu.link = "audiogallery";
-                break;
-              case 'Profile':
-                newmenu.link = "profile";
-                break;
-              case 'Blog':
-                newmenu.link = "blogs";
-                break;
-              case 'Notification':
-                newmenu.link = "notification";
-                break;
-              case 'Contact':
-                newmenu.link = "contact";
-                break;
-              default:
-
-            }
-
-          }
-
-      }
-      $scope.menudata.push(newmenu);
-    });
-    // $scope.contact = data.config[5];
-    // $scope.menu = {};
-    // $scope.menu.setting = false;
-    // var blogdata1 = JSON.parse(data.config[0].text);
-    //
-    // // config data
-    // var blogdata = JSON.parse(data.config[1].text);
-    // for (var i = 0; i < blogdata.length; i++) {
-    //   if (blogdata[i].value === true) {
-    //     $scope.menudata.blogs = true;
-    //     $.jStorage.set("blogType", blogdata[i]);
-    //     break;
-    //   } else {
-    //     $scope.menudata.blogs = false;
-    //   }
-    // }
-    // _.each(blogdata1, function(n) {
-    //   if (n.value === true) {
-    //     loginstatus = true;
-    //   }
-    // });
-    //
+    $scope.menudata = data.menu;
     $scope.logso = "";
     if (!data.config.login.hasLogin) {
       // $scope.menu.setting = false;
@@ -159,17 +70,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
   };
 
-  // MyServices.getallfrontmenu(function(data) {
-  //   MyServices.setconfigdata(data);
-  //   _.each(data.config[0], function(n) {
-  //     if (n.value === true) {
-  //       loginstatus = true;
-  //     }
-  //   });
-  //   configreload.func();
-  // }, function(err) {
-  //   // $location.url("/access/offline");
-  // });
   $timeout(function() {
     configreload.func();
   }, 2000);
@@ -183,10 +83,23 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
   };
   $scope.logout = function() {
-    $ionicLoading.show();
-    MyServices.logout(logoutsuccess, function(err) {
-      // $location.url("/access/offline");
-    });
+    if (checkConnectivity) {
+      $ionicLoading.show();
+      MyServices.logout(logoutsuccess, function(err) {
+        // $location.url("/access/offline");
+      });
+    }else {
+      var myPopup = $ionicPopup.show({
+        template: '<p class="text-center">No internet Connectivity</p>',
+        title: 'Oops!',
+        scope: $scope,
+
+      });
+      $timeout(function() {
+        myPopup.close(); //close the popup after 3 seconds for some reason
+      }, 2000);
+    }
+
   };
 
   // Form data for the login modal
@@ -243,15 +156,15 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.redirectPage = function() {
     if (!MyServices.getuser() && config.config.login.hasLogin) {
       $state.go("access.login");
-    }else {
+    } else {
       $state.go("app.home");
     }
   };
   if (MyServices.getIntroJstorage()) {
     $scope.showButton = false;
-    $timeout(function(){
+    $timeout(function() {
       $scope.redirectPage();
-    },1000);
+    }, 1000);
 
   } else {
     MyServices.setIntroJstorage();
@@ -267,10 +180,24 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   })
   .controller('AudiogalleryCtrl', function($scope, MyServices, $stateParams, $http) {
+    $scope.msg = "";
+    if (checkConnectivity) {
+      $scope.msg = "";
+      MyServices.getAllAudio(function(data) {
+        console.log(data);
+        if (data.data.length === 0) {
+          $scope.msg = "No Sound Track Found.";
+        }else {
+          $scope.audio = data.data;
+        }
 
-    MyServices.getAllAudio(function(data) {
-      $scope.audio = data.data;
-    });
+      },function(err){
+        $scope.msg = "No Sounds.";
+      });
+    }else {
+      $scope.msg = "No Internet Connectivity";
+    }
+
 
   })
   .controller('AudiogallerycategoryCtrl', function($scope, MyServices, $stateParams) {
@@ -415,7 +342,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   function internetaccess(toState) {
     if (navigator) {
-        onoffline = navigator.onLine;
+      onoffline = navigator.onLine;
     }
   }
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams) {
@@ -936,9 +863,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }, 2000);
   };
 
-  $scope.showMsg = function(msg,title) {
+  $scope.showMsg = function(msg, title) {
     var myPopup = $ionicPopup.show({
-      template: '<p class="text-center">'+msg+'</p>',
+      template: '<p class="text-center">' + msg + '</p>',
       title: title,
       scope: $scope,
 
@@ -1017,12 +944,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   };
   $scope.picFromGallery = function() {
-    if(navigator.onLine){
+    if (navigator.onLine) {
       $cordovaImagePicker.getPictures(options).then(function(resultImage) {
         $scope.user.newimage = {
           'background-image': "url('" + resultImage[0] + "')"
         };
-        $cordovaFileTransfer.upload(vigzserver + "upload/uploadMob", resultImage[0], {})
+        $cordovaFileTransfer.upload(vigzserver + "upload/fileApp", resultImage[0], {"image":true})
           .then(function(result) {
             console.log(result.response);
             var data = JSON.parse(result.response);
@@ -1032,30 +959,30 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       }, function(err) {
         // An error occured. Show a message to the user
       });
-    }else {
+    } else {
       $scope.showMsg("Interner Connection Required To Edit Profile Image. ");
     }
 
   };
 
   $scope.picImageForCover = function() {
-      if(navigator.onLine){
-    $cordovaImagePicker.getPictures(options).then(function(resultImage) {
-      $scope.user.newcoverimage = {
-        'background-image': "url('" + resultImage[0] + "')"
-      };
-      $cordovaFileTransfer.upload(vigzserver + "upload/uploadMob", resultImage[0], {})
-        .then(function(result) {
-          console.log(result.response);
-          var data = JSON.parse(result.response);
-          $ionicLoading.hide();
-        }, function(err) {}, function(progress) {});
-    }, function(err) {
-      // An error occured. Show a message to the user
-    });
-  }else {
-    $scope.showMsg("Interner Connection Required To Edit Profile Image. ");
-  }
+    if (navigator.onLine) {
+      $cordovaImagePicker.getPictures(options).then(function(resultImage) {
+        $scope.user.newcoverimage = {
+          'background-image': "url('" + resultImage[0] + "')"
+        };
+        $cordovaFileTransfer.upload(vigzserver + "upload/fileApp", resultImage[0], {"image":false})
+          .then(function(result) {
+            console.log(result.response);
+            var data = JSON.parse(result.response);
+            $ionicLoading.hide();
+          }, function(err) {}, function(progress) {});
+      }, function(err) {
+        // An error occured. Show a message to the user
+      });
+    } else {
+      $scope.showMsg("Interner Connection Required To Edit Profile Image. ");
+    }
   };
 })
 
@@ -1101,6 +1028,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.keepscrolling = false;
       }
     }, function(err) {
+      $scope.keepscrolling = false;
+      if ($scope.events.length === 0) {
+        $scope.msg = "No data found.";
+      }
+      $ionicLoading.hide();
       // $location.url("/access/offline");
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1247,7 +1179,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "No data found";
       }
     }, function(err) {
-      // $location.url("/access/offline");
+      $scope.keepscrolling = false;
+      $scope.msg = "No data found";
+      $ionicLoading.hide();
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
     $scope.$broadcast('scroll.refreshComplete');
@@ -1392,7 +1326,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "";
       }
     }, function(err) {
-      // $location.url("/access/offline");
+      $scope.keepscrolling = false;
+      if ($scope.photos.length === 0) {
+        $scope.msg = "The gallery is empty.";
+      }
+      $ionicLoading.hide();
     });
 
     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1448,6 +1386,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "";
       }
     }, function(err) {
+      $scope.keepscrolling = false;
+      if ($scope.photos.length === 0) {
+        $scope.msg = "The gallery is empty.";
+      }
+      $ionicLoading.hide();
       // $location.url("/access/offline");
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1498,9 +1441,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       }
 
     }, function(err) {
-      // $location.url("/access/offline");
-    }, function(err) {
-      console.log(err);
+      $scope.keepscrolling = false;
+      $scope.msg = "The gallery is empty.";
+      $ionicLoading.hide();
     });
 
     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1557,6 +1500,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.msg = "";
       }
     }, function(err) {
+      $scope.keepscrolling = false;
+      if ($scope.videos.length === 0) {
+        $scope.msg = "The gallery is empty.";
+      }
+      $ionicLoading.hide();
       // $location.url("/access/offline");
     });
 
@@ -1775,35 +1723,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.loadnotification = function(pageno) {
     console.log($scope.notification);
     MyServices.getNotificationMob(pageno, function(data) {
-      _.each(data.data.data, function(n) {
-        switch (n.linktype) {
-          case '3':
-            n.tolink = n.event;
-            break;
-          case '6':
-            n.tolink = n.gallery;
-            break;
-          case '8':
-            n.tolink = n.video;
-            break;
-          case '10':
-            n.tolink = n.blog;
-            break;
-          case '2':
-            n.tolink = n.article;
-            break;
-          case '17':
-            n.tolink = n.article;
-            break;
-          default:
-            n.tolink = 0;
-
-        }
-        n.tolinkpath = n.linktypelink;
-
-        $scope.notify.push(n);
-      });
-
+      $scope.notify = data.data.data;
       if ($scope.notify.length === 0) {
         $scope.msg = "No notifications.";
       } else {
@@ -1812,6 +1732,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
       $ionicLoading.hide();
     }, function(err) {
+      $scope.keepscrolling = false;
+      if ($scope.notify.length === 0) {
+        $scope.msg = "The gallery is empty.";
+      }
+      $ionicLoading.hide();
       // $location.url("/access/offline");
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1824,28 +1749,20 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.loadnotification(++$scope.pageno);
   };
 
-  $scope.notifyclick = function(item) {
-    if (item.linktype == 17) {
-      window.open(item.link, '_blank', 'location=no');
-    } else {
-      $location.url("/app/" + item.tolinkpath + "/" + item.tolink);
-    }
-  };
-
 })
 
 .controller('ContactCtrl', function($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $compile, $ionicModal) {
   addanalytics("Contact page");
   configreload.onallpage();
-  $scope.showloading = function() {
-    $ionicLoading.show({
-      template: '<ion-spinner class="spinner-positive"></ion-spinner>'
-    });
-    $timeout(function() {
-      $ionicLoading.hide();
-    }, 5000);
-  };
-  $scope.showloading();
+  // $scope.showloading = function() {
+  //   $ionicLoading.show({
+  //     template: '<ion-spinner class="spinner-positive"></ion-spinner>'
+  //   });
+  //   $timeout(function() {
+  //     $ionicLoading.hide();
+  //   }, 5000);
+  // };
+  // $scope.showloading();
   $scope.enquiry = {};
   var msgforall = function(msg) {
     $ionicLoading.hide();
@@ -1863,58 +1780,41 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   var createenquirycallback = function(data, status) {
     $ionicLoading.hide();
     if (data.value === true) {
-      $scope.showPopupcontact();
+      $scope.msgforall("Successfully submitted!");
       $scope.enquiry = {};
     } else {
-      $scope.showPopupcontactfailure();
+      $scope.msgforall("Try again!");
     }
-  };
-
-  $scope.showPopupcontact = function() {
-    var myPopup = $ionicPopup.show({
-      template: '<p class="text-center">Successfully submitted!</p>',
-      title: 'Thank you!',
-      scope: $scope,
-    });
-    $timeout(function() {
-      myPopup.close(); //close the popup after 3 seconds for some reason
-    }, 2000);
-  };
-  $scope.showPopupcontactfailure = function() {
-
-    var myPopup = $ionicPopup.show({
-      template: '<p class="text-center">Try again!</p>',
-      title: 'Sorry!',
-      scope: $scope,
-    });
-    $timeout(function() {
-      myPopup.close(); //close the popup after 3 seconds for some reason
-    }, 2000);
   };
 
   $scope.enquiryform = function(enquiry) {
-    $scope.allvalidation = [{
-      field: $scope.enquiry.name,
-      validation: ""
-    }, {
-      field: $scope.enquiry.email,
-      validation: ""
-    }, {
-      field: $scope.enquiry.title,
-      validation: ""
-    }, {
-      field: $scope.enquiry.content,
-      validation: ""
-    }];
-    var check = formvalidation($scope.allvalidation);
-    if (check) {
-      MyServices.submitEnquiry(enquiry, createenquirycallback, function(err) {
-        // $location.url("/access/offline");
-      });
-    } else {
-      msgforall('Fill all data');
-      $ionicLoading.hide();
+    if (checkConnectivity) {
+      $scope.allvalidation = [{
+        field: $scope.enquiry.name,
+        validation: ""
+      }, {
+        field: $scope.enquiry.email,
+        validation: ""
+      }, {
+        field: $scope.enquiry.title,
+        validation: ""
+      }, {
+        field: $scope.enquiry.content,
+        validation: ""
+      }];
+      var check = formvalidation($scope.allvalidation);
+      if (check) {
+        MyServices.submitEnquiry(enquiry, createenquirycallback, function(err) {
+          // $location.url("/access/offline");
+        });
+      } else {
+        msgforall('Fill all data');
+        $ionicLoading.hide();
+      }
+    }else {
+      msgforall("No Internet Connectivity");
     }
+
 
   };
 
@@ -2045,6 +1945,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.searchresults.article = data.data.article;
     $scope.searchresults.notification = data.data.notification;
     $scope.searchresults.contacts = data.data.contact;
+    if (data.data.home !== '') {
+      $scope.searchresults.home = [{
+        "name": "Home"
+      }];
+    }
   };
   $scope.getsearchelement = function(searchelement) {
     $timeout(function() {

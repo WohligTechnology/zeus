@@ -1,11 +1,16 @@
 <ion-view view-title="Photo Category">
+
     <div class="text-center positive middle-align" ng-if="msg != ''">
         {{msg}}
     </div>
     <ion-content class="padding">
+      <ion-refresher
+        pulling-text=""
+        on-refresh="loadMorePolls()">
+      </ion-refresher>
         <div class="list" collection-repeat="photos in photos" item-height="100%" ng-click="sendphotoid(photos._id);">
             <div class="item item-image">
-                <img ng-src="{{photos.icon | serverpath:100:100:'fill'}}" imgloadingsec>
+                <img cache-src="{{photos.icon | serverpath:100:100:'fill'}}">
             </div>
             <div class="item">
                 {{photos.title}}
