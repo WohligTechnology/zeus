@@ -20,8 +20,8 @@ function addanalytics(screen) {
 
 angular.module('starter', ['ionic', 'starter.controllers'])
 
-.run(function($ionicPlatform, MyServices,$ionicPopup,$timeout) {
-  loadMenu(MyServices,$ionicPopup,$timeout);
+.run(function($ionicPlatform, MyServices, $ionicPopup, $timeout) {
+  loadMenu(MyServices, $ionicPopup, $timeout);
   $ionicPlatform.ready(function() {
 
     // MyServices.getall
@@ -505,8 +505,8 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   };
 })
 
-.filter('toPages', function(){
-  return function(menu){
+.filter('toPages', function() {
+  return function(menu) {
     var newmenu = {};
     switch (menu.type) {
       case 'Blog':
@@ -564,9 +564,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
     }
     if (newmenu.typeid) {
-      return "app."+newmenu.link+"({id:'"+newmenu.typeid+"'})";
-    }else {
-      return "app."+newmenu.link;
+      return "app." + newmenu.link + "({id:'" + newmenu.typeid + "'})";
+    } else {
+      return "app." + newmenu.link;
     }
   };
 })
@@ -659,32 +659,32 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 })
 
 .directive('noInt', function() {
-    return {
-        restrict: 'A',
-        link: function(scope, element, attrs) {
-          scope.signinsubmit = function(data){
-            scope.signinsubmit(data);
-          };
-          // if (checkConnectivity) {
-          //   element.attr("disabled",false);
-          // }else {
-          //   element.attr("disabled",true);
-          // }
+  return {
+    restrict: 'A',
+    link: function(scope, element, attrs) {
+      scope.signinsubmit = function(data) {
+        scope.signinsubmit(data);
+      };
+      // if (checkConnectivity) {
+      //   element.attr("disabled",false);
+      // }else {
+      //   element.attr("disabled",true);
+      // }
 
-        }
-    };
+    }
+  };
 })
 
 .directive('listType', function($ionicPopup) {
-    return {
-        templateUrl: 'views/directive/listType.html',
-        scope: {
-            model: '=ngModel'
-        },
-        link: function($scope, element, attrs) {
+  return {
+    templateUrl: 'views/directive/listType.html',
+    scope: {
+      model: '=ngModel'
+    },
+    link: function($scope, element, attrs) {
 
-        }
-    };
+    }
+  };
 })
 
 
@@ -708,22 +708,25 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   };
 });
 
-var loadMenu = function(MyServices,$ionicPopup,$timeout) {
+var loadMenu = function(MyServices, $ionicPopup, $timeout) {
   var navigation = {};
-  MyServices.getConfigMob(function(conf) {
-    navigation.config = conf.data[0];
-    config = navigation;
-    MyServices.setconfigdata(navigation);
-    $.jStorage.set("blogType",config.config.blog);
-  }, function(err,sta){
-
-  });
   MyServices.getNavigationMob(function(nav) {
+    console.log(nav);
     navigation.menu = nav.data;
-  }, function(err,sta) {
+    MyServices.getConfigMob(function(conf) {
+      console.log(conf);
+      navigation.config = conf.data[0];
+      config = navigation;
+      MyServices.setconfigdata(navigation);
+      $.jStorage.set("blogType", config.config.blog);
+    }, function(err, sta) {
+
+    });
+  }, function(err, sta) {
     var myPopup = $ionicPopup.show({
       template: '<p class="text-center">No Internet Connection!</p>',
       title: ''
+
     });
     $timeout(function() {
       myPopup.close(); //close the popup after 3 seconds for some reason

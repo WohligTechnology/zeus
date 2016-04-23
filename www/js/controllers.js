@@ -62,6 +62,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     var data = MyServices.getconfigdata();
     $scope.menudata = data.menu;
     $scope.logso = "";
+    $scope.userdetails = $.jStorage.get("user");
     if (!data.config.login.hasLogin) {
       // $scope.menu.setting = false;
     } else {
@@ -131,7 +132,26 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   if ($.jStorage.get("user")) {
-    MyServices.getUserMob(function(data) {
+    MyServices.getConfigMob(function(conf) {
+
+      console.log("sdfasdfasdfasdfasdfas");
+      console.log(conf);
+      // if (conf) {
+      //
+      // }
+    });
+    console.log(config);
+    MyServices.authenticate(function(data) {
+      console.log("in user user user");
+      console.log(data);
+
+      if (data === '') {
+        $.jStorage.set("user",data);
+        $scope.userdetails = $.jStorage.get("user");
+      }else {
+
+      }
+
       if (data.value === false) {
         $scope.userdetails = $.jStorage.get("user");
       } else {
@@ -149,15 +169,27 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http, $timeout, $state) {
+.controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http, $timeout, $state, $ionicPopup) {
   $scope.showButton = true;
   $scope.redirectPage = function() {
     MyServices.setIntroJstorage();
-    if (!MyServices.getuser() && config.config.login.hasLogin) {
-      $state.go("access.login");
-    } else {
-      $state.go("app.home");
+    if (config.config) {
+      if (!MyServices.getuser() && config.config.login.hasLogin) {
+        $state.go("access.login");
+      } else {
+        $state.go("app.home");
+      }
+    }else {
+      var myPopup = $ionicPopup.show({
+        template: '<p class="text-center">No internet Connectivity</p>',
+        title: 'Oops!',
+        scope: $scope,
+      });
+      $timeout(function() {
+        myPopup.close(); //close the popup after 3 seconds for some reason
+      }, 2000);
     }
+
   };
   if (MyServices.getIntroJstorage()) {
     $scope.showButton = false;
@@ -471,18 +503,20 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   //SIGN UP FORM
   $scope.signup = {};
   var signupsuccess = function(data, status) {
-    if (data != "false") {
-      $.jStorage.set("user", data);
-      user = data;
-      var myPopup = $ionicPopup.show({
-        template: '<p class="text-center">Signed up successfully!</p>',
-        title: 'Congrats!',
-        scope: $scope,
+    if (data.value === true) {
+      MyServices.authenticate(function(data) {
+        $.jStorage.set("user", data);
+        user = data;
+        var myPopup = $ionicPopup.show({
+          template: '<p class="text-center">Signed up successfully!</p>',
+          title: 'Congrats!',
+          scope: $scope,
+        });
+        $timeout(function() {
+          myPopup.close(); //close the popup after 3 seconds for some reason
+          $location.url("/app/home");
+        }, 2000);
       });
-      $timeout(function() {
-        myPopup.close(); //close the popup after 3 seconds for some reason
-        $location.url("/app/home");
-      }, 2000);
     } else {
       $scope.showPopupsignupfailure();
     }
@@ -522,7 +556,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }];
     var check = formvalidation($scope.allvalidation);
     if (check) {
-      MyServices.signup($scope.signup, signupsuccess, function(err) {
+      console.log($scope.signup);
+      MyServices.saveProfileMob($scope.signup, signupsuccess, function(err) {
         // $location.url("/access/offline");
         $ionicLoading.hide();
         msgforall("No Internet Connection.");
@@ -1646,28 +1681,22 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('SettingCtrl', function($scope, MyServices, $ionicLoading, $timeout, $location) {
   addanalytics("Setting page");
   configreload.onallpage();
-  $ionicLoading.show({
-    template: '<ion-spinner class="spinner-positive"></ion-spinner>'
-  });
-  $timeout(function() {
-    $ionicLoading.hide();
-  }, 5000);
+
   $scope.setting = {};
-  MyServices.getUserMob(function(data) {
-    $ionicLoading.hide();
-    $scope.user = data.data;
-    $scope.setting.videonotification = $scope.user.videonotification;
-    $scope.setting.eventnotification = $scope.user.eventnotification;
-    $scope.setting.blognotification = $scope.user.blognotification;
-    $scope.setting.photonotification = $scope.user.photonotification;
-    $scope.id = $scope.user.id;
-  }, function(err) {
-    // $location.url("/access/offline");
-  });
+  $scope.config = config;
+  // MyServices.getUserMob(function(data) {
+  if (config.config.notification) {
+    $scope.setting.videonotification = config.config.notification.videonotification;
+    $scope.setting.eventnotification = config.config.notification.eventnotification;
+    $scope.setting.blognotification = config.config.notification.blognotification;
+    $scope.setting.photonotification = config.config.notification.photonotification;
+  }
+  // }, function(err) {
+  //   // $location.url("/access/offline");
+  // });
 
   $scope.changeSetting = function(setting) {
-    setting.id = $scope.user.id;
-    MyServices.changesetting(setting, function(data) {
+    MyServices.changeSetting(function(data) {
       console.log(data);
     }, function(err) {
       // $location.url("/access/offline");
@@ -1776,6 +1805,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('ContactCtrl', function($scope, MyServices, $location, $ionicLoading, $ionicPopup, $timeout, $compile, $ionicModal) {
   addanalytics("Contact page");
   configreload.onallpage();
+  $scope.msg = "";
   // $scope.showloading = function() {
   //   $ionicLoading.show({
   //     template: '<ion-spinner class="spinner-positive"></ion-spinner>'

@@ -121,12 +121,16 @@ angular.module('starter.services', ['httpService'])
       saveProfileMob: function(data, callback, errCallback) {
         var data2 = {
           "email": data.email,
-          "name": data.name,
-          "phone": data.phone,
-          "location": data.location,
+          "name": data.username,
+          "password": data.phone,
           "dob": data.dob
         };
-        httpService.post(vigzserver + "user/savemob", data2, callback, errCallback);
+        // httpService.post(vigzserver + "user/savemob", data2, callback, errCallback);
+        return $http({
+          url: vigzserver + 'user/saveMob',
+          method: "POST",
+          data: data2
+        }).success(callback).error(errCallback);
       },
       updateProfileMob: function(data, callback, errCallback) {
         var data2 = {
@@ -137,7 +141,7 @@ angular.module('starter.services', ['httpService'])
           "location": data.location,
           "dob": data.dob
         };
-        httpService.post(vigzserver + "user/savemob", data2, callback, errCallback);
+        httpService.post(vigzserver + "user/saveMob", data2, callback, errCallback);
       },
       changePasswordMob: function(data, callback, errCallback) {
         var data2 = {
@@ -241,6 +245,13 @@ angular.module('starter.services', ['httpService'])
           params: options,
           withCredentials: false
         }).then(callback).catch(err);
+      },
+      changeSetting: function(callback,errCallback) {
+        return $http({
+          url: vigzserver + 'config/save',
+          method: "POST",
+          data: config.config
+        }).success(callback).error(errCallback);
       }
     };
   });
