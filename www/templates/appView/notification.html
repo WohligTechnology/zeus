@@ -5,7 +5,7 @@
     <ion-content>
         <ion-list class="full-width">
             <ion-item ng-repeat="item in notify" class="item-text-wrap" ui-sref='{{item | toPages}}'>
-                <img ng-if="item.image" ng-src="{{item.image | serverimage}}" class="full-image" ng-if="item.image">
+                <img ng-if="item.image" cache-src="{{item.image | serverimage}}" class="full-image" ng-if="item.image">
                 <p ng-bind-html="item.content"></p>
                 <p ng-if="item.linktype == 17">{{item.link}}</p>
                 <p ng-if="item.modificationTime">{{item.modificationTime | formatdate}}</p>
