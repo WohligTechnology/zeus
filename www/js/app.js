@@ -20,8 +20,8 @@ function addanalytics(screen) {
 
 angular.module('starter', ['ionic', 'starter.controllers'])
 
-.run(function($ionicPlatform, MyServices) {
-  loadMenu(MyServices);
+.run(function($ionicPlatform, MyServices,$ionicPopup,$timeout) {
+  loadMenu(MyServices,$ionicPopup,$timeout);
   $ionicPlatform.ready(function() {
 
     // MyServices.getall
@@ -662,11 +662,26 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     return {
         restrict: 'A',
         link: function(scope, element, attrs) {
-          if (checkConnectivity) {
-            element.attr("disabled",false);
-          }else {
-            element.attr("disabled",true);
-          }
+          scope.signinsubmit = function(data){
+            scope.signinsubmit(data);
+          };
+          // if (checkConnectivity) {
+          //   element.attr("disabled",false);
+          // }else {
+          //   element.attr("disabled",true);
+          // }
+
+        }
+    };
+})
+
+.directive('listType', function($ionicPopup) {
+    return {
+        templateUrl: 'views/directive/listType.html',
+        scope: {
+            model: '=ngModel'
+        },
+        link: function($scope, element, attrs) {
 
         }
     };
@@ -693,22 +708,30 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   };
 });
 
-var loadMenu = function(MyServices) {
+var loadMenu = function(MyServices,$ionicPopup,$timeout) {
   var navigation = {};
+  MyServices.getConfigMob(function(conf) {
+    navigation.config = conf.data[0];
+    config = navigation;
+    MyServices.setconfigdata(navigation);
+    $.jStorage.set("blogType",config.config.blog);
+  }, function(err,sta){
+
+  });
   MyServices.getNavigationMob(function(nav) {
     navigation.menu = nav.data;
-    MyServices.getConfigMob(function(conf) {
-      navigation.config = conf.data[0];
-      config = navigation;
-      MyServices.setconfigdata(navigation);
-      $.jStorage.set("blogType",config.config.blog);
-    }, function(err){
-      console.log(err);
+  }, function(err,sta) {
+    var myPopup = $ionicPopup.show({
+      template: '<p class="text-center">No Internet Connection!</p>',
+      title: ''
     });
-  }, function(err) {
-    console.log(err);
+    $timeout(function() {
+      myPopup.close(); //close the popup after 3 seconds for some reason
+    }, 2000);
   });
 };
+
+
 
 var formvalidation = function(allvalidation) {
   var isvalid2 = true;

@@ -54,7 +54,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     configreload.onallpage();
   }, 1000);
 
-  $scope.toSetting = function(){
+  $scope.toSetting = function() {
     $state.go("app.setting");
   };
 
@@ -88,18 +88,16 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       MyServices.logout(logoutsuccess, function(err) {
         // $location.url("/access/offline");
       });
-    }else {
+    } else {
       var myPopup = $ionicPopup.show({
         template: '<p class="text-center">No internet Connectivity</p>',
         title: 'Oops!',
         scope: $scope,
-
       });
       $timeout(function() {
         myPopup.close(); //close the popup after 3 seconds for some reason
       }, 2000);
     }
-
   };
 
   // Form data for the login modal
@@ -154,6 +152,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 .controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http, $timeout, $state) {
   $scope.showButton = true;
   $scope.redirectPage = function() {
+    MyServices.setIntroJstorage();
     if (!MyServices.getuser() && config.config.login.hasLogin) {
       $state.go("access.login");
     } else {
@@ -165,9 +164,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $timeout(function() {
       $scope.redirectPage();
     }, 1000);
-
   } else {
-    MyServices.setIntroJstorage();
     MyServices.getIntroslider(function(data) {
       $scope.slider = data.data;
     });
@@ -178,128 +175,130 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 .controller('AccessCtrl', function($scope) {
 
-  })
-  .controller('AudiogalleryCtrl', function($scope, MyServices, $stateParams, $http) {
+})
+
+.controller('AudiogalleryCtrl', function($scope, MyServices, $stateParams, $http) {
+  $scope.msg = "";
+  if (checkConnectivity) {
     $scope.msg = "";
-    if (checkConnectivity) {
-      $scope.msg = "";
-      MyServices.getAllAudio(function(data) {
-        console.log(data);
-        if (data.data.length === 0) {
-          $scope.msg = "No Sound Track Found.";
-        }else {
-          $scope.audio = data.data;
-        }
+    MyServices.getAllAudio(function(data) {
+      console.log(data);
+      if (data.data.length === 0) {
+        $scope.msg = "No Sound Track Found.";
+      } else {
+        $scope.audio = data.data;
+      }
 
-      },function(err){
-        $scope.msg = "No Sounds.";
-      });
-    }else {
-      $scope.msg = "No Internet Connectivity";
-    }
-
-
-  })
-  .controller('AudiogallerycategoryCtrl', function($scope, MyServices, $stateParams) {
-
-    SC.initialize({
-      client_id: 'f4f861b2fb75e16adfe48c4140d826f5'
+    }, function(err) {
+      $scope.msg = "No Sounds.";
     });
-    var pauser;
-    $scope.item = $stateParams.item;
-    var allAudio = $stateParams.items;
-    console.log('each item: ', $stateParams);
-    $scope.isPlaying = 0;
-    console.log('isPlaying: ', $scope.isPlaying);
+  } else {
+    $scope.msg = "No Internet Connectivity";
+  }
 
-    $scope.streamNow = function(value, isPlaying) {
-      console.log("stream now cliked");
-      console.log("is playing value: ", isPlaying);
-      if (isPlaying == 1) {
-        console.log("value: ", value);
-        $scope.isPlaying = 0;
-        SC.stream('/tracks/' + value.id).then(function(player) {
-          pauser.pause();
-          // $.jStorage.set('pauser', pauser);
-          // $.jStorage.set('id', value.id);
-          console.log($scope.isPlaying);
-        });
-      } else {
-        console.log("value: ", value);
-        $scope.isPlaying = 1;
-        SC.stream('/tracks/' + value.id).then(function(player) {
-          player.play();
-          pauser = player;
-          // $.jStorage.set('pauser', pauser);
-          // $.jStorage.set('id', value.id);
-          console.log($scope.isPlaying);
-        });
-      }
-    };
 
-    $scope.streamNow($scope.item, $scope.isPlaying);
+})
 
-    console.log('all audio length: ', allAudio.length);
-    $scope.nextPlay = function(value) {
-      var index = allAudio.indexOf(value);
-      if (index >= allAudio.length - 1) {
-        // $scope.isPlaying = 1;
-        index = 0;
-        $scope.item = allAudio[index];
-        SC.stream('/tracks/' + allAudio[index].id).then(function(player) {
-          player.play();
-          pauser = player;
-          // $.jStorage.set('pauser', pauser);
-          // $.jStorage.set('id', allAudio[index].id);
-        });
-      } else {
-        // $scope.isPlaying = 1;
-        ++index;
-        $scope.item = allAudio[index];
-        SC.stream('/tracks/' + allAudio[index].id).then(function(player) {
-          player.play();
-          pauser = player;
-          // $.jStorage.set('pauser', pauser);
-          // $.jStorage.set('id', allAudio[index].id);
-        });
-      }
-    };
+.controller('AudiogallerycategoryCtrl', function($scope, MyServices, $stateParams) {
 
-    $scope.prevPlay = function(value) {
-      var index = allAudio.indexOf(value);
-      if (index === 0) {
-        $scope.isPlaying = 1;
-        index = allAudio.length - 1;
-        $scope.item = allAudio[index];
-        SC.stream('/tracks/' + allAudio[index].id).then(function(player) {
-          player.play();
-          pauser = player;
-          // $.jStorage.set('pauser', pauser);
-          // $.jStorage.set('id', allAudio[index].id);
-        });
-      } else {
-        $scope.isPlaying = 1;
-        --index;
-        $scope.item = allAudio[index];
-        SC.stream('/tracks/' + allAudio[index].id).then(function(player) {
-          player.play();
-          pauser = player;
-          // $.jStorage.set('pauser', pauser);
-          // $.jStorage.set('id', allAudio[index].id);
-        });
-      }
-    };
+  SC.initialize({
+    client_id: 'f4f861b2fb75e16adfe48c4140d826f5'
+  });
+  var pauser;
+  $scope.item = $stateParams.item;
+  var allAudio = $stateParams.items;
+  console.log('each item: ', $stateParams);
+  $scope.isPlaying = 0;
+  console.log('isPlaying: ', $scope.isPlaying);
 
-    $scope.$on('$destroy', function() {
-      // console.log('exiting AudiogallerycategoryCtrl!')
-      SC.stream('/tracks/' + $scope.item.id).then(function(player) {
+  $scope.streamNow = function(value, isPlaying) {
+    console.log("stream now cliked");
+    console.log("is playing value: ", isPlaying);
+    if (isPlaying == 1) {
+      console.log("value: ", value);
+      $scope.isPlaying = 0;
+      SC.stream('/tracks/' + value.id).then(function(player) {
         pauser.pause();
-        // pauser = player;
+        // $.jStorage.set('pauser', pauser);
+        // $.jStorage.set('id', value.id);
+        console.log($scope.isPlaying);
+      });
+    } else {
+      console.log("value: ", value);
+      $scope.isPlaying = 1;
+      SC.stream('/tracks/' + value.id).then(function(player) {
+        player.play();
+        pauser = player;
+        // $.jStorage.set('pauser', pauser);
+        // $.jStorage.set('id', value.id);
+        console.log($scope.isPlaying);
+      });
+    }
+  };
+
+  $scope.streamNow($scope.item, $scope.isPlaying);
+
+  console.log('all audio length: ', allAudio.length);
+  $scope.nextPlay = function(value) {
+    var index = allAudio.indexOf(value);
+    if (index >= allAudio.length - 1) {
+      // $scope.isPlaying = 1;
+      index = 0;
+      $scope.item = allAudio[index];
+      SC.stream('/tracks/' + allAudio[index].id).then(function(player) {
+        player.play();
+        pauser = player;
         // $.jStorage.set('pauser', pauser);
         // $.jStorage.set('id', allAudio[index].id);
       });
+    } else {
+      // $scope.isPlaying = 1;
+      ++index;
+      $scope.item = allAudio[index];
+      SC.stream('/tracks/' + allAudio[index].id).then(function(player) {
+        player.play();
+        pauser = player;
+        // $.jStorage.set('pauser', pauser);
+        // $.jStorage.set('id', allAudio[index].id);
+      });
+    }
+  };
+
+  $scope.prevPlay = function(value) {
+    var index = allAudio.indexOf(value);
+    if (index === 0) {
+      $scope.isPlaying = 1;
+      index = allAudio.length - 1;
+      $scope.item = allAudio[index];
+      SC.stream('/tracks/' + allAudio[index].id).then(function(player) {
+        player.play();
+        pauser = player;
+        // $.jStorage.set('pauser', pauser);
+        // $.jStorage.set('id', allAudio[index].id);
+      });
+    } else {
+      $scope.isPlaying = 1;
+      --index;
+      $scope.item = allAudio[index];
+      SC.stream('/tracks/' + allAudio[index].id).then(function(player) {
+        player.play();
+        pauser = player;
+        // $.jStorage.set('pauser', pauser);
+        // $.jStorage.set('id', allAudio[index].id);
+      });
+    }
+  };
+
+  $scope.$on('$destroy', function() {
+    // console.log('exiting AudiogallerycategoryCtrl!')
+    SC.stream('/tracks/' + $scope.item.id).then(function(player) {
+      pauser.pause();
+      // pauser = player;
+      // $.jStorage.set('pauser', pauser);
+      // $.jStorage.set('id', allAudio[index].id);
     });
-  })
+  });
+})
 
 .controller('ArticleCtrl', function($scope, MyServices, $stateParams, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout) {
   configreload.onallpage();
@@ -390,6 +389,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
   };
   $scope.facebooklogin = function() {
+    if (checkConnectivity) {
+
+    } else {
+
+    }
     if (isapp) {
       ref = cordova.InAppBrowser.open(vigzserver + 'user/loginFacebook', '_blank', 'location=no');
     } else {
@@ -501,6 +505,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   $scope.signupsubmit = function(signup) {
+    if (checkConnectivity) {
     $ionicLoading.show();
     $scope.allvalidation = [{
       field: $scope.signup.username,
@@ -519,11 +524,16 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     if (check) {
       MyServices.signup($scope.signup, signupsuccess, function(err) {
         // $location.url("/access/offline");
+        $ionicLoading.hide();
+        msgforall("No Internet Connection.");
       });
     } else {
       msgforall("Fill all data");
       $ionicLoading.hide();
     }
+  }else {
+    msgforall("No Internet Connection.");
+  }
 
   };
 
@@ -546,23 +556,31 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
   };
   $scope.signinsubmit = function(signin) {
-    $ionicLoading.show();
-    $scope.allvalidation = [{
-      field: $scope.signin.username,
-      validation: ""
-    }, {
-      field: $scope.signin.password,
-      validation: ""
-    }];
-    var check = formvalidation($scope.allvalidation);
-    if (check) {
-      MyServices.signinMob(signin, signinsuccess, function(err) {
-        // $location.url("/access/offline");
-      });
-    } else {
-      msgforall("Fill all data");
-      $ionicLoading.hide();
+    if (checkConnectivity) {
+      $ionicLoading.show();
+      $scope.allvalidation = [{
+        field: $scope.signin.username,
+        validation: ""
+      }, {
+        field: $scope.signin.password,
+        validation: ""
+      }];
+      var check = formvalidation($scope.allvalidation);
+      if (check) {
+        MyServices.signinMob(signin, signinsuccess, function(err) {
+          // $location.url("/access/offline");
+          $ionicLoading.hide();
+          msgforall("No Internet Connection.");
+        });
+      } else {
+        msgforall("Fill all data");
+        $ionicLoading.hide();
+      }
+    }else {
+      msgforall("No Internet Connection.");
     }
+
+
   };
 
   //        ***** tabchange ****
@@ -949,7 +967,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.user.newimage = {
           'background-image': "url('" + resultImage[0] + "')"
         };
-        $cordovaFileTransfer.upload(vigzserver + "upload/fileApp", resultImage[0], {"image":true})
+        $cordovaFileTransfer.upload(vigzserver + "upload/fileApp", resultImage[0], {
+            "image": true
+          })
           .then(function(result) {
             console.log(result.response);
             var data = JSON.parse(result.response);
@@ -971,7 +991,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.user.newcoverimage = {
           'background-image': "url('" + resultImage[0] + "')"
         };
-        $cordovaFileTransfer.upload(vigzserver + "upload/fileApp", resultImage[0], {"image":false})
+        $cordovaFileTransfer.upload(vigzserver + "upload/fileApp", resultImage[0], {
+            "image": false
+          })
           .then(function(result) {
             console.log(result.response);
             var data = JSON.parse(result.response);
@@ -1811,7 +1833,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         msgforall('Fill all data');
         $ionicLoading.hide();
       }
-    }else {
+    } else {
       msgforall("No Internet Connectivity");
     }
 

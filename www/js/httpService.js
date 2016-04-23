@@ -1,6 +1,6 @@
 // var db;
 var httpService = angular.module('httpService', ['angular-websql']);
-httpService.service('httpService', function($http, $webSql) {
+httpService.service('httpService', function($http, $webSql, $ionicPopup) {
     //SHOULD ADD LOADER AS WELL
     var maxTableLimit = 50;
     this.db = $webSql.openDatabase('httpService', '1.0', 'HTTP SERVICE Database', 2 * 1024 * 1024);
@@ -61,7 +61,7 @@ httpService.service('httpService', function($http, $webSql) {
             }
 
             //HTTP SUCCESS
-            httpCall.success(function(data, status) {
+            httpCall.then(function(data, status) {
                 if (status == 200) { // STATUS 200
                     var md5 = $.md5(JSON.stringify(data));
                     if (sqlResponse && md5 != sqlResponse.md5) {
@@ -104,15 +104,15 @@ httpService.service('httpService', function($http, $webSql) {
                         });
                     }
                 } else {
-                    if (errorCallback) { // ERROR STATUS FROM SERVER
-                        errorCallback(data, status);
-                    }
+                    // if (errorCallback) { // ERROR STATUS FROM SERVER
+                    //     httpCall.error(errorCallback);
+                    // }
                 }
-            });
-            //HTTP ERROR
-            if (errorCallback) {
-                httpCall.error(errorCallback);
-            }
+            },errorCallback);
+            // //HTTP ERROR
+            // if (errorCallback) {
+            //     httpCall.error(errorCallback);
+            // }
         }
 
         //GET FROM LOCAL DATABASE
