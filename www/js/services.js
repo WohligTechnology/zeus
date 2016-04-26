@@ -1,6 +1,7 @@
 
 //Node admin
-var vigzserver = "http://blazen.io/";
+// var vigzserver = "http://blazen.io/";
+var vigzserver = "http://192.168.1.131/";
 // var adminurl = "http://wohlig.biz/";
 var adminimage = vigzserver + "upload/readFile?file=";
 // var adminhauth = adminurl + "index.php/hauth/";
@@ -183,11 +184,11 @@ angular.module('starter.services', ['httpService'])
       getIntroJstorage:function(){
         return $.jStorage.get('introslider');
       },
-      authenticate: function(callback) {
+      authenticate: function(callback, errCallback) {
         return $http({
           url: vigzserver + 'user/profile',
           method: "POST"
-        }).success(callback);
+        }).success(callback).error(errCallback);
       },
       getallblog: function(pageno, callback, err) {
         return $http.get(adminurl + 'getAllBlog?pageno=' + pageno + '&maxrow=' + 15, {
@@ -239,6 +240,9 @@ angular.module('starter.services', ['httpService'])
         }).success(callback);
       },
       getAllAudio: function(callback,err) {
+        if (config.config.soundCloudUsername) {
+            soundCloudUsername = config.config.soundCloudUsername;
+        }
         $http({
           method: 'GET',
           url: 'http://api.soundcloud.com/users/' + soundclouduser + '/tracks',

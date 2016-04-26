@@ -156,14 +156,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.userdetails = $.jStorage.get("user");
       } else {
         $scope.userdetails = data.data;
-        $scope.userdetails.myimage = {
-          'background-image': "url('" + $filter("profileimg")(data.image) + "')"
-        };
+        // $scope.userdetails.myimage = {
+        //   'background-image': "url('" + $filter("profileimg")(data.image) + "')"
+        // };
       }
     }, function(err) {
       $scope.userdetails = $.jStorage.get("user");
       // $location.url("/access/offline");
-    });
+    },function(err){console.log(err);});
 
   }
 
@@ -402,14 +402,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     if (data._id) {
       $interval.cancel(stopinterval);
       ref.close();
-      MyServices.authenticate().success(authenticatesuccess);
+      MyServices.authenticate(authenticatesuccess,function(err){console.log(err);});
     } else {
 
     }
   };
 
   var callAtIntervaltwitter = function() {
-    MyServices.authenticate().success(checktwitter);
+    MyServices.authenticate(checktwitter,function(err){console.log(err);});
   };
   var authenticatesuccess = function(data, status) {
     $ionicLoading.hide();
@@ -433,7 +433,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
-      MyServices.authenticate().success(authenticatesuccess);
+      MyServices.authenticate(authenticatesuccess,function(err){console.log(err);});
       $interval.cancel(stopinterval);
     });
   };
@@ -445,7 +445,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
-      MyServices.authenticate().success(authenticatesuccess);
+      MyServices.authenticate(authenticatesuccess,function(err){console.log(err);});
       $interval.cancel(stopinterval);
     });
   };
@@ -458,7 +458,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
-      MyServices.authenticate().success(authenticatesuccess);
+      MyServices.authenticate(authenticatesuccess,function(err){console.log(err);});
       $interval.cancel(stopinterval);
     });
   };
@@ -471,7 +471,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }
     stopinterval = $interval(callAtIntervaltwitter, 2000);
     ref.addEventListener('exit', function(event) {
-      MyServices.authenticate().success(authenticatesuccess);
+      MyServices.authenticate(authenticatesuccess,function(err){console.log(err);});
       $interval.cancel(stopinterval);
     });
   };
@@ -516,7 +516,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
           myPopup.close(); //close the popup after 3 seconds for some reason
           $location.url("/app/home");
         }, 2000);
-      });
+      },function(err){console.log(err);});
     } else {
       $scope.showPopupsignupfailure();
     }
@@ -582,7 +582,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         user = data;
         $location.url("/app/home");
         $scope.signin = {};
-      });
+      },function(err){console.log(err);});
     } else {
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',
@@ -806,8 +806,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   MyServices.homeSlider(function(data) {
     $scope.slides = data.data;
+    $ionicSlideBoxDelegate.update();
   }, function(err) {});
+
   configreload.onallpage();
+
   // $scope.setup = function() {
   //   var blogdata = JSON.parse(MyServices.getconfigdata().config[0].text);
   //   _.each(blogdata, function(n) {
@@ -835,13 +838,6 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   // }, function(err) {
   //   // $location.url("/access/offline");
   // });
-
-  MyServices.homeSlider(function(data) {
-    $scope.slides = data;
-    $ionicSlideBoxDelegate.update();
-  }, function(err) {
-    // $location.url("/access/offline");
-  });
 
 })
 
@@ -894,12 +890,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $ionicLoading.hide();
     $scope.user = data.data;
     addanalytics(data.name);
-    $scope.user.newcoverimage = {
-      'background-image': "url('" + $filter("serverimage")($scope.user.coverimage) + "')"
-    };
-    $scope.user.newimage = {
-      'background-image': "url('" + $filter("profileimg")($scope.user.image) + "')"
-    };
+    // $scope.user.newcoverimage = {
+    //   'background-image': "url('" + $filter("serverimage")($scope.user.coverimage) + "')"
+    // };
+    // $scope.user.newimage = {
+    //   'background-image': "url('" + $filter("profileimg")($scope.user.image) + "')"
+    // };
 
   }, function(err) {
     // $location.url("/access/offline");
@@ -1237,7 +1233,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       }
     }, function(err) {
       $scope.keepscrolling = false;
+      if ($scope.blogs.length !== 0) {
       $scope.msg = "No data found";
+    }
       $ionicLoading.hide();
     });
     $scope.$broadcast('scroll.infiniteScrollComplete');
@@ -1487,7 +1485,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         $scope.videos.push(n);
       });
 
-      if (data.data.data === '') {
+      if (data.data.data.length === 0) {
         $scope.keepscrolling = false;
       }
 
@@ -1499,7 +1497,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
     }, function(err) {
       $scope.keepscrolling = false;
+      if ($scope.videos.length === 0) {
       $scope.msg = "The gallery is empty.";
+    }
       $ionicLoading.hide();
     });
 
@@ -1548,6 +1548,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 
       if (data.data.data.length === 0) {
+        console.log("in oth length");
         $scope.keepscrolling = false;
       }
 
@@ -1705,34 +1706,25 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('SocialCtrl', function($scope, MyServices) {
+.controller('SocialCtrl', function($scope, MyServices, $timeout) {
   addanalytics("Social page");
   configreload.onallpage();
   $scope.tab = 'fb';
-  $scope.social = {};
+  $scope.social = [];
   $scope.showsocial = {};
 
-  $scope.go = function() {
-    console.log("demo demo");
-  };
-
-  console.log(MyServices.getconfigdata());
-  $scope.config = MyServices.getconfigdata().config;
-  _.each($scope.config.socialfeeds, function(n, key) {
-    console.log(n);
-  });
-  if ($scope.socialfeeds) {
-    $scope.social = JSON.parse($scope.config[6].text);
-    $scope.social = _.filter($scope.social, function(n) {
-      return n.value !== "";
+  $timeout(function(){
+    $scope.config = config.config;
+    _.each($scope.config.socialfeeds, function(n, key) {
+      if (n !== "") {
+        $scope.social.push({"name":key,"value":n});
+      }
     });
-  }
-  $scope.social = _.chunk($scope.social, 2);
-  console.log($scope.social);
+
+    $scope.social = _.chunk($scope.social, 2);
+  },1000);
 
   $scope.goSocial = function(link) {
-    console.log(link);
-    console.log("dfasdf");
     if (typeof cordova != 'undefined') {
       cordova.InAppBrowser.open(link, '_blank', 'location=yes');
     } else {

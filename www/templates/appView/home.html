@@ -2,7 +2,7 @@
     <ion-content>
         <ion-slide-box on-slide-changed="slideHasChanged($index)">
             <ion-slide ng-repeat="slide in slides track by $index" ng-if="slide.status">
-                <img ng-src="{{slide.image | serverpath}}">
+                <img cache-src="{{slide.image | serverpath}}">
             </ion-slide>
         </ion-slide-box>
         <div class="padding" ng-bind-html="config.config.homeContent"></div>

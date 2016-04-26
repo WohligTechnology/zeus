@@ -12,8 +12,8 @@ function addanalytics(screen) {
       window.analytics.trackView(screen);
       window.analytics.trackEvent("Page Load", screen, screen, 1);
     } else {
-      window.analytics.setUserId(user.id);
-      window.analytics.trackEvent("User ID Tracking", "User ID Tracking", "Userid", user.id);
+      window.analytics.setUserId($.jStorage.get("user")._id);
+      window.analytics.trackEvent("User ID Tracking", "User ID Tracking", "Userid", $.jStorage.get("user")._id);
     }
   }
 }
@@ -607,7 +607,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 
 .filter('noappid', function() {
   return function(val) {
-    var val = val.replace("appid", "");
+    var val = val.replace("PageUrl", "");
     return val;
   };
 })
@@ -675,18 +675,6 @@ angular.module('starter', ['ionic', 'starter.controllers'])
   };
 })
 
-.directive('listType', function($ionicPopup) {
-  return {
-    templateUrl: 'views/directive/listType.html',
-    scope: {
-      model: '=ngModel'
-    },
-    link: function($scope, element, attrs) {
-
-    }
-  };
-})
-
 
 .directive('imgloadingsec', function($compile, $parse) {
   return {
@@ -718,6 +706,9 @@ var loadMenu = function(MyServices, $ionicPopup, $timeout) {
       navigation.config = conf.data[0];
       config = navigation;
       MyServices.setconfigdata(navigation);
+      if (config.config.soundCloudUsername) {
+          soundCloudUsername = config.config.soundCloudUsername;
+      }
       $.jStorage.set("blogType", config.config.blog);
     }, function(err, sta) {
 
