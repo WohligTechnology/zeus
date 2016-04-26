@@ -31,7 +31,7 @@
                 </label>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ln-phone"></i></span>
-                    <input type="tel" placeholder="Phone No." ng-model="user.phone">
+                    <input type="tel" placeholder="Phone No." ng-model="user.phone" maxlength="15" only-digits>
                 </label>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ln-map-marker"></i></span>
@@ -45,7 +45,7 @@
             <div class="padding-horizontal padding-bottom">
                 <button no-int class="button button-positive button-block" ng-click="saveProfile();">Save</button>
             </div>
-            <div class="list list-icon">
+            <div class="list list-icon" ng-if="!user.oauthLogin">
                 <div class="item item-divider">Change Password</div>
                 <label class="item item-input">
                     <span class="input-label"><i class="icon ln-user"></i></span>
@@ -60,7 +60,7 @@
                     <input type="password" placeholder="Confirm password" ng-model="password.confirmpassword" ng-class="allvalidation[2].validation">
                 </label>
             </div>
-            <div class="padding-horizontal">
+            <div class="padding-horizontal" ng-if="!user.oauthLogin">
                 <button no-int class="button button-positive button-block" ng-click="changePassword();">Change password</button>
             </div>
         </div>

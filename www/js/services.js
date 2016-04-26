@@ -123,7 +123,7 @@ angular.module('starter.services', ['httpService'])
         var data2 = {
           "email": data.email,
           "name": data.username,
-          "password": data.phone,
+          "password": data.password,
           "dob": data.dob
         };
         // httpService.post(vigzserver + "user/savemob", data2, callback, errCallback);

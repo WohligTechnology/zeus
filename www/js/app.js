@@ -20,7 +20,13 @@ function addanalytics(screen) {
 
 angular.module('starter', ['ionic', 'starter.controllers'])
 
-.run(function($ionicPlatform, MyServices, $ionicPopup, $timeout) {
+.run(function($ionicPlatform, MyServices, $ionicPopup, $timeout, $state) {
+  console.log("ininininininini");
+  console.log($.jStorage.get("introslider"));
+  $state.go("access.slider");
+  if ($.jStorage.get("introslider") === false || $.jStorage.get("introslider") !== null) {
+    $state.go("access.slider");
+  }
   loadMenu(MyServices, $ionicPopup, $timeout);
   $ionicPlatform.ready(function() {
 
@@ -597,6 +603,34 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     };
   }
 ])
+
+.directive('onlyDigits', function() {
+  return {
+    require: 'ngModel',
+    restrict: 'A',
+    link: function(scope, element, attr, ctrl) {
+      var digits;
+      function inputValue(val) {
+        if (val) {
+          if (attr.type == "tel") {
+             digits = val.replace(/[^0-9\+\\]/g, '');
+          } else {
+             digits = val.replace(/[^0-9\-\\]/g, '');
+          }
+
+
+          if (digits !== val) {
+            ctrl.$setViewValue(digits);
+            ctrl.$render();
+          }
+          return parseInt(digits, 10);
+        }
+        return undefined;
+      }
+      ctrl.$parsers.push(inputValue);
+    }
+  };
+})
 
 .filter('formatdate', function($filter) {
   return function(val) {

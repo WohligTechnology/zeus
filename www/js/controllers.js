@@ -41,11 +41,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     console.log("in on all pages");
     console.log(config);
     var loginstatus = false;
+    if ($.jStorage.get("introslider") === false || $.jStorage.get("introslider") === null) {
+      $state.go("access.slider");
+    }else {
     if (MyServices.getconfigdata()) {
       if (MyServices.getconfigdata().config.login.hasLogin) {
         loginstatus = true;
         if (loginstatus && MyServices.getuser() === null) {
-          $location.url("/access/login");
+
+            $location.url("/access/login");
+
+          }
         }
       }
     }
@@ -925,21 +931,26 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   $scope.saveProfile = function() {
-    MyServices.updateProfileMob($scope.user, function(data, status) {
-      if (data !== 0) {
-        $.jStorage.set("user", data);
-        $scope.showPopup1();
-        $scope.edit = !$scope.edit;
-      }
-    }, function(err) {
-      // $location.url("/access/offline");
-    });
+    if (checkConnectivity) {
+      MyServices.updateProfileMob($scope.user, function(data, status) {
+        if (data !== 0) {
+          $.jStorage.set("user", data);
+          $scope.showPopup1();
+          $scope.edit = !$scope.edit;
+        }
+      }, function(err) {
+        // $location.url("/access/offline");
+      });
+    }else {
+      $scope.passwordpopup("No Internet Connection", 'Profile');
+    }
+
   };
 
-  $scope.passwordpopup = function(msg) {
+  $scope.passwordpopup = function(msg, title) {
     var myPopup = $ionicPopup.show({
       template: '<p class="text-center">' + msg + '</p>',
-      title: 'Forgot Password!',
+      title: title,
       scope: $scope
     });
     $timeout(function() {
@@ -966,20 +977,20 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       if ($scope.password.newpassword === $scope.password.confirmpassword) {
         MyServices.changePasswordMob($scope.password, function(data) {
           if (data.value === true) {
-            $scope.passwordpopup("Password changed successfully");
+            $scope.passwordpopup("Password changed successfully", 'Forgot Password!');
           } else {
-            $scope.passwordpopup("Old password does not match");
+            $scope.passwordpopup("Old password does not match", 'Forgot Password!');
           }
           console.log(data);
         }, function(err) {
           // $location.url("/access/offline");
         });
       } else {
-        $scope.passwordpopup("Both the passwords does not match");
+        $scope.passwordpopup("Both the passwords does not match",'Forgot Password!');
       }
     } else {
       $ionicLoading.hide();
-      $scope.passwordpopup("Please enter all the fields.");
+      $scope.passwordpopup("Please enter all the fields.", 'Forgot Password!');
     }
   };
 
