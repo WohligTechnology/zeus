@@ -28,7 +28,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   var loginstatus = false;
 
   // loader
-  // $scope.showloading = function() {
+  // $scope.showloading = functiocordovan() {
   //   $ionicLoading.show({
   //     template: '<ion-spinner class="spinner-positive"></ion-spinner>'
   //   });
@@ -179,11 +179,22 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.showButton = true;
   $scope.redirectPage = function() {
     MyServices.setIntroJstorage();
-    if (config.config) {
-      if (!MyServices.getuser() && config.config.login.hasLogin) {
-        $state.go("access.login");
-      } else {
-        $state.go("app.home");
+    if (checkConnectivity) {
+      if (config.config) {
+        if (!MyServices.getuser() && config.config.login.hasLogin) {
+          $state.go("access.login");
+        } else {
+          $state.go("app.home");
+        }
+      }else {
+        var myPopup = $ionicPopup.show({
+          template: '<p class="text-center">Contact Owner</p>',
+          title: 'Oops!',
+          scope: $scope,
+        });
+        $timeout(function() {
+          myPopup.close(); //close the popup after 3 seconds for some reason
+        }, 2000);
       }
     }else {
       var myPopup = $ionicPopup.show({
@@ -195,6 +206,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         myPopup.close(); //close the popup after 3 seconds for some reason
       }, 2000);
     }
+
 
   };
   if (MyServices.getIntroJstorage()) {
@@ -583,12 +595,19 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   var signinsuccess = function(data, status) {
     $ionicLoading.hide();
     if (data.value === true) {
-      MyServices.authenticate(function(data) {
-        $.jStorage.set("user", data);
-        user = data;
-        $location.url("/app/home");
-        $scope.signin = {};
-      },function(err){console.log(err);});
+      $timeout(function(){
+        MyServices.authenticate(function(data) {
+          console.log(data);
+          if (data._id) {
+            $.jStorage.set("user", data);
+            user = data;
+            $location.url("/app/home");
+            $scope.signin = {};
+          }
+
+        },function(err){console.log(err);});
+      },10);
+
     } else {
       var alertPopup = $ionicPopup.alert({
         title: 'Login failed!',
@@ -896,12 +915,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $ionicLoading.hide();
     $scope.user = data.data;
     addanalytics(data.name);
-    // $scope.user.newcoverimage = {
-    //   'background-image': "url('" + $filter("serverimage")($scope.user.coverimage) + "')"
-    // };
-    // $scope.user.newimage = {
-    //   'background-image': "url('" + $filter("profileimg")($scope.user.image) + "')"
-    // };
+    $scope.user.newcoverimage = {
+      'background-image': "url('" + $filter("serverpath")($scope.user.bannerPic) + "')"
+    };
+    $scope.user.newimage = {
+      'background-image': "url('" + $filter("serverpath")($scope.user.profilePic) + "')"
+    };
 
   }, function(err) {
     // $location.url("/access/offline");
@@ -1006,17 +1025,25 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.picFromGallery = function() {
     if (navigator.onLine) {
       $cordovaImagePicker.getPictures(options).then(function(resultImage) {
-        $scope.user.newimage = {
-          'background-image': "url('" + resultImage[0] + "')"
-        };
-        $cordovaFileTransfer.upload(vigzserver + "upload/fileApp", resultImage[0], {
-            "image": true
-          })
+
+        var options = {};
+        var params = {};
+            params.image = true;
+            options.params = params;
+        $cordovaFileTransfer.upload(vigzserver + "upload/fromApp", resultImage[0], options)
           .then(function(result) {
             console.log(result.response);
             var data = JSON.parse(result.response);
+            if (data.value === true) {
+              $scope.user.newimage = {
+                'background-image': "url('" + resultImage[0] + "')"
+              };
+            }else {
+              $scope.showMsg("Your Session is Expired OR Invalid Image Formate. Please Login.");
+
+            }
             $ionicLoading.hide();
-          }, function(err) {}, function(progress) {});
+          }, function(err) {console.log(err);}, function(progress) {console.log(progress);});
 
       }, function(err) {
         // An error occured. Show a message to the user
@@ -1028,25 +1055,37 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   $scope.picImageForCover = function() {
+    console.log("in profile cover pic");
+
     if (navigator.onLine) {
       $cordovaImagePicker.getPictures(options).then(function(resultImage) {
-        $scope.user.newcoverimage = {
-          'background-image': "url('" + resultImage[0] + "')"
-        };
-        $cordovaFileTransfer.upload(vigzserver + "upload/fileApp", resultImage[0], {
-            "image": false
-          })
+        var options = {};
+        var params = {};
+            params.image = false;
+
+            options.params = params;
+        $cordovaFileTransfer.upload(vigzserver + "upload/fromApp", resultImage[0], options)
           .then(function(result) {
             console.log(result.response);
             var data = JSON.parse(result.response);
+            if (data.value === true) {
+              $scope.user.newcoverimage = {
+                'background-image': "url('" + resultImage[0] + "')"
+              };
+            }else {
+              $scope.showMsg("Your Session is Expired OR Invalid Image Formate. Please Login.");
+
+            }
             $ionicLoading.hide();
-          }, function(err) {}, function(progress) {});
+          }, function(err) {console.log(err);}, function(progress) {console.log(progress);});
+
       }, function(err) {
         // An error occured. Show a message to the user
       });
     } else {
       $scope.showMsg("Interner Connection Required To Edit Profile Image. ");
     }
+
   };
 })
 
@@ -1181,10 +1220,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       addanalytics(data.title);
     }
     if (data.eventimages && data.eventimages.length > 0) {
-      data.eventimages = _.chunk(data.eventimages, 2);
+      data.data.eventimages = _.chunk(data.eventimages, 2);
     }
-    if (data.eventvideos && data.eventvideos.length > 0) {
-      data.eventvideos = _.chunk(data.eventvideos, 2);
+    if (data.data.videos && data.data.videos.length > 0) {
+      data.data.eventvideos = _.chunk(data.data.videos, 2);
     }
     $scope.eventdetail = data.data;
     $ionicSlideBoxDelegate.update();

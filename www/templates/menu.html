@@ -17,9 +17,9 @@
     <ion-side-menu side="left">
         <div class="top-statusbar"></div>
         <div class="list no-margin" ng-if="config.config.login.hasLogin">
-            <ion-item class="item-avatar item-icon-right" ui-sref="app.profile">
+            <ion-item menu-close class="item-avatar item-icon-right" ui-sref="app.profile">
                 <!-- <div class="image-adjust" ng-style="userdetails.myimage"></div> -->
-                <img  class="image-adjust" ng-src="{{userdetails.image}}" alt="" />
+                <img  class="image-adjust" cache-src="{{userdetails.profilePic | serverpath}}" alt="" />
                 <h3>{{userdetails.name}}</h3>
                 <p>{{userdetails.email}}</p>
                 <i class="icon ln-gear2 small" ng-click="toSetting();  $event.stopPropagation();" menu-close></i>
