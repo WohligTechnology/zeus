@@ -45,6 +45,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       $state.go("access.slider");
     }else {
     if (MyServices.getconfigdata()) {
+      if(MyServices.getconfigdata().config.login){
       if (MyServices.getconfigdata().config.login.hasLogin) {
         loginstatus = true;
         if (loginstatus && MyServices.getuser() === null) {
@@ -53,6 +54,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
           }
         }
+      }else{
+        // $state.go("access.slider");
+      }
       }
     }
   };
@@ -69,11 +73,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.menudata = data.menu;
     $scope.logso = "";
     $scope.userdetails = $.jStorage.get("user");
-    if (!data.config.login.hasLogin) {
-      // $scope.menu.setting = false;
-    } else {
-      // $scope.menu.setting = true;
-      $scope.logso = "has-menu-photo";
+    if (data.config.login) {
+      if (!data.config.login.hasLogin) {
+        // $scope.menu.setting = false;
+      } else {
+        // $scope.menu.setting = true;
+        $scope.logso = "has-menu-photo";
+      }
     }
   };
 
@@ -181,8 +187,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     MyServices.setIntroJstorage();
     if (checkConnectivity) {
       if (config.config) {
-        if (!MyServices.getuser() && config.config.login.hasLogin) {
-          $state.go("access.login");
+        if (config.config.login) {
+          if (!MyServices.getuser() && config.config.login.hasLogin) {
+            $state.go("access.login");
+          } else {
+            $state.go("app.home");
+          }
         } else {
           $state.go("app.home");
         }
@@ -1219,8 +1229,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       $scope.msg = "";
       addanalytics(data.title);
     }
-    if (data.eventimages && data.eventimages.length > 0) {
-      data.data.eventimages = _.chunk(data.eventimages, 2);
+    if (data.data.images && data.data.images.length > 0) {
+      data.data.eventimages = _.chunk(data.data.images, 2);
     }
     if (data.data.videos && data.data.videos.length > 0) {
       data.data.eventvideos = _.chunk(data.data.videos, 2);
