@@ -1,7 +1,7 @@
 
 //Node admin
 // var vigzserver = "http://blazen.io/";
-var vigzserver = "http://192.168.1.100/";
+var vigzserver = "http://192.168.1.131:81/";
 // var adminurl = "http://wohlig.biz/";
 var adminimage = vigzserver + "upload/readFile?file=";
 // var adminhauth = adminurl + "index.php/hauth/";
