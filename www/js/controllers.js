@@ -387,7 +387,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('LoginCtrl', function($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout, $state) {
+.controller('LoginCtrl', function($scope, MyServices, $ionicPopup, $interval, $location, $window, $ionicLoading, $timeout, $state, $filter) {
   addanalytics("flexible login page");
   $scope.logindata = {};
   $.jStorage.deleteKey("user");
