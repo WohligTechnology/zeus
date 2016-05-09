@@ -192,10 +192,18 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
             $state.go("access.login");
           } else {
             console.log(config.defaultMenu[0]);
+            if (config.defaultMenu.length === 0) {
+              $state.go("app.home");
+            }else{
             $location.url($filter('toPages')(config.defaultMenu[0], 'default'));
           }
+          }
         } else {
+          if (config.defaultMenu.length === 0) {
+            $state.go("app.home");
+          }else{
           $location.url($filter('toPages')(config.defaultMenu[0], 'default'));
+        }
         }
       }else {
         var myPopup = $ionicPopup.show({
@@ -446,8 +454,12 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       $.jStorage.set("user", data);
       user = data;
       reloadpage = true;
+      if (config.defaultMenu.length === 0) {
+        $state.go("app.home");
+      }else{
       $location.url($filter('toPages')(config.defaultMenu[0], 'default'));
     }
+  }
   };
   $scope.facebooklogin = function() {
     if (checkConnectivity) {
@@ -543,7 +555,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         });
         $timeout(function() {
           myPopup.close(); //close the popup after 3 seconds for some reason
+          if (config.defaultMenu.length === 0) {
+            $state.go("app.home");
+          }else{
           $location.url($filter('toPages')(config.defaultMenu[0], 'default'));
+        }
         }, 2000);
       },function(err){console.log(err);});
     } else {
@@ -612,7 +628,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
           if (data._id) {
             $.jStorage.set("user", data);
             user = data;
+            if (config.defaultMenu.length === 0) {
+              $state.go("app.home");
+            }else{
             $location.url($filter('toPages')(config.defaultMenu[0], 'default'));
+          }
             $scope.signin = {};
           }
 
