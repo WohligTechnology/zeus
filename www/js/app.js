@@ -512,7 +512,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
 })
 
 .filter('toPages', function() {
-  return function(menu) {
+  return function(menu, value) {
     var newmenu = {};
     switch (menu.type) {
       case 'Blog':
@@ -570,9 +570,17 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
     }
     if (newmenu.typeid) {
+      if (value == "default") {
+        return "/app/"+newmenu.link+"/"+newmenu.typeid;
+      }else{
       return "app." + newmenu.link + "({id:'" + newmenu.typeid + "'})";
+    }
     } else {
+      if (value == "default") {
+        return "/app/"+newmenu.link;
+      }else{
       return "app." + newmenu.link;
+    }
     }
   };
 })
@@ -739,6 +747,7 @@ var loadMenu = function(MyServices, $ionicPopup, $timeout) {
       console.log(conf);
       navigation.config = conf.data[0];
       config = navigation;
+      config.defaultMenu = _.filter(config.menu, {'default':true});
       MyServices.setconfigdata(navigation);
       if (config.config.soundCloudUsername) {
           soundCloudUsername = config.config.soundCloudUsername;

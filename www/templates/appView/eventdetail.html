@@ -20,7 +20,7 @@
                 <ion-slide-box on-slide-changed="slideHasChanged($index)">
                     <ion-slide ng-repeat="images in eventdetail.eventvideos">
                         <div class="row">
-                            <div class="col col-50" ng-repeat="img in images" ng-click="showVideo(img.url);">
+                            <div class="col col-50" ng-repeat="img in images" ng-click="showVideo(img.link);">
                                 <img ng-src="{{img.thumbnail}}" alt="">
                             </div>
                         </div>

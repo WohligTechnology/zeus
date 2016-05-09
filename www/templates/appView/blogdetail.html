@@ -5,7 +5,7 @@
     <ion-content>
         <div class="article-view" ng-if="details.provider=='wordpress' && id==0">
             <div class="relative stable-bg min-height">
-                <img class="full-image" ng-src="img/login-bg.jpg">
+                <img class="full-image" cache-src="img/login-bg.jpg">
                 <div class="gradient-hold full">
                     <h4 class="light">{{details.author.first_name}} {{details.author.last_name}}</h4>
                     <p class="light">{{details.date|date : 'MMMM dd, yyyy'}}</p>
@@ -18,7 +18,7 @@
         </div>
         <div class="article-view" ng-if="details.provider=='wordpressself' && id==0">
             <div class="relative stable-bg min-height">
-                <img class="full-image" ng-src="img/login-bg.jpg">
+                <img class="full-image" cache-src="img/login-bg.jpg">
                 <div class="gradient-hold full">
                     <h4 class="light">{{blog.title.rendered}}</h4>
                     <p class="light">{{details.date|date : 'MMMM dd, yyyy'}}</p>
@@ -62,6 +62,10 @@
             <div class="padding" ng-if="details.type =='quote'">
                 <h4>Quote</h4>
                 <p>{{details.text}}</p>
+            </div>
+            <div class="padding" ng-if="details.type =='video'">
+                <h4>Quote</h4>
+                <div youtube code="details.video.youtube.video_id"></div>
             </div>
         </div>
     </ion-content>

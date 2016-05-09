@@ -24,6 +24,7 @@ var WORDPRESS_self_API_URL = '/wp-json/wp/v2/posts';
 //for tumblr
 var Tumblr_UserName = "";
 var TUBMLR_API_URL = 'http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + Tumblr_UserName + '/posts';
+var TUBMLR_API_KEY = "z1dnwToZiXGJkx1fTMtwqYkzcpf83G381TnPgH3wuft4EcEQTU";
 
 angular.module('starter.services', ['httpService'])
   .factory('MyServices', function($http, $filter, httpService) {
@@ -222,10 +223,11 @@ angular.module('starter.services', ['httpService'])
           withCredentials: false
         }).success(callback);
       },
-      getTumblrPosts: function(tmb, callback) {
-        $http.get('http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + tmb + '/posts?api_key=z1dnwToZiXGJkx1fTMtwqYkzcpf83G381TnPgH3wuft4EcEQTU', {
-          withCredentials: false
-        }).success(callback);
+      getTumblrPosts: function(tmb, callback, errCallback) {
+        httpService.get(vigzserver + 'config/urlToJson?url=http://api.tumblr.com/v2/blog/' + tmb + '/posts?api_key=' + TUBMLR_API_KEY, {}, callback, errCallback);
+        // $http.get(vigzserver + 'config/urlToJson?url=http://api.tumblr.com/v2/blog/' + tmb + '/posts?api_key=z1dnwToZiXGJkx1fTMtwqYkzcpf83G381TnPgH3wuft4EcEQTU', {
+        //   withCredentials: false
+        // }).success(callback);
       },
 
       setconfigdata: function(data) {
@@ -250,11 +252,12 @@ angular.module('starter.services', ['httpService'])
           withCredentials: false
         }).then(callback).catch(err);
       },
-      changeSetting: function(callback,errCallback) {
+      changeSetting: function(user, callback,errCallback) {
+        user._id = "0";
         return $http({
-          url: vigzserver + 'config/save',
+          url: vigzserver + 'user/saveMob',
           method: "POST",
-          data: config.config
+          data: user
         }).success(callback).error(errCallback);
       }
     };

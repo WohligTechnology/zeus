@@ -28,7 +28,9 @@
         <ion-content ng-class="logso">
             <div class="list menu-set">
                 <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="{{menu | toPages}}" ui-sref-active="bordered" ng-repeat="menu in menudata">
-                    <i class="icon {{menu.iconType}}"></i>{{menu.name}}
+                    <i class="icon {{menu.iconType}}" ng-if="menu.iconType!='custom'"></i>
+                    <img ng-src="{{menu.icon | serverpath}}" alt="" ng-if="menu.iconType=='custom'"/>{{menu.name}}
+
                 </ion-item>
                 <ion-item nav-clear menu-close class="item item-icon-left item-complex" ng-click="logout()" ui-sref-active="bordered" ng-if="config.config.login.hasLogin">
                     <div class="item-content"><i class="icon ln-arrow-right2"></i>Logout</div>
