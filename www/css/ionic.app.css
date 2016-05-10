@@ -6573,7 +6573,7 @@ button.item.item-button-right {
 .list-inset {
   overflow: hidden;
   margin: 20px 10px;
-  border-radius: 0px;
+  border-radius: 0;
   background-color: #fff; }
 
 .card {
@@ -6595,24 +6595,24 @@ button.item.item-button-right {
 .card .item:first-child,
 .list-inset .item:first-child,
 .padding > .list .item:first-child {
-  border-top-left-radius: 0px;
-  border-top-right-radius: 0px; }
+  border-top-left-radius: 0;
+  border-top-right-radius: 0; }
   .card .item:first-child .item-content,
   .list-inset .item:first-child .item-content,
   .padding > .list .item:first-child .item-content {
-    border-top-left-radius: 0px;
-    border-top-right-radius: 0px; }
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; }
 
 .card .item:last-child,
 .list-inset .item:last-child,
 .padding > .list .item:last-child {
-  border-bottom-right-radius: 0px;
-  border-bottom-left-radius: 0px; }
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0; }
   .card .item:last-child .item-content,
   .list-inset .item:last-child .item-content,
   .padding > .list .item:last-child .item-content {
-    border-bottom-right-radius: 0px;
-    border-bottom-left-radius: 0px; }
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; }
 
 .card .item:last-child,
 .list-inset .item:last-child {
@@ -8511,9 +8511,9 @@ progress {
   padding: 0 12px;
   min-width: 52px;
   min-height: 47px;
-  border-width: 0px;
+  border-width: 0;
   border-style: solid;
-  border-radius: 0px;
+  border-radius: 0;
   vertical-align: top;
   text-align: center;
   text-overflow: ellipsis;
@@ -8537,7 +8537,7 @@ progress {
     pointer-events: none; }
   .button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
     display: inline-block;
-    padding: 0 0 0px 0;
+    padding: 0 0 0 0;
     vertical-align: inherit;
     font-size: 24px;
     line-height: 42px;
@@ -8797,7 +8797,7 @@ progress {
   font-size: 20px;
   line-height: 54px; }
   .button-large .icon:before, .button-large.icon:before, .button-large.icon-left:before, .button-large.icon-right:before {
-    padding-bottom: 0px;
+    padding-bottom: 0;
     font-size: 32px;
     line-height: 53px; }
 
@@ -8937,12 +8937,12 @@ a.button {
   .button-bar > .button .icon:before {
     line-height: 44px; }
   .button-bar > .button:first-child {
-    border-radius: 0px 0px 0px 0px; }
+    border-radius: 0 0px 0px 0; }
   .button-bar > .button:last-child {
     border-right-width: 1px;
-    border-radius: 0px 0px 0px 0px; }
+    border-radius: 0px 0 0 0px; }
   .button-bar > .button:only-child {
-    border-radius: 0px; }
+    border-radius: 0; }
 
 .button-bar > .button-small:before,
 .button-bar > .button-small .icon:before {
@@ -9381,7 +9381,7 @@ a.button {
  * --------------------------------------------------
  */
 .rounded {
-  border-radius: 0px; }
+  border-radius: 0; }
 
 /**
  * Utility Colors
@@ -9722,17 +9722,18 @@ a.button {
 
 @font-face {
   font-family: 'Lato-light';
-  src: url(../fonts/Lato-Light.ttf);
+  src: url("../fonts/Lato-Light.ttf");
   font-weight: 300; }
 
 @font-face {
   font-family: 'Lato';
-  src: url(../fonts/Lato-Regular.ttf); }
+  src: url("../fonts/Lato-Regular.ttf"); }
 
 .item {
   font-size: 14px; }
 
-.item-icon-left .icon, .item-icon-right .icon {
+.item-icon-left .icon,
+.item-icon-right .icon {
   font-size: 25px; }
 
 a {
@@ -9825,7 +9826,7 @@ a:hover {
     text-align: center;
     text-transform: uppercase; }
     .login-tab .tab .row .col {
-      padding: 10px 0px;
+      padding: 10px 0;
       font-size: 13px;
       color: white; }
   .login-tab .tab .active {
@@ -9838,7 +9839,7 @@ a:hover {
       margin: 0 15px; }
       .login-tab .login .list .item {
         border-bottom: 1px solid #ffffff;
-        border-top: 0px;
+        border-top: 0;
         border-right: 0;
         border-left: 0; }
         .login-tab .login .list .item i {
@@ -9855,7 +9856,7 @@ a:hover {
           padding-bottom: 2px;
           color: white; }
     .login-tab .login .login-btn {
-      margin: 0px 20px;
+      margin: 0 20px;
       padding-top: 45px; }
       .login-tab .login .login-btn .sign span {
         color: #F13232;
@@ -9912,7 +9913,7 @@ a:hover {
   font-size: 12px !important;
   border-right: 0;
   border-left: 0;
-  padding: 0px;
+  padding: 0;
   border-bottom: 0;
   text-transform: capitalize; }
 
@@ -9944,10 +9945,10 @@ a:hover {
   .card .item.tabs {
     padding: 0; }
   .card .item.item-image {
-    padding: 0px; }
+    padding: 0; }
 
 .button-bar > .button {
-  border-width: 0px !important; }
+  border-width: 0 !important; }
 
 .button.underline {
   border-bottom: 2px solid #F13232 !important; }
@@ -10201,7 +10202,7 @@ img[imgloadingsec] {
   transition: all 1s ease; }
 
 img.loading {
-  background-image: url(../img/loading.gif);
+  background-image: url("../img/loading.gif");
   background-repeat: no-repeat;
   background-position: center;
   background-size: contain;
@@ -10220,7 +10221,7 @@ img.doneLoading {
   opacity: 1; }
 
 .audio-box .item-content {
-  padding-top: 8px;
+  padding-top: 8px !important;
   padding-left: 60px !important;
   min-height: 55px !important; }
 
@@ -10246,7 +10247,7 @@ img.doneLoading {
   margin: 4px auto; }
   .audio-btn i {
     font-size: 26px;
-    margin: 0px 5px;
+    margin: 0 5px;
     color: #fff; }
 
 .boxs {
@@ -10254,3 +10255,14 @@ img.doneLoading {
   margin: 0 auto;
   text-align: center;
   height: 100%; }
+
+.menu-img {
+  width: 38px;
+  vertical-align: middle;
+  padding-right: 15px;
+  align-items: center;
+  position: absolute;
+  top: 10px;
+  left: 15px;
+  display: flex;
+  -webkit-box-align: center; }
