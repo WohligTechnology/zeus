@@ -957,7 +957,11 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   showloading();
   MyServices.getUserMob(function(data) {
     $ionicLoading.hide();
-    $scope.user = data.data;
+    if (data.value === false) {
+      $scope.user = false;
+    }else {
+      $scope.user = data.data;
+    }
     addanalytics(data.name);
     $scope.user.newcoverimage = {
       'background-image': "url('" + $filter("serverpath")($scope.user.bannerPic) + "')"
@@ -994,6 +998,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   $scope.saveProfile = function() {
+    console.log($scope.user);
+    if ($scope.user === false) {
+      $scope.showMsg("Session Expired.", "Profile");
+    }else{
     if (checkConnectivity) {
       MyServices.updateProfileMob($scope.user, function(data, status) {
         if (data !== 0) {
@@ -1007,6 +1015,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     }else {
       $scope.passwordpopup("No Internet Connection", 'Profile');
     }
+  }
 
   };
 
@@ -1022,6 +1031,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   };
 
   $scope.changePassword = function() {
+    if ($scope.user === false) {
+      $scope.showMsg("Session Expired.", "Profile");
+    }else{
     $scope.password.id = MyServices.getuser().id;
 
 
@@ -1055,6 +1067,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       $ionicLoading.hide();
       $scope.passwordpopup("Please enter all the fields.", 'Forgot Password!');
     }
+  }
   };
 
   //	pick image from gallery
@@ -1160,6 +1173,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   $scope.loadevents = function(pageno) {
     MyServices.getEventAllMob(pageno, function(data) {
+      if (pageno === 1) {
+        $scope.events = [];
+      }
       $ionicLoading.hide();
       _.each(data.data.data, function(n) {
         $scope.events.push(n);
@@ -1186,7 +1202,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.$broadcast('scroll.refreshComplete');
   };
 
-  $scope.loadevents(1);
+  $scope.refreshData = function(){
+    $scope.events = [];
+    $scope.pageno = 1;
+    $scope.loadevents(1);
+  };
+
+  $scope.refreshData();
 
   $scope.loadMorePolls = function() {
     $scope.loadevents(++$scope.pageno);
@@ -1458,10 +1480,16 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $state.go("app.photogallery", {id:id});
   };
 
+  // $scope.getItemHeight = function(item){
+  //   return angular.element(item).offsetHeight;
+  // };
+
   $scope.loadgallery = function(pageno) {
     MyServices.getPhotoAllMob(pageno, function(data, status) {
       $ionicLoading.hide();
-
+      if (pageno === 1) {
+        $scope.photos = [];
+      }
       _.each(data.data.data, function(n) {
         $scope.photos.push(n);
       });
@@ -1529,6 +1557,9 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   $scope.loadphoto = function(pageno) {
     MyServices.getPhotoOneMob($stateParams.id, pageno, function(data, status) {
       $ionicLoading.hide();
+      if (pageno === 1) {
+        $scope.photos = [];
+      }
       _.each(data.data.data, function(n) {
         $scope.photoObj = {};
         $scope.photoObj.src = adminimage + n.image;
@@ -1555,7 +1586,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.$broadcast('scroll.refreshComplete');
   };
 
-  $scope.loadphoto(1);
+  $scope.refreshData = function(){
+    $scope.photos = [];
+    $scope.pageno = 1;
+    $scope.loadphoto(1);
+  };
+
+  $scope.refreshData();
 
   $scope.loadMorePolls = function() {
     $scope.loadphoto(++$scope.pageno);
@@ -1788,10 +1825,13 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   $scope.setting = {};
   $scope.config = config;
+  $scope.user = {};
 
   MyServices.getUserMob(function(data) {
     $ionicLoading.hide();
-    $scope.user = data.data;
+    if (data.value === true) {
+      $scope.user = data.data;
+    }
 
   }, function(err) {
     // $location.url("/access/offline");
@@ -1810,11 +1850,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   $scope.changeSetting = function(setting) {
     console.log($scope.user);
-    MyServices.changeSetting($scope.user, function(data) {
-      console.log(data);
-    }, function(err) {
-      // $location.url("/access/offline");
-    });
+    if ($scope.user._id !== "0") {
+      MyServices.changeSetting($scope.user, function(data) {
+        console.log(data);
+      }, function(err) {
+        // $location.url("/access/offline");
+      });
+    }
+
   };
 
 })

@@ -29,7 +29,7 @@
             <div class="list menu-set">
                 <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="{{menu | toPages}}" ui-sref-active="bordered" ng-repeat="menu in menudata">
                     <i class="icon {{menu.iconType}}" ng-if="menu.iconType!='custom'"></i>
-                    <img ng-src="{{menu.icon | serverpath}}" alt="" ng-if="menu.iconType=='custom'" class="menu-img"/>{{menu.name}}
+                    <img cache-src="{{menu.icon | serverpath}}" alt="" ng-if="menu.iconType=='custom'" class="menu-img"/>{{menu.name}}
 
                 </ion-item>
                 <ion-item nav-clear menu-close class="item item-icon-left item-complex" ng-click="logout()" ui-sref-active="bordered" ng-if="config.config.login.hasLogin">

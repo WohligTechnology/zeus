@@ -125,7 +125,8 @@ angular.module('starter.services', ['httpService'])
           "email": data.email,
           "name": data.username,
           "password": data.password,
-          "dob": data.dob
+          "dob": data.dob,
+          "loginType":"Normal"
         };
         // httpService.post(vigzserver + "user/savemob", data2, callback, errCallback);
         return $http({

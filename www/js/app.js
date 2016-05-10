@@ -557,6 +557,7 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         newmenu.typeid = menu.link._id;
         newmenu.link = "article";
         break;
+
       default:
         {
           switch (menu.link) {
@@ -586,6 +587,9 @@ angular.module('starter', ['ionic', 'starter.controllers'])
               break;
             case 'Contact':
               newmenu.link = "contact";
+              break;
+            case 'Social Feeds':
+              newmenu.link = "social";
               break;
             default:
           }
