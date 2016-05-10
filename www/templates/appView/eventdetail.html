@@ -21,7 +21,7 @@
                     <ion-slide ng-repeat="images in eventdetail.eventvideos">
                         <div class="row">
                             <div class="col col-50" ng-repeat="img in images" ng-click="showVideo(img.link);">
-                                <img ng-src="{{img.thumbnail}}" alt="">
+                                <img ng-src="{{img.thumbnail}}" alt="" class="full-image">
                             </div>
                         </div>
                     </ion-slide>

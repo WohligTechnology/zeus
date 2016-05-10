@@ -10266,3 +10266,6 @@ img.doneLoading {
   left: 15px;
   display: flex;
   -webkit-box-align: center; }
+
+.pdb {
+  padding-bottom: 10px; }
