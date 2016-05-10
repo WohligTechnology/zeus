@@ -6,11 +6,11 @@
     <ion-content class="padding">
       <ion-refresher
         pulling-text=""
-        on-refresh="loadMorePolls()">
+        on-refresh="loadgallery(1)">
       </ion-refresher>
         <div class="list" collection-repeat="photos in photos" item-height="100%" ng-click="sendphotoid(photos._id);">
             <div class="item item-image">
-                <img cache-src="{{photos.icon | serverpath:100:100:'fill'}}">
+                <img cache-src="{{photos.icon | serverpath}}">
             </div>
             <div class="item">
                 {{photos.title}}
