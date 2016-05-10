@@ -1,8 +1,8 @@
 <ion-view>
   <ion-content>
-    <ion-slide-box on-slide-changed="slideHasChanged($index)">
-      <ion-slide ng-repeat="slide in slider">
-        <div class="boxs" ng-style="{'background-image':'url({{slide.image | serverpath}})'}">
+    <ion-slide-box on-slide-changed="slideHasChanged($index)" class="full-h">
+      <ion-slide ng-repeat="slide in slider" class="full-h">
+        <div class="boxs" ng-style="{'background-image':'url({{slide.image | serverpath}})'}" class="full-h">
           <!-- <img ng-src="" alt="" class="full-image"> -->
         </div>
       </ion-slide>
