@@ -1531,7 +1531,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('PhotoGalleryCtrl', function($scope, MyServices, $stateParams, $ionicLoading, $timeout, $location) {
+.controller('PhotoGalleryCtrl', function($scope, MyServices, $stateParams, $ionicLoading, $timeout, $location, $filter) {
   addanalytics("Photo gallery Details");
   configreload.onallpage();
   $ionicLoading.show();
@@ -1562,7 +1562,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       }
       _.each(data.data.data, function(n) {
         $scope.photoObj = {};
-        $scope.photoObj.src = adminimage + n.image;
+        $scope.photoObj.src = $filter("serverpath")(n.image,300,300,"fill");
         $scope.photos.push($scope.photoObj);
       });
       if (data.data.data.length === 0) {
