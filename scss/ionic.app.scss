@@ -249,6 +249,9 @@ a:hover {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  .button{
+    min-height: 47px !important;
+  }
 }
 .img-content {
   @include square(80px);

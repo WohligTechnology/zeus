@@ -9893,6 +9893,8 @@ a:hover {
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover; }
+  .image-adjust .button {
+    min-height: 47px !important; }
 
 .img-content {
   width: 80px;
