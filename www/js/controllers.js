@@ -3,7 +3,7 @@ var configreload = {};
 var checkConnectivity = navigator.onLine;
 angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize', 'ionic-cache-src'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork, $state) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork, $state, $ionicPopup) {
   console.log("in app controller");
   addanalytics("flexible menu");
   //	$ionicLoading.hide();
@@ -73,6 +73,16 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.userdetails = $.jStorage.get("user");
     if (data.config.login) {
       if (!data.config.login.hasLogin) {
+        if (data.menu.length<1) {
+          var myPopup = $ionicPopup.show({
+            template: '<p class="text-center">No Data to Show.</p>',
+            title: 'Oops!',
+            scope: $scope,
+          });
+          $timeout(function() {
+            myPopup.close(); //close the popup after 3 seconds for some reason
+          }, 2000);
+        }
         // $scope.menu.setting = false;
       } else {
         // $scope.menu.setting = true;
@@ -233,7 +243,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.showButton = false;
     $timeout(function() {
       $scope.redirectPage();
-      
+
     }, 1000);
   } else {
     MyServices.getIntroslider(function(data) {
@@ -953,7 +963,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       'background-image': "url('" + $filter("serverpath")($scope.user.bannerPic) + "')"
     };
     $scope.user.newimage = {
-      'background-image': "url('" + $filter("serverpath")($scope.user.profilePic) + "')"
+      'background-image': "url('" + $filter("serverpathprofile")($scope.user.profilePic) + "')"
     };
 
   }, function(err) {

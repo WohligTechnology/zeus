@@ -412,6 +412,28 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
     if (input) {
       return adminimage + input + other;
+    }else {
+      return "/img/default.png";
+    }
+  };
+})
+
+.filter('serverpathprofile', function() {
+  return function(input, width, height, style) {
+    var other = "";
+    if (width && width !== "") {
+      other += "&width=" + width;
+    }
+    if (height && height !== "") {
+      other += "&height=" + height;
+    }
+    if (style && style !== "") {
+      other += "&style=" + style;
+    }
+    if (input) {
+      return adminimage + input + other;
+    }else{
+      return "/img/user.jpg";
     }
   };
 })
