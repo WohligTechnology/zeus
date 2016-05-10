@@ -2,11 +2,16 @@
   <ion-content>
     <ion-slide-box on-slide-changed="slideHasChanged($index)">
       <ion-slide ng-repeat="slide in slider">
-        <div class="boxs"><img ng-src="{{slide.image | serverpath}}" alt="" class="full-image"></div>
+        <div class="boxs" ng-style="{'background-image':'url({{slide.image | serverpath}})'}">
+          <!-- <img ng-src="" alt="" class="full-image"> -->
+        </div>
       </ion-slide>
     </ion-slide-box>
+
+  </ion-content>
+  <div class="bar bar-footer bar-positive">
     <button class="button button-block button-positive" ng-click="redirectPage();" ng-if="showButton">
       GO
   </button>
-  </ion-content>
+</div>
 </ion-view>
