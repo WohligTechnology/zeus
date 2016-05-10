@@ -9941,7 +9941,7 @@ a:hover {
   .card .item-avatar {
     padding-left: 70px; }
   .card .item-body {
-    padding: 16px; }
+    padding: 10px; }
   .card .item.tabs {
     padding: 0; }
   .card .item.item-image {
@@ -10269,3 +10269,9 @@ img.doneLoading {
 
 .z-ind {
   z-index: 9; }
+
+.margin0 {
+  margin: 0px !important; }
+
+.mb10 {
+  margin-bottom: 10px; }

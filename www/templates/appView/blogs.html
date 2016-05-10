@@ -11,8 +11,10 @@
         <p>{{blog.date|date:'MMMM dd, yyyy'}}</p>
       </ion-item>
       <div class="item item-body" ng-click="blogDetail(blog,'wordpress');">
-        <img class="full-image" cache-src="{{blog.featured_image}}">
-        <p>
+      <div class="mb10">
+          <img class="full-image" cache-src="{{blog.featured_image}}">
+      </div>
+        <p class="margin0">
           <span ng-bind-html="blog.content| cut:true:367:'. . .'| rawHtml"></span>
         </p>
       </div>
