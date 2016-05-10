@@ -6,9 +6,9 @@
     <ion-content class="padding">
       <ion-refresher
         pulling-text=""
-        on-refresh="loadgallery(1)">
+        on-refresh="refreshData()">
       </ion-refresher>
-        <div class="list" collection-repeat="photos in photos" item-height="100%" ng-click="sendphotoid(photos._id);">
+        <div class="list" collection-repeat="photos in photos" ng-click="sendphotoid(photos._id);">
             <div class="item item-image">
                 <img cache-src="{{photos.icon | serverpath}}">
             </div>

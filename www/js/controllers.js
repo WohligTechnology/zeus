@@ -1487,7 +1487,15 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     $scope.$broadcast('scroll.refreshComplete');
   };
 
-  $scope.loadgallery(1);
+
+  $scope.refreshData = function(){
+    $scope.photos = [];
+    $scope.pageno = 1;
+    $scope.loadgallery(1);
+  };
+
+  $scope.refreshData();
+
 
   $scope.loadMorePolls = function() {
     $scope.loadgallery(++$scope.pageno);
