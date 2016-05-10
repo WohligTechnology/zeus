@@ -414,7 +414,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
     if (input) {
       return adminimage + input + other;
     }else {
-      return "/img/default.png";
+      return "img/default.png";
     }
   };
 })
