@@ -12,10 +12,10 @@
                             <i class="icon ln-home3"></i>
                             <span ng-bind-html="contact.address"></span>
                         </div>
-                        <a ng-href="tel:{{contact.text}}" class="item item-icon-left" ng-if="contact.phone">
-                            <i class="icon ln-phone2"></i> {{contact.phone}}
+                        <a ng-href="tel:{{contact.contactno}}" class="item item-icon-left" ng-if="contact.contactno">
+                            <i class="icon ln-phone2"></i> {{contact.contactno}}
                         </a>
-                        <a ng-href="mailto:{{contact.type}}" class="item item-icon-left" ng-if="contact.email">
+                        <a ng-href="mailto:{{contact.email}}" class="item item-icon-left" ng-if="contact.email">
                             <i class="icon ln-envelope"></i> {{contact.email}}
                         </a>
                     </div>
