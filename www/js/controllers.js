@@ -179,7 +179,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 })
 
-.controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http, $timeout, $state, $ionicPopup, $filter, $location) {
+.controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http, $timeout, $state, $ionicPopup, $filter, $location, $ionicSlideBoxDelegate) {
   $scope.showButton = true;
 
 
@@ -228,14 +228,17 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 
   };
+
   if (MyServices.getIntroJstorage()) {
     $scope.showButton = false;
     $timeout(function() {
       $scope.redirectPage();
+      
     }, 1000);
   } else {
     MyServices.getIntroslider(function(data) {
       $scope.slider = data.data;
+      $ionicSlideBoxDelegate.update();
     });
     $scope.showButton = true;
   }
