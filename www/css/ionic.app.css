@@ -3215,8 +3215,7 @@ select {
  *  `input` and others.
  */
 button,
-html input[type="button"],
-input[type="reset"],
+html input[type="button"], input[type="reset"],
 input[type="submit"] {
   cursor: pointer;
   /* 3 */
@@ -3599,23 +3598,23 @@ h3, .h3 {
     margin-top: 0; }
   h1 + h1, h1 + .h1,
   h1 + h2, h1 + .h2,
-  h1 + h3, h1 + .h3, .h1 + h1, .h1 + .h1,
-  .h1 + h2, .h1 + .h2,
-  .h1 + h3, .h1 + .h3,
-  h2 + h1,
-  h2 + .h1,
-  h2 + h2,
-  h2 + .h2,
-  h2 + h3,
-  h2 + .h3, .h2 + h1, .h2 + .h1,
-  .h2 + h2, .h2 + .h2,
-  .h2 + h3, .h2 + .h3,
-  h3 + h1,
-  h3 + .h1,
-  h3 + h2,
-  h3 + .h2,
-  h3 + h3,
-  h3 + .h3, .h3 + h1, .h3 + .h1,
+  h1 + h3, h1 + .h3, .h1 + h1,
+  .h1 + .h1,
+  .h1 + h2,
+  .h1 + .h2,
+  .h1 + h3,
+  .h1 + .h3,
+  h2 + h1, h2 + .h1,
+  h2 + h2, h2 + .h2,
+  h2 + h3, h2 + .h3, .h2 + h1,
+  .h2 + .h1,
+  .h2 + h2,
+  .h2 + .h2,
+  .h2 + h3,
+  .h2 + .h3,
+  h3 + h1, h3 + .h1,
+  h3 + h2, h3 + .h2,
+  h3 + h3, h3 + .h3, .h3 + h1, .h3 + .h1,
   .h3 + h2, .h3 + .h2,
   .h3 + h3, .h3 + .h3 {
     margin-top: 10px; }
@@ -4015,15 +4014,27 @@ a.subdued {
     font-size: 13px;
     line-height: 32px; }
     .bar .button.button-icon:before,
-    .bar .button .icon:before, .bar .button.icon:before, .bar .button.icon-left:before, .bar .button.icon-right:before, .bar button.button-icon:before,
-    .bar button .icon:before, .bar button.icon:before, .bar button.icon-left:before, .bar button.icon-right:before {
+    .bar .button .icon:before,
+    .bar .button.icon:before,
+    .bar .button.icon-left:before,
+    .bar .button.icon-right:before, .bar button.button-icon:before,
+    .bar button .icon:before,
+    .bar button.icon:before,
+    .bar button.icon-left:before,
+    .bar button.icon-right:before {
       padding-right: 2px;
       padding-left: 2px;
       font-size: 20px;
       line-height: 32px; }
     .bar .button.button-icon, .bar button.button-icon {
       font-size: 17px; }
-      .bar .button.button-icon .icon:before, .bar .button.button-icon:before, .bar .button.button-icon.icon-left:before, .bar .button.button-icon.icon-right:before, .bar button.button-icon .icon:before, .bar button.button-icon:before, .bar button.button-icon.icon-left:before, .bar button.button-icon.icon-right:before {
+      .bar .button.button-icon .icon:before,
+      .bar .button.button-icon:before,
+      .bar .button.button-icon.icon-left:before,
+      .bar .button.button-icon.icon-right:before, .bar button.button-icon .icon:before,
+      .bar button.button-icon:before,
+      .bar button.button-icon.icon-left:before,
+      .bar button.button-icon.icon-right:before {
         vertical-align: top;
         font-size: 32px;
         line-height: 32px; }
@@ -4032,7 +4043,13 @@ a.subdued {
       padding-left: 2px;
       font-weight: 300;
       font-size: 17px; }
-      .bar .button.button-clear .icon:before, .bar .button.button-clear.icon:before, .bar .button.button-clear.icon-left:before, .bar .button.button-clear.icon-right:before, .bar button.button-clear .icon:before, .bar button.button-clear.icon:before, .bar button.button-clear.icon-left:before, .bar button.button-clear.icon-right:before {
+      .bar .button.button-clear .icon:before,
+      .bar .button.button-clear.icon:before,
+      .bar .button.button-clear.icon-left:before,
+      .bar .button.button-clear.icon-right:before, .bar button.button-clear .icon:before,
+      .bar button.button-clear.icon:before,
+      .bar button.button-clear.icon-left:before,
+      .bar button.button-clear.icon-right:before {
         font-size: 32px;
         line-height: 32px; }
     .bar .button.back-button, .bar button.back-button {
@@ -4041,7 +4058,9 @@ a.subdued {
       padding: 0;
       white-space: nowrap;
       font-weight: 400; }
-    .bar .button.back-button.active, .bar .button.back-button.activated, .bar button.back-button.active, .bar button.back-button.activated {
+    .bar .button.back-button.active,
+    .bar .button.back-button.activated, .bar button.back-button.active,
+    .bar button.back-button.activated {
       opacity: 0.2; }
   .bar .button-bar > .button,
   .bar .buttons > .button {
@@ -4089,7 +4108,8 @@ a.subdued {
   .bar-light .button:hover {
     color: #444;
     text-decoration: none; }
-  .bar-light .button.active, .bar-light .button.activated {
+  .bar-light .button.active,
+  .bar-light .button.activated {
     background-color: #fafafa; }
   .bar-light .button.button-clear {
     border-color: transparent;
@@ -4108,7 +4128,8 @@ a.subdued {
   .bar-stable .button:hover {
     color: #444;
     text-decoration: none; }
-  .bar-stable .button.active, .bar-stable .button.activated {
+  .bar-stable .button.active,
+  .bar-stable .button.activated {
     background-color: #e5e5e5; }
   .bar-stable .button.button-clear {
     border-color: transparent;
@@ -4127,7 +4148,8 @@ a.subdued {
   .bar-positive .button:hover {
     color: #fff;
     text-decoration: none; }
-  .bar-positive .button.active, .bar-positive .button.activated {
+  .bar-positive .button.active,
+  .bar-positive .button.activated {
     background-color: #e10f0f; }
   .bar-positive .button.button-clear {
     border-color: transparent;
@@ -4146,7 +4168,8 @@ a.subdued {
   .bar-calm .button:hover {
     color: #fff;
     text-decoration: none; }
-  .bar-calm .button.active, .bar-calm .button.activated {
+  .bar-calm .button.active,
+  .bar-calm .button.activated {
     background-color: #0a9dc7; }
   .bar-calm .button.button-clear {
     border-color: transparent;
@@ -4165,7 +4188,8 @@ a.subdued {
   .bar-assertive .button:hover {
     color: #fff;
     text-decoration: none; }
-  .bar-assertive .button.active, .bar-assertive .button.activated {
+  .bar-assertive .button.active,
+  .bar-assertive .button.activated {
     background-color: #e42112; }
   .bar-assertive .button.button-clear {
     border-color: transparent;
@@ -4184,7 +4208,8 @@ a.subdued {
   .bar-balanced .button:hover {
     color: #fff;
     text-decoration: none; }
-  .bar-balanced .button.active, .bar-balanced .button.activated {
+  .bar-balanced .button.active,
+  .bar-balanced .button.activated {
     background-color: #28a54c; }
   .bar-balanced .button.button-clear {
     border-color: transparent;
@@ -4203,7 +4228,8 @@ a.subdued {
   .bar-energized .button:hover {
     color: #fff;
     text-decoration: none; }
-  .bar-energized .button.active, .bar-energized .button.activated {
+  .bar-energized .button.active,
+  .bar-energized .button.activated {
     background-color: #e6b500; }
   .bar-energized .button.button-clear {
     border-color: transparent;
@@ -4222,7 +4248,8 @@ a.subdued {
   .bar-royal .button:hover {
     color: #fff;
     text-decoration: none; }
-  .bar-royal .button.active, .bar-royal .button.activated {
+  .bar-royal .button.active,
+  .bar-royal .button.activated {
     background-color: #6b46e5; }
   .bar-royal .button.button-clear {
     border-color: transparent;
@@ -4241,7 +4268,8 @@ a.subdued {
   .bar-dark .button:hover {
     color: #fff;
     text-decoration: none; }
-  .bar-dark .button.active, .bar-dark .button.activated {
+  .bar-dark .button.active,
+  .bar-dark .button.activated {
     background-color: #262626; }
   .bar-dark .button.button-clear {
     border-color: transparent;
@@ -4458,12 +4486,16 @@ a.subdued {
   border-bottom: 1px solid #ddd;
   padding-top: 2px; }
 
-.tabs-striped .tab-item.tab-item-active, .tabs-striped .tab-item.active, .tabs-striped .tab-item.activated {
+.tabs-striped .tab-item.tab-item-active,
+.tabs-striped .tab-item.active,
+.tabs-striped .tab-item.activated {
   margin-top: -2px;
   border-style: solid;
   border-width: 2px 0 0 0;
   border-color: #444; }
-  .tabs-striped .tab-item.tab-item-active .badge, .tabs-striped .tab-item.active .badge, .tabs-striped .tab-item.activated .badge {
+  .tabs-striped .tab-item.tab-item-active .badge,
+  .tabs-striped .tab-item.active .badge,
+  .tabs-striped .tab-item.activated .badge {
     top: 2px;
     opacity: 1; }
 
@@ -4475,14 +4507,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-light .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-light .tab-item.tab-item-active, .tabs-striped.tabs-light .tab-item.active, .tabs-striped.tabs-light .tab-item.activated {
+  .tabs-striped.tabs-light .tab-item.tab-item-active,
+  .tabs-striped.tabs-light .tab-item.active,
+  .tabs-striped.tabs-light .tab-item.activated {
     margin-top: -2px;
     color: #444;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #444; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-stable .tabs {
@@ -4493,14 +4529,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-stable .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-stable .tab-item.tab-item-active, .tabs-striped.tabs-stable .tab-item.active, .tabs-striped.tabs-stable .tab-item.activated {
+  .tabs-striped.tabs-stable .tab-item.tab-item-active,
+  .tabs-striped.tabs-stable .tab-item.active,
+  .tabs-striped.tabs-stable .tab-item.activated {
     margin-top: -2px;
     color: #444;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #444; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-positive .tabs {
@@ -4511,14 +4551,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-positive .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-positive .tab-item.tab-item-active, .tabs-striped.tabs-positive .tab-item.active, .tabs-striped.tabs-positive .tab-item.activated {
+  .tabs-striped.tabs-positive .tab-item.tab-item-active,
+  .tabs-striped.tabs-positive .tab-item.active,
+  .tabs-striped.tabs-positive .tab-item.activated {
     margin-top: -2px;
     color: #ffffff;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #ffffff; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-calm .tabs {
@@ -4529,14 +4573,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-calm .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-calm .tab-item.tab-item-active, .tabs-striped.tabs-calm .tab-item.active, .tabs-striped.tabs-calm .tab-item.activated {
+  .tabs-striped.tabs-calm .tab-item.tab-item-active,
+  .tabs-striped.tabs-calm .tab-item.active,
+  .tabs-striped.tabs-calm .tab-item.activated {
     margin-top: -2px;
     color: #ffffff;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #ffffff; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-assertive .tabs {
@@ -4547,14 +4595,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-assertive .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-assertive .tab-item.tab-item-active, .tabs-striped.tabs-assertive .tab-item.active, .tabs-striped.tabs-assertive .tab-item.activated {
+  .tabs-striped.tabs-assertive .tab-item.tab-item-active,
+  .tabs-striped.tabs-assertive .tab-item.active,
+  .tabs-striped.tabs-assertive .tab-item.activated {
     margin-top: -2px;
     color: #ffffff;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #ffffff; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-balanced .tabs {
@@ -4565,14 +4617,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-balanced .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-balanced .tab-item.tab-item-active, .tabs-striped.tabs-balanced .tab-item.active, .tabs-striped.tabs-balanced .tab-item.activated {
+  .tabs-striped.tabs-balanced .tab-item.tab-item-active,
+  .tabs-striped.tabs-balanced .tab-item.active,
+  .tabs-striped.tabs-balanced .tab-item.activated {
     margin-top: -2px;
     color: #ffffff;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #ffffff; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-energized .tabs {
@@ -4583,14 +4639,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-energized .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-energized .tab-item.tab-item-active, .tabs-striped.tabs-energized .tab-item.active, .tabs-striped.tabs-energized .tab-item.activated {
+  .tabs-striped.tabs-energized .tab-item.tab-item-active,
+  .tabs-striped.tabs-energized .tab-item.active,
+  .tabs-striped.tabs-energized .tab-item.activated {
     margin-top: -2px;
     color: #ffffff;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #ffffff; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-royal .tabs {
@@ -4601,14 +4661,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-royal .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-royal .tab-item.tab-item-active, .tabs-striped.tabs-royal .tab-item.active, .tabs-striped.tabs-royal .tab-item.activated {
+  .tabs-striped.tabs-royal .tab-item.tab-item-active,
+  .tabs-striped.tabs-royal .tab-item.active,
+  .tabs-striped.tabs-royal .tab-item.activated {
     margin-top: -2px;
     color: #ffffff;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #ffffff; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-dark .tabs {
@@ -4619,14 +4683,18 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-dark .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-dark .tab-item.tab-item-active, .tabs-striped.tabs-dark .tab-item.active, .tabs-striped.tabs-dark .tab-item.activated {
+  .tabs-striped.tabs-dark .tab-item.tab-item-active,
+  .tabs-striped.tabs-dark .tab-item.active,
+  .tabs-striped.tabs-dark .tab-item.activated {
     margin-top: -2px;
     color: #ffffff;
     border-style: solid;
     border-width: 2px 0 0 0;
     border-color: #ffffff; }
 
-.tabs-striped.tabs-top .tab-item.tab-item-active .badge, .tabs-striped.tabs-top .tab-item.active .badge, .tabs-striped.tabs-top .tab-item.activated .badge {
+.tabs-striped.tabs-top .tab-item.tab-item-active .badge,
+.tabs-striped.tabs-top .tab-item.active .badge,
+.tabs-striped.tabs-top .tab-item.activated .badge {
   top: 4%; }
 
 .tabs-striped.tabs-background-light .tabs {
@@ -4670,12 +4738,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-light .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-light .tab-item.tab-item-active, .tabs-striped.tabs-color-light .tab-item.active, .tabs-striped.tabs-color-light .tab-item.activated {
+  .tabs-striped.tabs-color-light .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-light .tab-item.active,
+  .tabs-striped.tabs-color-light .tab-item.activated {
     margin-top: -2px;
     color: #ffffff;
     border: 0 solid #ffffff;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-light .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-light .tab-item.active .badge, .tabs-striped.tabs-color-light .tab-item.activated .badge {
+    .tabs-striped.tabs-color-light .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-light .tab-item.active .badge,
+    .tabs-striped.tabs-color-light .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4684,12 +4756,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-stable .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-stable .tab-item.tab-item-active, .tabs-striped.tabs-color-stable .tab-item.active, .tabs-striped.tabs-color-stable .tab-item.activated {
+  .tabs-striped.tabs-color-stable .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-stable .tab-item.active,
+  .tabs-striped.tabs-color-stable .tab-item.activated {
     margin-top: -2px;
     color: #ccc;
     border: 0 solid #ccc;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-stable .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-stable .tab-item.active .badge, .tabs-striped.tabs-color-stable .tab-item.activated .badge {
+    .tabs-striped.tabs-color-stable .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-stable .tab-item.active .badge,
+    .tabs-striped.tabs-color-stable .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4698,12 +4774,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-positive .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-positive .tab-item.tab-item-active, .tabs-striped.tabs-color-positive .tab-item.active, .tabs-striped.tabs-color-positive .tab-item.activated {
+  .tabs-striped.tabs-color-positive .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-positive .tab-item.active,
+  .tabs-striped.tabs-color-positive .tab-item.activated {
     margin-top: -2px;
     color: #F13232;
     border: 0 solid #F13232;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-positive .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-positive .tab-item.active .badge, .tabs-striped.tabs-color-positive .tab-item.activated .badge {
+    .tabs-striped.tabs-color-positive .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-positive .tab-item.active .badge,
+    .tabs-striped.tabs-color-positive .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4712,12 +4792,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-calm .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-calm .tab-item.tab-item-active, .tabs-striped.tabs-color-calm .tab-item.active, .tabs-striped.tabs-color-calm .tab-item.activated {
+  .tabs-striped.tabs-color-calm .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-calm .tab-item.active,
+  .tabs-striped.tabs-color-calm .tab-item.activated {
     margin-top: -2px;
     color: #11c1f3;
     border: 0 solid #11c1f3;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-calm .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-calm .tab-item.active .badge, .tabs-striped.tabs-color-calm .tab-item.activated .badge {
+    .tabs-striped.tabs-color-calm .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-calm .tab-item.active .badge,
+    .tabs-striped.tabs-color-calm .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4726,12 +4810,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-assertive .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-assertive .tab-item.tab-item-active, .tabs-striped.tabs-color-assertive .tab-item.active, .tabs-striped.tabs-color-assertive .tab-item.activated {
+  .tabs-striped.tabs-color-assertive .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-assertive .tab-item.active,
+  .tabs-striped.tabs-color-assertive .tab-item.activated {
     margin-top: -2px;
     color: #ef473a;
     border: 0 solid #ef473a;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-assertive .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-assertive .tab-item.active .badge, .tabs-striped.tabs-color-assertive .tab-item.activated .badge {
+    .tabs-striped.tabs-color-assertive .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-assertive .tab-item.active .badge,
+    .tabs-striped.tabs-color-assertive .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4740,12 +4828,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-balanced .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-balanced .tab-item.tab-item-active, .tabs-striped.tabs-color-balanced .tab-item.active, .tabs-striped.tabs-color-balanced .tab-item.activated {
+  .tabs-striped.tabs-color-balanced .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-balanced .tab-item.active,
+  .tabs-striped.tabs-color-balanced .tab-item.activated {
     margin-top: -2px;
     color: #33cd5f;
     border: 0 solid #33cd5f;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-balanced .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-balanced .tab-item.active .badge, .tabs-striped.tabs-color-balanced .tab-item.activated .badge {
+    .tabs-striped.tabs-color-balanced .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-balanced .tab-item.active .badge,
+    .tabs-striped.tabs-color-balanced .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4754,12 +4846,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-energized .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-energized .tab-item.tab-item-active, .tabs-striped.tabs-color-energized .tab-item.active, .tabs-striped.tabs-color-energized .tab-item.activated {
+  .tabs-striped.tabs-color-energized .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-energized .tab-item.active,
+  .tabs-striped.tabs-color-energized .tab-item.activated {
     margin-top: -2px;
     color: #ffc900;
     border: 0 solid #ffc900;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-energized .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-energized .tab-item.active .badge, .tabs-striped.tabs-color-energized .tab-item.activated .badge {
+    .tabs-striped.tabs-color-energized .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-energized .tab-item.active .badge,
+    .tabs-striped.tabs-color-energized .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4768,12 +4864,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-royal .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-royal .tab-item.tab-item-active, .tabs-striped.tabs-color-royal .tab-item.active, .tabs-striped.tabs-color-royal .tab-item.activated {
+  .tabs-striped.tabs-color-royal .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-royal .tab-item.active,
+  .tabs-striped.tabs-color-royal .tab-item.activated {
     margin-top: -2px;
     color: #886aea;
     border: 0 solid #886aea;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-royal .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-royal .tab-item.active .badge, .tabs-striped.tabs-color-royal .tab-item.activated .badge {
+    .tabs-striped.tabs-color-royal .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-royal .tab-item.active .badge,
+    .tabs-striped.tabs-color-royal .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4782,12 +4882,16 @@ a.subdued {
   opacity: 1; }
   .tabs-striped.tabs-color-dark .tab-item .badge {
     opacity: 0.4; }
-  .tabs-striped.tabs-color-dark .tab-item.tab-item-active, .tabs-striped.tabs-color-dark .tab-item.active, .tabs-striped.tabs-color-dark .tab-item.activated {
+  .tabs-striped.tabs-color-dark .tab-item.tab-item-active,
+  .tabs-striped.tabs-color-dark .tab-item.active,
+  .tabs-striped.tabs-color-dark .tab-item.activated {
     margin-top: -2px;
     color: #444;
     border: 0 solid #444;
     border-top-width: 2px; }
-    .tabs-striped.tabs-color-dark .tab-item.tab-item-active .badge, .tabs-striped.tabs-color-dark .tab-item.active .badge, .tabs-striped.tabs-color-dark .tab-item.activated .badge {
+    .tabs-striped.tabs-color-dark .tab-item.tab-item-active .badge,
+    .tabs-striped.tabs-color-dark .tab-item.active .badge,
+    .tabs-striped.tabs-color-dark .tab-item.activated .badge {
       top: 2px;
       opacity: 1; }
 
@@ -4850,10 +4954,14 @@ a.subdued {
   opacity: 1; }
   .tabs-color-light .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-light .tab-item.tab-item-active, .tabs-color-light .tab-item.active, .tabs-color-light .tab-item.activated {
+  .tabs-color-light .tab-item.tab-item-active,
+  .tabs-color-light .tab-item.active,
+  .tabs-color-light .tab-item.activated {
     color: #ffffff;
     border: 0 solid #ffffff; }
-    .tabs-color-light .tab-item.tab-item-active .badge, .tabs-color-light .tab-item.active .badge, .tabs-color-light .tab-item.activated .badge {
+    .tabs-color-light .tab-item.tab-item-active .badge,
+    .tabs-color-light .tab-item.active .badge,
+    .tabs-color-light .tab-item.activated .badge {
       opacity: 1; }
 
 .tabs-color-stable .tab-item {
@@ -4861,10 +4969,14 @@ a.subdued {
   opacity: 1; }
   .tabs-color-stable .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-stable .tab-item.tab-item-active, .tabs-color-stable .tab-item.active, .tabs-color-stable .tab-item.activated {
+  .tabs-color-stable .tab-item.tab-item-active,
+  .tabs-color-stable .tab-item.active,
+  .tabs-color-stable .tab-item.activated {
     color: #ccc;
     border: 0 solid #ccc; }
-    .tabs-color-stable .tab-item.tab-item-active .badge, .tabs-color-stable .tab-item.active .badge, .tabs-color-stable .tab-item.activated .badge {
+    .tabs-color-stable .tab-item.tab-item-active .badge,
+    .tabs-color-stable .tab-item.active .badge,
+    .tabs-color-stable .tab-item.activated .badge {
       opacity: 1; }
 
 .tabs-color-positive .tab-item {
@@ -4872,10 +4984,14 @@ a.subdued {
   opacity: 1; }
   .tabs-color-positive .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-positive .tab-item.tab-item-active, .tabs-color-positive .tab-item.active, .tabs-color-positive .tab-item.activated {
+  .tabs-color-positive .tab-item.tab-item-active,
+  .tabs-color-positive .tab-item.active,
+  .tabs-color-positive .tab-item.activated {
     color: #F13232;
     border: 0 solid #F13232; }
-    .tabs-color-positive .tab-item.tab-item-active .badge, .tabs-color-positive .tab-item.active .badge, .tabs-color-positive .tab-item.activated .badge {
+    .tabs-color-positive .tab-item.tab-item-active .badge,
+    .tabs-color-positive .tab-item.active .badge,
+    .tabs-color-positive .tab-item.activated .badge {
       opacity: 1; }
 
 .tabs-color-calm .tab-item {
@@ -4883,10 +4999,14 @@ a.subdued {
   opacity: 1; }
   .tabs-color-calm .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-calm .tab-item.tab-item-active, .tabs-color-calm .tab-item.active, .tabs-color-calm .tab-item.activated {
+  .tabs-color-calm .tab-item.tab-item-active,
+  .tabs-color-calm .tab-item.active,
+  .tabs-color-calm .tab-item.activated {
     color: #11c1f3;
     border: 0 solid #11c1f3; }
-    .tabs-color-calm .tab-item.tab-item-active .badge, .tabs-color-calm .tab-item.active .badge, .tabs-color-calm .tab-item.activated .badge {
+    .tabs-color-calm .tab-item.tab-item-active .badge,
+    .tabs-color-calm .tab-item.active .badge,
+    .tabs-color-calm .tab-item.activated .badge {
       opacity: 1; }
 
 .tabs-color-assertive .tab-item {
@@ -4894,10 +5014,14 @@ a.subdued {
   opacity: 1; }
   .tabs-color-assertive .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-assertive .tab-item.tab-item-active, .tabs-color-assertive .tab-item.active, .tabs-color-assertive .tab-item.activated {
+  .tabs-color-assertive .tab-item.tab-item-active,
+  .tabs-color-assertive .tab-item.active,
+  .tabs-color-assertive .tab-item.activated {
     color: #ef473a;
     border: 0 solid #ef473a; }
-    .tabs-color-assertive .tab-item.tab-item-active .badge, .tabs-color-assertive .tab-item.active .badge, .tabs-color-assertive .tab-item.activated .badge {
+    .tabs-color-assertive .tab-item.tab-item-active .badge,
+    .tabs-color-assertive .tab-item.active .badge,
+    .tabs-color-assertive .tab-item.activated .badge {
       opacity: 1; }
 
 .tabs-color-balanced .tab-item {
@@ -4905,10 +5029,14 @@ a.subdued {
   opacity: 1; }
   .tabs-color-balanced .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-balanced .tab-item.tab-item-active, .tabs-color-balanced .tab-item.active, .tabs-color-balanced .tab-item.activated {
+  .tabs-color-balanced .tab-item.tab-item-active,
+  .tabs-color-balanced .tab-item.active,
+  .tabs-color-balanced .tab-item.activated {
     color: #33cd5f;
     border: 0 solid #33cd5f; }
-    .tabs-color-balanced .tab-item.tab-item-active .badge, .tabs-color-balanced .tab-item.active .badge, .tabs-color-balanced .tab-item.activated .badge {
+    .tabs-color-balanced .tab-item.tab-item-active .badge,
+    .tabs-color-balanced .tab-item.active .badge,
+    .tabs-color-balanced .tab-item.activated .badge {
       opacity: 1; }
 
 .tabs-color-energized .tab-item {
@@ -4916,10 +5044,14 @@ a.subdued {
   opacity: 1; }
   .tabs-color-energized .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-energized .tab-item.tab-item-active, .tabs-color-energized .tab-item.active, .tabs-color-energized .tab-item.activated {
+  .tabs-color-energized .tab-item.tab-item-active,
+  .tabs-color-energized .tab-item.active,
+  .tabs-color-energized .tab-item.activated {
     color: #ffc900;
     border: 0 solid #ffc900; }
-    .tabs-color-energized .tab-item.tab-item-active .badge, .tabs-color-energized .tab-item.active .badge, .tabs-color-energized .tab-item.activated .badge {
+    .tabs-color-energized .tab-item.tab-item-active .badge,
+    .tabs-color-energized .tab-item.active .badge,
+    .tabs-color-energized .tab-item.activated .badge {
       opacity: 1; }
 
 .tabs-color-royal .tab-item {
@@ -4927,10 +5059,14 @@ a.subdued {
   opacity: 1; }
   .tabs-color-royal .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-royal .tab-item.tab-item-active, .tabs-color-royal .tab-item.active, .tabs-color-royal .tab-item.activated {
+  .tabs-color-royal .tab-item.tab-item-active,
+  .tabs-color-royal .tab-item.active,
+  .tabs-color-royal .tab-item.activated {
     color: #886aea;
     border: 0 solid #886aea; }
-    .tabs-color-royal .tab-item.tab-item-active .badge, .tabs-color-royal .tab-item.active .badge, .tabs-color-royal .tab-item.activated .badge {
+    .tabs-color-royal .tab-item.tab-item-active .badge,
+    .tabs-color-royal .tab-item.active .badge,
+    .tabs-color-royal .tab-item.activated .badge {
       opacity: 1; }
 
 .tabs-color-dark .tab-item {
@@ -4938,84 +5074,120 @@ a.subdued {
   opacity: 1; }
   .tabs-color-dark .tab-item .badge {
     opacity: 0.4; }
-  .tabs-color-dark .tab-item.tab-item-active, .tabs-color-dark .tab-item.active, .tabs-color-dark .tab-item.activated {
+  .tabs-color-dark .tab-item.tab-item-active,
+  .tabs-color-dark .tab-item.active,
+  .tabs-color-dark .tab-item.activated {
     color: #444;
     border: 0 solid #444; }
-    .tabs-color-dark .tab-item.tab-item-active .badge, .tabs-color-dark .tab-item.active .badge, .tabs-color-dark .tab-item.activated .badge {
+    .tabs-color-dark .tab-item.tab-item-active .badge,
+    .tabs-color-dark .tab-item.active .badge,
+    .tabs-color-dark .tab-item.activated .badge {
       opacity: 1; }
 
 ion-tabs.tabs-color-active-light .tab-item {
   color: #444; }
-  ion-tabs.tabs-color-active-light .tab-item.tab-item-active, ion-tabs.tabs-color-active-light .tab-item.active, ion-tabs.tabs-color-active-light .tab-item.activated {
+  ion-tabs.tabs-color-active-light .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-light .tab-item.active,
+  ion-tabs.tabs-color-active-light .tab-item.activated {
     color: #ffffff; }
 
 ion-tabs.tabs-color-active-stable .tab-item {
   color: #444; }
-  ion-tabs.tabs-color-active-stable .tab-item.tab-item-active, ion-tabs.tabs-color-active-stable .tab-item.active, ion-tabs.tabs-color-active-stable .tab-item.activated {
+  ion-tabs.tabs-color-active-stable .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-stable .tab-item.active,
+  ion-tabs.tabs-color-active-stable .tab-item.activated {
     color: #ccc; }
 
 ion-tabs.tabs-color-active-positive .tab-item {
   color: #444; }
-  ion-tabs.tabs-color-active-positive .tab-item.tab-item-active, ion-tabs.tabs-color-active-positive .tab-item.active, ion-tabs.tabs-color-active-positive .tab-item.activated {
+  ion-tabs.tabs-color-active-positive .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-positive .tab-item.active,
+  ion-tabs.tabs-color-active-positive .tab-item.activated {
     color: #F13232; }
 
 ion-tabs.tabs-color-active-calm .tab-item {
   color: #444; }
-  ion-tabs.tabs-color-active-calm .tab-item.tab-item-active, ion-tabs.tabs-color-active-calm .tab-item.active, ion-tabs.tabs-color-active-calm .tab-item.activated {
+  ion-tabs.tabs-color-active-calm .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-calm .tab-item.active,
+  ion-tabs.tabs-color-active-calm .tab-item.activated {
     color: #11c1f3; }
 
 ion-tabs.tabs-color-active-assertive .tab-item {
   color: #444; }
-  ion-tabs.tabs-color-active-assertive .tab-item.tab-item-active, ion-tabs.tabs-color-active-assertive .tab-item.active, ion-tabs.tabs-color-active-assertive .tab-item.activated {
+  ion-tabs.tabs-color-active-assertive .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-assertive .tab-item.active,
+  ion-tabs.tabs-color-active-assertive .tab-item.activated {
     color: #ef473a; }
 
 ion-tabs.tabs-color-active-balanced .tab-item {
   color: #444; }
-  ion-tabs.tabs-color-active-balanced .tab-item.tab-item-active, ion-tabs.tabs-color-active-balanced .tab-item.active, ion-tabs.tabs-color-active-balanced .tab-item.activated {
+  ion-tabs.tabs-color-active-balanced .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-balanced .tab-item.active,
+  ion-tabs.tabs-color-active-balanced .tab-item.activated {
     color: #33cd5f; }
 
 ion-tabs.tabs-color-active-energized .tab-item {
   color: #444; }
-  ion-tabs.tabs-color-active-energized .tab-item.tab-item-active, ion-tabs.tabs-color-active-energized .tab-item.active, ion-tabs.tabs-color-active-energized .tab-item.activated {
+  ion-tabs.tabs-color-active-energized .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-energized .tab-item.active,
+  ion-tabs.tabs-color-active-energized .tab-item.activated {
     color: #ffc900; }
 
 ion-tabs.tabs-color-active-royal .tab-item {
   color: #444; }
-  ion-tabs.tabs-color-active-royal .tab-item.tab-item-active, ion-tabs.tabs-color-active-royal .tab-item.active, ion-tabs.tabs-color-active-royal .tab-item.activated {
+  ion-tabs.tabs-color-active-royal .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-royal .tab-item.active,
+  ion-tabs.tabs-color-active-royal .tab-item.activated {
     color: #886aea; }
 
 ion-tabs.tabs-color-active-dark .tab-item {
   color: #ffffff; }
-  ion-tabs.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs.tabs-color-active-dark .tab-item.active, ion-tabs.tabs-color-active-dark .tab-item.activated {
+  ion-tabs.tabs-color-active-dark .tab-item.tab-item-active,
+  ion-tabs.tabs-color-active-dark .tab-item.active,
+  ion-tabs.tabs-color-active-dark .tab-item.activated {
     color: #444; }
 
 .tabs-top.tabs-striped {
   padding-bottom: 0; }
   .tabs-top.tabs-striped .tab-item {
     background: transparent;
-    -webkit-transition: color .1s ease;
-    -moz-transition: color .1s ease;
-    -ms-transition: color .1s ease;
-    -o-transition: color .1s ease;
-    transition: color .1s ease; }
-    .tabs-top.tabs-striped .tab-item.tab-item-active, .tabs-top.tabs-striped .tab-item.active, .tabs-top.tabs-striped .tab-item.activated {
+    -webkit-transition: color 0.1s ease;
+    -moz-transition: color 0.1s ease;
+    -ms-transition: color 0.1s ease;
+    -o-transition: color 0.1s ease;
+    transition: color 0.1s ease; }
+    .tabs-top.tabs-striped .tab-item.tab-item-active,
+    .tabs-top.tabs-striped .tab-item.active,
+    .tabs-top.tabs-striped .tab-item.activated {
       margin-top: 1px;
       border-width: 0px 0px 2px 0px !important;
       border-style: solid; }
-      .tabs-top.tabs-striped .tab-item.tab-item-active > .badge, .tabs-top.tabs-striped .tab-item.tab-item-active > i, .tabs-top.tabs-striped .tab-item.active > .badge, .tabs-top.tabs-striped .tab-item.active > i, .tabs-top.tabs-striped .tab-item.activated > .badge, .tabs-top.tabs-striped .tab-item.activated > i {
+      .tabs-top.tabs-striped .tab-item.tab-item-active > .badge,
+      .tabs-top.tabs-striped .tab-item.tab-item-active > i,
+      .tabs-top.tabs-striped .tab-item.active > .badge,
+      .tabs-top.tabs-striped .tab-item.active > i,
+      .tabs-top.tabs-striped .tab-item.activated > .badge, .tabs-top.tabs-striped .tab-item.activated > i {
         margin-top: -1px; }
     .tabs-top.tabs-striped .tab-item .badge {
-      -webkit-transition: color .2s ease;
-      -moz-transition: color .2s ease;
-      -ms-transition: color .2s ease;
-      -o-transition: color .2s ease;
-      transition: color .2s ease; }
-  .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active i, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active i, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated i {
+      -webkit-transition: color 0.2s ease;
+      -moz-transition: color 0.2s ease;
+      -ms-transition: color 0.2s ease;
+      -o-transition: color 0.2s ease;
+      transition: color 0.2s ease; }
+  .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active .tab-title,
+  .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.tab-item-active i,
+  .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active .tab-title,
+  .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.active i,
+  .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated .tab-title, .tabs-top.tabs-striped:not(.tabs-icon-left):not(.tabs-icon-top) .tab-item.activated i {
     display: block;
     margin-top: -1px; }
   .tabs-top.tabs-striped.tabs-icon-left .tab-item {
     margin-top: 1px; }
-    .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active i, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.active i, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated i {
+    .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active .tab-title,
+    .tabs-top.tabs-striped.tabs-icon-left .tab-item.tab-item-active i,
+    .tabs-top.tabs-striped.tabs-icon-left .tab-item.active .tab-title,
+    .tabs-top.tabs-striped.tabs-icon-left .tab-item.active i,
+    .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated .tab-title, .tabs-top.tabs-striped.tabs-icon-left .tab-item.activated i {
       margin-top: -0.1em; }
 
 /* Allow parent element to have tabs-top */
@@ -5027,7 +5199,9 @@ ion-tabs.tabs-color-active-dark .tab-item {
   background-position: bottom;
   border-top-width: 0;
   border-bottom-width: 1px; }
-  .tabs-top > .tabs .tab-item.tab-item-active .badge, .tabs-top > .tabs .tab-item.active .badge, .tabs-top > .tabs .tab-item.activated .badge,
+  .tabs-top > .tabs .tab-item.tab-item-active .badge,
+  .tabs-top > .tabs .tab-item.active .badge,
+  .tabs-top > .tabs .tab-item.activated .badge,
   .tabs.tabs-top .tab-item.tab-item-active .badge,
   .tabs.tabs-top .tab-item.active .badge,
   .tabs.tabs-top .tab-item.activated .badge {
@@ -5083,23 +5257,23 @@ ion-tabs.tabs-color-active-dark .tab-item {
 .tabs-icon-right.tabs .tab-item,
 .tabs-icon-right > .tabs .tab-item {
   font-size: 10px; }
-  .tabs-icon-left.tabs .tab-item .icon, .tabs-icon-left.tabs .tab-item .tab-title,
+  .tabs-icon-left.tabs .tab-item .icon,
+  .tabs-icon-left.tabs .tab-item .tab-title,
   .tabs-icon-left > .tabs .tab-item .icon,
   .tabs-icon-left > .tabs .tab-item .tab-title,
   .tabs-icon-right.tabs .tab-item .icon,
   .tabs-icon-right.tabs .tab-item .tab-title,
-  .tabs-icon-right > .tabs .tab-item .icon,
-  .tabs-icon-right > .tabs .tab-item .tab-title {
+  .tabs-icon-right > .tabs .tab-item .icon, .tabs-icon-right > .tabs .tab-item .tab-title {
     display: inline-block;
     vertical-align: top;
     margin-top: -.1em; }
-    .tabs-icon-left.tabs .tab-item .icon:before, .tabs-icon-left.tabs .tab-item .tab-title:before,
+    .tabs-icon-left.tabs .tab-item .icon:before,
+    .tabs-icon-left.tabs .tab-item .tab-title:before,
     .tabs-icon-left > .tabs .tab-item .icon:before,
     .tabs-icon-left > .tabs .tab-item .tab-title:before,
     .tabs-icon-right.tabs .tab-item .icon:before,
     .tabs-icon-right.tabs .tab-item .tab-title:before,
-    .tabs-icon-right > .tabs .tab-item .icon:before,
-    .tabs-icon-right > .tabs .tab-item .tab-title:before {
+    .tabs-icon-right > .tabs .tab-item .icon:before, .tabs-icon-right > .tabs .tab-item .tab-title:before {
       font-size: 24px;
       line-height: 49px; }
 
@@ -5910,7 +6084,8 @@ ion-tabs.tabs-color-active-dark .tab-item {
 a.item {
   color: inherit;
   text-decoration: none; }
-  a.item:hover, a.item:focus {
+  a.item:hover,
+  a.item:focus {
     text-decoration: none; }
 
 /**
@@ -6374,7 +6549,8 @@ button.item.item-button-right {
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms; }
 
-.item-remove-animate.ng-leave .item-content, .item-remove-animate.ng-leave:last-of-type {
+.item-remove-animate.ng-leave .item-content,
+.item-remove-animate.ng-leave:last-of-type {
   -webkit-transition-duration: 300ms;
   transition-duration: 300ms;
   -webkit-transition-timing-function: ease-in;
@@ -6749,7 +6925,9 @@ button.item.item-button-right {
       transition: opacity 0.4s ease-in;
       opacity: 1; }
 
-.slider-slide.ng-enter, .slider-slide.ng-leave, .slider-slide.ng-animate,
+.slider-slide.ng-enter,
+.slider-slide.ng-leave,
+.slider-slide.ng-animate,
 .slider-pager-page.ng-enter,
 .slider-pager-page.ng-leave,
 .slider-pager-page.ng-animate {
@@ -8448,7 +8626,7 @@ input:checked + .checkbox-icon:after {
     background: #ccc;
     color: #444; }
   .item-select.item-stable:after, .item-select.item-stable .input-label {
-    color: #666666; }
+    color: #656565; }
   .item-select.item-positive select {
     background: #F13232;
     color: #fff; }
@@ -8485,7 +8663,8 @@ input:checked + .checkbox-icon:after {
   .item-select.item-dark:after, .item-select.item-dark .input-label {
     color: #fff; }
 
-select[multiple], select[size] {
+select[multiple],
+select[size] {
   height: auto; }
 
 /**
@@ -8523,7 +8702,8 @@ progress {
   .button:hover {
     color: #444;
     text-decoration: none; }
-  .button.active, .button.activated {
+  .button.active,
+  .button.activated {
     background-color: #e5e5e5; }
   .button:after {
     position: absolute;
@@ -8535,7 +8715,10 @@ progress {
   .button .icon {
     vertical-align: top;
     pointer-events: none; }
-  .button .icon:before, .button.icon:before, .button.icon-left:before, .button.icon-right:before {
+  .button .icon:before,
+  .button.icon:before,
+  .button.icon-left:before,
+  .button.icon-right:before {
     display: inline-block;
     padding: 0 0 0 0;
     vertical-align: inherit;
@@ -8560,7 +8743,8 @@ progress {
     .button.button-light:hover {
       color: #444;
       text-decoration: none; }
-    .button.button-light.active, .button.button-light.activated {
+    .button.button-light.active,
+    .button.button-light.activated {
       background-color: #fafafa; }
     .button.button-light.button-clear {
       border-color: transparent;
@@ -8574,7 +8758,8 @@ progress {
       border-color: #ddd;
       background: transparent;
       color: #ddd; }
-      .button.button-light.button-outline.active, .button.button-light.button-outline.activated {
+      .button.button-light.button-outline.active,
+      .button.button-light.button-outline.activated {
         background-color: #ddd;
         box-shadow: none;
         color: #fff; }
@@ -8585,7 +8770,8 @@ progress {
     .button.button-stable:hover {
       color: #444;
       text-decoration: none; }
-    .button.button-stable.active, .button.button-stable.activated {
+    .button.button-stable.active,
+    .button.button-stable.activated {
       background-color: #e5e5e5; }
     .button.button-stable.button-clear {
       border-color: transparent;
@@ -8599,7 +8785,8 @@ progress {
       border-color: #b2b2b2;
       background: transparent;
       color: #b2b2b2; }
-      .button.button-stable.button-outline.active, .button.button-stable.button-outline.activated {
+      .button.button-stable.button-outline.active,
+      .button.button-stable.button-outline.activated {
         background-color: #b2b2b2;
         box-shadow: none;
         color: #fff; }
@@ -8610,7 +8797,8 @@ progress {
     .button.button-positive:hover {
       color: #fff;
       text-decoration: none; }
-    .button.button-positive.active, .button.button-positive.activated {
+    .button.button-positive.active,
+    .button.button-positive.activated {
       background-color: #e10f0f; }
     .button.button-positive.button-clear {
       border-color: transparent;
@@ -8624,7 +8812,8 @@ progress {
       border-color: #F13232;
       background: transparent;
       color: #F13232; }
-      .button.button-positive.button-outline.active, .button.button-positive.button-outline.activated {
+      .button.button-positive.button-outline.active,
+      .button.button-positive.button-outline.activated {
         background-color: #F13232;
         box-shadow: none;
         color: #fff; }
@@ -8635,7 +8824,8 @@ progress {
     .button.button-calm:hover {
       color: #fff;
       text-decoration: none; }
-    .button.button-calm.active, .button.button-calm.activated {
+    .button.button-calm.active,
+    .button.button-calm.activated {
       background-color: #0a9dc7; }
     .button.button-calm.button-clear {
       border-color: transparent;
@@ -8649,7 +8839,8 @@ progress {
       border-color: #11c1f3;
       background: transparent;
       color: #11c1f3; }
-      .button.button-calm.button-outline.active, .button.button-calm.button-outline.activated {
+      .button.button-calm.button-outline.active,
+      .button.button-calm.button-outline.activated {
         background-color: #11c1f3;
         box-shadow: none;
         color: #fff; }
@@ -8660,7 +8851,8 @@ progress {
     .button.button-assertive:hover {
       color: #fff;
       text-decoration: none; }
-    .button.button-assertive.active, .button.button-assertive.activated {
+    .button.button-assertive.active,
+    .button.button-assertive.activated {
       background-color: #e42112; }
     .button.button-assertive.button-clear {
       border-color: transparent;
@@ -8674,7 +8866,8 @@ progress {
       border-color: #ef473a;
       background: transparent;
       color: #ef473a; }
-      .button.button-assertive.button-outline.active, .button.button-assertive.button-outline.activated {
+      .button.button-assertive.button-outline.active,
+      .button.button-assertive.button-outline.activated {
         background-color: #ef473a;
         box-shadow: none;
         color: #fff; }
@@ -8685,7 +8878,8 @@ progress {
     .button.button-balanced:hover {
       color: #fff;
       text-decoration: none; }
-    .button.button-balanced.active, .button.button-balanced.activated {
+    .button.button-balanced.active,
+    .button.button-balanced.activated {
       background-color: #28a54c; }
     .button.button-balanced.button-clear {
       border-color: transparent;
@@ -8699,7 +8893,8 @@ progress {
       border-color: #33cd5f;
       background: transparent;
       color: #33cd5f; }
-      .button.button-balanced.button-outline.active, .button.button-balanced.button-outline.activated {
+      .button.button-balanced.button-outline.active,
+      .button.button-balanced.button-outline.activated {
         background-color: #33cd5f;
         box-shadow: none;
         color: #fff; }
@@ -8710,7 +8905,8 @@ progress {
     .button.button-energized:hover {
       color: #fff;
       text-decoration: none; }
-    .button.button-energized.active, .button.button-energized.activated {
+    .button.button-energized.active,
+    .button.button-energized.activated {
       background-color: #e6b500; }
     .button.button-energized.button-clear {
       border-color: transparent;
@@ -8724,7 +8920,8 @@ progress {
       border-color: #ffc900;
       background: transparent;
       color: #ffc900; }
-      .button.button-energized.button-outline.active, .button.button-energized.button-outline.activated {
+      .button.button-energized.button-outline.active,
+      .button.button-energized.button-outline.activated {
         background-color: #ffc900;
         box-shadow: none;
         color: #fff; }
@@ -8735,7 +8932,8 @@ progress {
     .button.button-royal:hover {
       color: #fff;
       text-decoration: none; }
-    .button.button-royal.active, .button.button-royal.activated {
+    .button.button-royal.active,
+    .button.button-royal.activated {
       background-color: #6b46e5; }
     .button.button-royal.button-clear {
       border-color: transparent;
@@ -8749,7 +8947,8 @@ progress {
       border-color: #886aea;
       background: transparent;
       color: #886aea; }
-      .button.button-royal.button-outline.active, .button.button-royal.button-outline.activated {
+      .button.button-royal.button-outline.active,
+      .button.button-royal.button-outline.activated {
         background-color: #886aea;
         box-shadow: none;
         color: #fff; }
@@ -8760,7 +8959,8 @@ progress {
     .button.button-dark:hover {
       color: #fff;
       text-decoration: none; }
-    .button.button-dark.active, .button.button-dark.activated {
+    .button.button-dark.active,
+    .button.button-dark.activated {
       background-color: #262626; }
     .button.button-dark.button-clear {
       border-color: transparent;
@@ -8774,7 +8974,8 @@ progress {
       border-color: #444;
       background: transparent;
       color: #444; }
-      .button.button-dark.button-outline.active, .button.button-dark.button-outline.activated {
+      .button.button-dark.button-outline.active,
+      .button.button-dark.button-outline.activated {
         background-color: #444;
         box-shadow: none;
         color: #fff; }
@@ -8785,7 +8986,10 @@ progress {
   min-height: 30px;
   font-size: 12px;
   line-height: 27px; }
-  .button-small .icon:before, .button-small.icon:before, .button-small.icon-left:before, .button-small.icon-right:before {
+  .button-small .icon:before,
+  .button-small.icon:before,
+  .button-small.icon-left:before,
+  .button-small.icon-right:before {
     font-size: 16px;
     line-height: 19px;
     margin-top: 3px; }
@@ -8796,7 +9000,10 @@ progress {
   min-height: 59px;
   font-size: 20px;
   line-height: 54px; }
-  .button-large .icon:before, .button-large.icon:before, .button-large.icon-left:before, .button-large.icon-right:before {
+  .button-large .icon:before,
+  .button-large.icon:before,
+  .button-large.icon-left:before,
+  .button-large.icon-right:before {
     padding-bottom: 0;
     font-size: 32px;
     line-height: 53px; }
@@ -8808,12 +9015,14 @@ progress {
   min-width: initial;
   border-color: transparent;
   background: none; }
-  .button-icon.button.active, .button-icon.button.activated {
+  .button-icon.button.active,
+  .button-icon.button.activated {
     border-color: transparent;
     background: none;
     box-shadow: none;
     opacity: 0.3; }
-  .button-icon .icon:before, .button-icon.icon:before {
+  .button-icon .icon:before,
+  .button-icon.icon:before {
     font-size: 32px; }
 
 .button-clear {
@@ -8832,7 +9041,8 @@ progress {
   .button-clear.button-icon {
     border-color: transparent;
     background: none; }
-  .button-clear.active, .button-clear.activated {
+  .button-clear.active,
+  .button-clear.activated {
     opacity: 0.3; }
 
 .button-outline {
@@ -8844,7 +9054,8 @@ progress {
     border-color: #b2b2b2;
     background: transparent;
     color: #b2b2b2; }
-    .button-outline.button-outline.active, .button-outline.button-outline.activated {
+    .button-outline.button-outline.active,
+    .button-outline.button-outline.activated {
       background-color: #b2b2b2;
       box-shadow: none;
       color: #fff; }
@@ -8875,7 +9086,10 @@ input.button.button-block {
 
 a.button {
   text-decoration: none; }
-  a.button .icon:before, a.button.icon:before, a.button.icon-left:before, a.button.icon-right:before {
+  a.button .icon:before,
+  a.button.icon:before,
+  a.button.icon-left:before,
+  a.button.icon-right:before {
     margin-top: 2px; }
 
 .button.disabled,
@@ -8906,7 +9120,8 @@ a.button {
     display: block;
     width: auto;
     *zoom: 1; }
-    .button-bar.button-bar-inline:before, .button-bar.button-bar-inline:after {
+    .button-bar.button-bar-inline:before,
+    .button-bar.button-bar-inline:after {
       display: table;
       content: "";
       line-height: 0; }
@@ -9334,7 +9549,8 @@ a.button {
 
 .clearfix {
   *zoom: 1; }
-  .clearfix:before, .clearfix:after {
+  .clearfix:before,
+  .clearfix:after {
     display: table;
     content: "";
     line-height: 0; }
@@ -9607,7 +9823,8 @@ a.button {
   -webkit-transition-property: opacity, -webkit-transform, box-shadow;
   transition-property: opacity, transform, box-shadow; }
 
-[nav-view-transition="ios"][nav-view-direction="forward"], [nav-view-transition="ios"][nav-view-direction="back"] {
+[nav-view-transition="ios"][nav-view-direction="forward"],
+[nav-view-transition="ios"][nav-view-direction="back"] {
   background-color: #000; }
 
 [nav-view-transition="ios"] [nav-view="active"],

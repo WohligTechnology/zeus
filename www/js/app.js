@@ -18,9 +18,10 @@ function addanalytics(screen) {
   }
 }
 
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
 
 .run(function($ionicPlatform, MyServices, $ionicPopup, $timeout, $state) {
+
   console.log("ininininininini");
   console.log($.jStorage.get("introslider"));
   $state.go("access.slider");
@@ -742,7 +743,10 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   };
 })
-
+.config(function($cacheSrcProvider){
+    $cacheSrcProvider
+              .set({color:"#e10f0f"}); // set option
+})
 
 .directive('imgloadingsec', function($compile, $parse) {
   return {
