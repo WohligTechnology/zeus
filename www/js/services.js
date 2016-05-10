@@ -242,9 +242,12 @@ angular.module('starter.services', ['httpService'])
         }).success(callback);
       },
       getAllAudio: function(callback,err) {
-        if (config.config.soundCloudUsername) {
-            soundCloudUsername = config.config.soundCloudUsername;
+        if (config.config) {
+          if (config.config.soundCloudUsername) {
+              soundclouduser = config.config.soundCloudUsername;
+          }
         }
+
         $http({
           method: 'GET',
           url: 'http://api.soundcloud.com/users/' + soundclouduser + '/tracks',

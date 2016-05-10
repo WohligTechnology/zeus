@@ -41,7 +41,7 @@
         <p ng-if="blog.date">{{blog.date|formatdate}}</p>
       </ion-item>
       <div class="item item-body" ng-click="blogDetail(blog,'tumblr');">
-        <img class="full-image" cache-src="{{blog.photos[0].original_size.url}}">
+        <!-- <img class="full-image" cache-src="{{blog.photos[0].original_size.url}}"> -->
         <p ng-if="blog.type == 'audio'">
           <span>{{blog.album}}</span>
           <span ng-bind-html="blog.embed|rawHtml" ng-if="blog.embed"></span>
