@@ -9980,8 +9980,8 @@ a:hover {
   padding: 4px 20px; }
 
 .gradient-hold {
-  background-image: -webkit-linear-gradient(transparent 0%, black 60%);
-  background-image: linear-gradient(transparent 0%, black 60%);
+  background-image: -webkit-linear-gradient(transparent 0%, rgba(0, 0, 0, 0.37) 60%);
+  background-image: linear-gradient(transparent 0%, rgba(0, 0, 0, 0.37) 60%);
   position: absolute;
   bottom: 21px;
   right: 16px;
@@ -10080,8 +10080,11 @@ img.play {
   font-family: Lato-Light; }
 
 .profile-banner {
-  background-size: cover;
-  height: 140px; }
+  background-size: contain;
+  height: 140px;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  background-position: center; }
   .profile-banner > * {
     color: white; }
   .profile-banner h3 {
