@@ -27,7 +27,7 @@
         </div>
         <ion-content ng-class="logso">
             <div class="list menu-set">
-                <ion-item nav-clear menu-close class="item item-icon-left" ui-sref="{{menu | toPages}}" ui-sref-active="bordered" ng-repeat="menu in menudata">
+                <ion-item nav-clear menu-close class="item item-icon-left menuitem" href="{{menu.topage}}" target="{{menu.target}}" ui-sref-active="bordered" ng-repeat="menu in menudata">
                     <i class="icon {{menu.iconType}}" ng-if="menu.iconType!='custom'"></i>
                     <img cache-src="{{menu.icon | serverpath}}" alt="" ng-if="menu.iconType=='custom'" class="menu-img"/>{{menu.name}}
 

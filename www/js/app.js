@@ -18,7 +18,7 @@ function addanalytics(screen) {
   }
 }
 
-angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
+angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
 
 .run(function($ionicPlatform, MyServices, $ionicPopup, $timeout, $state) {
 
@@ -400,7 +400,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
 })
 
 .filter('serverpath', function() {
-  return function(input, width, height, style) {
+  return function(input, width, height, style, prof) {
     var other = "";
     if (width && width !== "") {
       other += "&width=" + width;
@@ -413,8 +413,12 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
     }
     if (input) {
       return adminimage + input + other;
-    }else {
-      return "img/default.png";
+    } else {
+      if (height && height === "profile") {
+        return "/img/user.jpg";
+      } else {
+        return "img/default.png";
+      }
     }
   };
 })
@@ -433,7 +437,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
     }
     if (input) {
       return adminimage + input + other;
-    }else{
+    } else {
       return "/img/user.jpg";
     }
   };
@@ -558,6 +562,10 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
         newmenu.typeid = menu.link._id;
         newmenu.link = "article";
         break;
+      case 'External Link':
+        // newmenu.typeid = menu.link;
+        newmenu.link = "blazen"+ menu.link;
+        break;
 
       default:
         {
@@ -590,13 +598,7 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
               newmenu.link = "contact";
               break;
             case 'Social Feeds':
-            // window.open("http://wohlig.co.in", "_blank");
-              // newmenu.link = "social";
-              break;
-
-            case 'External Link':
-              // newmenu.link = "social";
-              window.open("http://wohlig.co.in", "_blank");
+              newmenu.link = "social";
               break;
             default:
           }
@@ -604,16 +606,16 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
     }
     if (newmenu.typeid) {
       if (value == "default") {
-        return "/app/"+newmenu.link+"/"+newmenu.typeid;
-      }else{
-      return "app." + newmenu.link + "({id:'" + newmenu.typeid + "'})";
-    }
+        return "/app/" + newmenu.link + "/" + newmenu.typeid;
+      } else {
+        return "app." + newmenu.link + "({id:'" + newmenu.typeid + "'})";
+      }
     } else {
       if (value == "default") {
-        return "/app/"+newmenu.link;
-      }else{
-      return "app." + newmenu.link;
-    }
+        return "/app/" + newmenu.link;
+      } else {
+        return "app." + newmenu.link;
+      }
     }
   };
 })
@@ -638,40 +640,52 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
 })
 
 .filter('rawHtml', ['$sce',
-  function($sce) {
-    return function(val) {
-      return $sce.trustAsHtml(val);
-    };
-  }
-])
-
-.directive('onlyDigits', function() {
-  return {
-    require: 'ngModel',
-    restrict: 'A',
-    link: function(scope, element, attr, ctrl) {
-      var digits;
-      function inputValue(val) {
-        if (val) {
-          if (attr.type == "tel") {
-             digits = val.replace(/[^0-9\+\\]/g, '');
-          } else {
-             digits = val.replace(/[^0-9\-\\]/g, '');
-          }
-
-
-          if (digits !== val) {
-            ctrl.$setViewValue(digits);
-            ctrl.$render();
-          }
-          return parseInt(digits, 10);
-        }
-        return undefined;
-      }
-      ctrl.$parsers.push(inputValue);
+    function($sce) {
+      return function(val) {
+        return $sce.trustAsHtml(val);
+      };
     }
-  };
-})
+  ])
+  .directive('navigationLink', function() {
+    return {
+      // templateUrl: 'views/directive/listType.html',
+      restrict: 'A',
+      scope: {
+        uisref: '=uiSref'
+      },
+      link: function($scope, element, attrs) {
+        console.log($scope.uisref);
+      }
+    };
+  })
+  .directive('onlyDigits', function() {
+    return {
+      require: 'ngModel',
+      restrict: 'A',
+      link: function(scope, element, attr, ctrl) {
+        var digits;
+
+        function inputValue(val) {
+          if (val) {
+            if (attr.type == "tel") {
+              digits = val.replace(/[^0-9\+\\]/g, '');
+            } else {
+              digits = val.replace(/[^0-9\-\\]/g, '');
+            }
+
+
+            if (digits !== val) {
+              ctrl.$setViewValue(digits);
+              ctrl.$render();
+            }
+            return parseInt(digits, 10);
+          }
+          return undefined;
+        }
+        ctrl.$parsers.push(inputValue);
+      }
+    };
+  })
 
 .filter('formatdate', function($filter) {
   return function(val) {
@@ -734,25 +748,27 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
 })
 
 .directive('noInt', function() {
-  return {
-    restrict: 'A',
-    link: function(scope, element, attrs) {
-      scope.signinsubmit = function(data) {
-        scope.signinsubmit(data);
-      };
-      // if (checkConnectivity) {
-      //   element.attr("disabled",false);
-      // }else {
-      //   element.attr("disabled",true);
-      // }
+    return {
+      restrict: 'A',
+      link: function(scope, element, attrs) {
+        scope.signinsubmit = function(data) {
+          scope.signinsubmit(data);
+        };
+        // if (checkConnectivity) {
+        //   element.attr("disabled",false);
+        // }else {
+        //   element.attr("disabled",true);
+        // }
 
-    }
-  };
-})
-.config(function($cacheSrcProvider){
+      }
+    };
+  })
+  .config(function($cacheSrcProvider) {
     $cacheSrcProvider
-              .set({color:"#e10f0f"}); // set option
-})
+      .set({
+        color: "#e10f0f"
+      }); // set option
+  })
 
 .directive('imgloadingsec', function($compile, $parse) {
   return {
@@ -783,10 +799,12 @@ var loadMenu = function(MyServices, $ionicPopup, $timeout) {
       console.log(conf);
       navigation.config = conf.data[0];
       config = navigation;
-      config.defaultMenu = _.filter(config.menu, {'default':true});
+      config.defaultMenu = _.filter(config.menu, {
+        'default': true
+      });
       MyServices.setconfigdata(navigation);
       if (config.config.soundCloudUsername) {
-          soundCloudUsername = config.config.soundCloudUsername;
+        soundCloudUsername = config.config.soundCloudUsername;
       }
       $.jStorage.set("blogType", config.config.blog);
     }, function(err, sta) {

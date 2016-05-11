@@ -9,6 +9,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   //	$ionicLoading.hide();
   $scope.config = MyServices.getconfigdata();
 
+
   function internetaccess() {
     if (navigator) {
       checkConnectivity = navigator.onLine;
@@ -69,6 +70,16 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   configreload.func = function() {
     var data = MyServices.getconfigdata();
     $scope.menudata = data.menu;
+    _.each($scope.menudata, function(n, key){
+      if ($filter("toPages")(n,"default").split('blazen')[0] === "/app/") {
+        n.topage = $filter("toPages")(n,"default").split('blazen')[1];
+        // n.target = "_blank";
+      }else {
+        n.topage = "#"+$filter("toPages")(n,"default").split('blazen')[0];
+        // n.target = "";
+
+      }
+    });
     $scope.logso = "";
     $scope.userdetails = $.jStorage.get("user");
     if (data.config.login) {
@@ -971,7 +982,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       'background-image': "url('" + $filter("serverpath")($scope.user.bannerPic) + "')"
     };
     $scope.user.newimage = {
-      'background-image': "url('" + $filter("serverpathprofile")($scope.user.profilePic) + "')"
+      'background-image': "url('" + $filter("serverpath")($scope.user.profilePic,'','','','profile') + "')"
     };
 
   }, function(err) {
@@ -2039,9 +2050,14 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   });
 
   $scope.showMap = function(lat, long) {
-    $scope.mapframe = "<iframe width='600' height='450' frameborder='0' scrolling='yes' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?q=" + lat + "," + long + "&hl=es;z=14&amp;output=embed' allowfullscreen></iframe>";
-    console.log($scope.mapframe);
-    $scope.modal.show();
+    if (isapp) {
+      ref = cordova.InAppBrowser.open('https://www.google.co.in/maps/@'+lat+','+long+',11z?hl=en', '_blank', 'location=no');
+    } else {
+      ref = window.open('https://www.google.co.in/maps/@'+lat+','+long+',11z?hl=en', '_blank', 'location=no');
+    }
+    // $scope.mapframe = "<iframe width='600' height='450' frameborder='0' scrolling='yes' marginheight='0' marginwidth='0' src='https://maps.google.com/maps?q=" + lat + "," + long + "&hl=es;z=3&amp;output=embed' allowfullscreen></iframe>";
+    // console.log($scope.mapframe);
+    // $scope.modal.show();
   };
 
   $scope.closeMap = function() {
