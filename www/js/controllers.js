@@ -1980,10 +1980,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   var createenquirycallback = function(data, status) {
     $ionicLoading.hide();
     if (data.value === true) {
-      $scope.msgforall("Successfully submitted!");
+      msgforall("Successfully submitted!");
       $scope.enquiry = {};
     } else {
-      $scope.msgforall("Try again!");
+      msgforall("Try again!");
     }
   };
 
@@ -2006,6 +2006,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       if (check) {
         MyServices.submitEnquiry(enquiry, createenquirycallback, function(err) {
           // $location.url("/access/offline");
+
         });
       } else {
         msgforall('Fill all data');
