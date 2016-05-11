@@ -187,6 +187,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   }
 
+  $scope.navigatePage = function(link){
+    console.log(link);
+  };
+
 })
 
 .controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http, $timeout, $state, $ionicPopup, $filter, $location, $ionicSlideBoxDelegate) {
@@ -1562,7 +1566,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
       }
       _.each(data.data.data, function(n) {
         $scope.photoObj = {};
-        $scope.photoObj.src = $filter("serverpath")(n.image,300,300,"fill");
+        $scope.photoObj.src = $filter("serverpath")(n.image,1200,1200,"fill");
         $scope.photos.push($scope.photoObj);
       });
       if (data.data.data.length === 0) {

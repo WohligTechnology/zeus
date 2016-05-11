@@ -590,7 +590,13 @@ angular.module('starter', ['ionic', 'starter.controllers','ionic-cache-src'])
               newmenu.link = "contact";
               break;
             case 'Social Feeds':
-              newmenu.link = "social";
+            // window.open("http://wohlig.co.in", "_blank");
+              // newmenu.link = "social";
+              break;
+
+            case 'External Link':
+              // newmenu.link = "social";
+              window.open("http://wohlig.co.in", "_blank");
               break;
             default:
           }
