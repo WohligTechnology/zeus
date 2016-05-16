@@ -3,6 +3,10 @@
         {{msg}}
     </div>
     <ion-content class="padding-bottom">
+      <ion-refresher
+        pulling-text=""
+        on-refresh="refreshData()">
+      </ion-refresher>
         <div class="article-view">
             <div class="min-height max-height" ng-if="eventdetail.image">
                 <img class="full-image" imgloadingsec cache-src="{{eventdetail.image | serverimage}}">
@@ -30,7 +34,7 @@
                 <ion-slide-box on-slide-changed="slideHasChanged($index)">
                     <ion-slide ng-repeat="images in eventdetail.eventimages">
                         <div class="row">
-                            <div class="col col-50" ng-repeat="img in images" ng-click="showImage(img.image);"><img ng-src="{{img.image|serverimage}}" imgloadingsec class="full-image"></div>
+                            <div class="col col-50" ng-repeat="img in images" ng-click="showImage(img.image);"><img ng-src="{{img.image|serverpath}}" imgloadingsec class="full-image"></div>
                         </div>
                     </ion-slide>
                 </ion-slide-box>

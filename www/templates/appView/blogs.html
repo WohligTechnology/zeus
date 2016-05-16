@@ -3,7 +3,10 @@
     {{msg}}
   </div>
   <ion-content>
-
+    <ion-refresher
+      pulling-text=""
+      on-refresh="refreshData()">
+    </ion-refresher>
     <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpress">
       <ion-item class="item-avatar item-icon-right">
         <div class="image-adjust img-blog" ng-style="{'background-image':'url({{blog.author.avatar_URL}})'}"></div>

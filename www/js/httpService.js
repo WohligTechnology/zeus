@@ -103,13 +103,29 @@ httpService.service('httpService', function($http, $webSql, $ionicPopup) {
                         }, {
                             "id": sqlResponse.id
                         });
+                        if (callback) {
+                            callback(data2, status);
+                        }
                     }
                 } else {
-                    // if (errorCallback) { // ERROR STATUS FROM SERVER
-                    //     httpCall.error(errorCallback);
-                    // }
+                    if(callback && sqlResponse )
+                    {
+                      callback(sqlResponse.jsonResponse);
+                    }
                 }
-            },errorCallback);
+            },
+            function() {
+              if(callback && sqlResponse )
+              {
+                callback(sqlResponse.jsonResponse);
+              }
+              else {
+                if(errorCallback)
+                {
+                  errorCallback();
+                }
+              }
+            });
             // //HTTP ERROR
             // if (errorCallback) {
             //     httpCall.error(errorCallback);
@@ -134,9 +150,9 @@ httpService.service('httpService', function($http, $webSql, $ionicPopup) {
             if (results.rows.length > 0) {
                 sqlResponse = results.rows.item(0);
                 sqlResponse.jsonResponse = JSON.parse(sqlResponse.response);
-                if (callback) {
-                    callback(sqlResponse.jsonResponse);
-                }
+                // if (callback) {
+                //     callback(sqlResponse.jsonResponse);
+                // }
                 sqlResponse.jsonResponse = sqlResponse.response;
                 makeHttpCall(sqlResponse);
             } else {

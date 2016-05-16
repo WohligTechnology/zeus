@@ -22,7 +22,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
 
 .run(function($ionicPlatform, MyServices, $ionicPopup, $timeout, $state) {
 
-  console.log("ininininininini");
   console.log($.jStorage.get("introslider"));
   $state.go("access.slider");
   if ($.jStorage.get("introslider") === false || $.jStorage.get("introslider") !== null) {
@@ -384,6 +383,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
     }
   })
 
+  .state('app.enquiry', {
+    url: '/enquiry',
+    views: {
+      'menuContent': {
+        templateUrl: 'templates/appView/enquiry.html',
+        controller: "EnquiryCtrl"
+      }
+    }
+  })
+
   .state('app.search', {
     url: '/search',
     views: {
@@ -599,6 +608,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
               break;
             case 'Social Feeds':
               newmenu.link = "social";
+              break;
+            case 'Enquiry Page':
+              newmenu.link = "enquiry";
               break;
             default:
           }

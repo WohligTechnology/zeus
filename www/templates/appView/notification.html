@@ -3,6 +3,10 @@
         {{msg}}
     </div>
     <ion-content>
+      <ion-refresher
+        pulling-text=""
+        on-refresh="refreshData()">
+      </ion-refresher>
         <ion-list class="full-width">
             <ion-item ng-repeat="item in notify" class="item-text-wrap" ui-sref='{{item | toPages}}'>
                 <img ng-if="item.image" cache-src="{{item.image | serverimage}}" class="full-image" ng-if="item.image">
