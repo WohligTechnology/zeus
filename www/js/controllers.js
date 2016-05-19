@@ -9,7 +9,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
   addanalytics("flexible menu");
   //	$ionicLoading.hide();
   $scope.config = MyServices.getconfigdata();
-  $scope.circleStyle = "display:inline-block;position:absolute;top:50%;left:30px;transform:translate(-50%,-50%);"
+  $scope.circleStyle = "display:inline-block;position:absolute;top:50%;left:30px;transform:translate(-50%,-50%);";
 
   function internetaccess() {
     if (navigator) {
@@ -212,7 +212,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
   $scope.redirectPage = function() {
     MyServices.setIntroJstorage();
-    if (checkConnectivity) {
+    if (config) {
       if (config.config) {
         if (config.config.login) {
           if (!MyServices.getuser() && config.config.login.hasLogin) {
@@ -234,7 +234,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         }
       } else {
         var myPopup = $ionicPopup.show({
-          template: '<p class="text-center">Contact Owner</p>',
+          template: '<p class="text-center">Contact Owner OR No internet Connectivity</p>',
           title: 'Oops!',
           scope: $scope,
         });
@@ -242,7 +242,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
           myPopup.close(); //close the popup after 3 seconds for some reason
         }, 2000);
       }
-    } else {
+    }
+    else {
       var myPopup = $ionicPopup.show({
         template: '<p class="text-center">No internet Connectivity</p>',
         title: 'Oops!',
