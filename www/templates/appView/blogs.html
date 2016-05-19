@@ -7,7 +7,7 @@
       pulling-text=""
       on-refresh="refreshData()">
     </ion-refresher>
-    <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpress">
+    <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpress" ng-click="blogDetail(blog,'wordpress');">
       <ion-item class="item-avatar item-icon-right">
         <div class="image-adjust img-blog" ng-style="{'background-image':'url({{blog.author.avatar_URL}})'}"></div>
         <h2>{{blog.author.first_name}} {{blog.author.last_name}}</h2>
@@ -23,7 +23,7 @@
       </div>
     </div>
 
-    <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpressSelf">
+    <div class="padding card" ng-repeat="blog in blogs" ng-show="showWordpressSelf" ng-click="blogDetail(blog,'wordpressself');">
       <ion-item class="item-avatar item-icon-right">
         <div class="image-adjust img-blog" ng-style="{'background-image':'url(img/blog.png)'}"></div>
         <!--                <h2>{{blog.author.first_name}} {{blog.author.last_name}}</h2>-->
@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <div class="padding card" ng-repeat="blog in blogs" ng-show="showTumblr">
+    <div class="padding card" ng-repeat="blog in blogs" ng-show="showTumblr" ng-click="blogDetail(blog,'tumblr');">
       <ion-item class="item-avatar item-icon-right">
         <div class="image-adjust img-blog" ng-style="{'background-image': 'url('+blog.photos[0].alt_sizes[5].url+')'}"></div>
         <h2 ng-if="blog.summary" ng-bind-html="blog.summary"></h2>
@@ -66,10 +66,10 @@
       </div>
     </div>
 
-    <div class="padding card" ng-repeat="blog in blogs" ng-show="showCustomblog">
+    <div class="padding card" ng-repeat="blog in blogs" ng-show="showCustomblog" ng-click="blogDetail(blog,'cms');">
       <ion-item class="item-avatar item-icon-right">
         <!-- <div class="image-adjust img-blog" ng-style="{'background-image':'url(http://a.13cdn.com/Facebook_TaylorSwift.png)'}"></div> -->
-        <img cache-src="{{blog.image | serverpath}}" alt="" />
+        <img cache-src="{{blog.image | serverpath}}" circle-container-style="{{circleStyle}}" alt="" />
         <h2>{{blog.blogtitle}}</h2>
         <p ng-if="blog.timestamp">{{blog.timestamp|formatdate}}</p>
       </ion-item>

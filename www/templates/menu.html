@@ -20,7 +20,7 @@
         <div class="list no-margin" ng-if="config.config.login.hasLogin">
             <ion-item menu-close class="item-avatar item-icon-right" ui-sref="app.profile">
                 <!-- <div class="image-adjust" ng-style="userdetails.myimage"></div> -->
-                <img  class="image-adjust" cache-src="{{userdetails.profilePic | serverpathprofile:80:80:'cover'}}" alt="" />
+                <img  class="image-adjust" cache-src="{{userdetails.profilePic | serverpathprofile:80:80:'cover'}}" circle-container-style="{{circleStyle}}" alt="" />
                 <h3>{{userdetails.name}}</h3>
                 <p>{{userdetails.email}}</p>
                 <i class="icon ln-gear2 small" ng-click="toSetting();  $event.stopPropagation();" menu-close></i>
@@ -30,7 +30,7 @@
             <div class="list menu-set">
                 <ion-item nav-clear menu-close class="item item-icon-left menuitem" href="{{menu.topage}}" target="{{menu.target}}" ui-sref-active="bordered" ng-repeat="menu in menudata" ng-if="menu.status == '1'">
                     <i class="icon {{menu.iconType}}" ng-if="menu.iconType!='custom'"></i>
-                    <img cache-src="{{menu.icon | serverpath}}" alt="" ng-if="menu.iconType=='custom'" class="menu-img"/>{{menu.name}}
+                    <img cache-src="{{menu.icon | serverpath}}" circle-container-style="{{circleStyle}}" alt="" ng-if="menu.iconType=='custom'" class="menu-img"/>{{menu.name}}
 
                 </ion-item>
                 <ion-item nav-clear menu-close class="item item-icon-left item-complex" ng-click="logout()" ui-sref-active="bordered" ng-if="config.config.login.hasLogin">

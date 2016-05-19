@@ -6,7 +6,8 @@
     <ion-list>
       <ion-item collection-repeat="item in audio" class="item-thumbnail-left item-text-wrap" ui-sref="app.audiogallerycategory({item: item, items: audio})">
         <!-- <div class="image-adjust img-content" ng-style="{'background-image':'url({{item.artwork_url}})'}"></div> -->
-        <img cache-src="{{item.artwork_url}}" alt="" />
+        <img cache-src="{{item.artwork_url}}" ng-if="item.artwork_url" circle-container-style="{{circleStyle}}" alt="" />
+        <img cache-src="{{item.user.avatar_url}}" ng-if="!item.artwork_url" circle-container-style="{{circleStyle}}" alt="" />
         <h2>{{item.title}}</h2>
         <!-- <p>{{item.description}}</p> -->
         <ion-option-button class="button-positive" ng-click="share(item)">

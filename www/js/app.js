@@ -4,6 +4,7 @@ var googleanalyticsid = 'UA-67616258-1';
 var isapp = true;
 var config = {};
 var onoffline = false;
+var platform = "";
 
 function addanalytics(screen) {
   if (window.analytics) {
@@ -20,9 +21,8 @@ function addanalytics(screen) {
 
 angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
 
-.run(function($ionicPlatform, MyServices, $ionicPopup, $timeout, $state) {
+.run(function($ionicPlatform, MyServices, $ionicPopup, $timeout, $state, $cordovaDevice) {
 
-  console.log($.jStorage.get("introslider"));
   $state.go("access.slider");
   if ($.jStorage.get("introslider") === false || $.jStorage.get("introslider") !== null) {
     $state.go("access.slider");
@@ -34,6 +34,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
     if (window && window.plugins && window.plugins.socialsharing && window.plugins.socialsharing.share) {
       socialShare = window.plugins.socialsharing.share;
     }
+    platform = $cordovaDevice.getPlatform();
+    console.log(platform);
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
     if (window.cordova && window.cordova.plugins.Keyboard) {
@@ -805,16 +807,17 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
 var loadMenu = function(MyServices, $ionicPopup, $timeout) {
   var navigation = {};
   MyServices.getNavigationMob(function(nav) {
-    console.log(nav);
     navigation.menu = nav.data;
     MyServices.getConfigMob(function(conf) {
-      console.log(conf);
       navigation.config = conf.data[0];
       config = navigation;
       config.defaultMenu = _.filter(config.menu, {
         'default': true
       });
       MyServices.setconfigdata(navigation);
+      if (config.config.gaid) {
+          googleanalyticsid = config.config.gaid;
+      }
       if (config.config.soundCloudUsername) {
         soundCloudUsername = config.config.soundCloudUsername;
       }

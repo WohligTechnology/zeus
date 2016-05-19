@@ -10,7 +10,7 @@
         <ion-list>
             <ion-item collection-repeat="event in events" class="item-thumbnail-left item-text-wrap" ng-click="geteventdetails(event._id);">
                 <!-- <div class="image-adjust img-content" ng-style="{'background-image':'url({{event.image|serverimage}})'}"></div> -->
-                <img cache-src="{{event.image | serverpath:80:80:'cover'}}" alt="" />
+                  <img cache-src="{{event.image | serverpath:80:80:'cover'}}" circle-container-style="{{circleStyle}}" alt="" />
                 <h2 class="pdb">{{event.name}}</h2>
 
                 <span class="icon-space"><i class="icon ln-calendar3"></i></span><span class="font-light">{{event.startTime|date : 'dd MMM, yyyy'}}</span>

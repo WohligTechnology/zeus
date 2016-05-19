@@ -9,7 +9,7 @@
       </ion-refresher>
         <div class="article-view">
             <div class="min-height max-height" ng-if="eventdetail.image">
-                <img class="full-image" imgloadingsec cache-src="{{eventdetail.image | serverimage}}">
+                <img class="full-image" cache-src="{{eventdetail.image | serverimage}}">
             </div>
             <div class="padding-horizontal">
                 <h4 class="dark">{{eventdetail.title}}</h4>
@@ -25,7 +25,7 @@
                     <ion-slide ng-repeat="images in eventdetail.eventvideos">
                         <div class="row">
                             <div class="col col-50" ng-repeat="img in images" ng-click="showVideo(img.link);">
-                                <img ng-src="{{img.thumbnail}}" alt="" class="full-image">
+                                <img cache-src="{{img.thumbnail}}" alt="" class="full-image">
                             </div>
                         </div>
                     </ion-slide>
@@ -34,7 +34,9 @@
                 <ion-slide-box on-slide-changed="slideHasChanged($index)">
                     <ion-slide ng-repeat="images in eventdetail.eventimages">
                         <div class="row">
-                            <div class="col col-50" ng-repeat="img in images" ng-click="showImage(img.image);"><img ng-src="{{img.image|serverpath}}" imgloadingsec class="full-image"></div>
+                            <div class="col col-50" ng-repeat="img in images" ng-click="showImage(img.image);">
+                              <img cache-src="{{img.image|serverpath}}" class="full-image">
+                            </div>
                         </div>
                     </ion-slide>
                 </ion-slide-box>

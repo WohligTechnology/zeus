@@ -1,7 +1,7 @@
 
 //Node admin
 // var vigzserver = "http://blazen.io/";
-var vigzserver = "http://192.168.1.113:1337/";
+var vigzserver = "http://192.168.1.129:81/";
 // var adminurl = "http://wohlig.biz/";
 var adminimage = vigzserver + "upload/readFile?file=";
 // var adminhauth = adminurl + "index.php/hauth/";
@@ -25,6 +25,8 @@ var WORDPRESS_self_API_URL = '/wp-json/wp/v2/posts';
 var Tumblr_UserName = "";
 var TUBMLR_API_URL = 'http://wohlig.co.in/tumblr/?url=http://api.tumblr.com/v2/blog/' + Tumblr_UserName + '/posts';
 var TUBMLR_API_KEY = "z1dnwToZiXGJkx1fTMtwqYkzcpf83G381TnPgH3wuft4EcEQTU";
+
+//loginType = "ios"/"android"
 
 angular.module('starter.services', ['httpService'])
   .factory('MyServices', function($http, $filter, httpService) {
@@ -126,7 +128,7 @@ angular.module('starter.services', ['httpService'])
           "name": data.username,
           "password": data.password,
           "dob": data.dob,
-          "loginType":"Normal"
+          "loginType": platform
         };
         // httpService.post(vigzserver + "user/savemob", data2, callback, errCallback);
         return $http({

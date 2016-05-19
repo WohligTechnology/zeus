@@ -1,12 +1,15 @@
 var reloadpage = false;
 var configreload = {};
 var checkConnectivity = navigator.onLine;
+var circleStyle = "display:inline-block;position:absolute;top:50%;left:50px;transform:translate(-50%,-50%);";
+
 angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCordova', 'ngSanitize', 'ionic-cache-src'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, MyServices, $ionicLoading, $location, $filter, $cordovaNetwork, $state, $ionicPopup) {
   addanalytics("flexible menu");
   //	$ionicLoading.hide();
   $scope.config = MyServices.getconfigdata();
+  $scope.circleStyle = "display:inline-block;position:absolute;top:50%;left:30px;transform:translate(-50%,-50%);"
 
   function internetaccess() {
     if (navigator) {
@@ -285,6 +288,8 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 
 .controller('AudiogalleryCtrl', function($scope, MyServices, $stateParams, $http) {
   $scope.msg = "";
+  $scope.circleStyle = circleStyle;
+
   if (checkConnectivity) {
     $scope.msg = "";
     MyServices.getAllAudio(function(data) {
@@ -1182,6 +1187,7 @@ $scope.refreshData();
   $scope.events = [];
   $scope.keepscrolling = true;
   $scope.msg = "Loading....";
+  $scope.circleStyle = circleStyle;
   $scope.showloading = function() {
     $ionicLoading.show({
       template: '<ion-spinner class="spinner-positive"></ion-spinner>'
@@ -1340,6 +1346,7 @@ $scope.refreshData();
   $ionicLoading.show();
   $scope.pageno = 1;
   $scope.keepscrolling = true;
+  $scope.circleStyle = "display:inline-block;position:absolute;top:50%;left:30px;transform:translate(-50%,-50%);";
   $scope.msg = "Loading...";
   // loader
 
@@ -1662,6 +1669,7 @@ $scope.reloadGetAll();
   $scope.keepscrolling = true;
   $scope.pageno = 1;
   $scope.msg = "Loading....";
+  $scope.circleStyle = circleStyle;
   // loader
   $scope.showloading = function() {
     $ionicLoading.show({
@@ -1722,6 +1730,7 @@ console.log(data.data);
   $scope.videos = [];
   $scope.keepscrolling = true;
   $scope.msg = "Loading....";
+  $scope.circleStyle = circleStyle;
 
   $scope.share = function(item) {
     console.log(item);

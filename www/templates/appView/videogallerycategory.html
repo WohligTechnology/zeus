@@ -10,7 +10,7 @@
         <ion-list>
             <ion-item collection-repeat="item in videos" class="item-thumbnail-left item-text-wrap" ui-sref="app.videogallery({id:item._id})">
                 <!-- <div class="image-adjust img-content" ng-style="{'background-image':'url({{item.image | serverimage}})'}"></div> -->
-                <img cache-src="{{item.image | serverpath:80:80:'cover'}}" >
+                <img cache-src="{{item.image | serverpath:80:80:'cover'}}" circle-container-style="{{circleStyle}}">
                 <h2>{{item.title}}</h2>
                 <p>{{item.subtitle}}</p>
             </ion-item>
