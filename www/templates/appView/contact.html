@@ -1,4 +1,7 @@
 <ion-view view-title="Contact">
+  <div class="text-center positive middle-align" ng-if="msg != ''">
+      {{msg}}
+  </div>
     <ion-content>
         <div class="contactus">
             <div class="address" ng-repeat="contact in contacts">

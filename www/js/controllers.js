@@ -2149,7 +2149,13 @@ $scope.refreshData();
   MyServices.getContactAllMob(function(data, status) {
     console.log();
     $scope.contacts = data.data;
+    if ($scope.contacts === "") {
+      $scope.msg = "No Information.";
+    }else {
+      $scope.msg = "";
+    }
   }, function(err) {
+    $scope.msg = "No Information.";
     // $location.url("/access/offline");
   });
 
