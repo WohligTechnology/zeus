@@ -1422,11 +1422,12 @@ $scope.reloadGetAll = function(){
       if (data) {
         $scope.msg = "";
         $scope.blogs = data.data.response.posts;
+        console.log($scope.blogs);
       } else {
         $scope.msg = "No blog data or Invalid blog";
       }
     }, function(data) {
-      console.log(data);
+      // console.log(data);
     });
   } else if ($.jStorage.get("blogType") && $.jStorage.get("blogType").blogType == "CMS") {
     addanalytics("Custom blog");

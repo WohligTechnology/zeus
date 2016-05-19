@@ -39,10 +39,10 @@
 
     <div class="padding card" ng-repeat="blog in blogs" ng-show="showTumblr">
       <ion-item class="item-avatar item-icon-right">
-        <!-- <div class="image-adjust img-blog" ng-style="{'background-image': 'url(http://a.13cdn.com/Facebook_TaylorSwift.png)'}"></div> -->
-        <h2 ng-if="blog.caption" ng-bind-html="blog.caption"></h2>
-        <h2 ng-if="blog.slug" ng-bind-html="blog.slug"></h2>
-        <h2 ng-if="blog.blog_name" ng-bind-html="blog.blog_name"></h2>
+        <div class="image-adjust img-blog" ng-style="{'background-image': 'url('+blog.photos[0].alt_sizes[5].url+')'}"></div>
+        <h2 ng-if="blog.summary" ng-bind-html="blog.summary"></h2>
+        <!-- <h2 ng-if="blog.slug" ng-bind-html="blog.slug"></h2> -->
+        <!-- <h2 ng-if="blog.blog_name" ng-bind-html="blog.blog_name"></h2> -->
         <p ng-if="blog.date">{{blog.date|formatdate}}</p>
       </ion-item>
       <div class="item item-body" ng-click="blogDetail(blog,'tumblr');">
