@@ -425,8 +425,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
     if (input) {
       return adminimage + input + other;
     } else {
-      if (height && height === "profile") {
-        return "/img/user.jpg";
+      if (prof && prof == "profile") {
+        return "img/user.jpg";
       } else {
         return "img/default.png";
       }

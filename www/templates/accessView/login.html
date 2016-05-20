@@ -29,15 +29,16 @@
                     <div class="or text-center" ng-show="config.config.login.facebook || config.config.login.twitter || config.config.login.google  || config.config.login.insta">
                         <p ng-show="config.config.login.custom">- OR -</p>
                     </div>
+                    <button ng-click="googlelogin()" class="button button-full button-positive-google button-block" ng-show="config.config.login.google">
+                        Sign in with Google
+                    </button>
                     <button ng-click="facebooklogin()" class="button button-full button-positive-facebook button-block" ng-show="config.config.login.facebook">
                         Sign in with Facebook
                     </button>
                     <button ng-click="twitterlogin()" class="button button-full button-positive-twitter button-block" ng-show="config.config.login.twitter">
                         Sign in with Twitter
                     </button>
-                    <button ng-click="googlelogin()" class="button button-full button-positive-google button-block" ng-show="config.config.login.google">
-                        Sign in with Google
-                    </button>
+
                     <button ng-click="instagramlogin()" class="button button-full button-positive-instagram button-block" ng-show="config.config.login.insta">
                         Sign in with Instagram
                     </button>
