@@ -146,8 +146,8 @@ httpService.service('httpService', function($http, $webSql, $ionicPopup) {
             if (results.rows.length > 0) {
                 sqlResponse = results.rows.item(0);
                 sqlResponse.jsonResponse = JSON.parse(sqlResponse.response);
-                
-                sqlResponse.jsonResponse = JSON.parse(sqlResponse.response);
+
+                // sqlResponse.jsonResponse = JSON.parse(sqlResponse.response);
                 makeHttpCall(sqlResponse);
             } else {
                 makeHttpCall();

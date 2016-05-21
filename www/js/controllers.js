@@ -1398,7 +1398,7 @@ $scope.refreshData();
       }
     }, function(err) {
       $scope.keepscrolling = false;
-      if ($scope.blogs.length !== 0) {
+      if ($scope.blogs.length === 0) {
         $scope.msg = "No data found";
       }
       $ionicLoading.hide();
@@ -1683,7 +1683,6 @@ $scope.reloadGetAll();
   $scope.loadphoto = function(pageno) {
     MyServices.getAllMob(pageno, function(data, status) {
       $ionicLoading.hide();
-      console.log(pageno);
       _.each(data.data.data, function(n) {
         $scope.videos.push(n);
       });
@@ -1706,12 +1705,20 @@ $scope.reloadGetAll();
       $ionicLoading.hide();
     });
 
-    // $scope.$broadcast('scroll.infiniteScrollComplete');
-    // $scope.$broadcast('scroll.refreshComplete');
+    $scope.$broadcast('scroll.infiniteScrollComplete');
+    $scope.$broadcast('scroll.refreshComplete');
   };
 
   $scope.loadphoto(1);
 
+  $scope.loadMorePolls = function() {
+    $scope.loadphoto(++$scope.pageno);
+  };
+  $scope.refreshData = function(){
+    $scope.videos = [];
+    $scope.pageno = 1;
+    $scope.loadphoto(1);
+  };
 })
 
 .controller('VideoGalleryCtrl', function($scope, MyServices, $location, $ionicModal, $stateParams, $ionicLoading, $ionicPopup, $timeout, $ionicPlatform, $filter) {
@@ -1885,7 +1892,7 @@ $scope.reloadGetAll();
   };
 })
 
-.controller('SettingCtrl', function($scope, MyServices, $ionicLoading, $timeout, $location) {
+.controller('SettingCtrl', function($scope, MyServices, $ionicLoading, $timeout, $location, $ionicPopup) {
   addanalytics("Setting page");
   configreload.onallpage();
 
@@ -1915,13 +1922,25 @@ $scope.reloadGetAll();
   // });
 
   $scope.changeSetting = function(setting) {
-    console.log($scope.user);
-    if ($scope.user._id !== "0") {
-      MyServices.changeSetting($scope.user, function(data) {
-        console.log(data);
-      }, function(err) {
-        // $location.url("/access/offline");
+    if (checkConnectivity) {
+      if ($scope.user._id !== "0") {
+        MyServices.changeSetting($scope.user, function(data) {
+          console.log(data);
+        }, function(err) {
+          // $location.url("/access/offline");
+        });
+      }
+
+    }else {
+      var myPopup = $ionicPopup.show({
+        template: '<p class="text-center">NO Internet Connectivity.</p>',
+        title: 'Contact Us',
+        scope: $scope,
+
       });
+      $timeout(function() {
+        myPopup.close(); //close the popup after 3 seconds for some reason
+      }, 2000);
     }
 
   };
