@@ -789,17 +789,18 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
     restrict: 'EA',
     replace: false,
     link: function($scope, element, attrs) {
+      console.log(element);
       var $element = $(element);
       if (!attrs.noloading) {
-        $timeout(function(){
-          $element.after("<img src='img/loading.gif' class='loading' />");
+        // $timeout(function(){
+          // $element.after("<img src='img/loading.gif' class='loading' />");
 
         var $loading = $element.next(".loading");
         $element.load(function() {
           $loading.remove();
           $(this).addClass("doneLoading");
         });
-      },2000);
+      // },2000);
       } else {
         $($element).addClass("doneLoading");
       }

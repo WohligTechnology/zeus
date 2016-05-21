@@ -1514,7 +1514,8 @@ $scope.reloadGetAll();
     }
   } else {
     MyServices.getBlogOneMob($scope.id, getsingleblogsuccess, function(err) {
-      // $location.url("/access/offline");
+      $ionicLoading.hide();
+      $scope.msg = "No Information Found.";
     });
   }
 })
@@ -2244,6 +2245,7 @@ $scope.refreshData();
   $scope.search = {};
   $scope.search.text = "";
   configreload.onallpage();
+  $scope.msg = "";
 
   $scope.showloading = function() {
     $ionicLoading.show({
@@ -2269,14 +2271,20 @@ $scope.refreshData();
         "name": "Home"
       }];
     }
+    if ($scope.searchresults.searchevent === '' && $scope.searchresults.searchgallery === '' && $scope.searchresults.searchvideogallery ==='' && $scope.searchresults.blog === '' && $scope.searchresults.article === '' && $scope.searchresults.notification === '' && $scope.searchresults.contacts === '' && $scope.searchresults.home === '') {
+      $scope.msg = "No Information Found.";
+    }else {
+      $scope.msg = "";
+    }
   };
+
   $scope.getsearchelement = function(searchelement) {
     $timeout(function() {
       MyServices.searchAll(searchelement, searchelementcallback, function(err) {
         // $location.url("/access/offline");
+        $scope.msg = "No Information Found.";
       });
     }, 2000);
-
   };
 
   // Go to Events page
@@ -2303,7 +2311,7 @@ $scope.refreshData();
   $scope.openarticle = function(id) {
     $state.go("app.article", {
       id: id
-    })
+    });
   };
   $scope.clear = function() {
     $scope.search.text = "";
