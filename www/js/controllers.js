@@ -1683,8 +1683,7 @@ $scope.reloadGetAll();
   $scope.loadphoto = function(pageno) {
     MyServices.getAllMob(pageno, function(data, status) {
       $ionicLoading.hide();
-      console.log("ininininininini");
-console.log(data.data);
+      console.log(pageno);
       _.each(data.data.data, function(n) {
         $scope.videos.push(n);
       });
@@ -1707,20 +1706,12 @@ console.log(data.data);
       $ionicLoading.hide();
     });
 
-    $scope.$broadcast('scroll.infiniteScrollComplete');
-    $scope.$broadcast('scroll.refreshComplete');
+    // $scope.$broadcast('scroll.infiniteScrollComplete');
+    // $scope.$broadcast('scroll.refreshComplete');
   };
 
   $scope.loadphoto(1);
 
-  $scope.loadMorePolls = function() {
-    $scope.loadphoto(++$scope.pageno);
-  };
-  $scope.refreshData = function(){
-    $scope.videos = [];
-    $scope.pageno = 1;
-    $scope.loadphoto(1);
-  };
 })
 
 .controller('VideoGalleryCtrl', function($scope, MyServices, $location, $ionicModal, $stateParams, $ionicLoading, $ionicPopup, $timeout, $ionicPlatform, $filter) {

@@ -7,7 +7,7 @@
         <ion-slide-box on-slide-changed="slideHasChanged($index)" does-continue="true" auto-play="true">
             <ion-slide ng-repeat="slide in slides track by $index" ui-sref='{{slide | toPages}}' ng-if="slide.status">
               <div class="img-home-box">
-                  <img cache-src="{{slide.image | serverpath:1000:1000:'fill'}}" class="full-image">
+                  <img cache-src="{{slide.image | serverpath:1000:1000:'fill'}}" imgloadingsec class="full-image">
               </div>
             </ion-slide>
         </ion-slide-box>

@@ -10,7 +10,7 @@
       </ion-refresher>
         <div class="list" ng-repeat="photos in photos" ng-click="sendphotoid(photos._id);">
             <div class="item item-image">
-                <img cache-src="{{photos.icon | serverpath:800:400:'cover'}}">
+                <img cache-src="{{photos.icon | serverpath:800:400:'cover'}}" imgloadingsec>
             </div>
             <div class="item">
                 {{photos.title}}

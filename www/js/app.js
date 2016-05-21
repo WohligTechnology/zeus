@@ -784,19 +784,22 @@ angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
       }); // set option
   })
 
-.directive('imgloadingsec', function($compile, $parse) {
+.directive('imgloadingsec', function($compile, $parse, $timeout) {
   return {
     restrict: 'EA',
     replace: false,
     link: function($scope, element, attrs) {
       var $element = $(element);
       if (!attrs.noloading) {
-        $element.after("<img src='img/loading.gif' class='loading' />");
+        $timeout(function(){
+          $element.after("<img src='img/loading.gif' class='loading' />");
+
         var $loading = $element.next(".loading");
         $element.load(function() {
           $loading.remove();
           $(this).addClass("doneLoading");
         });
+      },2000);
       } else {
         $($element).addClass("doneLoading");
       }
