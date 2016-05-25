@@ -207,7 +207,7 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
 })
 
 .controller('IntroSliderCtrl', function($scope, MyServices, $stateParams, $http, $timeout, $state, $ionicPopup, $filter, $location, $ionicSlideBoxDelegate) {
-  $scope.showButton = false;
+  $scope.showButton = true;
 
 
   $scope.redirectPage = function() {
@@ -253,12 +253,10 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
         myPopup.close(); //close the popup after 3 seconds for some reason
       }, 2000);
     }
-
-
   };
 
   if (MyServices.getIntroJstorage()) {
-    // $scope.showButton = false;
+    $scope.showButton = false;
     $timeout(function() {
       $scope.redirectPage();
 
@@ -271,15 +269,15 @@ angular.module('starter.controllers', ['starter.services', 'ion-gallery', 'ngCor
     // $scope.showButton = true;
   }
 
-  $scope.slideHasChanged = function(index) {
-    console.log(index);
-    console.log($scope.slider.length);
-    if (index === $scope.slider.length - 1) {
-      $scope.showButton = true;
-    } else {
-      $scope.showButton = false;
-    }
-  };
+  // $scope.slideHasChanged = function(index) {
+  //   console.log(index);
+  //   console.log($scope.slider.length);
+  //   if (index === $scope.slider.length - 1) {
+  //     $scope.showButton = true;
+  //   } else {
+  //     $scope.showButton = false;
+  //   }
+  // };
 
 })
 
