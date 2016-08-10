@@ -19,7 +19,7 @@ function addanalytics(screen) {
   }
 }
 
-angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
+var firstapp = angular.module('starter', ['ionic', 'starter.controllers', 'ionic-cache-src'])
 
 .run(function($ionicPlatform, MyServices, $ionicPopup, $timeout, $state, $cordovaDevice) {
 
